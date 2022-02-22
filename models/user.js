@@ -1,21 +1,13 @@
 const mongoose = require("mongoose");
 
-const customerSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 
-    _id: mongoose.Types.ObjectId,
-    fullname: {
-        firstName: {
-            type: String,
-            required: true,
-            trim: true,
-            max: 50,
-        },
-        lastName: {
-            type: String,
-            required: true,
-            trim: true,
-            max: 50,
-        },
+    // _id: mongoose.Types.ObjectId,
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+        max: 50,
     },
 
     email: {
@@ -56,4 +48,4 @@ const customerSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model("customer", customerSchema);
+module.exports = mongoose.model("user", userSchema);
