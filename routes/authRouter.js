@@ -20,4 +20,7 @@ router.route("/changePass").post([
 
 ],isAuth,authController.changePass)
 
+
+
+
  module.exports=router;
