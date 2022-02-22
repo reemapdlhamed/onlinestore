@@ -4,12 +4,10 @@ const app = express()
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
-
 app.use(bodyParser.json());
 
 //Import Routes
 const authenticationRouter = require("./routers/userAuthRouter");
-
 app.use(authenticationRouter);
 
 //Connect to DB
