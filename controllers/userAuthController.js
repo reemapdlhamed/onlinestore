@@ -1,8 +1,20 @@
 const User = require("../models/user")
 const bcrypt = require("bcrypt");
+const { validationResult } = require("express-validator");
 
 
-exports.register = async (request, response) => {
+exports.register = async (request, response,next) => {
+    //Validation
+    let errors = validationResult(request);
+    if (!errors.isEmpty()) {
+        let error = new Error();
+        error.status = 422;
+        error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
+        // throw error;
+        // next(error);
+        // not working properly 
+    }
+    
 
     let hashed = bcrypt.hashSync(request.body.password, 10);
     const user = new User({
