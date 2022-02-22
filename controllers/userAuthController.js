@@ -3,18 +3,20 @@ const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
 
 
-exports.register = async (request, response,next) => {
+exports.register = async (request, response, next) => {
+
     //Validation
     let errors = validationResult(request);
     if (!errors.isEmpty()) {
         let error = new Error();
         error.status = 422;
         error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
-        // throw error;
+        throw error;
         // next(error);
         // not working properly 
     }
-    
+
+
 
     let hashed = bcrypt.hashSync(request.body.password, 10);
     const user = new User({
@@ -30,5 +32,7 @@ exports.register = async (request, response,next) => {
     }
     catch (err) {
         response.status(400).json({ message: err.message });
+        next(error);
     }
+
 }

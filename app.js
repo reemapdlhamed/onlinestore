@@ -45,7 +45,10 @@ app.use((request, response) => {
 })
 
 //Error MW
-app.use((error, request, response, next) => {
+//NOT WORKING
+app.use((error, request, response, next) => {   //JS  code function.length
     let status = error.status || 500;
     response.status(status).json({ Error: error + "" });
 })
+
+
