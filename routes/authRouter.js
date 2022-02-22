@@ -21,6 +21,21 @@ router.route("/changePass").post([
 ],isAuth,authController.changePass)
 
 
+router.route("/login").post([
+    
+    body("email").notEmpty().isEmail().withMessage("invalid Email."),
+    body("password").notEmpty().withMessage("new Password shouldn't be Empty."),
 
+],isAuth,authController.login)
+
+
+router.route("/register").post([
+    
+    body("email").notEmpty().isEmail().withMessage("invalid Email."),
+    body("password").notEmpty().withMessage("new Password shouldn't be Empty."),
+    body("confirmPassword").notEmpty().withMessage("confirm Password shouldn't be Empty."),
+    body("fullName").notEmpty().withMessage("confirm Password shouldn't be Empty."),
+
+],isAuth,authController.changePass)
 
  module.exports=router;
