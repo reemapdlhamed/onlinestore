@@ -38,7 +38,7 @@ exports.userLogin = (request, response, next) => {
                 .compare(request.body.password, encrypted)
                 .then(function (result) {
                     if (result) {
-                        response.json({ message: "login", result })
+                        response.json({ message: "login", data })
                         // response.redirect("http://127.0.0.1:5500/index.html")
                     } else {
                         next(new Error("wrong pass"))
