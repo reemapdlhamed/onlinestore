@@ -1,60 +1,36 @@
-//Adel
 const mongoose = require("mongoose");
 
-const sellerSchema = new mongoose.Schema(
-    {
-        _id: mongoose.Types.ObjectId,
-        products: [
-            {
-                type: mongoose.Types.ObjectId, ref: "product"
-            }
-        ],
-
-        // fullname:{
-        //     firstName: {
-        //         type: String,
-        //         required: true,
-        //         trim: true,
-        //         max: 50,
-        //     },
-        //     lastName: {
-        //         type: String,
-        //         required: true,
-        //         trim: true,
-        //         max: 50,
-        //     },
-        // },
-
-        username: {
-            type: String,
-            required: true,
-            trim: true,
-            unique: true,
-            lowercase: true,
-            min: 5,
-            max: 20,
-        },
-        email: {
-            type: String,
-            required: true,
-            trim: true,
-            unique: true,
-            lowercase: true,
-            max: 50,
-
-        },
-        password: {
-            type: String,
-            required: true,
-            min: 8,
-            max: 100,
-        },
-
-
-
-        phoneNumber: { type: String },
-        // pofilePicture: { type: String },
+const Schema = new mongoose.Schema(
+  {
+    _id: mongoose.Types.ObjectId,
+    name: {
+      type: String,
+      required: true,
+      min: 5,
+      max: 50,
     },
-    { timestamps: true }
+    products: [
+      {
+        product_id: {
+          type: mongoose.type.ObjectId,
+          ref: "product",
+          required: true,
+        },
+      },
+    ],
+
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
 );
-module.exports = mongoose.model("seller", sellerSchema);
+module.exports = mongoose.model("seller", Schema);
+
+console.log("reem");

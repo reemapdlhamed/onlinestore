@@ -7,11 +7,14 @@ const orderSchema = new mongoose.Schema(
             ref: "customer",
             required: true,
         },
-        address: {
-            type: String,
-            // ref: "customer.address",
-            required: true,
+        shippingAddress: {
+            country:{type:string,required: true },
+            city:{type:String,required: true},
+            street:{type:String,required: true},
+            building:{type:String,required: true},
+
         },
+
         items: [
             {
                 productId: {
@@ -29,7 +32,7 @@ const orderSchema = new mongoose.Schema(
             },
         ],
         orderStatus:
-        {   //hmmmm
+        {   
             type: {
                 type: String,
                 enum: ["pending", "packed", "shipped", "delivered", "cancelled"],
@@ -39,8 +42,18 @@ const orderSchema = new mongoose.Schema(
                 type: Date,
             }
         },
-
+        totalPrice: {
+            type: Number,
+            required: true,
+          }, 
+        paymentStatus: {
+            type: String,
+            enum: ["pending", "completed", "cancelled", "refund"],
+            required: true,
+          },
     },
+ 
+
     { timestamps: true }
 );
 
