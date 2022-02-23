@@ -1,20 +1,19 @@
-//ADEL
+//Manzlawy
 const mongoose = require("mongoose");
 
 const categorySchema = new mongoose.Schema({
-    name: {
+    _id:mongoose.Types.ObjectId,
+	name: {
         type: String,
         required: true,
         max: 20,
-        trim:true
+        required: true,
     },
     description: {
         type: String
-        // , required: true,
-        // min: 50,,
         , max: 1000
     },
-    image: String
+    bannerImage: String
 });
 
 
