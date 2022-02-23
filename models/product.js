@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema({
     category_id: { type: mongoose.Types.ObjectId, required: true, ref: "category" },
     discount: { type: Number, required: false },
     reviews: [{
-        user_id:{type:mongoose.Types.ObjectId,required:true,ref:"user"},
+        user_id:{type:mongoose.Types.ObjectId,required:true,ref:"customer"},
         title:{type:String,required:true},
         description:{type:String,required:true},
         rating:{type:Number}
