@@ -1,7 +1,8 @@
 const mongoose = require("mongoose");
 
-const customerSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
 
+<<<<<<< HEAD:models/customer.js
     _id: mongoose.Types.ObjectId,
     role:String,
     fullname: {
@@ -17,6 +18,14 @@ const customerSchema = new mongoose.Schema({
             trim: true,
             max: 50,
         },
+=======
+    // _id: mongoose.Types.ObjectId,
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+        max: 50,
+>>>>>>> origin/dev:models/user.js
     },
 
     email: {
@@ -57,4 +66,8 @@ const customerSchema = new mongoose.Schema({
 
 })
 
+<<<<<<< HEAD:models/customer.js
 module.exports = mongoose.model("users", customerSchema);
+=======
+module.exports = mongoose.model("user", userSchema);
+>>>>>>> origin/dev:models/user.js
