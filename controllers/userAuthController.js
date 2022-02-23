@@ -3,7 +3,7 @@ const bcrypt = require("bcrypt");
 const { validationResult } = require("express-validator");
 
 
-exports.register = async (request, response, next) => {
+exports.register =  (request, response, next) => {
 
     //Validation
     let errors = validationResult(request);
@@ -18,21 +18,21 @@ exports.register = async (request, response, next) => {
 
 
 
-    let hashed = bcrypt.hashSync(request.body.password, 10);
-    const user = new User({
-        name: request.body.name,
-        email: request.body.email,
-        password: hashed
-    }
-    );
+    // let hashed = bcrypt.hashSync(request.body.password, 10);
+    // const user = new User({
+    //     name: request.body.name,
+    //     email: request.body.email,
+    //     password: hashed
+    // }
+    // );
 
-    try {
-        const newUser = await user.save();
-        response.status(201).json(newUser);
-    }
-    catch (err) {
-        response.status(400).json({ message: err.message });
-        next(error);
-    }
+    // try {
+    //     const newUser = await user.save();
+    //     response.status(201).json(newUser);
+    // }
+    // catch (err) {
+    //     response.status(400).json({ message: err.message });
+    //     next(error);
+    // }
 
 }
