@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const authenticationRouter = require("./routes/authRouter");
 //const speakerRouter = require("./routers/speakerRouter");
 //const studentRouter = require("./routers/studentRouter");
-//const eventRouter = require("./routers/eventRouter");
+//const eventRouter = refquire("./routers/eventRouter");
 const mongoose=require("mongoose");
 const multer=require("multer");
 const  path=require("path");
@@ -37,10 +37,6 @@ const fileFilter=(req,file,cb)=>{
 }
 
 const app= express();
-
-
-
-
 
 mongoose.connect(process.env.MONGO_URL)
         .then(()=>{
@@ -73,9 +69,9 @@ app.use(body_parser.json());
 app.use(body_parser.urlencoded({extended:false}));
 //////////////////////////////////// Routers
 app.use(authenticationRouter);
-app.use(speakerRouter);
-app.use(studentRouter);
-app.use(eventRouter);
+//app.use(speakerRouter);
+//app.use(studentRouter);
+//app.use(eventRouter);
 
 
 
@@ -85,10 +81,10 @@ app.use((request,response)=>{
 })
 
 //Error MW
-app.use((error,request,response,next)=>{   //JS  code function.length
-    let status=error.status||500;
-    response.status(status).json({Error:error+""});
-})
+// app.use((error,request,response,next)=>{   //JS  code function.length
+//     let status=error.status||500;
+//     response.status(status).json({Error:error+""});
+// })
 
 
 

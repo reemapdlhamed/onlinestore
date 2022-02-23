@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const customerSchema = new mongoose.Schema({
 
     _id: mongoose.Types.ObjectId,
+    role:String,
     fullname: {
         firstName: {
             type: String,
@@ -56,4 +57,4 @@ const customerSchema = new mongoose.Schema({
 
 })
 
-module.exports = mongoose.model("customer", customerSchema);
+module.exports = mongoose.model("users", customerSchema);
