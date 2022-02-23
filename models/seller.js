@@ -32,3 +32,5 @@ const Schema = new mongoose.Schema(
   { timestamps: true }
 );
 module.exports = mongoose.model("seller", Schema);
+
+console.log("reem");
