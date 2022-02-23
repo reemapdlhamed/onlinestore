@@ -3,7 +3,6 @@ const jwt=require("jsonwebtoken");
 module.exports=(request,response,next)=>{
         let token,decode;
     try{
-        console.log("XXXXXXXXXXXXXXX")
         token = localStorage.getItem('token'); 
         //token=request.get("Authorization").split(" ")[1];
         console.log(token)

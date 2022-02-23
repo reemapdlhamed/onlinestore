@@ -5,9 +5,8 @@ const { body, query, param } = require("express-validator")
 
 
 
-router.post("/login", (request, response) => {
-    response.send("this is login");
-})
+router.post("/login",controller.userLogin)
+router.post("/changePass",controller.changePass)
 
 
 router.post("/register", [
