@@ -40,7 +40,10 @@ const userSchema = new mongoose.Schema({
             max: 100
         }
     },
-
+    cart:[{
+        product_id:{type:mongoose.Types.ObjectId,required:true,ref:"product"},
+        quantity:{type:number}
+    }],
     orders: [
         { type: mongoose.Types.ObjectId, ref: "order" }
     ]
