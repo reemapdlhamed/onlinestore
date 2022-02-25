@@ -56,7 +56,7 @@ exports.delete_products=(request,response,next)=>{
     
 }
 
-exports.update_products=(request,response,next)=>{
+exports.update_stock=(request,response,next)=>{
     Products.findByIdAndUpdate({"_id":request.body._id},{
         $set:{
             quantity:quantity-(+request.body.amount)
