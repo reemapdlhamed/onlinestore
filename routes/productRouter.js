@@ -12,12 +12,14 @@ router
       body("name").isAlphanumeric().withMessage("invalid Name."),
       body("price").isNumeric().withMessage("enter valid price"),
       body("brand").isString().withMessage("enter brand name"),
-      body("seller_id").notEmpty().withMessage("Address should be an object"),
+      body("seller").notEmpty().withMessage("add seller info"),
       body("quantity").isNumeric().withMessage("enter number"),
       body("category_id").notEmpty().withMessage("enter valid category id"),
       body("discount").isNumeric().withMessage("enter discount if exist"),
       body("description").isString().withMessage("enter descriptiont"),
       body("images").notEmpty().withMessage("you should images for product"),
+      body("properties").notEmpty().withMessage("enter product properties"),
+      body("quantity").isNumeric().withMessage("enter product quantity"),
     ],
     controller.add_product
   )
@@ -57,8 +59,10 @@ router
     isAuth,
     [
       body("title").isString().withMessage("enter valid review title"),
-      body("content").isString().withMessage("enter valid review content"),
-      body("username").isString().withMessage("enter valid username"),
+      body("description").isString().withMessage("enter valid review content"),
+      body("user").isString().withMessage("enter valid username"),
+      body("userID").notEmpty().withMessage("enter valid id"),
+      body("rating").isNumeric.withMessage("enter your rating as number")
     ].controller.add_review
   );
 
@@ -69,3 +73,10 @@ router
     [body("id").notEmpty().withMessage("ID shouldn't be Empty.")],
     controller.show_product
   );
+
+  router
+    .route("/products/stock/:id")
+    .put(
+      [body("id").notEmpty().withMessage("ID shouldn't be Empty.")],
+      controller.update_stock
+    );
