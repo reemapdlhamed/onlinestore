@@ -2,16 +2,37 @@ const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema(
     {
         _id: mongoose.Types.ObjectId,
-        customer: {
+        customerID: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "customer",
+            ref: "user",
             required: true,
         },
+        customerName:{
+            type:String,
+            required:true,
+        },
+        customerPhoneNumber:{
+            type:Number,
+            required:true,
+        }
+        ,
         shippingAddress: {
-            country:{type:string,required: true },
-            city:{type:String,required: true},
-            street:{type:String,required: true},
-            building:{type:String,required: true},
+            country:{
+                type:string,
+                required: true 
+            },
+            city:{
+                type:String,
+                required: true
+            },
+            street:{
+                type:String,
+                required: true
+            },
+            building:{
+                type:String,
+                required: true
+            },
 
         },
 
@@ -51,6 +72,11 @@ const orderSchema = new mongoose.Schema(
             enum: ["pending", "completed", "cancelled", "refund"],
             required: true,
           },
+        paymentType:{
+            type:String,
+            enum:["cod", "card"],
+            required: true,
+        }  
     },
  
 

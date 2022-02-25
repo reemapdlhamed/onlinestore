@@ -1,24 +1,15 @@
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
-const User = require("./../models/user");
+const User = require("../models/user");
 const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
 const { redirect } = require("express/lib/response");
 var ls = require('local-storage');
+const res = require("express/lib/response");
 require("dotenv").config();
-
+const asyncHandler = require('express-async-handler')
 
 exports.userLogin = (request, response, next) => {
-
-    let token = jwt.sign(
-        {
-            role: "user",
-            email: request.body.email,
-        },
-        process.env.SECRET_KEY,
-        { expiresIn: "1h" }
-    );
-    ls('token', token);
 
     let errors = validationResult(request);
     if (!errors.isEmpty()) {
@@ -32,13 +23,24 @@ exports.userLogin = (request, response, next) => {
 
     User.findOne({ email: request.body.email })
         .then((data) => {
+            if (data == null) {
+                throw new Error("email not found");
+            }
             encrypted = data.password;
-
             bcrypt
                 .compare(request.body.password, encrypted)
                 .then(function (result) {
+
                     if (result) {
-                        response.json({ message: "login", data })
+                        let token = jwt.sign(
+                            {
+                                role: data.role,
+                                id: data._id,
+                            },
+                            process.env.SECRET_KEY,
+                            { expiresIn: "1d" }
+                        );
+                        response.json({ data, token })
                         // response.redirect("http://127.0.0.1:5500/index.html")
                     } else {
                         next(new Error("wrong pass"))
@@ -46,8 +48,8 @@ exports.userLogin = (request, response, next) => {
                 });
         })
         .catch((error) => {
-            error.message = "error happened while login1";
-            next(error);
+
+            next(error.message);
         });
 
 };
@@ -55,6 +57,7 @@ exports.userLogin = (request, response, next) => {
 
 
 exports.changePass = (request, response, next) => {
+
     let errors = validationResult(request);
     if (!errors.isEmpty()) {
         let error = new Error();
@@ -64,47 +67,49 @@ exports.changePass = (request, response, next) => {
             .reduce((current, object) => current + object.msg + " ", "");
         throw error;
     }
-    console.log("tokennnnnnnnnnnnnnnnnnnnnnnnnnnnn")
-    console.log(ls("token"))
-    if (1) {
-        User.findOne({ email: request.body.email })
-            .then((data) => {
-                encryptedOld = data.password;
+    // console.log("tokennnnnnnnnnnnnnnnnnnnnnnnnnnnn")
+    // console.log(ls("token"))
 
-                bcrypt
-                    .compare(request.body.oldPassword, encryptedOld)
-                    .then(function (result) {
-                        if (
-                            result &&
-                            request.body.newPassword == request.body.newPasswordConfirm &&
-                            request.body.oldPassword != request.body.newPassword
-                        ) {
-                            User.findByIdAndUpdate(data._id, {
-                                $set: {
-                                    password: bcrypt.hashSync(request.body.newPassword, 10),
-                                },
-                            }).then((data) => {
-                                if (data == null) next(new Error("User not fount"))
+    // console.log("TOKEN TESTS");
+    // console.log("Req.role: ", request.role);
+    // console.log("Req.id: ", request.id); //working
 
-                                else response.redirect("http://127.0.0.1:5500/index.html")
-                            });
-                        } else {
 
-                            next(new Error("error happened while login9"))
-                        }
-                    });
-            })
-            .catch((error) => {
-                error.message = "error happened while login3";
-                next(error);
-            });
-    } else {
-        next(new Error("plz login first"))
-    }
+    User.findOne({ email: request.body.email })
+
+        .then((data) => {
+            if (data == null) {
+                throw new Error("email not found");
+            }
+
+
+            let matched = bcrypt.compareSync(request.body.password, data.password);
+            if (matched) {
+                User.findByIdAndUpdate(data._id, {
+                    $set: {
+                        password: bcrypt.hashSync(request.body.newPassword, 10),
+                    },
+                }).then((data) => {
+                    if (data == null) next(new Error("User not fount"))
+                    response.json({message:"password changed"})
+                    // else response.redirect("http://127.0.0.1:5500/index.html")
+                });
+            }
+            else
+            {
+                throw new Error("password in incorrect");
+            }
+
+        })
+        .catch((error) => {
+            // error.message = "error happened while login3";
+            next(error.message);
+        });
+
 };
 
 
-exports.register = async (request, response, next) => {
+exports.register = asyncHandler(async (request, response, next) => {
 
     //Validation
     let errors = validationResult(request);
@@ -113,8 +118,6 @@ exports.register = async (request, response, next) => {
         error.status = 422;
         error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
         throw error;
-        // next(error);
-        // not working properly 
     }
 
 
@@ -136,4 +139,4 @@ exports.register = async (request, response, next) => {
         next(error);
     }
 
-}
+})

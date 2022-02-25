@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const morgan = require('morgan');
 const cors = require('cors');
+const asyncHandler = require('express-async-handler')
 
 
 app.use(bodyParser.json());
@@ -27,15 +28,12 @@ mongoose.connect(process.env.DATABASE_URL)
     )
 
 
-
-
-
 //Listen To port
 app.listen(process.env.PORT_NUMBER);
 
 
 //Import Routes
-const authenticationRouter = require("./routes/userAuthRouter");
+const authenticationRouter = require("./routes/authRouter");
 app.use(authenticationRouter);
 
 
@@ -45,10 +43,13 @@ app.use((request, response) => {
 })
 
 //Error MW
-//NOT WORKING
 app.use((error, request, response, next) => {   //JS  code function.length
     let status = error.status || 500;
     response.status(status).json({ Error: error + "" });
 })
-
+//TODO: Error middleware for async functions
+// express.get('/', asyncHandler(async (req, res, next) => {
+// 	const bar = await foo.findAll();
+// 	res.send(bar)
+// }))
 
