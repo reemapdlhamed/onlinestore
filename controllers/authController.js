@@ -41,7 +41,7 @@ exports.userLogin = (request, response, next) => {
                 .compare(request.body.password, encrypted)
                 .then(function (result) {
                     if (result) {
-                        response.json({ message: "login", data })
+                        response.json({ data, token })
                         // response.redirect("http://127.0.0.1:5500/index.html")
                     } else {
                         next(new Error("wrong pass"))
@@ -69,7 +69,7 @@ exports.changePass = (request, response, next) => {
     }
     console.log("tokennnnnnnnnnnnnnnnnnnnnnnnnnnnn")
     console.log(ls("token"))
-    console.log("Req.role: ",request.role);
+    console.log("Req.role: ", request.role);
     if (1) {
         User.findOne({ email: request.body.email })
             .then((data) => {
@@ -118,8 +118,7 @@ exports.register = async (request, response, next) => {
         error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
         throw error;
         //FIXME: Error middleware doesn't handle async functions.
-
-
+        
     }
 
 
