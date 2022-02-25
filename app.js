@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const morgan = require('morgan');
 const cors = require('cors');
+const asyncHandler = require('express-async-handler')
 
 
 app.use(bodyParser.json());
@@ -47,6 +48,8 @@ app.use((error, request, response, next) => {   //JS  code function.length
     response.status(status).json({ Error: error + "" });
 })
 //TODO: Error middleware for async functions
-
-
+// express.get('/', asyncHandler(async (req, res, next) => {
+// 	const bar = await foo.findAll();
+// 	res.send(bar)
+// }))
 
