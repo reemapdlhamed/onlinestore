@@ -35,7 +35,7 @@ app.listen(process.env.PORT_NUMBER);
 
 
 //Import Routes
-const authenticationRouter = require("./routes/userAuthRouter");
+const authenticationRouter = require("./routes/authRouter");
 app.use(authenticationRouter);
 
 

@@ -1,6 +1,6 @@
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
-const User = require("./../models/user");
+const User = require("../models/user");
 const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
 const { redirect } = require("express/lib/response");
@@ -10,6 +10,7 @@ require("dotenv").config();
 
 exports.userLogin = (request, response, next) => {
 
+    //TODO: Get User Role from Database and assign it to Role
     let token = jwt.sign(
         {
             role: "user",
@@ -113,8 +114,9 @@ exports.register = async (request, response, next) => {
         error.status = 422;
         error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
         throw error;
-        // next(error);
-        // not working properly 
+        //FIXME: Error middleware doesn't handle async functions.
+
+
     }
 
 
