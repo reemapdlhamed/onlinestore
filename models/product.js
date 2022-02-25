@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
       user_id: {
         type: mongoose.Types.ObjectId,
         required: true,
-        ref: "customer",
+        ref: "user",
       },
       title: { type: String, required: true },
       description: { type: String, required: true },
