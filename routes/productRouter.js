@@ -5,7 +5,7 @@ const { body } = require("express-validator");
 
 router
   .route("/products")
-  .get(isAuth, controller.show_speakers)
+  .get(isAuth, controller.show_products)
 
   .post(
     [
