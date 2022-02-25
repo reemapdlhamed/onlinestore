@@ -53,9 +53,9 @@ const userSchema = new mongoose.Schema({
         quantity: { type: Number }
     }],
 
-    orders: [
-        { type: mongoose.Types.ObjectId, ref: "order" }
-    ],
+        orders: [
+            { type: mongoose.Types.ObjectId, ref: "order" }
+        ],
     //Values of types arrays and objects are stored as empty in DB 
     //I could fix this by giving a default as undefined
     //TODO: SEARH THIS 

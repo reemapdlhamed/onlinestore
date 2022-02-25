@@ -2,11 +2,11 @@ const express = require('express')
 const router = express.Router()
 const controller = require("../controllers/authController");
 const { body, query, param } = require("express-validator")
-
+const isAuth = require("../MW/auth");
 
 
 router.post("/login", controller.userLogin)
-router.post("/changePass", controller.changePass)
+router.post("/changePass",isAuth, controller.changePass)
 
 
 router.post("/register", [

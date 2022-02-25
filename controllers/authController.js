@@ -5,6 +5,7 @@ const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
 const { redirect } = require("express/lib/response");
 var ls = require('local-storage');
+const res = require("express/lib/response");
 require("dotenv").config();
 
 
@@ -19,6 +20,7 @@ exports.userLogin = (request, response, next) => {
         process.env.SECRET_KEY,
         { expiresIn: "1h" }
     );
+
     ls('token', token);
 
     let errors = validationResult(request);
@@ -67,6 +69,7 @@ exports.changePass = (request, response, next) => {
     }
     console.log("tokennnnnnnnnnnnnnnnnnnnnnnnnnnnn")
     console.log(ls("token"))
+    console.log("Req.role: ",request.role);
     if (1) {
         User.findOne({ email: request.body.email })
             .then((data) => {
@@ -86,8 +89,8 @@ exports.changePass = (request, response, next) => {
                                 },
                             }).then((data) => {
                                 if (data == null) next(new Error("User not fount"))
-
-                                else response.redirect("http://127.0.0.1:5500/index.html")
+                                response.send("password changed")
+                                // else response.redirect("http://127.0.0.1:5500/index.html")
                             });
                         } else {
 
