@@ -49,7 +49,7 @@ exports.delete_products = (request, response, next) => {
     });
 };
 
-exports.update_products = (request, response, next) => {
+exports.update_stock = (request, response, next) => {
   Products.findByIdAndUpdate(
     { _id: request.body.id },
     {
@@ -102,3 +102,13 @@ exports.show_product = (request, response, next) => {
       next(error);
     });
 };
+
+exports.add_review = (request, response, next) => {
+    Products.updateOne({ _id: request.body.id },{$push:{reviews:request.body.new_review}})
+      .then((data) => {
+        response.status(201).json({ message: " review added", data });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  };
