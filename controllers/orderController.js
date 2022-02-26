@@ -84,6 +84,16 @@ exports.updateOrderStatus = (request, response, next) => {
       });
   };
 
+//get Orders
+exports.getOrders=(request,response,next)=>{
+    order.find({})
+        .then(date=>{
+            response.status(200).json(data)
+        })
+        .catch(error=>{
+            next(error);
+        })
+}  
   //delete order
 //   exports.deleteOrder = async (request, response, next) => {
 //         try {

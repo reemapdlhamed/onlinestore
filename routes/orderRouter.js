@@ -8,7 +8,7 @@ const { body } = require("express-validator");
 router
 // GET> /orders > FOR ADMIN
 .route("/order")
-.get(isAuth, controller.getAllOrders)
+.get(isAuth, controller.getOrders)
 // POST> /orders > ADD a new order
 .post(
     isAuth,
