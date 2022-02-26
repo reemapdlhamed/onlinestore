@@ -30,7 +30,7 @@ router
 router.route("/:id").get(isAuth, controller.getMyOrdersByID);
 
 //TODO Later
-router.route("/:id/pay").put(isAuth, controller.updateOrderToPaid);
+// router.route("/:id/pay").put(isAuth, controller.updateOrderToPaid);
 
 // PUT> /orders/:id  >FOR ADMIN >>update Status 
 router.route("/:id/order-status")
