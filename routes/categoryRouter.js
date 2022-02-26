@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const { request } = require("http");
-//isAuth=require("./../Middleware/authMW");
+isAuth=require("./../Middleware/authMW");
 const category = require("./../models/categorySchema");
 
 router
@@ -16,7 +16,7 @@ router
       body("description").isString().withMessage("enter valid price"),
       body("bannerImage").isString().withMessage("enter brand name"),
     ],
-    controller.add_category
+   isAuth,controller.add_category
   )
 
 router
