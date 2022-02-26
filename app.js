@@ -1,12 +1,11 @@
 require("dotenv").config();
-const express = require("express")
-const app = express()
+const express = require("express");
+const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const morgan = require('morgan');
-const cors = require('cors');
-const asyncHandler = require('express-async-handler')
-
+const morgan = require("morgan");
+const cors = require("cors");
+// const asyncHandler = require("express-async-handler");
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -14,42 +13,50 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("tiny"));
 
 //CORS
-app.use(cors());
-
+// app.use(cors());
+app.use((request, response, next) => {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header(
+    "Access-Control-Allow-Methods",
+    "GET,POST,DELETE,PUT,OPTIONS"
+  );
+  response.header("Access-Control-Allow-Headers", "Content-Type,Authorization");
+  next();
+});
 
 //Connect to DB
-mongoose.connect(process.env.DATABASE_URL)
-    .then(() => {
-        console.log("DB Connected")
-    })
-    .catch(() => {
-        console.log("DB Error.")
-    }
-    )
-
+mongoose
+  .connect(process.env.DATABASE_URL)
+  .then(() => {
+    console.log("DB Connected");
+  })
+  .catch(() => {
+    console.log("DB Error.");
+  });
 
 //Listen To port
 app.listen(process.env.PORT_NUMBER);
 
-
 //Import Routes
 const authenticationRouter = require("./routes/authRouter");
+const productRouter = require("./routes/productRouter");
+const categoryRouter = require("./routes/categoryRouter");
 app.use(authenticationRouter);
-
-
+app.use(productRouter);
+app.use(categoryRouter);
 //Not found MW
 app.use((request, response) => {
-    response.status(404).json({ data: "Not Found" });
-})
+  response.status(404).json({ data: "Not Found" });
+});
 
 //Error MW
-app.use((error, request, response, next) => {   //JS  code function.length
-    let status = error.status || 500;
-    response.status(status).json({ Error: error + "" });
-})
+app.use((error, request, response, next) => {
+  //JS  code function.length
+  let status = error.status || 500;
+  response.status(status).json({ Error: error + "" });
+});
 //TODO: Error middleware for async functions
 // express.get('/', asyncHandler(async (req, res, next) => {
 // 	const bar = await foo.findAll();
 // 	res.send(bar)
 // }))
-

@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
+const controller = require("./../controllers/productController");
 //isAuth=require("./../Middleware/authMW");
 
 router
   .route("/products")
-  .get(isAuth, controller.show_products)
+  .get(controller.show_products)
 
   .post(
     [
@@ -25,13 +26,11 @@ router
   )
 
   .delete(
-    isAuth,
     [body("id").notEmpty().withMessage("ID Should be a object_ID")],
     controller.delete_product
   )
 
   .put(
-    isAuth,
     [
       body("name").isAlphanumeric().withMessage("invalid Name."),
       body("price").isString().withMessage("Enter Valid Price."),
@@ -56,27 +55,28 @@ router
 router
   .route("/products/add_reviews")
   .put(
-    isAuth,
     [
       body("title").isString().withMessage("enter valid review title"),
       body("description").isString().withMessage("enter valid review content"),
       body("user").isString().withMessage("enter valid username"),
       body("userID").notEmpty().withMessage("enter valid id"),
-      body("rating").isNumeric.withMessage("enter your rating as number")
-    ].controller.add_review
+      body("rating").isNumeric().withMessage("enter your rating as number"),
+    ],
+    controller.add_review
   );
 
 router
   .route("/products/:id")
   .get(
-    isAuth,
     [body("id").notEmpty().withMessage("ID shouldn't be Empty.")],
     controller.show_product
   );
 
-  router
-    .route("/products/stock/:id")
-    .put(
-      [body("id").notEmpty().withMessage("ID shouldn't be Empty.")],
-      controller.update_stock
-    );
+router
+  .route("/products/stock")
+  .put(
+    [body("id").notEmpty().withMessage("ID shouldn't be Empty.")],
+    controller.update_stock
+  );
+
+module.exports = router;

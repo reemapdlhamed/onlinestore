@@ -13,33 +13,33 @@ exports.show_products = (request, response, next) => {
 };
 
 exports.add_product = (request, response, next) => {
-  let auto_id;
-  Products.find({}).then((data) => {
-    auto_id = data.length;
-    let object = new Products({
-      _id: auto_id,
-      name: request.body.name,
-      price: request.body.price,
-      brand: request.body.brand,
-      category_id: request.body.category_id,
-      discount: request.body.discount,
-      reviews: request.body.reviews,
-      description: request.body.description,
-      images: request.body.images,
-      properties: request.body.properties,
-      quantity: request.body.quantity,
-      seller: request.body.seller,
-    });
-    object
-      .save()
-      .then((data) => {
-        response.status(201).json({ message: "added", data });
-      })
-      .catch((error) => next(error));
+  // let auto_id;
+  // Products.find({}).then((data) => {
+  //   auto_id = data.length;
+  let object = new Products({
+    // _id: auto_id,
+    name: request.body.name,
+    price: request.body.price,
+    brand: request.body.brand,
+    category_id: request.body.category_id,
+    discount: request.body.discount,
+    reviews: request.body.reviews,
+    description: request.body.description,
+    images: request.body.images,
+    properties: request.body.properties,
+    quantity: request.body.quantity,
+    seller: request.body.seller,
   });
+  object
+    .save()
+    .then((data) => {
+      response.status(201).json({ message: "added", data });
+    })
+    .catch((error) => next(error));
+  // });
 };
 
-exports.delete_products = (request, response, next) => {
+exports.delete_product = (request, response, next) => {
   Products.findByIdAndDelete({ _id: request.body.id })
     .then((data) => {
       response.status(201).json({ message: "deleted", data });
@@ -54,7 +54,7 @@ exports.update_stock = (request, response, next) => {
     { _id: request.body.id },
     {
       $set: {
-        quantity: quantity - +request.body.amount,
+        quantity: quantity - request.body.amount,
       },
     }
   )
@@ -94,7 +94,7 @@ exports.update_product = (request, response, next) => {
 };
 
 exports.show_product = (request, response, next) => {
-  Products.findOne({ _id: request.body.id })
+  Products.findOne({ _id: request.params.id })
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -104,11 +104,14 @@ exports.show_product = (request, response, next) => {
 };
 
 exports.add_review = (request, response, next) => {
-    Products.updateOne({ _id: request.body.id },{$push:{reviews:request.body.new_review}})
-      .then((data) => {
-        response.status(201).json({ message: " review added", data });
-      })
-      .catch((error) => {
-        next(error);
-      });
-  };
+  Products.updateOne(
+    { _id: request.body.id },
+    { $push: { reviews: request.body.new_review } }
+  )
+    .then((data) => {
+      response.status(201).json({ message: " review added", data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
