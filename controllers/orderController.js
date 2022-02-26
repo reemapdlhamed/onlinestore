@@ -15,9 +15,9 @@ exports.createOrders = (request, response, next) => {
     } 
       let object = new order({
         _id: request.body.id,
-       customerName:request.body.customerName,
+        customerName:request.body.customerName,
         customerID:request.body.user,
-        customerPhoneNumber:request.body.customerPhoneNumber,
+        phoneNumber:request.body.phoneNumber,
         shippingAddress:request.body.shippingAddress,
         orderItems:request.body.orderItems,
         orderDate:request.body.orderDate,
