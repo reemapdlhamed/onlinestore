@@ -1,7 +1,4 @@
-//By Team
 const mongoose = require("mongoose");
-// const autoIncrement = require('mongoose-auto-increment');
-// autoIncrement.initialize(mongoose.connection);
 const orderSchema = new mongoose.Schema(
     {
         _id: mongoose.Types.ObjectId,
@@ -28,9 +25,13 @@ const orderSchema = new mongoose.Schema(
                 type:String,
                 required: true
             },
+           
             street:{
                 type:String,
                 required: true
+            },
+            postalCode:{ 
+                type: String, required: true 
             },
             building:{
                 type:String,
@@ -39,8 +40,11 @@ const orderSchema = new mongoose.Schema(
 
         },
 
-        items: [
+        orderItems: [
             {
+            //productName: { type: String, required: true },
+            //orderImage: { type: String, required: true },
+
                 productId: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "product",
@@ -62,13 +66,19 @@ const orderSchema = new mongoose.Schema(
                 enum: ["pending", "packed", "shipped", "delivered", "cancelled"],
                 default: "pending",
             },
-            date: {
+            orderDate: {
                 type: Date,
             }
         },
         totalPrice: {
             type: Number,
             required: true,
+            default: 0.0,
+          },
+        shippingPrice: {
+            type: Number,
+            required: true,
+            default: 0.0,
           }, 
         paymentStatus: {
             type: String,
@@ -85,5 +95,5 @@ const orderSchema = new mongoose.Schema(
 
     { timestamps: true }
 );
-schema.plugin(autoIncrement.plugin, 'order');
+
 module.exports = mongoose.model("order", orderSchema);
