@@ -7,7 +7,7 @@ const { body } = require("express-validator");
 router.route("/order")
 .get(isAuth, controller.getAllOrders)
 .post(isAuth,controller.createOrders)
-// .get(isAuth,controller.getMyOrders)
+
 
 
 
