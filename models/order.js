@@ -1,4 +1,7 @@
+//By Team
 const mongoose = require("mongoose");
+// const autoIncrement = require('mongoose-auto-increment');
+// autoIncrement.initialize(mongoose.connection);
 const orderSchema = new mongoose.Schema(
     {
         _id: mongoose.Types.ObjectId,
@@ -82,5 +85,5 @@ const orderSchema = new mongoose.Schema(
 
     { timestamps: true }
 );
-
+schema.plugin(autoIncrement.plugin, 'order');
 module.exports = mongoose.model("order", orderSchema);
