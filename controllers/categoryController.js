@@ -16,7 +16,8 @@ exports.show_category=(request,response,next)=>{
 }
 
 
-exports.add_product=(request,response,next)=>{
+exports.add_category=(request,response,next)=>{
+    if(request.role!="admin")next(Error("not authorized "))
     let auto_id;
         Category.find({})
             .then(data=>{

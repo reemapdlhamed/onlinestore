@@ -16,7 +16,7 @@ router.post("/changePass", isAuth, controller.changePass)
 
 
 router.post("/register", [
-
+    body("role").notEmpty().withMessage("role should not be empty"),
     body("name").notEmpty().withMessage("name should not be empty"),
     body("email").isEmail().withMessage("Email is not valid"),
     body("password").notEmpty().withMessage("password should not be empty"),
@@ -25,7 +25,12 @@ router.post("/register", [
     }).withMessage("confirmpassword doesn't match")
 
 ], controller.register)
+ 
+router.put("/updateUser",[
 
+body("email").isEmail().withMessage("invalid Email."),
+
+],isAuth,controller.updateUser)
 
 
 module.exports = router
