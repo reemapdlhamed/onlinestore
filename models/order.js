@@ -59,16 +59,15 @@ const orderSchema = new mongoose.Schema(
                 },
             },
         ],
+        orderDate: {
+            type: Date,
+        },
         orderStatus:
-        {   
-            type: {
-                type: String,
-                enum: ["pending", "packed", "shipped", "delivered", "cancelled"],
-                default: "pending",
-            },
-            orderDate: {
-                type: Date,
-            }
+        {               
+          type: String,
+           enum: ["pending", "packed", "shipped", "delivered", "cancelled"],
+            default: "pending",
+   
         },
         totalPrice: {
             type: Number,
