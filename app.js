@@ -8,6 +8,7 @@ const cors = require('cors');
 const asyncHandler = require('express-async-handler')
 
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -35,7 +36,9 @@ app.listen(process.env.PORT_NUMBER);
 //Import Routes
 const authenticationRouter = require("./routes/authRouter");
 app.use(authenticationRouter);
-
+//Import Order Router
+const orderRouter=require("./routes/orderRouter");
+app.use(orderRouter);
 
 //Not found MW
 app.use((request, response) => {
