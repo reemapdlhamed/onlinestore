@@ -44,6 +44,10 @@ const categoryRouter = require("./routes/categoryRouter");
 app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);
+//Import Order Router
+const orderRouter = require("./routes/orderRouter");
+app.use(orderRouter);
+
 //Not found MW
 app.use((request, response) => {
   response.status(404).json({ data: "Not Found" });

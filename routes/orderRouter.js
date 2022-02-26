@@ -4,25 +4,38 @@ const { body } = require("express-validator");
 //isAuth=require("./../Middleware/authMW");
 
 
-router.route("/order")
-.get(isAuth, controller.getAllOrders)
-.post(isAuth,controller.createOrders)
 
+router
+// GET> /orders > FOR ADMIN
+.route("/order")
+.get(isAuth, controller.getOrders)
+// POST> /orders > ADD a new order
+.post(
+    isAuth,
+    [
+    body("phoneNumber").isNumeric().withMessage("invalid PhoneNumber."),
+    body("country").isString().withMessage("enter correct country"),
+    body("city").isString().withMessage("enter correct city"),
+    body("street").isString().withMessage("enter correct street"),
+    body("building").isString().withMessage("enter correct building"),
+    body("postalCode").isAlphanumeric().withMessage("enter postalCode"),
+    body("paymentType").isString().withMessage("enter paymentType"),
+    ],
+    controller.createOrders
+);
 
+// router.route("/my-order").get(isAuth, controller.getMyOrders);
 
+// GET> /orders/:id > Get Some Order for customer
+router.route("/:id").get(isAuth, controller.getMyOrdersByID);
 
-router.route("/my-order")
-.get(isAuth,controller.getMyOrders)
+//TODO Later
+router.route("/:id/pay").put(isAuth, controller.updateOrderToPaid);
 
-router.route("/:id")
-.get(isAuth,controller.getMyOrdersByID)
+// PUT> /orders/:id  >FOR ADMIN >>update Status 
+router.route("/:id/order-status")
+        .put(isAuth,[
+            body("orderStatus").isString().withMessage("enter orderStatus"),
+        ], controller.updateOrderStatus);
 
-router.route("/:id/pay").
-put(isAuth, controller.updateOrderToPaid);
-
-router.route("/:id/order-status").
-put(isAuth, controller.updateOrderStatus);
-
-
-module.exports=router;
-
+module.exports = router;
