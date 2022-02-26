@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 module.exports = (request, response, next) => {
     let token, decode;
     try {
-        // token = localStorage.getItem('token');
         // token = ls("token");
         // console.log("authMW: Token", token);
         // token = req.headers.token
@@ -21,6 +20,8 @@ module.exports = (request, response, next) => {
     if (decode !== undefined) {
         request.role = decode.role;
         request.id = decode.id;
+        request.email = decode.email;
+
         next();
     }
 }
