@@ -21,20 +21,9 @@ router
     controller.add_category
   );
 
-router.route("/category/products").get(function (request, response, next) {
-  // category;
-  // .find({ name: request.params.name })
-  // .then((data) => {
-  //   request.body.category_id = data[0]._id;
-  //   response.redirect(307, "/products/");
-  //   console.log(data[0]._id.objectId());
-  // })
-  response.redirect(307, "/products");
-  console.log(data[0]._id.objectId());
-
-  // .catch((error) => next(error));
-  // console.log(request.params.name);
-  // throw new Error("Not Found");
+router.route("/category/:id").get(function (request, response, next) {
+  let category_id = request.params.id;
+  response.redirect(307,"/products/"+category_id);
 });
 
 module.exports = router;

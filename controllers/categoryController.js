@@ -13,10 +13,6 @@ exports.show_category = (request, response, next) => {
 };
 
 exports.add_category = (request, response, next) => {
-  // if(request.role!="admin")next(Error("not authorized "))
-  // let auto_id;
-  //   Category.find({}).then((data) => {
-  //     auto_id = data.length;
   let object = new Category({
     // _id: auto_id,
     name: request.body.name,

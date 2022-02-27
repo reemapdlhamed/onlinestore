@@ -4,6 +4,10 @@ const { body } = require("express-validator");
 const controller = require("./../controllers/productController");
 //isAuth=require("./../Middleware/authMW");
 
+
+
+router.route("/products/:category_id").get(controller.show_products_category)
+
 router
   .route("/products")
   .get(controller.show_products)
