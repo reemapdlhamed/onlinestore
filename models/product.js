@@ -25,6 +25,9 @@ const productSchema = new mongoose.Schema({
         required: true,
         ref: "user",
       },
+      email:{
+        type:String
+      },
       title: { type: String, required: true },
       description: { type: String, required: true },
       rating: { type: Number },

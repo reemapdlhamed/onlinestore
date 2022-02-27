@@ -68,7 +68,9 @@ router
     ],
     controller.add_review
   );
-
+router  
+    .route("/products/reviews")
+    .get(controller.show_reviews);
 router
   .route("/products/:id")
   .get(

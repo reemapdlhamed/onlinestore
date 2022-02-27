@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const Products = require("./../models/product");
 const express = require("express");
 
+
 exports.show_products_category = (request, response, next) => {
   Products.find({ category_id: request.params.category_id })
     .then((data) => {
@@ -191,12 +192,27 @@ exports.show_product = (request, response, next) => {
 };
 //----------------------------------------------------------------------------------------------------------
 exports.add_review = (request, response, next) => {
-  Products.updateOne(
-    { _id: request.body.id },
-    { $push: { reviews: request.body.new_review } }
-  )
+  if(request.role == "customer"){
+    Products.updateOne(
+      { _id: request.body.id },
+      { $push: { reviews: request.body.new_review } }
+    )
+      .then((data) => {
+        response.status(201).json({ message: "review added", data });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+  else{
+    response.status(404).json({ message: "your are not signed as customer" });
+  }
+};
+//-----------------------------------------------------------------------------------------------------------
+exports.show_reviews = (request, response, next) => {
+  Products.find({"reviews":{_id: "ObjectId("+request.body.id+")" }})
     .then((data) => {
-      response.status(201).json({ message: " review added", data });
+      response.status(200).json({ data });
     })
     .catch((error) => {
       next(error);
