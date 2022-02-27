@@ -14,7 +14,7 @@ exports.show_products_category = (request, response, next) => {
 };
 //--------------------------------------------------------------------------------------------
 exports.show_products = (request, response, next) => {
-  Products.find({})
+  Products.findById({ _id: request.body.id })
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -28,9 +28,9 @@ exports.add_product = (request, response, next) => {
   if (!errors.isEmpty()) {
     let error = new Error();
     error.status = 422;
-    error.message = errors.array().reduce((current, object) => {
-      current + object.msg + " ", "";
-    });
+    error.message = errors
+      .array()
+      .reduce((current, object) => current + object.msg + " ", "");
     throw error;
   }
   if (request.role == "admin" || request.role == "seller") {
@@ -63,15 +63,6 @@ exports.add_product = (request, response, next) => {
 };
 //--------------------------------------------------------------------------------------------------
 exports.delete_product = (request, response, next) => {
-  let errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    let error = new Error();
-    error.status = 422;
-    error.message = errors.array().reduce((current, object) => {
-      current + object.msg + " ", "";
-    });
-    throw error;
-  }
   if (request.role == "admin") {
     Products.findByIdAndDelete({ _id: request.body.id })
       .then((data) => {
@@ -106,9 +97,9 @@ exports.update_stock = (request, response, next) => {
   if (!errors.isEmpty()) {
     let error = new Error();
     error.status = 422;
-    error.message = errors.array().reduce((current, object) => {
-      current + object.msg + " ", "";
-    });
+    error.message = errors
+      .array()
+      .reduce((current, object) => current + object.msg + " ", "");
     throw error;
   }
   Products.findById({ _id: request.body.id })
@@ -141,15 +132,6 @@ exports.update_stock = (request, response, next) => {
 };
 //------------------------------------------------------------------------------------------------------------
 exports.update_product = (request, response, next) => {
-  let errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    let error = new Error();
-    error.status = 422;
-    error.message = errors.array().reduce((current, object) => {
-      current + object.msg + " ", "";
-    });
-    throw error;
-  }
   if (request.role == "admin") {
     Products.findByIdAndUpdate(
       { _id: request.body.id },
@@ -214,7 +196,7 @@ exports.update_product = (request, response, next) => {
 };
 //------------------------------------------------------------------------------------------------------------
 exports.show_product = (request, response, next) => {
-  Products.findOne({ _id: request.params.id })
+  Products.find({ _id: request.params.id })
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -224,15 +206,16 @@ exports.show_product = (request, response, next) => {
 };
 //----------------------------------------------------------------------------------------------------------
 exports.add_review = (request, response, next) => {
-  // let errors = validationResult(request);
-  // if (!errors.isEmpty()) {
-  //   let error = new Error();
-  //   error.status = 422;
-  //   error.message = errors.array().reduce((current, object) => {
-  //     current + object.msg + " ", "";
-  //   });
-  //   throw error;
-  // }
+  let errors = validationResult(request);
+  if (!errors.isEmpty()) {
+    let error = new Error();
+    error.status = 422;
+    error.message = errors
+      .array()
+      .reduce((current, object) => current + object.msg + " ", "");
+    throw error;
+  }
+  console.log(request.role);
   if (request.role == "customer") {
     Products.updateOne(
       { _id: request.body.id },
@@ -250,7 +233,26 @@ exports.add_review = (request, response, next) => {
 };
 //-----------------------------------------------------------------------------------------------------------
 exports.show_reviews = (request, response, next) => {
-  Products.find({})
+  Products.find({ "reviews.userID": request.body.id }, { "reviews.$": 1 })
+    .then((data) => {
+      response.status(200).json({ data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
+//------------------------------------------------------------------------------------------------------------
+exports.edit_reviews = (request, response, next) => {
+  Products.updateOne(
+    { "reviews._id": request.body.id },
+    {
+      $set: {
+        "reviews.$.title": request.body.title,
+        "reviews.$.description": request.body.description,
+        "reviews.$.rating": request.body.rating,
+      },
+    }
+  )
     .then((data) => {
       response.status(200).json({ data });
     })
