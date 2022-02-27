@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   brand: { type: String, required: true, max: 50 },
   seller: {
-    userID: { type: Number, required: true, ref: "user" },
+    userID: { type: mongoose.Types.ObjectId, required: true, ref: "user" },
     name: { type: String, required: true, max: 20 },
   },
   category_id: {
