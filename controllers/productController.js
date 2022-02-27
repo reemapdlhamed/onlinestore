@@ -224,15 +224,15 @@ exports.show_product = (request, response, next) => {
 };
 //----------------------------------------------------------------------------------------------------------
 exports.add_review = (request, response, next) => {
-  let errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    let error = new Error();
-    error.status = 422;
-    error.message = errors.array().reduce((current, object) => {
-      current + object.msg + " ", "";
-    });
-    throw error;
-  }
+  // let errors = validationResult(request);
+  // if (!errors.isEmpty()) {
+  //   let error = new Error();
+  //   error.status = 422;
+  //   error.message = errors.array().reduce((current, object) => {
+  //     current + object.msg + " ", "";
+  //   });
+  //   throw error;
+  // }
   if (request.role == "customer") {
     Products.updateOne(
       { _id: request.body.id },
