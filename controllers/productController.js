@@ -11,6 +11,7 @@ exports.show_products_category = (request, response, next) => {
       next(error);
     });
 };
+//--------------------------------------------------------------------------------------------
 exports.show_products = (request, response, next) => {
   Products.find({})
     .then((data) => {
@@ -20,7 +21,7 @@ exports.show_products = (request, response, next) => {
       next(error);
     });
 };
-
+//-----------------------------------------------------------------------------------------------
 exports.add_product = (request, response, next) => {
   if(request.role == "admin" || request.role == "seller"){
     let object = new Products({
@@ -49,7 +50,7 @@ exports.add_product = (request, response, next) => {
   
   // });
 };
-
+//--------------------------------------------------------------------------------------------------
 exports.delete_product = (request, response, next) => {
   if(request.role == "admin"){
     Products.findByIdAndDelete({ _id: request.body.id })
@@ -60,21 +61,28 @@ exports.delete_product = (request, response, next) => {
       next(error);
     });
   }
-  else{
+  else if(request.role == "seller"){
     Products.findById({_id:request.body.id})
       .then((data) =>{
-        if(request.role == data.seller.useID){
-          response.status(201).json({ message: "the same", data });
+        if(request.id == data.seller.userID){
+          Products.findByIdAndDelete({ _id: request.body.id })
+            .then((data) => {
+                response.status(201).json({ message: "deleted", data });
+              })
+              .catch((error) => {
+                next(error);
+              });
         }
         else{
           response.status(404).json({ message: "You dont owne this product " });
         }
       })
   }
-
-  
+  else{
+    response.status(404).json({ message: "You should be admin or seller to delete product " });
+  }
 };
-
+//-------------------------------------------------------------------------------------------------------
 exports.update_stock = (request, response, next) => {
   Products.findById({_id:request.body.id})
     .then((data) =>{
@@ -103,34 +111,75 @@ exports.update_stock = (request, response, next) => {
       next(error);
     });
 };
-
+//------------------------------------------------------------------------------------------------------------
 exports.update_product = (request, response, next) => {
-  Products.findByIdAndUpdate(
-    { _id: request.body.id },
-    {
-      $set: {
-        name: request.body.name,
-        price: request.body.price,
-        brand: request.body.brand,
-        category_id: request.body.category_id,
-        discount: request.body.discount,
-        reviews: request.body.reviews,
-        description: request.body.description,
-        images: request.body.images,
-        properties: request.body.properties,
-        quantity: request.body.quantity,
-        seller: request.body.seller,
-      },
-    }
-  )
-    .then((data) => {
-      response.status(201).json({ message: " updated", data });
-    })
-    .catch((error) => {
-      next(error);
-    });
+  if(request.role == "admin"){
+    Products.findByIdAndUpdate(
+      { _id: request.body.id },
+      {
+        $set: {
+          name: request.body.name,
+          price: request.body.price,
+          brand: request.body.brand,
+          category_id: request.body.category_id,
+          discount: request.body.discount,
+          reviews: request.body.reviews,
+          description: request.body.description,
+          images: request.body.images,
+          properties: request.body.properties,
+          quantity: request.body.quantity,
+          seller: request.body.seller,
+        },
+      }
+    )
+      .then((data) => {
+        response.status(201).json({ message: " updated", data });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+  else if(request.role == "seller"){
+    Products.findById({_id:request.body.id})
+      .then((data) =>{
+        if(request.id == data.seller.userID){
+          Products.findByIdAndUpdate(
+            { _id: request.body.id },
+            {
+              $set: {
+                name: request.body.name,
+                price: request.body.price,
+                brand: request.body.brand,
+                category_id: request.body.category_id,
+                discount: request.body.discount,
+                reviews: request.body.reviews,
+                description: request.body.description,
+                images: request.body.images,
+                properties: request.body.properties,
+                quantity: request.body.quantity,
+                seller: request.body.seller,
+              },
+            }
+          )
+            .then((data) => {
+              response.status(201).json({ message: " updated", data });
+            })
+            .catch((error) => {
+              next(error);
+            });
+        }
+        else{
+          response.status(404).json({ message: "You dont owne this product " });
+        }
+      })
+  }
+  else{
+    response.status(404).json({ message: "You should be admin or seller to delete product " });
+  }
+  
+  
 };
-
+//------------------------------------------------------------------------------------------------------------
 exports.show_product = (request, response, next) => {
   Products.findOne({ _id: request.params.id })
     .then((data) => {
@@ -140,7 +189,7 @@ exports.show_product = (request, response, next) => {
       next(error);
     });
 };
-
+//----------------------------------------------------------------------------------------------------------
 exports.add_review = (request, response, next) => {
   Products.updateOne(
     { _id: request.body.id },
