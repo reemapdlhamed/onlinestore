@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const { body } = require("express-validator");
 // const { request } = require("http");
-// isAuth = require("./../Middleware/authMW");
+ isAuth = require("./../MW/auth");
 const category = require("./../models/category");
 const controller = require("./../controllers/categoryController");
 
@@ -11,7 +11,7 @@ router
   .route("/category")
   .get(controller.show_category)
 
-  .post(
+  .post(isAuth,
     [
       body("name").isAlphanumeric().withMessage("invalid Name."),
       body("description").isString().withMessage("enter valid price"),
@@ -20,11 +20,11 @@ router
 
     controller.add_category
   )
-  .delete(
+  .delete(isAuth,
     [body("id").notEmpty().withMessage("ID Should be a object_ID")],
     controller.delete_category
   )
-  .put(
+  .put(isAuth,
     [
       body("name").isAlphanumeric().withMessage("invalid Name."),
       body("description").isString().withMessage("enter valid price"),
