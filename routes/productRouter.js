@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const controller = require("./../controllers/productController");
-//isAuth=require("./../Middleware/authMW");
+isAuth=require("./../MW/auth");
 
 
 
@@ -12,7 +12,7 @@ router
   .route("/products")
   .get(controller.show_products)
 
-  .post(
+  .post(isAuth,
     [
       body("name").isAlphanumeric().withMessage("invalid Name."),
       body("price").isNumeric().withMessage("enter valid price"),
@@ -29,12 +29,12 @@ router
     controller.add_product
   )
 
-  .delete(
+  .delete(isAuth,
     [body("id").notEmpty().withMessage("ID Should be a object_ID")],
     controller.delete_product
   )
 
-  .put(
+  .put(isAuth,
     [
       body("name").isAlphanumeric().withMessage("invalid Name."),
       body("price").isString().withMessage("Enter Valid Price."),
