@@ -249,7 +249,7 @@ exports.edit_review = (request, response, next) => {
       "reviews.$.description":request.body.description,
       "reviews.$.rating":request.body.rating
     }
-  )
+  })
     .then((data) => {
       response.status(200).json({ data });
     })
