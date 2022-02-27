@@ -46,7 +46,7 @@ app.use(productRouter);
 app.use(categoryRouter);
 //Import Order Router
 const orderRouter = require("./routes/orderRouter");
-app.use(orderRouter);
+app.use("/orders",orderRouter);
 
 //Not found MW
 app.use((request, response) => {

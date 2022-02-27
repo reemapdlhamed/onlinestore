@@ -6,51 +6,52 @@ const { validationResult } = require("express-validator");
 
 //create order
 exports.createOrders = (request, response, next) => {
-    let errors = validationResult(request);
-    if (!errors.isEmpty()) {
-        let error = new Error();
-        error.status = 422;
-        error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
-        throw error;
-    } 
+    // let errors = validationResult(request);
+    // if (!errors.isEmpty()) {
+    //     let error = new Error();
+    //     error.status = 422;
+    //     error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
+    //     throw error;
+    // } 
       let object = new order({
-        _id: request.body.id,
+
         customerName:request.body.customerName,
-        customerID:request.body.user,
+        customerID:request.body.customerID,
         phoneNumber:request.body.phoneNumber,
         shippingAddress:request.body.shippingAddress,
         orderItems:request.body.orderItems,
         orderDate:request.body.orderDate,
         orderStatus:request.body.orderStatus,
         totalPrice:request.body.totalPrice,
-        shippingPrice:request.body.shippingAddress,
-        // paymentStatus:request.body.paymentStatus,
-        // paymentType:request.body.paymentType
+        shippingPrice:request.body.shippingPrice,
+        paymentType:request.body.paymentType
+        
       });
       object
         .save()
         .then((data) => {
           response.status(201).json({ message: "order added", data });
         })
-        .catch((error) => next(error));  
+        .catch((error) => next(error.message));  
   };
 
 
   //getMyOrdersByID //check
   exports.getMyOrdersByID = (request, response, next) => {
-    let errors = validationResult(request);
-    if (!errors.isEmpty()) {
-        let error = new Error();
-        error.status = 422;
-        error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
-        throw error;
-    } 
-  order.find({_id:request.body.customerID })
+    // let errors = validationResult(request);
+    // if (!errors.isEmpty()) {
+    //     let error = new Error();
+    //     error.status = 422;
+    //     error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
+    //     throw error;
+    // } 
+    console.log("here");
+  order.find({customerID:request.params.customerId})
   .then((data) => {
-    if (!orderItems && orderItems.length === 0) {
-        next(new Error("order not found"));
-    }
-    response.status(200).json({ data });
+    // if (!orderItems && orderItems.length === 0) {
+    //     next(new Error("order not found"));
+    // }
+    response.status(200).json(data);
   })
   .catch((error) => {
     next(error.message);
@@ -71,7 +72,6 @@ exports.updateOrderStatus = (request, response, next) => {
       {
         $set: {
             orderStatus: req.body.orderStatus
-
         },
       }
     )
@@ -86,15 +86,17 @@ exports.updateOrderStatus = (request, response, next) => {
 
 //get Orders
 exports.getOrders=(request,response,next)=>{
+  //TODO: Add admin authorization
     order.find({})
-        .then(date=>{
+        .then(data=>{
             response.status(200).json(data)
         })
         .catch(error=>{
             next(error);
         })
 }  
-  //delete order
+
+//delete order
 //   exports.deleteOrder = async (request, response, next) => {
 //         try {
 //             let data = await order.findOneAndDelete({ orderItems: request.body.productId });
