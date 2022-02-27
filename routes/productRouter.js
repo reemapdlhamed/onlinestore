@@ -39,11 +39,12 @@ router
   );
 router
     .route("/edit_reviews")
-    .put(controller.edit_reviews)
+    .put(controller.edit_review)
 
 router
   .route("/review")
   .get(controller.show_reviews)
+  .delete(isAuth,controller.delete_review)
   .put(isAuth,
     [
       body("new_review.title").notEmpty().withMessage("enter valid review title"),

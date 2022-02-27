@@ -243,7 +243,7 @@ exports.show_reviews = (request, response, next) => {
     });
 };
 //------------------------------------------------------------------------------------------------------------
-exports.edit_reviews = (request, response, next) => {
+exports.edit_review = (request, response, next) => {
   Products.updateOne({"reviews._id":request.body.id},{
     $set:{
       "reviews.$.title":request.body.title,
@@ -253,6 +253,18 @@ exports.edit_reviews = (request, response, next) => {
   })
     .then((data) => {
       response.status(200).json({ data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
+//-----------------------------------------------------------------------------------------------------------
+exports.delete_review = (request, response, next) => {
+  Products.updateOne({"_id":request.body.id},{
+    $pull:{reviews:{userID:request.id}}
+  })
+    .then((data) => {
+      response.status(200).json({ message: "deleted", data });
     })
     .catch((error) => {
       next(error);
