@@ -14,7 +14,7 @@ exports.show_products_category = (request, response, next) => {
 };
 //--------------------------------------------------------------------------------------------
 exports.show_products = (request, response, next) => {
-  Products.findById({_id:request.body.id})
+  Products.findById({ _id: request.body.id })
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -63,7 +63,6 @@ exports.add_product = (request, response, next) => {
 };
 //--------------------------------------------------------------------------------------------------
 exports.delete_product = (request, response, next) => {
-  
   if (request.role == "admin") {
     Products.findByIdAndDelete({ _id: request.body.id })
       .then((data) => {
@@ -197,9 +196,9 @@ exports.update_product = (request, response, next) => {
 };
 //------------------------------------------------------------------------------------------------------------
 exports.show_product = (request, response, next) => {
-  Products.find({_id:request.params.id})
+  Products.find({ _id: request.params.id })
     .then((data) => {
-      response.status(200).json({data});
+      response.status(200).json({ data });
     })
     .catch((error) => {
       next(error);
@@ -234,7 +233,7 @@ exports.add_review = (request, response, next) => {
 };
 //-----------------------------------------------------------------------------------------------------------
 exports.show_reviews = (request, response, next) => {
-  Products.find({"reviews.userID":request.body.id},{"reviews.$":1})
+  Products.find({ "reviews.userID": request.body.id }, { "reviews.$": 1 })
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -250,7 +249,7 @@ exports.edit_review = (request, response, next) => {
       "reviews.$.description":request.body.description,
       "reviews.$.rating":request.body.rating
     }
-  })
+  )
     .then((data) => {
       response.status(200).json({ data });
     })
