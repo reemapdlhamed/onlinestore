@@ -210,7 +210,7 @@ exports.add_review = (request, response, next) => {
 };
 //-----------------------------------------------------------------------------------------------------------
 exports.show_reviews = (request, response, next) => {
-  Products.find({"reviews":{_id: "ObjectId("+request.body.id+")" }})
+  Products.find({})
     .then((data) => {
       response.status(200).json({ data });
     })
