@@ -19,6 +19,18 @@ router
     ],
 
     controller.add_category
+  )
+  .delete(
+    [body("id").notEmpty().withMessage("ID Should be a object_ID")],
+    controller.delete_category
+  )
+  .put(
+    [
+      body("name").isAlphanumeric().withMessage("invalid Name."),
+      body("description").isString().withMessage("enter valid price"),
+      body("bannerImage").isString().withMessage("enter brand name"),
+    ],
+    controller.update_category
   );
 
 router.route("/category/:id").get(function (request, response, next) {
