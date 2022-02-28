@@ -17,10 +17,10 @@ const userSchema = new mongoose.Schema({
         trim: true
     },
 
-    // password: {
-    //     type: String,
-    //     required: true
-    // },
+    password: {
+        type: String,
+        required: true
+    },
 
     role: {
         type: String,
@@ -49,8 +49,8 @@ const userSchema = new mongoose.Schema({
 
     },
     cart: [{
-        product_id: { type: mongoose.Types.ObjectId, required: true, ref: "product" },
-        quantity: { type: Number }
+        product_id: {unique:true, type: mongoose.Types.ObjectId, required: true, ref: "product" },
+        quantity: { type: Number,min:1,max:100 }
     }],
 
         orders: [

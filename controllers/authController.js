@@ -1,7 +1,6 @@
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-const Password = require("../models/password");
 
 const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
@@ -27,14 +26,8 @@ exports.userLogin = (request, response, next) => {
       if (data == null) {
         throw new Error("email not found1");
       }
+          encrypted = data.password;
 
-      Password.findOne({ userId: data._id })
-        .then((dataPass) => {
-          if (dataPass == null) {
-            throw new Error("email not found2");
-          }
-
-          encrypted = dataPass.password;
           bcrypt
             .compare(request.body.password, encrypted)
             .then(function (result) {
@@ -54,10 +47,8 @@ exports.userLogin = (request, response, next) => {
                 next(new Error("wrong pass"));
               }
             });
-        })
-        .catch((error) => {
-          next(error.message);
-        });
+        
+  
     })
     .catch((error) => {
       next(error.message);
@@ -88,17 +79,13 @@ exports.changePass = (request, response, next) => {
       if (data == null) {
         throw new Error("email not found");
       }
-      Password.findOne({ userId:data._id })
-        .then((dataPass) => {
-          if (dataPass == null) {
-            throw new Error("email not found");
-          }
+
           let matched = bcrypt.compareSync(
             request.body.oldPassword,
-            dataPass.password
+            data.password
           );
-          if (matched) {
-            Password.findByIdAndUpdate(dataPass._id, {
+          if (matched&&request.body.newPassword==request.body.newPasswordConfirm) {
+            User.findByIdAndUpdate(data._id, {
               $set: {
                 password: bcrypt.hashSync(request.body.newPassword, 10),
               },
@@ -108,13 +95,9 @@ exports.changePass = (request, response, next) => {
               // else response.redirect("http://127.0.0.1:5500/index.html")
             });
           } else {
-            throw new Error("password in incorrect");
+            throw new Error("password in incorrect or not matched");
           }
-        })
-        .catch((error) => {
-          // error.message = "error happened while login3";
-          next(error.message);
-        });
+
     })
     .catch((error) => {
       // error.message = "error happened while login3";
@@ -135,24 +118,19 @@ exports.register = asyncHandler(async (request, response, next) => {
   }
 
   let hashed = bcrypt.hashSync(request.body.password, 10);
-
   const user = new User({
     name: request.body.name,
     email: request.body.email,
     role: request.body.role,
-  });
-console.log(user._id)
-  const password = new Password({
-    userId: user._id,
     password: hashed,
+
   });
 
   try {
     const newUser = await user.save();
-    //response.status(201).json(newUser);
+    response.status(201).json(newUser);
 
-    const newPass = await password.save();
-    response.status(201).json(newUser,newPass);
+
   } catch (err) {
     response.status(400).json({ message: err.message });
     next(error);
