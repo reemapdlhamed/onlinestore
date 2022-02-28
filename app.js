@@ -39,14 +39,21 @@ app.listen(process.env.PORT_NUMBER);
 
 //Import Routes
 const authenticationRouter = require("./routes/authRouter");
+
+
 const productRouter = require("./routes/productRouter");
 const categoryRouter = require("./routes/categoryRouter");
+const cartRouter = require("./routes/cartRouter");
+
 app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);
+app.use(cartRouter);
+
 //Import Order Router
 const orderRouter = require("./routes/orderRouter");
 app.use("/orders",orderRouter);
+
 
 //Not found MW
 app.use((request, response) => {
