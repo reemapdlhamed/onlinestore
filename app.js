@@ -66,8 +66,3 @@ app.use((error, request, response, next) => {
   let status = error.status || 500;
   response.status(status).json({ Error: error + "" });
 });
-//TODO: Error middleware for async functions
-// express.get('/', asyncHandler(async (req, res, next) => {
-// 	const bar = await foo.findAll();
-// 	res.send(bar)
-// }))
