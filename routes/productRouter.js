@@ -1,15 +1,20 @@
 const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
-//isAuth=require("./../Middleware/authMW");
+const controller = require("./../controllers/productController");
+isAuth=require("./../MW/auth");
+
+
+
+router.route("/products/:category_id").get(controller.show_products_category)
 
 router
   .route("/products")
-  .get(isAuth, controller.show_products)
+  .get(controller.show_products)
 
-  .post(
+  .post(isAuth,
     [
-      body("name").isAlphanumeric().withMessage("invalid Name."),
+      body("name").notEmpty().withMessage("invalid Name."),
       body("price").isNumeric().withMessage("enter valid price"),
       body("brand").isString().withMessage("enter brand name"),
       body("seller").notEmpty().withMessage("add seller info"),
@@ -24,59 +29,48 @@ router
     controller.add_product
   )
 
-  .delete(
-    isAuth,
+  .delete(isAuth,
     [body("id").notEmpty().withMessage("ID Should be a object_ID")],
     controller.delete_product
   )
 
-  .put(
-    isAuth,
-    [
-      body("name").isAlphanumeric().withMessage("invalid Name."),
-      body("price").isString().withMessage("Enter Valid Price."),
-      body("brand").isEmail().withMessage("enter brand name"),
-      body("seller_id").notEmpty().withMessage("enter number"),
-      body("quantity")
-        .isNumeric()
-        .withMessage("enter the quantity of the product"),
-      body("category_id").notEmpty().withMessage("enter number"),
-      body("discount").isNumeric().withMessage("enter discount"),
-      body("discription").isString().withMessage("enter product description"),
-      body("images").notEmpty().withMessage("Image should be a string"),
-      body("seller").notEmpty().withMessage("Invalid Seller Name"),
-      body("quantity")
-        .isNumeric()
-        .withMessage("you have to enter the quantity"),
-      body("properities").notEmpty().withMessage("properties is not valid"),
-    ],
+  .put(isAuth,
     controller.update_product
   );
+router
+    .route("/edit_reviews")
+    .put(controller.edit_review)
 
 router
-  .route("/products/add_reviews")
-  .put(
-    isAuth,
+  .route("/review")
+  .get(controller.show_reviews)
+  .delete(isAuth,controller.delete_review)
+  .put(isAuth,
     [
-      body("title").isString().withMessage("enter valid review title"),
-      body("description").isString().withMessage("enter valid review content"),
-      body("user").isString().withMessage("enter valid username"),
-      body("userID").notEmpty().withMessage("enter valid id"),
-      body("rating").isNumeric.withMessage("enter your rating as number")
-    ].controller.add_review
+      body("new_review.title").notEmpty().withMessage("enter valid review title"),
+      body("new_review.description").notEmpty().withMessage("enter valid review content"),
+      body("new_review.user").isString().withMessage("enter valid username"),
+      body("new_review.userID").notEmpty().withMessage("enter valid id"),
+      body("new_review.rating").isNumeric().withMessage("enter your rating as number"),
+    ],
+    controller.add_review
   );
 
 router
-  .route("/products/:id")
+  .route("/product/:id")
   .get(
-    isAuth,
-    [body("id").notEmpty().withMessage("ID shouldn't be Empty.")],
     controller.show_product
   );
 
-  router
-    .route("/products/stock/:id")
-    .put(
-      [body("id").notEmpty().withMessage("ID shouldn't be Empty.")],
-      controller.update_stock
-    );
+router
+  .route("/products/stock")
+  .put(
+    [
+      body("id").notEmpty().withMessage("ID shouldn't be Empty."),
+      body("amount").isNumeric().withMessage("amount shouldn't be Empty.")
+  
+  ],
+    controller.update_stock
+  );
+
+module.exports = router;

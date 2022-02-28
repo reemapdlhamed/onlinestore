@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema(
     {
-        _id: mongoose.Types.ObjectId,
+        // _id: mongoose.Types.ObjectId,
         customerID: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "user",
@@ -11,23 +11,27 @@ const orderSchema = new mongoose.Schema(
             type:String,
             required:true,
         },
-        customerPhoneNumber:{
+        phoneNumber:{
             type:Number,
             required:true,
         }
         ,
         shippingAddress: {
             country:{
-                type:string,
+                type:String,
                 required: true 
             },
             city:{
                 type:String,
                 required: true
             },
+           
             street:{
                 type:String,
                 required: true
+            },
+            postalCode:{ 
+                type: String, required: true 
             },
             building:{
                 type:String,
@@ -36,8 +40,11 @@ const orderSchema = new mongoose.Schema(
 
         },
 
-        items: [
+        orderItems: [
             {
+            //productName: { type: String, required: true },
+            //orderImage: { type: String, required: true },
+
                 productId: {
                     type: mongoose.Schema.Types.ObjectId,
                     ref: "product",
@@ -52,23 +59,29 @@ const orderSchema = new mongoose.Schema(
                 },
             },
         ],
+        orderDate: {
+            type: Date,
+        },
         orderStatus:
-        {   
-            type: {
-                type: String,
-                enum: ["pending", "packed", "shipped", "delivered", "cancelled"],
-                default: "pending",
-            },
-            date: {
-                type: Date,
-            }
+        {               
+          type: String,
+           enum: ["pending", "packed", "shipped", "delivered", "cancelled"],
+            default: "pending",
+   
         },
         totalPrice: {
             type: Number,
             required: true,
+            default: 0.0,
+          },
+        shippingPrice: {
+            type: Number,
+            required: true,
+            default: 0.0,
           }, 
         paymentStatus: {
             type: String,
+            default:"pending",
             enum: ["pending", "completed", "cancelled", "refund"],
             required: true,
           },
