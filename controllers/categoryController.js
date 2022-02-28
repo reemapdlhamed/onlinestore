@@ -18,14 +18,16 @@ exports.delete_category = (request, response, next) => {
   if (!errors.isEmpty()) {
     let error = new Error();
     error.status = 422;
-    error.message = errors.array().reduce((current, object) => {
-      current + object.msg + " ", "";
-    });
+    error.message = errors
+      .array()
+      .reduce((current, object) => current + object.msg + " ", "");
     throw error;
   }
+
   if (request.role == "admin") {
     Category.findByIdAndDelete({ _id: request.body.id })
       .then((data) => {
+        if (data == null) throw new Error("Category not found");
         response.status(201).json({ message: "deleted", data });
       })
       .catch((error) => {
@@ -75,11 +77,12 @@ exports.add_category = (request, response, next) => {
   if (!errors.isEmpty()) {
     let error = new Error();
     error.status = 422;
-    error.message = errors.array().reduce((current, object) => {
-      current + object.msg + " ", "";
-    });
+    error.message = errors
+      .array()
+      .reduce((current, object) => current + object.msg + " ", "");
     throw error;
   }
+
   if (request.role == "admin") {
     let object = new Category({
       // _id: auto_id,

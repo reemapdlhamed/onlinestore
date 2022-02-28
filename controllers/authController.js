@@ -123,7 +123,7 @@ exports.register = asyncHandler(async (request, response, next) => {
     const newUser = await user.save();
     response.status(201).json(newUser);
   } catch (err) {
-    err.status = 400 ;
+    err.status = 400;
     next(err);
   }
 });

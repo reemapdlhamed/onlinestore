@@ -44,15 +44,15 @@ const authenticationRouter = require("./routes/authRouter");
 const productRouter = require("./routes/productRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const cartRouter = require("./routes/cartRouter");
+const adminRouter = require("./routes/adminRouter");
+const orderRouter = require("./routes/orderRouter");
 
 app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);
 app.use(cartRouter);
-
-//Import Order Router
-const orderRouter = require("./routes/orderRouter");
 app.use("/orders",orderRouter);
+app.use("/admin",adminRouter);
 
 
 //Not found MW

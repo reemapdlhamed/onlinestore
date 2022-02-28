@@ -91,7 +91,7 @@ exports.updateOrderStatus = (request, response, next) => {
 
 //get Orders
 exports.getOrders = (request, response, next) => {
-  if (request.role == "Admin") {
+  if (request.role == "admin") {
     order
       .find({})
       .then((data) => {
