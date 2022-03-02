@@ -13,14 +13,17 @@ router
 .post(
     isAuth,
     [
-    // body("phoneNumber").isNumeric().withMessage("invalid PhoneNumber."),
-    // body("shippingAddress").isObject().withMessage("Address should be an object"),
-    // // body("country").isString().withMessage("enter correct country"),
-    // // body("city").isString().withMessage("enter correct city"),
-    // // body("street").isString().withMessage("enter correct street"),
-    // // body("building").isString().withMessage("enter correct building"),
-    // // body("postalCode").isAlphanumeric().withMessage("enter postalCode"),
-    // body("paymentType").isString().withMessage("enter paymentType"),
+    body("customerID").isString().withMessage("enter Valid ID"),
+    body("customerName").isString().withMessage("enter Valid Name"),
+    body("phoneNumber").isNumeric().withMessage("invalid PhoneNumber."),
+    body("shippingAddress").isObject().withMessage("Address should be an object"),
+    body("shippingAddress.country").isString().withMessage("enter correct country"),
+    body("shippingAddress.city").isString().withMessage("enter correct city"),
+    body("shippingAddress.street").isString().withMessage("enter correct street"),
+    body("shippingAddress.postalCode").isAlphanumeric().withMessage("enter postalCode"),
+    body("shippingAddress.building").isString().withMessage("enter correct building"),
+    body("orderStatus").isString().withMessage("enter orderStatus"),
+    body("paymentType").isString().withMessage("enter paymentType"),
     ],
     controller.createOrders
 );

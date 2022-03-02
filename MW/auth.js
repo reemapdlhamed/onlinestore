@@ -1,14 +1,14 @@
 const res = require("express/lib/response");
 const jwt = require("jsonwebtoken");
-// var ls = require('local-storage');
+var ls = require('local-storage');
 
 module.exports = (request, response, next) => {
     let token, decode;
     try {
-        // token = ls("token");
+        token = ls("token");
         // console.log("authMW: Token", token);
         // token = req.headers.token
-        token=request.get("Authorization").split(" ")[1];
+        //token=request.get("Authorization").split(" ")[1];
         decode = jwt.verify(token, process.env.SECRET_KEY)
 
     } catch (error) {

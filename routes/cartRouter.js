@@ -15,6 +15,16 @@ body("cart.quantity").isNumeric().withMessage("invalid product quantity."),
 ],isAuth,controller.addToCart)
 
 
+
+router.post("/confirmCart",[
+
+    body("email").isString().withMessage("invalid product id."),
+    //body("cart.quantity").isNumeric().withMessage("invalid product quantity."),
+    
+    ],isAuth,controller.confirmCart)
+
+
+
 router.put("/updateQuantityCart",[
 
     body("cart.product_id").isString().withMessage("invalid product id."),

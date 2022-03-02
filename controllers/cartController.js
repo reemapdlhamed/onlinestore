@@ -2,6 +2,7 @@ const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 const Product = require("../models/product");
+const axios = require('axios');
 
 const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
@@ -169,4 +170,103 @@ exports.updateQuantityCart = (request, response, next) => {
       // error.message = "error happened while login3";
       next(error.message);
     });
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exports.confirmCart = (request, response, next) => {
+  let errors = validationResult(request);
+  if (!errors.isEmpty()) {
+    let error = new Error();
+    error.status = 422;
+    error.message = errors
+      .array()
+      .reduce((current, object) => current + object.msg + " ", "");
+    throw error;
+  }
+
+
+  User.findOne({email:request.body.email})
+
+.then(p=>
+  axios.post('http://localhost:8080/orders', {
+    customerID:p._id,
+    customerName: p._name,
+    phoneNumber : "011",
+    orderItems : p.cart,
+    orderDate : Date.now(),
+    totalPrice:200,
+    shippingAddress:
+    {
+      "address.country":"egypt",
+      "address.city":"cairo",
+      "address.street":"10",
+      "address.postalCode":"9392",
+      "address.building":"7",
+  
+      orderStatus:"pending",
+      paymentType:"card"
+    },
+    headers: { Authorization: ls("token") }
+  },
+  //response.send("DOne")
+
+    
+    )
+    )
+    
+.catch(error=>next(error));
+
+
+
+
+/*
+  axios.post('/createOrders', {
+    firstName: 'Finn',
+    lastName: 'Williams'
+
+
+
+
+
+
+
+
+
+
+
+
+
+    body("customerID").isString().withMessage("enter Valid ID"),
+    body("customerName").isString().withMessage("enter Valid Name"),
+    body("phoneNumber").isNumeric().withMessage("invalid PhoneNumber."),
+    body("shippingAddress").isObject().withMessage("Address should be an object"),
+    body("shippingAddress.country").isString().withMessage("enter correct country"),
+    body("shippingAddress.city").isString().withMessage("enter correct city"),
+    body("shippingAddress.street").isString().withMessage("enter correct street"),
+    body("shippingAddress.postalCode").isAlphanumeric().withMessage("enter postalCode"),
+    body("shippingAddress.building").isString().withMessage("enter correct building"),
+    body("orderStatus").isString().withMessage("enter orderStatus"),
+    body("paymentType").isString().withMessage("enter paymentType"),
+  });
+
+*/
 };

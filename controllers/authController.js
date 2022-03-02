@@ -26,29 +26,26 @@ exports.userLogin = (request, response, next) => {
       if (data == null) {
         throw new Error("email not found1");
       }
-          encrypted = data.password;
+      encrypted = data.password;
 
-          bcrypt
-            .compare(request.body.password, encrypted)
-            .then(function (result) {
-              if (result) {
-                let token = jwt.sign(
-                  {
-                    role: data.role,
-                    id: data._id,
-                    email:data.email,
-                  },
-                  process.env.SECRET_KEY,
-                  { expiresIn: "1d" }
-                );
-                response.json({ data, token });
-                // response.redirect("http://127.0.0.1:5500/index.html")
-              } else {
-                next(new Error("wrong pass"));
-              }
-            });
-        
-  
+      bcrypt.compare(request.body.password, encrypted).then(function (result) {
+        if (result) {
+          let token = jwt.sign(
+            {
+              role: data.role,
+              id: data._id,
+              email: data.email,
+            },
+            process.env.SECRET_KEY,
+            { expiresIn: "1d" }
+          );
+          response.json({ data, token });
+          ls("token",token)
+          // response.redirect("http://127.0.0.1:5500/index.html")
+        } else {
+          next(new Error("wrong pass"));
+        }
+      });
     })
     .catch((error) => {
       next(error.message);
@@ -74,30 +71,29 @@ exports.changePass = (request, response, next) => {
   User.findOne({ email: request.body.email })
 
     .then((data) => {
-      
-        if(data.role!=request.role||data.email!=request.email) next(Error("login first plz"));
+      if (data.role != request.role || data.email != request.email)
+        next(Error("login first plz"));
       if (data == null) {
         throw new Error("email not found");
       }
 
-          let matched = bcrypt.compareSync(
-            request.body.oldPassword,
-            data.password
-          );
-          if (matched&&request.body.newPassword==request.body.newPasswordConfirm) {
-            User.findByIdAndUpdate(data._id, {
-              $set: {
-                password: bcrypt.hashSync(request.body.newPassword, 10),
-              },
-            }).then((data) => {
-              if (data == null) next(new Error("User not fount"));
-              response.json({ message: "password changed" });
-              // else response.redirect("http://127.0.0.1:5500/index.html")
-            });
-          } else {
-            throw new Error("password in incorrect or not matched");
-          }
-
+      let matched = bcrypt.compareSync(request.body.password, data.password);
+      if (
+        matched &&
+        request.body.newPassword == request.body.newPasswordConfirm
+      ) {
+        User.findByIdAndUpdate(data._id, {
+          $set: {
+            password: bcrypt.hashSync(request.body.newPassword, 10),
+          },
+        }).then((data) => {
+          if (data == null) next(new Error("User not fount"));
+          response.json({ message: "password changed" });
+          // else response.redirect("http://127.0.0.1:5500/index.html")
+        });
+      } else {
+        throw new Error("password in incorrect or not matched");
+      }
     })
     .catch((error) => {
       // error.message = "error happened while login3";
@@ -121,30 +117,17 @@ exports.register = asyncHandler(async (request, response, next) => {
   const user = new User({
     name: request.body.name,
     email: request.body.email,
-    role: request.body.role,
     password: hashed,
-
   });
 
   try {
     const newUser = await user.save();
     response.status(201).json(newUser);
-
-
   } catch (err) {
-    response.status(400).json({ message: err.message });
-    next(error);
+    err.status = 400;
+    next(err);
   }
 });
-
-
-
-
-
-
-
-
-
 
 exports.updateUser = (request, response, next) => {
   let errors = validationResult(request);
@@ -165,25 +148,23 @@ exports.updateUser = (request, response, next) => {
   User.findOne({ email: request.body.email })
 
     .then((data) => {
-      if(data.role!=request.role||data.email!=request.email) next(Error("login first plz"));
+      if (data.role != request.role || data.email != request.email)
+        next(Error("login first plz"));
       if (data == null) {
         throw new Error("email not found");
       }
 
-            User.findByIdAndUpdate(data._id, {
-              $set: {
-                address: request.body.address,
-                phone : request.body.phone,
-                name : request.body.name
-              },
-            }).then((data) => {
-              if (data == null) next(new Error("User not fount"));
-              response.json({ message: "data updated" });
-              // else response.redirect("http://127.0.0.1:5500/index.html")
-            });
-      
-        
-    
+      User.findByIdAndUpdate(data._id, {
+        $set: {
+          address: request.body.address,
+          phone: request.body.phone,
+          name: request.body.name,
+        },
+      }).then((data) => {
+        if (data == null) next(new Error("User not fount"));
+        response.json({ message: "data updated" });
+        // else response.redirect("http://127.0.0.1:5500/index.html")
+      });
     })
     .catch((error) => {
       // error.message = "error happened while login3";

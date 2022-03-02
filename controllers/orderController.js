@@ -12,6 +12,7 @@ exports.createOrders = (request, response, next) => {
       error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
       throw error;
   }
+  console.log(request.body)
   let object = new order({
     customerName: request.body.customerName,
     customerID: request.body.customerID,
@@ -91,7 +92,7 @@ exports.updateOrderStatus = (request, response, next) => {
 
 //get Orders
 exports.getOrders = (request, response, next) => {
-  if (request.role == "Admin") {
+  if (request.role == "admin") {
     order
       .find({})
       .then((data) => {

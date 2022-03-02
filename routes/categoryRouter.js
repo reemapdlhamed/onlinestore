@@ -8,18 +8,19 @@ const category = require("./../models/category");
 const controller = require("./../controllers/categoryController");
 
 router
-  .route("/category")
+  .route("/categories")
+  //GET ALL CATEGORIES
   .get(controller.show_category)
-
   .post(isAuth,
     [
       body("name").isAlphanumeric().withMessage("invalid Name."),
-      body("description").isString().withMessage("enter valid price"),
-      body("bannerImage").isString().withMessage("enter brand name"),
+      // body("description").isString().withMessage("enter a Description")
+      // body("bannerImage").isString().withMessage("enter a BannerImage"),
     ],
 
     controller.add_category
   )
+  //DELETE A CATEGORY WITH ID
   .delete(isAuth,
     [body("id").notEmpty().withMessage("ID Should be a object_ID")],
     controller.delete_category
