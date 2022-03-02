@@ -28,3 +28,12 @@ router.put("/updateQuantityCart",[
         body("cart.product_id").isString().withMessage("invalid product id.")        
         ],isAuth,controller.removeFromCart)
 module.exports = router
+
+
+
+router.post("/confirmCart",[
+
+    body("email").isString().withMessage("invalid product id."),
+    //body("cart.quantity").isNumeric().withMessage("invalid product quantity."),
+    
+    ],isAuth,controller.confirmCart)
