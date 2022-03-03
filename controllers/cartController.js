@@ -1,4 +1,4 @@
-const axios = require('axios');
+const axios = require("axios");
 
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
@@ -28,39 +28,45 @@ exports.addToCart = (request, response, next) => {
   User.findOne({ email: request.email })
 
     .then((data) => {
-      if (data.role != request.role /*||data.email!=request.email*/)
-        next(Error("login first plz"));
+      // if (data.role != request.role /*||data.email!=request.email*/)
+      //   next(Error("login first plz"));
       if (data == null) {
         throw new Error("email not found");
       }
-      let product_id_var = new ObjectId(request.body.cart.product_id);
+      //FIXME: Clean later
+      let product_id_var = new ObjectId(request.body.product_id);
+      
       let product_obj = {
         product_id: product_id_var,
-        quantity: request.body.cart.quantity,
+        quantity: request.body.quantity,
       };
+
       let cart = data.cart;
 
       let doesProductInCartExist = cart.find(
-        (e) => e.product_id.toString() === request.body.cart.product_id
+        (item) => item.product_id.toString() === request.body.product_id
       );
+      console.log("doesProductInCartExist ", doesProductInCartExist);
       Product.exists({ _id: product_id_var })
         .then((res) => {
-          if (!res||doesProductInCartExist) next(Error("errrrrrror"));
+          if (!res || doesProductInCartExist)
+            throw new Error("Product already Exist in cart");
+
+          User.findByIdAndUpdate(data._id, {
+            $push: { cart: product_obj },
+          }).then((data) => {
+            if (data == null) next(new Error("User not fount"));
+
+            response.json({ message: "cart updated" });
+            // else response.redirect("http://12  7.0.0.1:5500/index.html")
+          });
         })
         .catch((error) => {
+          // error.message = "error happened while login3";
           next(error.message);
         });
 
-        console.log(product_obj);
-        User.findByIdAndUpdate(data._id, {
-          $push: { cart: product_obj },
-        }).then((data) => {
-          if (data == null) next(new Error("User not fount"));
-
-          response.json({ message: "cart updated" });
-          // else response.redirect("http://127.0.0.1:5500/index.html")
-        });
-      
+      // console.log(product_obj);
     })
     .catch((error) => {
       // error.message = "error happened while login3";
@@ -87,10 +93,10 @@ exports.removeFromCart = (request, response, next) => {
       if (data == null) {
         throw new Error("email not found");
       }
-      let product_id_var = new ObjectId(request.body.cart.product_id);
+      let product_id_var = new ObjectId(request.body.product_id);
       let cart = data.cart;
       let doesProductInCartExist = cart.find(
-        (e) => e.product_id.toString() === request.body.cart.product_id
+        (e) => e.product_id.toString() === request.body.product_id
       );
       Product.exists({ _id: product_id_var })
         .then((res) => {
@@ -137,49 +143,41 @@ exports.updateQuantityCart = (request, response, next) => {
       if (data == null) {
         throw new Error("email not found");
       }
-      let product_id_var = new ObjectId(request.body.cart.product_id);
+      let product_id_var = new ObjectId(request.body.product_id);
       let cart = data.cart;
 
       let doesProductInCartExist = cart.find(
-        (e) => e.product_id.toString() === request.body.cart.product_id
+        (e) => e.product_id.toString() === request.body.product_id
       );
       Product.exists({ _id: product_id_var })
         .then((res) => {
-          if (!res||!doesProductInCartExist) next(Error("product doesnt exit5"));
+          if (!res || !doesProductInCartExist)
+            next(Error("product doesnt exit5"));
         })
         .catch((error) => {
           next(error.message);
         });
-        User.findOne({ "cart.product_id": product_id_var })
-          .then((doc) => {
-            item = doc.cart[0];
+      User.findOne({ "cart.product_id": product_id_var })
+        .then((doc) => {
+          item = doc.cart[0];
 
-            console.log(item);
-            item.quantity = request.body.cart.quantity;
-            doc.save();
-            response.send("Done");
+          console.log(item);
+          item.quantity = request.body.quantity;
+          doc.save();
+          response.json({ message: "Cart Updated", cart: doc.cart });
 
-            //sent respnse to client
-          })
-          .catch((err) => {
-            console.log("Oh! Dark");
-            response.send("dark");
-          });
-      
+          //sent respnse to client
+        })
+        .catch((err) => {
+          console.log("Oh! Dark");
+          response.send("dark");
+        });
     })
     .catch((error) => {
       // error.message = "error happened while login3";
       next(error.message);
     });
 };
-
-
-
-
-
-
-
-
 
 exports.confirmCart = (request, response, next) => {
   let errors = validationResult(request);
@@ -192,42 +190,77 @@ exports.confirmCart = (request, response, next) => {
     throw error;
   }
 
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 
-  User.findOne({email:request.email})
+  console.log(request.email);
 
-.then(p=>
-  axios.post('http://localhost:8080/orders', {
-    customerID:p._id,
-    customerName: p._name,
-    phoneNumber : "011",
-    orderItems : p.cart,
-    orderDate : Date.now(),
-    totalPrice:200,
-    shippingAddress:
-    {
-      "address.country":"egypt",
-      "address.city":"cairo",
-      "address.street":"10",
-      "address.postalCode":"9392",
-      "address.building":"7",
-  
-      orderStatus:"pending",
-      paymentType:"card"
-    },
-    headers: { Authorization: request.get("Authorization") } 
-  },
-  //response.send("DOne")
+  User.findOne({ email: request.email })
 
-    
-    )
-    )
-    
-.catch(error=>next(error));
+    .then((p) => {
+      console.log(p);
+      console.log(p);
 
+      axios
+        .post(
+          "http://127.0.0.1:8080/orders",
+          {
+            customerID: p._id,
+            customerName: p.name,
+            phoneNumber: "01012345678",
+            paymentType: "cod",
+            orderItems: tp.car,
+            shippingAddress: {
+              country: "egypt",
+              city: "mansoura",
+              street: "street 1",
+              postalCode: "37511",
+              building: "building 1 ",
+            },
+            shippingPrice: 30,
+            orderStatus: "pending",
+          },
+          { headers: { Authorization: request.get("Authorization") } }
+        )
+        .then(function (res) {
+          response.send(res.data);
+        });
+    })
 
+    //   axios
+    //     .post(
+    //       "http://127.0.0.1:8080/orders",
+    //       {
+    //         customerID: p._id.toString(),
+    //         customerName: p._name,
+    //         phoneNumber: "011",
+    //         // orderItems: p.cart,
+    //         // orderDate: Date.now(),
+    //         totalPrice: 200,
+    //         shippingAddress: {
+    //           country: "egypt",
+    //           city: "cairo",
+    //           street: "10",
+    //           postalCode: "9392",
+    //           building: "7",
+    //         },
+    //         shippingPrice: 30,
+    //         orderStatus: "pending",
+    //         paymentType: "cod",
+    //         paymentStatus: "pending",
+    //       },
+    //       { headers: { Authorization: request.get("Authorization") } }
+    //     )
+    //     .then(function (res) {
+    //       response.send(res.data);
+    //     });
 
+    // })
 
-/*
+    .catch((error) => {
+      next(error.message);
+    });
+
+  /*
   axios.post('/createOrders', {
     firstName: 'Finn',
     lastName: 'Williams'

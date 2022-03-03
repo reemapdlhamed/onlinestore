@@ -7,10 +7,12 @@ const { validationResult } = require("express-validator");
 exports.createOrders = (request, response, next) => {
   let errors = validationResult(request);
   if (!errors.isEmpty()) {
-      let error = new Error();
-      error.status = 422;
-      error.message = errors.array().reduce((current, object) => current + object.msg + " ", "")
-      throw error;
+    let error = new Error();
+    error.status = 422;
+    error.message = errors
+      .array()
+      .reduce((current, object) => current + object.msg + " ", "");
+    throw error;
   }
   let object = new order({
     customerName: request.body.customerName,
@@ -137,7 +139,6 @@ exports.updateOrderToPaid = (request, response, next) => {
     throw new Error("Not Authorized. Only Admin can do that");
   }
 };
-
 
 //delete order
 //   exports.deleteOrder = (request, response, next) => {
