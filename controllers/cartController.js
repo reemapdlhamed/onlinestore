@@ -25,7 +25,7 @@ exports.addToCart = (request, response, next) => {
     throw error;
   }
 
-  User.findOne({ email: request.body.email })
+  User.findOne({ email: request.email })
 
     .then((data) => {
       if (data.role != request.role /*||data.email!=request.email*/)
@@ -79,7 +79,7 @@ exports.removeFromCart = (request, response, next) => {
     throw error;
   }
 
-  User.findOne({ email: request.body.email })
+  User.findOne({ email: request.email })
 
     .then((data) => {
       if (data.role != request.role /*||data.email!=request.email*/)
@@ -129,7 +129,7 @@ exports.updateQuantityCart = (request, response, next) => {
     throw error;
   }
 
-  User.findOne({ email: request.body.email })
+  User.findOne({ email: request.email })
 
     .then((data) => {
       if (data.role != request.role /*||data.email!=request.email*/)
@@ -193,7 +193,7 @@ exports.confirmCart = (request, response, next) => {
   }
 
 
-  User.findOne({email:request.body.email})
+  User.findOne({email:request.email})
 
 .then(p=>
   axios.post('http://localhost:8080/orders', {
