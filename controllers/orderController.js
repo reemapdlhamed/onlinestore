@@ -45,7 +45,7 @@ exports.getMyOrdersByID = (request, response, next) => {
       .reduce((current, object) => current + object.msg + " ", "");
     throw error;
   }
-  if (request.role == "customer" || request.role == "Admin") {
+  if (request.role == "customer" || request.role == "admin") {
     order
       .find({ customerID: request.params.customerId })
       .then((data) => {
@@ -70,7 +70,7 @@ exports.updateOrderStatus = (request, response, next) => {
       .reduce((current, object) => current + object.msg + " ", "");
     throw error;
   }
-  if (request.role == "Admin") {
+  if (request.role == "admin") {
     order
       .findOneAndUpdate(
         { _id: request.body.id },
@@ -87,7 +87,7 @@ exports.updateOrderStatus = (request, response, next) => {
         next(error);
       });
   } else {
-    throw new Error("Not Authorized. Only Admin can do that");
+    throw new Error("Not Authorized. Only admin can do that");
   }
 };
 
@@ -103,7 +103,7 @@ exports.getOrders = (request, response, next) => {
         next(error);
       });
   } else {
-    throw new Error("Not Authorized. Only Admin can do that");
+    throw new Error("Not Authorized. Only admin can do that");
   }
 };
 
@@ -118,7 +118,7 @@ exports.updateOrderToPaid = (request, response, next) => {
       .reduce((current, object) => current + object.msg + " ", "");
     throw error;
   }
-  if (request.role == "Admin") {
+  if (request.role == "admin") {
     order
       .findOneAndUpdate(
         { _id: request.body.id },
@@ -136,7 +136,7 @@ exports.updateOrderToPaid = (request, response, next) => {
         next(error);
       });
   } else {
-    throw new Error("Not Authorized. Only Admin can do that");
+    throw new Error("Not Authorized. Only admin can do that");
   }
 };
 
@@ -151,7 +151,7 @@ exports.updateOrderToPaid = (request, response, next) => {
 //       .reduce((current, object) => current + object.msg + " ", "");
 //     throw error;
 //   }
-//   if (request.role == "Admin" || request.role == "customer") {
+//   if (request.role == "admin" || request.role == "customer") {
 //     order
 //       .findByIdAndDelete({ orderItems: request.body.orderItems })
 //       .then((data) => {
