@@ -14,8 +14,9 @@ router
     isAuth,
     [
     body("customerID").isString().withMessage("enter Valid ID"),
+    body("orderItems").isArray().notEmpty().withMessage("cart is empty"),
     body("customerName").isString().withMessage("enter Valid Name"),
-    body("phoneNumber").isNumeric().withMessage("invalid PhoneNumber."),
+    body("phoneNumber").notEmpty().withMessage("invalid PhoneNumber."),
     body("shippingAddress").isObject().withMessage("Address should be an object"),
     body("shippingAddress.country").isString().withMessage("enter correct country"),
     body("shippingAddress.city").isString().withMessage("enter correct city"),

@@ -52,6 +52,8 @@ const userSchema = new mongoose.Schema({
         ref: "product",
       },
       quantity: { type: Number, min: 1, max: 100 },
+      price: { type: Number, min: 1 },
+
     },
   ],
 

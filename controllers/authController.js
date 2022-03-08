@@ -40,7 +40,6 @@ exports.userLogin = (request, response, next) => {
             { expiresIn: "1d" }
           );
           response.json({ data, token });
-          ls("token",token)
           // response.redirect("http://127.0.0.1:5500/index.html")
         } else {
           next(new Error("wrong pass"));
