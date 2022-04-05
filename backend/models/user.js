@@ -52,12 +52,7 @@ const userSchema = new mongoose.Schema({
         ref: "product",
       },
       quantity: { type: Number, min: 1, max: 100 },
-<<<<<<< HEAD
       price: { type: Number, min: 1 },
-=======
-      
->>>>>>> origin/dev
-
     },
   ],
 

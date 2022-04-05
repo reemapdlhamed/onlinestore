@@ -64,9 +64,9 @@ exports.addToCart = async (request, response, next) => {
 
     //user then pushes his product into his cart
 
-    user.cart.push(product_obj);
-    await user.save();
-    response.status(200).json({ message: "done" });
+      user.cart.push(product_obj);
+      await user.save();
+      response.status(200).json({ message: "done" });
 
     // console.log(product_obj);
   } catch (error) {
