@@ -5,7 +5,6 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import ReadMoreIcon from '@mui/icons-material/ReadMore';
-import image from '../images/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg'
 function Products_Card(props) {
 
 

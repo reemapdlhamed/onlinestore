@@ -12,9 +12,9 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          <Login />
-          <Route path={"*"} component={NotFound} />
+          
           <Route path={"/products"} component={Products} />
+          <Route path={"*"} component={NotFound} />
         </Switch>
         <Footer />
       </BrowserRouter>
