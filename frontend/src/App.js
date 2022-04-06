@@ -1,8 +1,12 @@
 import "./App.css";
 import login from "./Components/login";
+import Products_Card from "./Components/Products_Card";
+import Products from "./pages/Products/Products";
 
 function App() {
-  return <h1>hiiiiii</h1>;
+  return (
+    <Products></Products>
+  )
 }
 
 export default App;

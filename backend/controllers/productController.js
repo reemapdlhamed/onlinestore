@@ -14,7 +14,7 @@ exports.show_products_category = (request, response, next) => {
 };
 //--------------------------------------------------------------------------------------------
 exports.show_products = (request, response, next) => {
-  Products.findById({ _id: request.body.id })
+  Products.find({})
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -196,7 +196,7 @@ exports.update_product = (request, response, next) => {
 };
 //------------------------------------------------------------------------------------------------------------
 exports.show_product = (request, response, next) => {
-  Products.find({ _id: request.params.id })
+  Products.find({ _id: request.params.id }).populate('category_id')
     .then((data) => {
       response.status(200).json({ data });
     })
