@@ -1,12 +1,24 @@
 import "./App.css";
-import login from "./Components/login";
-import Products_Card from "./Components/Products_Card";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import NotFound from "./pages/NotFound";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Login from "./components/Login";
 import Products from "./pages/Products/Products";
 
 function App() {
   return (
-    <Products></Products>
-  )
+    <div className="App ">
+      <BrowserRouter>
+        <Header />
+        <Switch>
+          <Login />
+          <Route path={"*"} component={NotFound} />
+          <Route path={"/products"} component={Products} />
+        </Switch>
+        <Footer />
+      </BrowserRouter>
+    </div>
+  );
 }
-
 export default App;

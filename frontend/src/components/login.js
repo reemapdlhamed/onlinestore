@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./login.css";
 import { Link } from "react-router-dom";
+// import Login from "./Login";
 
-function login() {
+function Login() {
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState();
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [password, setPassword] = useState();
   const signIn = (e) => {
@@ -16,7 +17,7 @@ function login() {
       <Link to="/">
         <img
           className="login__logo"
-          src="./simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"
+          src="images/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"
           alt="amazon logo "
         />
       </Link>
@@ -57,4 +58,4 @@ function login() {
   );
 }
 
-export default login;
+export default Login;
