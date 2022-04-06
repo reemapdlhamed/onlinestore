@@ -12,7 +12,7 @@ function App() {
       <BrowserRouter>
         <Header />
         <Switch>
-          
+          <Route path={"/Login"} component={Login} />
           <Route path={"/products"} component={Products} />
           <Route path={"*"} component={NotFound} />
         </Switch>
