@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NotFound from "./pages/NotFound"
 import Footer from './components/Footer';
 import Header from './components/Header';
-import login from "./Components/login";
+import login from "./components/login";
 
 function App() {
   return (
