@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import './App.css';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NotFound from "./pages/NotFound"
