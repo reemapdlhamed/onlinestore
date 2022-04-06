@@ -1,11 +1,10 @@
 import { Grid } from "@mui/material";
-import Products_Card from "../../Components/Products_Card";
+import Products_Card from "../../components/Products_Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProductsList } from "../../redux/actions/Products";
 import { Col, Container, Row } from 'react-bootstrap';
 import  "bootstrap/dist/css/bootstrap.min.css";
-
 function Products() {
   const ProductsList = useSelector((state)=>state.list);
   const dispatch = useDispatch();
