@@ -291,7 +291,7 @@ function Login() {
   // const register = (e) => e.preventDefault();
 
   async function loginHandler(e) {
-    e.preventDefault()
+    e.preventDefault();
     try {
       let res = await axios({
         method: "post",
