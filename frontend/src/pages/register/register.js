@@ -14,8 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-const EMAIL_REGEX =
-  /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+const EMAIL_REGEX = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
 
 function register() {
   const emailRef = useRef();
@@ -31,6 +30,7 @@ function register() {
   const [password, setPassword] = useState("");
   const [validPassword, setValidPassword] = useState(false);
   const [passwordFocus, setpasswordFocus] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
   const [matchPassword, setMatchPassword] = useState("");
   const [validMatch, setValidMatch] = useState(false);
   const [matchFocus, setMatchFocus] = useState(false);
@@ -141,7 +141,15 @@ function register() {
                 Must begin with a letter. <br />
                 Letters, Numbers,underscores,hyphens allowed
               </p>
-              <h5>E-mail </h5>
+              <h5>
+                E-mail
+                <span className={validEmail ? "valid" : "hide"}>
+                  <FontAwesomeIcon color="green" icon={faCheck} />
+                </span>
+                <span className={validEmail || !email ? "hide" : "invalid"}>
+                  <FontAwesomeIcon color="red" icon={faTimes} />
+                </span>
+              </h5>
               <input
                 type="email"
                 ref={emailRef}
@@ -151,8 +159,33 @@ function register() {
                 onChange={(e) => {
                   setEmail(e.target.value);
                 }}
+                aria-invalid={validEmail ? "false" : "true"}
+                aria-describedby="emailnote"
+                onFocus={() => setEmailFocus(true)}
+                onBlur={() => setEmailFocus(false)}
               />
-              <h5>Password</h5>
+              <p
+                id="emailnote"
+                className={
+                  emailFocus && email && !validEmail
+                    ? "instructions"
+                    : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Must be an valid Email. <br />
+              </p>
+              <h5>
+                Password
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className={validPassword ? "valid" : "hide"}
+                />
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className={validPassword || !password ? "hide" : "invalid"}
+                />
+              </h5>
               <input
                 type="password"
                 id="passwoed"
@@ -176,7 +209,17 @@ function register() {
                 <span aria-label="dollar sign ">$</span>
                 <span aria-label="precent">%</span>
               </p>
-              <h5>Confirm Password</h5>
+              <h5>
+                Confirm Password
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className={validMatch && matchPassword ? "valid" : "hide"}
+                />
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className={validMatch || !matchPassword ? "hide" : "invalid"}
+                />
+              </h5>
               <input
                 type="password"
                 id="confirm_password"
