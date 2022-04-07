@@ -12,10 +12,10 @@ import { useHistory } from "react-router-dom";
 
 function Products_Card(props) {
 const history = useHistory();
-const navigateTo = () => history.push('/login')
+const navigateTo = (id) => history.push(`/products/${id}`)
 
   return (
-    <Card onClick={navigateTo} className='Card1' style={{width:"300px",height:"400px",marginBottom:"50px"}}>
+    <Card onClick={()=>navigateTo(props.product._id)} className='Card1' style={{width:"300px",height:"400px",marginBottom:"50px"}}>
       <CardMedia
         style={{objectFit:"contain"}}
         component="img"
