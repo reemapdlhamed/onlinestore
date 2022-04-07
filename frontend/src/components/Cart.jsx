@@ -32,7 +32,7 @@ const Cart = () => {
                 <div className="container py-4">
                     <div className="row justify-content-center">
                         <div className="col-md-4">
-                            <img src={product.image} alt={product.title} height="200px" width="180px" />
+                            <img src={product.images} alt={product.name} height="200px" width="180px" />
                         </div>
                         <div className="col-md-4">
                             <h3>{product.title}</h3>

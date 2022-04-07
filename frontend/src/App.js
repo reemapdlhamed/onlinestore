@@ -6,6 +6,7 @@ import Products from "./pages/Products/Products";
 import Product from "./components/Product";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Cart from "./components/Cart";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login/Login"
 import Register from "./pages/register/register";
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/products/:id" component={Product} />
         <Route exact path="/about" component={About} />
         <Route exact path="/contact" component={Contact} />
+        <Route exact path="/cart" component={Cart} />
         <Route path={"/login"} component={Login} />
         <Route path={"/register"} component={Register} />
         <Route path={"*"} component={NotFound} />
