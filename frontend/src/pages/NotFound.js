@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
 
 const NotFound = () => {
   return (
@@ -9,14 +9,11 @@ const NotFound = () => {
           <h4 className="text-center mb-2 mb-sm-5">Page Not Found</h4>
           <img
             style={{ width: "100%", height: "300px", objectFit: "contain" }}
-            src="/images/not-found.png"
+            src="/assets/not-found.png"
             alt="Not-found"
           />
-          {/* <button className="col-md-3 col-sm-6 col-12 btn btn-success mt-5">
-            <Link to="/" className="text-white text-decoration-none">
-              Home page
-            </Link>
-          </button> */}
+        <NavLink to="/contact" className="btn btn-outline-primary"
+            >Back to Home</NavLink>   
         </div>
       </div>
     </>

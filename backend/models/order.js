@@ -1,42 +1,41 @@
 const mongoose = require("mongoose");
-const req = false;
 const orderSchema = new mongoose.Schema(
   {
     // _id: mongoose.Types.ObjectId,
     customerID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
-      required: req,
+      required: true,
     },
     customerName: {
       type: String,
-      required: req,
+      required: true,
     },
     phoneNumber: {
       type: String,
-      required: req,
+      required: true,
     },
     shippingAddress: {
       country: {
         type: String,
-        required: req,
+        required: true,
       },
       city: {
         type: String,
-        required: req,
+        required: true,
       },
 
       street: {
         type: String,
-        required: req,
+        required: true,
       },
       postalCode: {
         type: String,
-        required: req,
+        required: true,
       },
       building: {
         type: String,
-        required: req,
+        required: true,
       },
     },
 
@@ -51,11 +50,11 @@ const orderSchema = new mongoose.Schema(
         },
         price: {
           type: Number,
-          required: req,
+          required: true,
         },
         quantity: {
           type: Number,
-          required: req,
+          required: true,
         },
       },
     ],
@@ -69,28 +68,28 @@ const orderSchema = new mongoose.Schema(
     },
     totalPrice: {
       type: Number,
-      required: req,
+      required: true,
       default: 0.0,
     },
     shippingPrice: {
       type: Number,
-      required: req,
+      required: true,
       default: 0.0,
     },
     paymentStatus: {
       type: String,
       default: "pending",
       enum: ["pending", "completed", "cancelled", "refund"],
-      required: req,
+      required: true,
     },
     paymentType: {
       type: String,
       enum: ["cod", "card"],
-      required: req,
+      required: true,
     },
   },
 
-  { timestamps: req }
+  { timestamps: true }
 );
 
 module.exports = mongoose.model("order", orderSchema);

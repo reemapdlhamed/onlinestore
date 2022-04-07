@@ -1,29 +1,35 @@
 import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Home from "./components/Home";
+import Navbar from "./components/Navbar";
+import { Switch ,Route } from 'react-router-dom';
+import Products from './components/Products';
+import Product from './components/Product';
+import About from './components/About';
+import Contact from './components/Contact';
 import NotFound from "./pages/NotFound";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Login from "./components/Login";
-import Cart from "./pages/Cart/Cart";
+// import Login from "../src/pages/Login/Login"
+// import Register from "../src/pages/Register/Register";
+// import Footer from "./components/Footer";
 
-import Products from "./pages/Products/Products";
 
 function App() {
   return (
-    <div className="App ">
-      <BrowserRouter>
-        <Header />
-        <Switch>
-          <Route path={"/Login"} component={Login} />
-          <Route path={"/Cart"} component={Cart} />
-          <Route path={"/products"} component={Products} />
-
-          <Route path={"*"} component={NotFound} />
-
-        </Switch>
-        <Footer />
-      </BrowserRouter>
-    </div>
+    <> 
+   <Navbar />
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/products" component={Products} />
+      <Route exact path="/products/:id" component={Product} />
+      <Route exact path="/about" component={About} />
+      <Route exact path="/contact" component={Contact} />
+      {/* <Route path={"/login"} component={Login} />
+      <Route path={"/register"} component={Register} /> */}
+      <Route path={"*"} component={NotFound} />
+    </Switch>
+    {/* <Footer /> */}
+  
+    </>
   );
 }
+
 export default App;
