@@ -14,13 +14,37 @@ exports.show_products_category = (request, response, next) => {
 };
 //--------------------------------------------------------------------------------------------
 exports.show_products = (request, response, next) => {
-  Products.findById({ _id: request.body.id })
+  Products.find({})
     .then((data) => {
       response.status(200).json({ data });
     })
     .catch((error) => {
       next(error);
     });
+};
+//-----------------------------------------------------------------------------------------------
+exports.search_products = (request, response, next) => {
+  const s = request.body.word
+  const regex = new RegExp(s, 'i')
+  if(request.body.category_id == ""){
+    Products.find({name: {$regex: regex}})
+    .then((data) => {
+      response.status(200).json({ data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+  }
+  else{
+    Products.find({name: {$regex: regex},category_id: request.body.category_id})
+    .then((data) => {
+      response.status(200).json({ data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+  }
+  
 };
 //-----------------------------------------------------------------------------------------------
 exports.add_product = (request, response, next) => {
@@ -45,7 +69,7 @@ exports.add_product = (request, response, next) => {
       images: request.body.images,
       properties: request.body.properties,
       quantity: request.body.quantity,
-      seller: request.body.seller,
+      rating: request.body.rating,
     });
     object
       .save()
@@ -147,7 +171,7 @@ exports.update_product = (request, response, next) => {
           images: request.body.images,
           properties: request.body.properties,
           quantity: request.body.quantity,
-          seller: request.body.seller,
+          rating: request.body.rating,
         },
       }
     )
@@ -174,7 +198,7 @@ exports.update_product = (request, response, next) => {
               images: request.body.images,
               properties: request.body.properties,
               quantity: request.body.quantity,
-              seller: request.body.seller,
+              rating: request.body.rating,
             },
           }
         )
@@ -196,7 +220,7 @@ exports.update_product = (request, response, next) => {
 };
 //------------------------------------------------------------------------------------------------------------
 exports.show_product = (request, response, next) => {
-  Products.find({ _id: request.params.id })
+  Products.find({ _id: request.params.id }).populate('category_id')
     .then((data) => {
       response.status(200).json({ data });
     })

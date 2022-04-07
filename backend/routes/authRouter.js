@@ -9,7 +9,7 @@ const isAuth = require("../MW/auth");
 router.post(
   "/login",
   [
-    body("email").isEmail().withMessage("Email is not valid"),
+    body("email").notEmpty().withMessage("Email is not valid"),
     body("password").notEmpty().withMessage("password should not be empty"),
   ],
   controller.userLogin

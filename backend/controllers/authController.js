@@ -11,6 +11,7 @@ require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 
 exports.userLogin = (request, response, next) => {
+  console.log(request.body);
   let errors = validationResult(request);
   if (!errors.isEmpty()) {
     let error = new Error();
@@ -26,11 +27,12 @@ exports.userLogin = (request, response, next) => {
       if (data == null) {
         throw new Error("email not found1");
       }
+      console.log("2");
       encrypted = data.password;
 
       bcrypt.compare(request.body.password, encrypted).then(function (result) {
         if (result) {
-          let token = jwt.sign(
+          let accessToken = jwt.sign(
             {
               role: data.role,
               id: data._id,
@@ -39,7 +41,7 @@ exports.userLogin = (request, response, next) => {
             process.env.SECRET_KEY,
             { expiresIn: "1d" }
           );
-          response.json({ data, token });
+          response.json({ data, accessToken });
           // response.redirect("http://127.0.0.1:5500/index.html")
         } else {
           next(new Error("wrong pass"));
