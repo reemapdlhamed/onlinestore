@@ -22,6 +22,22 @@ exports.show_products = (request, response, next) => {
       next(error);
     });
 };
+
+
+
+exports.search_products = (request, response, next) => {
+  var query = { name: new RegExp('^' + request.body.query) };
+  Products.find(query)
+    .then((data) => {
+      response.status(200).json({ data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+  
+};
+
+
 //-----------------------------------------------------------------------------------------------
 exports.add_product = (request, response, next) => {
   let errors = validationResult(request);

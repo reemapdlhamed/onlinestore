@@ -12,6 +12,7 @@ const asyncHandler = require("express-async-handler");
 
 exports.userLogin = (request, response, next) => {
   let errors = validationResult(request);
+  console.log(errors)
   if (!errors.isEmpty()) {
     let error = new Error();
     error.status = 422;
@@ -20,6 +21,9 @@ exports.userLogin = (request, response, next) => {
       .reduce((current, object) => current + object.msg + " ", "");
     throw error;
   }
+
+
+
 
   User.findOne({ email: request.body.email })
     .then((data) => {

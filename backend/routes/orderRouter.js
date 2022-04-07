@@ -11,7 +11,6 @@ router
 .get(isAuth, controller.getOrders)
 // POST> /orders > ADD a new order
 .post(
-    isAuth,
     [
     body("customerID").isString().withMessage("enter Valid ID"),
     body("customerName").isString().withMessage("enter Valid Name"),
