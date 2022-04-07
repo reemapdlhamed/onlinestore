@@ -30,9 +30,10 @@ const Cart = () => {
             <>
                 <div className="px-4 my-5 bg-light rounded-3 py-5">
                 <div className="container py-4">
+                <button onClick={()=>handleDel(product)} className="btn-close float-end" aria-label="Close"></button>
                     <div className="row justify-content-center">
                         <div className="col-md-4">
-                            <img src={product.images} alt={product.name} height="200px" width="180px" />
+                            <img src={product.image} alt={product.title} height="200px" width="180px" />
                         </div>
                         <div className="col-md-4">
                             <h3>{product.title}</h3>

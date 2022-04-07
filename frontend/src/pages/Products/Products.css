@@ -1,8 +1,0 @@
-*{
-    box-sizing: border-box;
-}
-.Card1:hover{
-    border: 2px solid #eee;
-    cursor: pointer;
-    transform:scale(120%);
-}
