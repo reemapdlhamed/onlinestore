@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 const Checkout = () => {
-    const state = useSelector((state) => state.addCart)
+    const state = useSelector((state) => state.handleCart)
 
     var total = 0;
     const itemList = (item) => {
