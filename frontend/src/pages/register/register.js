@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
 import { Link } from "react-router-dom";
-
+import axios from "../../api/axios";
 import { useRef, useState, useEffect } from "react";
 import "./register.css";
 import {
@@ -15,7 +15,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
-
+const REGISTER_URL = "/register";
 function register() {
   const emailRef = useRef();
   const errRef = useRef();
@@ -65,18 +65,68 @@ function register() {
     setErrprMsg("");
   }, [user, password, matchPassword]);
 
-  const handleSubmit = async (e) => {
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   // if button enabled with JS hack
+  //   const v1 = USER_REGEX.test(user);
+  //   const v2 = PWD_REGEX.test(password);
+  //   if (!v1 || !v2) {
+  //     setErrprMsg("Invalid Entry");
+  //     return;
+  //   }
+  //   try {
+  //     const response = await axios.post(
+  //       REGISTER_URL,
+  //       JSON.stringify({ user, password }),
+  //       {
+  //         headers: { "Content-Type": "application/json" },
+  //         withCredentials: true,
+  //       }
+  //     );
+  //     console.log(response?.data);
+  //     console.log(response?.accessToken);
+  //     console.log(JSON.stringify(response));
+  //     SetSuccess(true);
+  //     //clear state and controlled inputs
+  //     //need value attrib on inputs for this
+  //     setUser("");
+  //     setPassword("");
+  //     setMatchPassword("");
+  //   } catch (err) {
+  //     if (!err?.response) {
+  //       setErrprMsg("No Server Response");
+  //     } else if (err.response?.status === 409) {
+  //       setErrprMsg("Username Taken");
+  //     } else {
+  //       setErrprMsg("Registration Failed");
+  //     }
+  //     errRef.current.focus();
+  //   }
+  // };
+  async function registerHandler(e) {
     e.preventDefault();
-    const v1 = USER_REGEX.test(user);
-    const v2 = EMAIL_REGEX.test(email);
-    const v3 = PWD_REGEX.test(password);
-    if (!v1 || !v2 || !v3) {
-      setErrprMsg("Invalid Entry");
-      return;
+    try {
+      let res = await axios({
+        method: "post",
+        url: "http://localhost:8080/register",
+        data: {
+          email: email,
+          password: password,
+          name: user,
+          confirmpassword: matchPassword,
+        },
+      });
+
+      let data = res.data;
+      console.log(data);
+
+      return data;
+    } catch (error) {
+      console.log(error.response); // this is the main part. Use the response property from the error object
+
+      return error.response;
     }
-    console.log(user, email, password);
-    SetSuccess(true);
-  };
+  }
 
   return (
     <>
@@ -106,7 +156,7 @@ function register() {
           </Link>
           <div className="login__container">
             <h1>Create Account</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={registerHandler}>
               <h5>
                 Name
                 <span className={validName ? "valid" : "hide"}>

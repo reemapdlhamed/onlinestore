@@ -296,7 +296,7 @@ function Login() {
       let res = await axios({
         method: "post",
         url: "http://localhost:8080/login",
-        data: { email: "admin@gmail.com", password: "admin" },
+        data: { email: email, password: password },
       });
 
       let data = res.data;
@@ -309,9 +309,9 @@ function Login() {
     }
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-  };
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  // };
   return (
     <>
       {success ? (
