@@ -32,7 +32,7 @@ function Products() {
 
   return (
     <Container className="d-flex flex-wrap justify-content-around">
-      <div className="d-flex flex-wrap justify-content-around align-content-center" style={{width:"70%",height:"60px",border:"solid 2px #eee",borderRadius:"10px",marginBottom:"50px"}}>
+      <div className="d-flex flex-wrap justify-content-around align-content-center" style={{width:"70%",height:"60px",border:"solid 2px #eee",borderRadius:"10px",marginBottom:"50px",marginTop:"50px"}}>
         <Chip label="All" onClick={()=>categoryClick({_id:""})} />
         {CategoriesList.map((cat)=>{
          return(
@@ -40,7 +40,7 @@ function Products() {
          )
         })}
       </div>
-      <TextField style={{width:"20%"}} id="outlined-basic" label="Search" value={searchWord} variant="outlined" onChange={(e)=>searchHandel(e)} />
+      <TextField style={{width:"20%",marginTop:"50px"}} id="outlined-basic" label="Search" value={searchWord} variant="outlined" onChange={(e)=>searchHandel(e)} />
         {ProductsList.map((product)=>{
               return (        
                   <Products_Card product={product} ></Products_Card>
