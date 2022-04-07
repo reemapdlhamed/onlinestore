@@ -17,7 +17,7 @@ const Product = () => {
     const addProduct = (product) => {
         dispatch(addCart(product));
     }
-
+    //changes
     useEffect(() => {
        axios.get(`http://localhost:8080/product/${id}`)
        .then((res)=>{
