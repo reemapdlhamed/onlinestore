@@ -154,7 +154,7 @@ exports.update_stock = (request, response, next) => {
       next(error);
     });
 };
-//------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------
 exports.update_product = (request, response, next) => {
   if (request.role == "admin") {
     Products.findByIdAndUpdate(
