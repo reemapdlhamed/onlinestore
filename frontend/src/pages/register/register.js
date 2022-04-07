@@ -64,14 +64,28 @@ function register() {
   useEffect(() => {
     setErrprMsg("");
   }, [user, password, matchPassword]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const v1 = USER_REGEX.test(user);
+    const v2 = EMAIL_REGEX.test(email);
+    const v3 = PWD_REGEX.test(password);
+    if (!v1 || !v2 || !v3) {
+      setErrprMsg("Invalid Entry");
+      return;
+    }
+    console.log(user, email, password);
+    SetSuccess(true);
+  };
+
   return (
     <>
       {success ? (
         <section>
-          <h1>You Are Logged In</h1>
+          <h1>success</h1>
           <br />
           <p>
-            <a href="/home"> Go To Home</a>
+            <a href="/login"> Sign In</a>
           </p>
         </section>
       ) : (
@@ -92,8 +106,16 @@ function register() {
           </Link>
           <div className="login__container">
             <h1>Create Account</h1>
-            <form>
-              <h5>Name</h5>
+            <form onSubmit={handleSubmit}>
+              <h5>
+                Name
+                <span className={validName ? "valid" : "hide"}>
+                  <FontAwesomeIcon color="green" icon={faCheck} />
+                </span>
+                <span className={validName || !user ? "hide" : "invalid"}>
+                  <FontAwesomeIcon color="red" icon={faTimes} />
+                </span>
+              </h5>
               <input
                 type="text"
                 ref={userRef}
@@ -103,10 +125,25 @@ function register() {
                 onChange={(e) => {
                   setUser(e.target.value);
                 }}
+                aria-invalid={validName ? "false" : "true"}
+                aria-describedby="uidnote"
+                onFocus={() => setUserFocus(true)}
+                onBlur={() => setUserFocus(false)}
               />
+              <p
+                id="uidnote"
+                className={
+                  userFocus && user && !validName ? "instructions" : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />4 to 24 characters.
+                <br />
+                Must begin with a letter. <br />
+                Letters, Numbers,underscores,hyphens allowed
+              </p>
               <h5>E-mail </h5>
               <input
-                type="text"
+                type="email"
                 ref={emailRef}
                 value={email}
                 autoComplete="off"
@@ -118,18 +155,54 @@ function register() {
               <h5>Password</h5>
               <input
                 type="password"
-                value={password}
+                id="passwoed"
                 required
                 onChange={(e) => setPassword(e.target.value)}
+                aria-invalid={validPassword ? "false" : "true"}
+                aria-describedby="passwordnote"
+                onFocus={() => setpasswordFocus(true)}
+                onBlur={() => setpasswordFocus(false)}
               />
+              <p
+                id="passwordnote"
+                className={
+                  passwordFocus && !validPassword ? "instructions" : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />8 to24 characters. <br />{" "}
+                must include uppercase and lowercase letters , a number and a
+                speacial characters. : <span aria-label="at symbol">@</span>
+                <span aria-label="hashtag">#</span>
+                <span aria-label="dollar sign ">$</span>
+                <span aria-label="precent">%</span>
+              </p>
               <h5>Confirm Password</h5>
               <input
                 type="password"
+                id="confirm_password"
                 value={matchPassword}
                 required
                 onChange={(e) => setMatchPassword(e.target.value)}
+                aria-invalid={validMatch ? "false" : "true"}
+                aria-describedby="confirmnote"
+                onFocus={() => setMatchFocus(true)}
+                onBlur={() => setMatchFocus(false)}
               />
+              <p
+                id="confirmnote"
+                className={
+                  matchFocus && !validMatch ? "instructions" : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Must match the first password.
+              </p>
               <button
+                disabled={
+                  !validEmail || !validName || !validPassword || !validMatch
+                    ? true
+                    : false
+                }
                 // onClick={signIn}
                 type="submit"
                 className="login__signin__button"
@@ -146,7 +219,7 @@ function register() {
               // onClick={register}
               className="login__registerbutton"
             >
-              Already have an account?
+              <a href="/login">Already have an account?</a>
             </button>
           </div>
         </div>
