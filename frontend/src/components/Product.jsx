@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import Skeleton from "react-loading-skeleton";
 import { useDispatch} from 'react-redux'
 import { addItem } from '../redux/action/index';
+import axios from "axios";
 
 function Product() {
     const{id} = useParams();
@@ -16,13 +17,11 @@ function Product() {
     }
 
     useEffect(() => {
-        const getProduct = async () =>{
-        setLoading(true);
-        const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-        setProduct(await response.json());
-        setLoading(false);
-        }
-        getProduct();
+       axios.get(`http://localhost:8080/product/${id}`)
+       .then((res)=>{
+           setProduct(res.data.data[0])
+           console.log(res.data.data)
+       })
     },[]);
     const Loading =()=>{
         return(
@@ -46,7 +45,7 @@ function Product() {
         return (
             <>
             <div className="col-md-6">
-                <img src={product.image} alt={product.title}
+                <img src={product.images} alt={product.name}
                 height="400px" width="400px" />
             </div>
             <div className="col-md-6">
@@ -55,7 +54,7 @@ function Product() {
                 </h4>
                 <h1 className="display-5">{product.title}</h1>
                 <p className="lead fw-bolder">
-                    Rating {product.rating && product.rating.rate}
+                    Rating {product.rating}
                     <i className="fa fa-star"></i>
                 </p>
                 <h3 className="display-6 fw-bold my-4">
