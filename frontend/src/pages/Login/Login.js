@@ -330,7 +330,7 @@ function Login() {
     <>
       {success ? (
         <section>
-          <h1>You Are Logged In</h1>
+          <h5>You Are Logged In</h5>
           <br />
           <p>
             <a href="/home"> Go To Home</a>
