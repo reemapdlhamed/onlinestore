@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { addItem } from "../redux/action/index";
+import { Rating } from "@mui/material";
 import axios from "axios";
 
 const Product = () => {
@@ -58,11 +59,8 @@ const Product = () => {
           
           
           <p className="lead fw-normal"> <p className="fw-bold ">DESC :</p> {product.description}</p>
-          <p className="lead fw-bolder">
-            Rating {product.rating}
-            <i className="fa fa-star text-warning"></i>
-          </p>
           <h3 className=" fw-bold my-4 text-danger">Price : {product.price} E£ </h3>
+          <Rating name="read-only" value={product.rating} readOnly  /> <hr/>
           <button
             className="btn btn-outline-dark px-4 py-2"
             onClick={() => addProduct(product)}
