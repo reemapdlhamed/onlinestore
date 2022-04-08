@@ -173,6 +173,7 @@ button {
 .line {
   display: inline-block;
 }
-a {
+button a {
   text-decoration: none;
+  color: black;
 }
