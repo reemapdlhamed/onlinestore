@@ -7,6 +7,7 @@ import Skeleton from "react-loading-skeleton";
 import { addItem } from "../redux/action/index";
 import { Rating } from "@mui/material";
 import axios from "axios";
+import { border } from "@mui/system";
 
 const Product = () => {
   const {id} = useParams();
@@ -46,20 +47,57 @@ const Product = () => {
   const ShowProduct = () => {
     return (
       <>
-        <div className="col-md-6">
+        <div className="col-md-6 ">
           <img
             src={product.images}
             alt={product.name}
             height="400px"
             width="400px"
+            style={{border :" 1px solid black"}}
+            className="py-3 px-3"
           />
+          <div className=" px-5 py-3">
+            <img
+            src={product.images}
+            alt={product.name}
+            height="80px"
+            width="80px"
+            style={{border :" 1px solid black"}}
+            className="py-3 px-3"
+          />
+          <img
+            src={product.images}
+            alt={product.name}
+            height="80px"
+            width="80px"
+            style={{border :" 1px solid black"}}
+            className="py-3 px-3"
+          />
+          <img
+            src={product.images}
+            alt={product.name}
+            height="80px"
+            width="80px"
+            style={{border :" 1px solid black"}}
+            className="py-3 px-3"
+          />
+          <img
+            src={product.images}
+            alt={product.name}
+            height="80px"
+            width="80px"
+            style={{border :"1px solid black"}}
+            className="py-3 px-3 "
+          />
+          </div>
+          
         </div>
         <div className="col-md-6">
           <h4 className="text-uppercase text-black fw-bold display-6">{product.name}</h4>
           
           
           <h3 className="lead fw-normal"> <p className="fw-bold ">DESC :</p> {product.description}</h3>
-          <h3 className=" fw-bold my-4 text-danger">Price : {product.price} E£ </h3>
+          <h3 className=" fw-bold my-4 text-danger ">Price : {product.price} E£ </h3>
           <Rating name="read-only" value={product.rating} readOnly  /> <hr/>
           <button
             className="btn btn-outline-dark px-4 py-2"
