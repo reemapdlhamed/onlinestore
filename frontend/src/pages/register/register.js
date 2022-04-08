@@ -159,9 +159,9 @@ function register() {
     <>
       {success ? (
         <section>
-          <Products>
+          <Home>
             <Route exact path="/" component={Home} />
-          </Products>
+          </Home>
 
           <br />
           <p>

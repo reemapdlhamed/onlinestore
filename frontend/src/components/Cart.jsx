@@ -1,14 +1,19 @@
-import React from 'react';
+import { useState, useEffect,React } from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import { addCart, delCart } from '../redux/action';
-import { useState } from "react";
 
 
 const Cart = () => {
+
+
+       
     const [price, setPrice] = useState({
         p: 0
       });
+      useEffect(() => {
+        changePrice()
+       }, [price.p]);
     const state = useSelector((state)=> state.handleCart)
     const dispatch = useDispatch()
 
@@ -28,6 +33,7 @@ function changePrice()
         {
              priceTmp+= state[i].qty*state[i].price
         }
+        console.log(priceTmp)
 
         setPrice(previousState => {
             return { ...previousState, p: priceTmp }
@@ -45,6 +51,7 @@ function changePrice()
         )
     }
     const cartItems = (product) => {
+
         return(
             <>
                 <div className="px-4 my-5 bg-light rounded-3 py-5">
@@ -84,9 +91,9 @@ function changePrice()
                         </NavLink>
             
                    
-                        <p className="lead fw-bold w-25 mx-auto">
+                        {/* <p className="lead fw-bold w-25 mx-auto">
                         {price.p} $
-                    </p>
+                    </p> */}
                     </div>
                 </div>
             </>
