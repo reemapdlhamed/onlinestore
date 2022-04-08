@@ -383,7 +383,8 @@ function Login() {
             </form>
             <p>
               by signing in you agree to our application conditions of use &
-              sale . please see your privacy notice
+              sale . please see your <a href="/about">privacy notice</a> <br />
+              <a href="/contact"> need a help!!</a>
             </p>
             <button
               // onClick={register}
