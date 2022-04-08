@@ -105,6 +105,13 @@ function register() {
   // };
   async function registerHandler(e) {
     e.preventDefault();
+    const v1 = USER_REGEX.test(user);
+    const v2 = PWD_REGEX.test(password);
+    const v3 = EMAIL_REGEX.test(email);
+    if (!v1 || !v2 || !v3) {
+      setErrprMsg("Invalid Entry");
+      return;
+    }
     try {
       let res = await axios({
         method: "post",
@@ -121,10 +128,18 @@ function register() {
       console.log(data);
 
       return data;
-    } catch (error) {
-      console.log(error.response); // this is the main part. Use the response property from the error object
+    } catch (err) {
+      if (!err?.response) {
+        setErrprMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrprMsg("Email Already Exist");
+      } else {
+        setErrprMsg("Registration Failed");
+      }
+      errRef.current.focus();
+      // this is the main part. Use the response property from the error object
 
-      return error.response;
+      return err.response;
     }
   }
 
@@ -140,13 +155,6 @@ function register() {
         </section>
       ) : (
         <div className="login">
-          <p
-            ref={errRef}
-            className={errorMsg ? "errorMsg" : "offScreen"}
-            aria-live="assertive"
-          >
-            {errorMsg}
-          </p>
           <Link to="/">
             <img
               className="login__logo"
@@ -155,6 +163,13 @@ function register() {
             />
           </Link>
           <div className="login__container">
+            <p
+              ref={errRef}
+              className={errorMsg ? "errorMsg" : "offScreen"}
+              aria-live="assertive"
+            >
+              {errorMsg}
+            </p>
             <h1>Create Account</h1>
             <form onSubmit={registerHandler}>
               <h5>

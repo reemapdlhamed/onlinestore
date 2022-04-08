@@ -372,11 +372,12 @@ function Login() {
               sale . please see your privacy notice
             </p>
             <button
-              href="/register"
+             
               // onClick={register}
               className="login__registerbutton"
             >
-              Create Your Account
+              <a href="/register">  Create Your Account</a>
+            
             </button>
           </div>
         </div>
