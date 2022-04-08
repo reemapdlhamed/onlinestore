@@ -268,7 +268,8 @@ import { Link } from "react-router-dom";
 // import Login from "./Login";
 // import { axiosInstance } from "../../Network/axiosconfig";
 import axios from "../../api/axios";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const { setAuth } = useContext(AuthContext);
   // const userRef = useRef();
@@ -326,6 +327,13 @@ function Login() {
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   // };
+  const customId = "custom-id-yes";
+  const difToast = () => {
+    toast.success("Login Success", {
+      theme: "colored",
+      toastId: customId,
+    });
+  };
   return (
     <>
       {success ? (
@@ -333,6 +341,18 @@ function Login() {
           <h5>You Are Logged In</h5>
           <br />
           <p>
+            {difToast}
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
             <a href="/home"> Go To Home</a>
           </p>
         </section>
@@ -377,6 +397,7 @@ function Login() {
                 // onClick={signIn}
                 type="submit"
                 className="login__signin__button"
+                onClick={difToast}
               >
                 Sign In
               </button>
