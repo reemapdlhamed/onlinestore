@@ -5,6 +5,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import  "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { NavLink } from 'react-router-dom'
 import { getCategoriesList } from "../redux/action/Products";
 const Home = () => {
   const CategoriesList = useSelector((state)=>state.ProductsReducer.categories);
@@ -25,7 +26,11 @@ const Home = () => {
             <h3>NEW SEASON ARRIVALS</h3>
             <p className="card-text lead fs-2">
             CHECK OUT ALL THE TRENDS
-          </p>          </Carousel.Caption>
+          </p> 
+          <NavLink to="/products" className="btn btn-outline-dark  ms-2 px-3 py-2">
+            Shop Now 
+          </NavLink>
+        </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
@@ -34,8 +39,13 @@ const Home = () => {
             alt="Second slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>NEW SEASON ARRIVALS</h3>
+            <p className="card-text lead fs-2">
+            CHECK OUT ALL THE TRENDS
+          </p> 
+          <NavLink to="/products" className="btn btn-outline-dark  ms-2 px-3 py-2">
+            Shop Now 
+          </NavLink>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -45,8 +55,13 @@ const Home = () => {
             alt="third slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>NEW SEASON ARRIVALS</h3>
+            <p className="card-text lead fs-2">
+            CHECK OUT ALL THE TRENDS
+          </p> 
+          <NavLink to="/products" className="btn btn-outline-dark  ms-2 px-3 py-2">
+            Shop Now 
+          </NavLink>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -57,8 +72,13 @@ const Home = () => {
           />
 
           <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3>NEW SEASON ARRIVALS</h3>
+            <p className="card-text lead fs-2">
+            CHECK OUT ALL THE TRENDS
+          </p> 
+          <NavLink to="/products" className="btn btn-outline-dark  ms-2 px-3 py-2">
+            Shop Now 
+          </NavLink>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -69,10 +89,13 @@ const Home = () => {
           />
 
           <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
+                       <h3>NEW SEASON ARRIVALS</h3>
+            <p className="card-text lead fs-2">
+            CHECK OUT ALL THE TRENDS
+          </p> 
+          <NavLink to="/products" className="btn btn-outline-dark  ms-2 px-3 py-2">
+            Shop Now 
+          </NavLink>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
