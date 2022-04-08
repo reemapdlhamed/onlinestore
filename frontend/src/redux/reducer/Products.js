@@ -1,7 +1,8 @@
 const INITIAL_STATE = {
     list: [],
     categories:[],
-    product:""
+    product:"",
+    category:""
   };
   
   export function ProductsReducer(state = INITIAL_STATE, action) {
@@ -25,6 +26,11 @@ const INITIAL_STATE = {
         return {
           ...state,
           list: action.payload,
+        };
+      case "SELECT_CATEGORY":
+        return {
+          ...state,
+          category: action.payload,
         };
       default:
         return state;

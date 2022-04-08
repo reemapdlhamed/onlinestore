@@ -36,3 +36,9 @@ export const getProduct = (product_id) => {
       payload : product_id
   }
 }
+export const selectGategory = (id) => {
+  return{
+      type : "SELECT_CATEGORY",
+      payload : id
+  }
+}
