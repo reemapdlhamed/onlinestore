@@ -62,33 +62,52 @@ exports.add_product = (request, response, next) => {
   // });
 };
 //--------------------------------------------------------------------------------------------------
+//Deleting with id in body
+// exports.delete_product = (request, response, next) => {
+// if (request.role == "admin") {
+//   Products.findByIdAndDelete({ _id: request.body.id })
+//     .then((data) => {
+//       response.status(201).json({ message: "deleted", data });
+//     })
+//     .catch((error) => {
+//       next(error);
+//     });
+// } else if (request.role == "seller") {
+//     Products.findById({ _id: request.body.id }).then((data) => {
+//       if (request.id == data.seller.userID) {
+//         Products.findByIdAndDelete({ _id: request.body.id })
+//           .then((data) => {
+//             response.status(201).json({ message: "deleted", data });
+//           })
+//           .catch((error) => {
+//             next(error);
+//           });
+//       } else {
+//         response.status(404).json({ message: "You dont owne this product " });
+//       }
+//     });
+//   } else {
+//     response
+//       .status(404)
+//       .json({ message: "You should be admin or seller to delete product " });
+//   }
+// };
+
+//Deleting with id in params
 exports.delete_product = (request, response, next) => {
+  console.log("delete product function");
   if (request.role == "admin") {
-    Products.findByIdAndDelete({ _id: request.body.id })
+    console.log("role is okay");
+    Products.findByIdAndDelete({ _id: request.params.id })
       .then((data) => {
+        console.log("id:",request.params.id );
         response.status(201).json({ message: "deleted", data });
       })
       .catch((error) => {
         next(error);
       });
-  } else if (request.role == "seller") {
-    Products.findById({ _id: request.body.id }).then((data) => {
-      if (request.id == data.seller.userID) {
-        Products.findByIdAndDelete({ _id: request.body.id })
-          .then((data) => {
-            response.status(201).json({ message: "deleted", data });
-          })
-          .catch((error) => {
-            next(error);
-          });
-      } else {
-        response.status(404).json({ message: "You dont owne this product " });
-      }
-    });
   } else {
-    response
-      .status(404)
-      .json({ message: "You should be admin or seller to delete product " });
+    response.status(403).json({ message: "Not Autorized" });
   }
 };
 //-------------------------------------------------------------------------------------------------------
@@ -196,8 +215,12 @@ exports.update_product = (request, response, next) => {
 };
 //------------------------------------------------------------------------------------------------------------
 exports.show_product = (request, response, next) => {
-  Products.find({ _id: request.params.id }).populate('category_id')
-    .then((data) => {
+  Products.findOne({ _id: request.params.id })
+  .populate("category_id",{name:1,_id:-1})
+
+   
+      .then((data) => {
+      
       response.status(200).json({ data });
     })
     .catch((error) => {
@@ -243,13 +266,16 @@ exports.show_reviews = (request, response, next) => {
 };
 //------------------------------------------------------------------------------------------------------------
 exports.edit_review = (request, response, next) => {
-  Products.updateOne({"reviews._id":request.body.id},{
-    $set:{
-      "reviews.$.title":request.body.title,
-      "reviews.$.description":request.body.description,
-      "reviews.$.rating":request.body.rating
+  Products.updateOne(
+    { "reviews._id": request.body.id },
+    {
+      $set: {
+        "reviews.$.title": request.body.title,
+        "reviews.$.description": request.body.description,
+        "reviews.$.rating": request.body.rating,
+      },
     }
-  })
+  )
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -259,9 +285,12 @@ exports.edit_review = (request, response, next) => {
 };
 //-----------------------------------------------------------------------------------------------------------
 exports.delete_review = (request, response, next) => {
-  Products.updateOne({"_id":request.body.id},{
-    $pull:{reviews:{userID:request.id}}
-  })
+  Products.updateOne(
+    { _id: request.body.id },
+    {
+      $pull: { reviews: { userID: request.id } },
+    }
+  )
     .then((data) => {
       response.status(200).json({ message: "deleted", data });
     })

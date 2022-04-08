@@ -8,38 +8,46 @@ import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
 import { useContext } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
+import ProductList from "./pages/productList/productList";
+import NewProduct from "./pages/newProduct/NewProduct";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+  let isAdmin =
+    JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+      .currentUser?.data.role == "admin";
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
-            <Route path="users">
-              <Route index element={<List />} />
-              <Route path=":userId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={userInputs} title="Add New User" />}
-              />
-            </Route>
-            <Route path="products">
-              <Route index element={<List />} />
-              <Route path=":productId" element={<Single />} />
-              <Route
-                path="new"
-                element={<New inputs={productInputs} title="Add New Product" />}
-              />
-            </Route>
+            {isAdmin && (
+              <>
+                <Route index element={<Home />} />
+                <Route path="users">
+                  <Route index element={<List />} />
+                  <Route path=":userId" element={<Single />} />
+                  <Route
+                    path="new"
+                    element={<New inputs={userInputs} title="Add New User" />}
+                  />
+                </Route>
+                <Route path="products">
+                  {/* <Route index element={<List />} /> */}
+                  <Route index element={<ProductList />} />
+                  <Route path=":productId" element={<Single />} />
+                  <Route path="new" element={<NewProduct />} />
+                </Route>
+              </>
+            )}
           </Route>
         </Routes>
       </BrowserRouter>
     </div>
   );
 }
+
 
 export default App;

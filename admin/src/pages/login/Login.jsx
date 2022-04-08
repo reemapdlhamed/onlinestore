@@ -2,15 +2,19 @@ import "./login.scss"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/apiCalls";
+import { useNavigate } from "react-router";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
 
+  const navigate = useNavigate()
+
   const handleClick = (e) => {
     e.preventDefault();
     login(dispatch, { email, password });
+    navigate('/');
   };
 
   return (
