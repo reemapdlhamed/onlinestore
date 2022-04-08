@@ -14,3 +14,11 @@ export const delCart = (product) => {
         payload : product
     }
 }
+
+// For Delete Item From Cart
+export const zeroCart = (product) => {
+    return{
+        type : "ZEROITEM",
+        payload : product
+    }
+}
