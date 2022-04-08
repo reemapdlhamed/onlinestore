@@ -13,16 +13,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("tiny"));
 
 //CORS
-// app.use(cors());
-// app.use((request, response, next) => {
-//   response.header("Access-Control-Allow-Origin", "*");
-//   response.header(
-//     "Access-Control-Allow-Methods",
-//     "GET,POST,DELETE,PUT,OPTIONS"
-//   );
-//   response.header("Access-Control-Allow-Headers", "Content-Type,Authorization");
-//   next();
-// });
+ app.use(cors());
+ app.use((request, response, next) => {
+   response.header("Access-Control-Allow-Origin", "*");
+   response.header(
+     "Access-Control-Allow-Methods",
+     "GET,POST,DELETE,PUT,OPTIONS"
+  );
+   response.header("Access-Control-Allow-Headers", "Content-Type,Authorization");
+   next();
+ });
 
 //Connect to DB
 mongoose
