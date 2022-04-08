@@ -46,7 +46,8 @@
 //       setEmail("");
 //       setPassword("");
 //       setSuccess(true);
-//     } catch (error) {
+//     }
+//catch (error) {
 //       if (!error?.response) {
 //         setErrMsg("No Server Response");
 //       } else if (error.response?.status === 400) {
@@ -303,10 +304,23 @@ function Login() {
       console.log(data);
       return data;
     } catch (error) {
-      console.log(error.response); // this is the main part. Use the response property from the error object
+      //   catch (error) {
+      //     console.log(error.response); // this is the main part. Use the response property from the error object
 
-      return error.response;
+      //     return error.response;
+      //   }
+      if (!error?.response) {
+        setErrMsg("No Server Response");
+      } else if (error.response?.status === 500) {
+        setErrMsg("Missing Email Or Password");
+      } else if (error.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      errorRef.current.focus();
     }
+    console.log(password, email);
   }
 
   // const handleSubmit = async (e) => {
@@ -324,13 +338,6 @@ function Login() {
         </section>
       ) : (
         <div className="login">
-          <p
-            ref={errorRef}
-            className={errMsg ? "errMsg" : "offScreen"}
-            aria-live="assertive"
-          >
-            {errMsg}
-          </p>
           <Link to="/">
             <img
               className="login__logo"
@@ -339,6 +346,13 @@ function Login() {
             />
           </Link>
           <div className="login__container">
+            <p
+              ref={errorRef}
+              className={errMsg ? "errMsg" : "offScreen"}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
             <h1>Sign In</h1>
             <form onSubmit={loginHandler}>
               <h5>E-mail </h5>
@@ -372,12 +386,10 @@ function Login() {
               sale . please see your privacy notice
             </p>
             <button
-             
               // onClick={register}
               className="login__registerbutton"
             >
-              <a href="/register">  Create Your Account</a>
-            
+              <a href="/register"> Create Your Account</a>
             </button>
           </div>
         </div>

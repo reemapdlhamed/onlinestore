@@ -319,8 +319,8 @@ function register() {
               </button>
             </form>
             <p>
-              By creating an account, you agree to our Terms of Use and our
-              Privacy Policy.
+              By creating an account, you agree to our Terms of Use and our{" "}
+              <a href="/about"> Privacy Policy.</a>
             </p>
             <button
               href="/login"
