@@ -1,6 +1,5 @@
 import React from "react";
 import CategoryCard from "./CategoryCard";
-import Products from "./Products";
 import Carousel from "react-bootstrap/Carousel";
 import { Col, Container, Row } from 'react-bootstrap';
 import  "bootstrap/dist/css/bootstrap.min.css";
@@ -23,9 +22,10 @@ const Home = () => {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
+            <h3>NEW SEASON ARRIVALS</h3>
+            <p className="card-text lead fs-2">
+            CHECK OUT ALL THE TRENDS
+          </p>          </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
@@ -83,7 +83,6 @@ const Home = () => {
           )
         })}
       </Container>
-      <Products />
     </div>
   );
 };

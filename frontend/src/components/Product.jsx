@@ -1,50 +1,47 @@
-import React, {useState, useEffect} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addCart } from '../redux/action';
-import { useParams } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart } from "../redux/action";
+import { useParams } from "react-router";
+import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { addItem } from "../redux/action/index";
 import axios from "axios";
 
-
 const Product = () => {
+  const {id} = useParams();
+  const [product, setProduct] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-    const id = useSelector((state)=>state.ProductsReducer.product)
-    const [product, setProduct] = useState([]);
-    const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const addProduct = (product) => {
+    dispatch(addCart(product));
+  };
+  //changes
+  useEffect(() => {
+    axios.get(`http://localhost:8080/product/${id}`).then((res) => {
+      setProduct(res.data.data[0]);
+      console.log(res.data.data);
+    });
+  }, []);
+  const Loading = () => {
+    return (
+      <>
+        <div className="col-md-6">
+          <Skeleton height={400} />
+        </div>
+        <div className="col-md-6" style={{ lineHeight: 2 }}>
+          <Skeleton height={50} width={300} />
+          <Skeleton height={75} />
+          <Skeleton height={25} width={150} />
+          <Skeleton height={50} />
+          <Skeleton height={150} />
+          <Skeleton height={50} width={100} />
+          <Skeleton height={50} width={100} style={{ marginLeft: 6 }} />
+        </div>
+      </>
+    );
+  };
 
-    const dispatch = useDispatch();
-    const addProduct = (product) => {
-        dispatch(addCart(product));
-    }
-    //changes
-    useEffect(() => {
-       axios.get(`http://localhost:8080/product/${id}`)
-       .then((res)=>{
-           setProduct(res.data.data[0])
-           console.log(res.data.data)
-       })
-    },[]);
-    const Loading =()=>{
-        return(
-            <>
-                <div className="col-md-6">
-                    <Skeleton height={400}/>
-                </div>
-                <div className="col-md-6" style={{lineHeight:2}}>
-                    <Skeleton height={50} width={300} />
-                    <Skeleton height={75} />
-                    <Skeleton height={25} width={150} />
-                    <Skeleton height={50} />
-                    <Skeleton height={150} />
-                    <Skeleton height={50} width={100} />
-                    <Skeleton height={50} width={100} style={{marginLeft:6}} />
-                </div>
-            </>
-        )
-    }
-    
   const ShowProduct = () => {
     return (
       <>
