@@ -43,7 +43,7 @@ const navigateTo = (e) => {
           {props.product.name}
         </Typography>
         <Typography gutterBottom variant="h7" component="div">
-          {props.product.price} $
+          {props.product.price} E£
         </Typography>
         <Rating name="read-only" value={props.product.rating} readOnly />
         <Button

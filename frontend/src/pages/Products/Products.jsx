@@ -2,14 +2,14 @@ import { Chip, Grid, TextField } from "@mui/material";
 import Products_Card from "../../components/Products_Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getCategoriesList, getProductsList, searchProduct } from "../../redux/action/Products";
+import { getCategoriesList, getProductsList, searchProduct, selectGategory } from "../../redux/action/Products";
 import { Col, Container, Row } from 'react-bootstrap';
 import  "bootstrap/dist/css/bootstrap.min.css";
 function Products() {
   const ProductsList = useSelector((state)=>state.ProductsReducer.list);
   const CategoriesList = useSelector((state)=>state.ProductsReducer.categories);
   const dispatch = useDispatch();
-  const [selected_category,setSelected_category] = useState("")
+  const selected_category = useSelector((state)=>state.ProductsReducer.category)
   const [searchWord,setSearchWord] = useState("")
   useEffect(()=>{
     if(searchWord === ""){
@@ -23,7 +23,7 @@ function Products() {
   },[selected_category,searchWord])
 
   function categoryClick(cat){
-    setSelected_category(cat._id)
+    dispatch(selectGategory(cat._id))
   }
   function searchHandel(e){
     setSearchWord(e.target.value)
