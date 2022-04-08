@@ -53,7 +53,7 @@ const Cart = () => {
                         <div className="col-md-4">
                             <h3>{product.name}</h3>
                             <p className="lead fw-bold">
-                                {product.quantity} X ${product.price} = ${product.quantity * product.price}
+                                {product.qty} X ${product.price} = ${product.qty * product.price}
                             </p>
                             <button className="btn btn-outline-dark me-4" onClick={()=>handleDel(product)}>
                                 <i className="fa fa-minus"></i>
