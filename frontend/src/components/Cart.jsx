@@ -1,7 +1,7 @@
 import { useState, useEffect,React } from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import { NavLink } from 'react-router-dom';
-import { addCart, delCart } from '../redux/action';
+import { addCart, delCart, zeroCart } from '../redux/action';
 
 
 const Cart = () => {
@@ -12,18 +12,28 @@ const Cart = () => {
         p: 0
       });
       useEffect(() => {
-        changePrice()
-       }, [price.p]);
+          changePrice()
+       }, []);
+
     const state = useSelector((state)=> state.handleCart)
     const dispatch = useDispatch()
 
     const handleAdd = (item) => {
+        if(item.quantity>item.qty)
+
         dispatch(addCart(item))
-        changePrice()
+        price.p+=item.price
     }
     const handleDel = (item) => {
         dispatch(delCart(item))
-        changePrice()
+        if(item.qty>1)
+        price.p-=item.price
+    }
+
+    const handleZero = (item) => {
+        dispatch(zeroCart(item))
+        price.p-=(item.price*item.qty)
+
     }
 
 function changePrice()
@@ -33,11 +43,15 @@ function changePrice()
         {
              priceTmp+= state[i].qty*state[i].price
         }
-        console.log(priceTmp)
-
+        if(priceTmp!=price.p)
         setPrice(previousState => {
             return { ...previousState, p: priceTmp }
           });
+}
+function getPrice()
+{
+    console.log(price.p)
+    return price.p
 }
     const emptyCart = () => {
         return(
@@ -56,7 +70,7 @@ function changePrice()
             <>
                 <div className="px-4 my-5 bg-light rounded-3 py-5">
                 <div className="container py-4">
-                <button onClick={()=>handleDel(product)} className="btn-close float-end" aria-label="Close"></button>
+                <button onClick={()=>handleZero(product)} className="btn-close float-end" aria-label="Close"></button>
                     <div className="row justify-content-center">
                         <div className="col-md-4">
                             <img src={product.images} alt={product.name} height="200px" width="180px" />
@@ -91,9 +105,9 @@ function changePrice()
                         </NavLink>
             
                    
-                        {/* <p className="lead fw-bold w-25 mx-auto">
-                        {price.p} $
-                    </p> */}
+                        <p className="lead fw-bold w-25 mx-auto">
+                        {getPrice()} $
+                    </p>
                     </div>
                 </div>
             </>
