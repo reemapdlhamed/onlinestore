@@ -58,7 +58,7 @@ const Product = () => {
           <h4 className="text-uppercase text-black fw-bold display-6">{product.name}</h4>
           
           
-          <p className="lead fw-normal"> <p className="fw-bold ">DESC :</p> {product.description}</p>
+          <h3 className="lead fw-normal"> <p className="fw-bold ">DESC :</p> {product.description}</h3>
           <h3 className=" fw-bold my-4 text-danger">Price : {product.price} E£ </h3>
           <Rating name="read-only" value={product.rating} readOnly  /> <hr/>
           <button
