@@ -23,6 +23,16 @@ exports.show_products = (request, response, next) => {
     });
 };
 //-----------------------------------------------------------------------------------------------
+exports.random_products = (request, response, next) => {
+  Products.find({}).limit(9)
+    .then((data) => {
+      response.status(200).json({ data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
+//-----------------------------------------------------------------------------------------------
 exports.search_products = (request, response, next) => {
   const s = request.body.word
   const regex = new RegExp(s, 'i')
