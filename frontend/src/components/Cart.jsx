@@ -13,7 +13,7 @@ const Cart = () => {
       });
       useEffect(() => {
         changePrice()
-       }, [price]);
+       }, [price.p]);
     const state = useSelector((state)=> state.handleCart)
     const dispatch = useDispatch()
 
@@ -91,9 +91,9 @@ function changePrice()
                         </NavLink>
             
                    
-                        <p className="lead fw-bold w-25 mx-auto">
+                        {/* <p className="lead fw-bold w-25 mx-auto">
                         {price.p} $
-                    </p>
+                    </p> */}
                     </div>
                 </div>
             </>
