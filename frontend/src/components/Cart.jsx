@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { addCart, delCart } from '../redux/action';
 import { useState } from "react";
 
+
 const Cart = () => {
     const [price, setPrice] = useState({
         p: 0
@@ -13,12 +14,16 @@ const Cart = () => {
 
     const handleAdd = (item) => {
         dispatch(addCart(item))
+        changePrice()
     }
     const handleDel = (item) => {
         dispatch(delCart(item))
+        changePrice()
     }
-    React.useEffect(() => {
-        var priceTmp=0
+
+function changePrice()
+{
+ var priceTmp=0
         for (var i=0;i<state.length;i++)
         {
              priceTmp+= state[i].qty*state[i].price
@@ -27,8 +32,7 @@ const Cart = () => {
         setPrice(previousState => {
             return { ...previousState, p: priceTmp }
           });
-
-      }, [handleDel,handleAdd]);
+}
     const emptyCart = () => {
         return(
             <div className="px-4 my-5 bg-light rounded-3 py-5">
