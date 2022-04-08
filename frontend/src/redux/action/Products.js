@@ -19,17 +19,6 @@ export const getCategoriesList = () => (dispatch) => {
     )
     .catch((err) => console.log(err));
 };
-export const getProduct = (id) => (dispatch) => {
-  return axios.get(`https://fakestoreapi.com/products/${id}`)
-    .then((res) =>
-      dispatch({
-        type: "GET_PRODUCT",
-        payload: res.data,
-      })
-    )
-    .catch((err) => console.log(err));
-};
-
 export const searchProduct = (word,category_id) => (dispatch) => {
   return axios.post(`http://localhost:8080/search`,{category_id,word})
     .then((res) =>{
@@ -41,3 +30,9 @@ export const searchProduct = (word,category_id) => (dispatch) => {
     )
     .catch((err) => console.log(err));
 };
+export const getProduct = (product_id) => {
+  return{
+      type : "GET_PRODUCT",
+      payload : product_id
+  }
+}

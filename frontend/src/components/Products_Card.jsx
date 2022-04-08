@@ -8,14 +8,17 @@ import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import "../pages/Products/Products.css";
 import { Rating } from "@mui/material";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from '../redux/action/Products';
 
 function Products_Card(props) {
-  const history = useHistory();
-
-  const navigateTo = (e) => {
-    console.log(e.target.value);
-    history.push(`/products/${e.target.value}`);
-  };
+  
+const history = useHistory();
+const dispatch = useDispatch();
+const navigateTo = (e) => {
+  dispatch(getProduct(e.target.value))
+  history.push(`/product`)
+}
 
   return (
     <Card
