@@ -268,7 +268,6 @@ import { Link } from "react-router-dom";
 // import Login from "./Login";
 // import { axiosInstance } from "../../Network/axiosconfig";
 import axios from "../../api/axios";
-const LOGIN_URL = "http://127.0.0.1:8080/login";
 
 function Login() {
   const { setAuth } = useContext(AuthContext);
@@ -294,13 +293,14 @@ function Login() {
   async function loginHandler(e) {
     e.preventDefault();
     try {
-      let res = await axios({
+      let response = await axios({
         method: "post",
         url: "http://localhost:8080/login",
         data: { email: email, password: password },
       });
 
-      let data = res.data;
+      setSuccess(true);
+      let data = response.data;
       console.log(data);
       return data;
     } catch (error) {

@@ -3,6 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "../../api/axios";
 import { useRef, useState, useEffect } from "react";
+
 import "./register.css";
 import {
   faCheck,
@@ -15,7 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
-const REGISTER_URL = "/register";
+
 function register() {
   const emailRef = useRef();
   const errRef = useRef();
@@ -123,7 +124,7 @@ function register() {
           confirmpassword: matchPassword,
         },
       });
-
+      SetSuccess(true);
       let data = res.data;
       console.log(data);
 
