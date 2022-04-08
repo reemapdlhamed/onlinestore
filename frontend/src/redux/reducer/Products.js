@@ -1,7 +1,7 @@
 const INITIAL_STATE = {
     list: [],
     categories:[],
-    product:{}
+    product:""
   };
   
   export function ProductsReducer(state = INITIAL_STATE, action) {
@@ -11,15 +11,15 @@ const INITIAL_STATE = {
           ...state,
           list: action.payload,
         };
-      case "GET_CATEGORIES_LIST":
-        return {
-          ...state,
-          categories: action.payload,
-        };
       case "GET_PRODUCT":
         return {
           ...state,
           product: action.payload,
+        };
+      case "GET_CATEGORIES_LIST":
+        return {
+          ...state,
+          categories: action.payload,
         };
       case "SEARCH_PRODUCT":
         return {

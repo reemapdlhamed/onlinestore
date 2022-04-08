@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addCart } from '../redux/action';
 import { useParams } from 'react-router';
 import { NavLink } from 'react-router-dom';
@@ -7,9 +7,10 @@ import Skeleton from "react-loading-skeleton";
 import { addItem } from '../redux/action/index';
 import axios from "axios";
 
+
 const Product = () => {
 
-    const {id} = useParams();
+    const id = useSelector((state)=>state.ProductsReducer.product)
     const [product, setProduct] = useState([]);
     const [loading, setLoading] = useState(false);
 
