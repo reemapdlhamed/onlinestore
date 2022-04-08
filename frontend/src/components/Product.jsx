@@ -19,7 +19,7 @@ const Product = () => {
   //changes
   useEffect(() => {
     console.log(id);
-    axios.get(`http://localhost:8080/product/${id}`).then((res) => {
+    axios.get(`http://localhost:8080/product/624eabd1f262161e5f869e4e`).then((res) => {
       setProduct(res.data.data[0]);
       console.log(res.data.data);
     });
