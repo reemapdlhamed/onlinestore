@@ -54,14 +54,15 @@ const Product = () => {
           />
         </div>
         <div className="col-md-6">
-          <h4 className="text-uppercase text-black-50">{product.category}</h4>
-          <h1 className="display-5">{product.title}</h1>
+          <h4 className="text-uppercase text-black fw-bold">{product.name}</h4>
+          
+          
+          <p className="lead"> <p className="fw-bold">DESC :</p> {product.description}</p>
           <p className="lead fw-bolder">
             Rating {product.rating}
             <i className="fa fa-star"></i>
           </p>
-          <h3 className="display-6 fw-bold my-4">$ {product.price}</h3>
-          <p className="lead">{product.description}</p>
+          <h3 className="display-6 fw-bold my-4">Price : {product.price} E£ </h3>
           <button
             className="btn btn-outline-dark px-4 py-2"
             onClick={() => addProduct(product)}
