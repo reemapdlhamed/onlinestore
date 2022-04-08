@@ -263,13 +263,17 @@
 
 import React, { useState, useRef, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthProvider";
+import Products from "./../Products/Products";
 import "./login.css";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 // import Login from "./Login";
 // import { axiosInstance } from "../../Network/axiosconfig";
 import axios from "../../api/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import Products from "./../Products/Products";
+import {Switch, Route } from "react-router-dom";
+import Product from './../../components/Product';
 function Login() {
   const { setAuth } = useContext(AuthContext);
   // const userRef = useRef();
@@ -337,8 +341,10 @@ function Login() {
   return (
     <>
       {success ? (
+
         <section>
-          <h5>You Are Logged In</h5>
+          <Products>  <Route exact path="/products" component={Products} /></Products>
+ 
           <br />
           <p>
             {difToast}
@@ -353,6 +359,7 @@ function Login() {
               draggable
               pauseOnHover
             />
+
             <a href="/home"> Go To Home</a>
           </p>
         </section>
