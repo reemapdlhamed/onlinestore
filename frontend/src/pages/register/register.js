@@ -149,7 +149,7 @@ function register() {
 
   const customId = "custom-id-yes";
   const difToast = () => {
-    toast.success("Register Success , Welcome To Our Store :)", {
+    toast.success("Register Success, Welcome "+[user]+":)", {
       theme: "dark",
       toastId: customId,
     });
