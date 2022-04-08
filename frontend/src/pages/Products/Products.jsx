@@ -12,6 +12,7 @@ function Products() {
   const selected_category = useSelector((state)=>state.ProductsReducer.category)
   const [searchWord,setSearchWord] = useState("")
   useEffect(()=>{
+    console.log(selected_category)
     if(searchWord === ""){
       dispatch(getProductsList(selected_category))
       dispatch(getCategoriesList())
