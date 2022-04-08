@@ -11,6 +11,9 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Login from "../src/pages/Login/Login";
 import Register from "../src/pages/register/register";
+import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { connect } from "react-redux";
 // import Footer from "./components/Footer";
 
 function App() {

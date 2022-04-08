@@ -332,9 +332,10 @@ function Login() {
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   // };
+  const name = email.substring(0, email.lastIndexOf("@"));
   const customId = "custom-id-yes";
   const difToast = () => {
-    toast.success("Login Success , Welcome", {
+    toast.success("Login Success, Welcome " + name, {
       theme: "dark",
       toastId: customId,
     });
@@ -343,9 +344,9 @@ function Login() {
     <>
       {success ? (
         <section>
-          <Products>
+          <Home>
             <Route exact path="/" component={Home} />
-          </Products>
+          </Home>
 
           <br />
           <p>

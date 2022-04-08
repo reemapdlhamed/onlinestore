@@ -60,6 +60,11 @@ router
   .post(
     controller.search_products
     );
+  router
+  .route("/random")
+  .get(
+    controller.random_products
+    );
     
     router
       .route("/product/:id")
