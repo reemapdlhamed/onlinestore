@@ -3,15 +3,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "../../api/axios";
 import { useRef, useState, useEffect } from "react";
-
+import { ToastContainer, toast } from "react-toastify";
+import { Switch, Route } from "react-router-dom";
 import "./register.css";
 import {
   faCheck,
   faTimes,
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
-
+import Products from "./../Products/Products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Home from './../../components/Home';
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -111,6 +113,7 @@ function register() {
     const v3 = EMAIL_REGEX.test(email);
     if (!v1 || !v2 || !v3) {
       setErrprMsg("Invalid Entry");
+
       return;
     }
     try {
@@ -144,14 +147,36 @@ function register() {
     }
   }
 
+  const customId = "custom-id-yes";
+  const difToast = () => {
+    toast.success("Register Success , Welcome To Our Store :)", {
+      theme: "dark",
+      toastId: customId,
+    });
+  };
+
   return (
     <>
       {success ? (
         <section>
-          <h1>success</h1>
+          <Products>
+            <Route exact path="/" component={Home} />
+          </Products>
+
           <br />
           <p>
-            <a href="/login"> Sign In</a>
+            {difToast}
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
           </p>
         </section>
       ) : (
@@ -315,6 +340,7 @@ function register() {
                 // onClick={signIn}
                 type="submit"
                 className="login__signin__button"
+                onClick={difToast}
               >
                 Sign Up
               </button>

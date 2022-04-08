@@ -272,8 +272,9 @@ import axios from "../../api/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import Products from "./../Products/Products";
-import {Switch, Route } from "react-router-dom";
-import Product from './../../components/Product';
+import { Switch, Route } from "react-router-dom";
+import Product from "./../../components/Product";
+import Home from "./../../components/Home";
 function Login() {
   const { setAuth } = useContext(AuthContext);
   // const userRef = useRef();
@@ -333,18 +334,19 @@ function Login() {
   // };
   const customId = "custom-id-yes";
   const difToast = () => {
-    toast.success("Login Success", {
-      theme: "colored",
+    toast.success("Login Success , Welcome", {
+      theme: "dark",
       toastId: customId,
     });
   };
   return (
     <>
       {success ? (
-
         <section>
-          <Products>  <Route exact path="/products" component={Products} /></Products>
- 
+          <Products>
+            <Route exact path="/" component={Home} />
+          </Products>
+
           <br />
           <p>
             {difToast}
@@ -359,8 +361,6 @@ function Login() {
               draggable
               pauseOnHover
             />
-
-            <a href="/home"> Go To Home</a>
           </p>
         </section>
       ) : (
