@@ -55,9 +55,9 @@ function getPrice()
 }
     const emptyCart = () => {
         return(
-            <div className="px-4 my-5 bg-light rounded-3 py-5">
-                <div className="container py-4">
-                    <div className="row">
+            <div className="px-4 my-5 bg-light rounded-3 py-0">
+                <div className="container ">
+                    <div className="alert alert-info text-center mt-3">
                         <h3>Your Cart is Empty</h3>
                     </div>
                 </div>
@@ -68,16 +68,18 @@ function getPrice()
 
         return(
             <>
-                <div className="px-4 my-5 bg-light rounded-3 py-5">
-                <div className="container py-4">
+            <div className="px-4 my-5 bg-light rounded-3 ">
+              <div className="container py-4">          
                 <button onClick={()=>handleZero(product)} className="btn-close float-end" aria-label="Close"></button>
                     <div className="row justify-content-center">
                         <div className="col-md-4">
                             <img src={product.images} alt={product.name} height="200px" width="180px" />
                         </div>
                         <div className="col-md-4">
-                            <h3>{product.name}</h3>
-                            <p className="lead fw-bold">
+                            <h3> {product.name}</h3>
+                            <h3>Price : {product.price}</h3>
+                            <h5>Quantity : {product.qty}</h5>
+                            <p className="lead fw-bold hide py-5">
                                 {product.qty} X ${product.price} = ${product.qty * product.price}
                             </p>
                             <button className="btn btn-outline-dark me-4" onClick={()=>handleDel(product)}>
@@ -97,16 +99,14 @@ function getPrice()
     const buttons = () => {
         return(
             <>
-                <div className="container">
+                <div className="container ">
                     <div className="row justify-content-center">
                     
                         <NavLink to="/checkout" className="btn btn-outline-dark mb-5 w-25 mx-auto">
                             Proceed to Checkout
-                        </NavLink>
-            
-                   
+                        </NavLink>           
                         <p className="lead fw-bold w-25 mx-auto">
-                        {getPrice()} $
+                       Total Price :  {getPrice()} $
                     </p>
                     </div>
                 </div>
