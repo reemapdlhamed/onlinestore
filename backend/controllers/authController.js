@@ -88,7 +88,7 @@ exports.changePass = (request, response, next) => {
             password: bcrypt.hashSync(request.body.newPassword, 10),
           },
         }).then((data) => {
-          if (data == null) next(new Error("User not fount"));
+          if (data == null) next(new Error("User not found"));
           response.json({ message: "password changed" });
           // else response.redirect("http://127.0.0.1:5500/index.html")
         });

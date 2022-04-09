@@ -14,6 +14,7 @@ import Register from "../src/pages/register/register";
 import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import UserProfile from "./pages/userProfile/UserProfile";
 // import Footer from "./components/Footer";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
     <>
       <Navbar />
       <Switch>
+        <Route exact path={"/profile"} component={UserProfile}/>
         <Route exact path="/" component={Home} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/product/:id" component={Product} />

@@ -13,7 +13,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Products from "./../Products/Products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Home from './../../components/Home';
+import Home from "./../../components/Home";
+import Login from "./../Login/Login";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -149,7 +150,7 @@ function register() {
 
   const customId = "custom-id-yes";
   const difToast = () => {
-    toast.success("Register Success, Welcome "+[user]+":)", {
+    toast.success("Register Success, Welcome " + [user] + ":)", {
       theme: "dark",
       toastId: customId,
     });
@@ -159,9 +160,9 @@ function register() {
     <>
       {success ? (
         <section>
-          <Home>
-            <Route exact path="/" component={Home} />
-          </Home>
+          <Login>
+            <Route exact path="/login" component={Login} />
+          </Login>
 
           <br />
           <p>

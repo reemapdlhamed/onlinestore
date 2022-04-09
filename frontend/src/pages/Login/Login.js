@@ -302,12 +302,23 @@ function Login() {
       let response = await axios({
         method: "post",
         url: "http://localhost:8080/login",
+
         data: { email: email, password: password },
       });
+      // localStorage.setItem("password", password);
+      localStorage.setItem("email", email);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("role", response.data.data.role);
+      localStorage.setItem("name", response.data.data.name);
+      localStorage.setItem("order", response.data.data.orders);
 
+      localStorage.setItem("data", response.data.data);
+
+      window.location.replace("/");
       setSuccess(true);
       let data = response.data;
-      console.log(data);
+      console.log(data.accessToken);
+
       return data;
     } catch (error) {
       //   catch (error) {
