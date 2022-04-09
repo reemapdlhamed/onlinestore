@@ -75,10 +75,10 @@ const Cart = () => {
               <div className="col-md-4">
                 <h3> {product.name}</h3>
                 <hr />
-                <h5>Price : {product.price}</h5>
+                <h5>Price : {product.price} E£</h5>
                 <h5>Quantity : {product.qty}</h5>
                 <p className="lead fw-bold hide py-5">
-                  {product.qty} X ${product.price} = $
+                  {product.qty} X E£ {product.price} = E£
                   {product.qty * product.price}
                 </p>
                 <button
@@ -113,7 +113,7 @@ const Cart = () => {
               Proceed to Checkout
             </NavLink>
             <p className="lead fw-bold w-25 mx-auto">
-              Total Price : {getPrice()} $
+              Total Price :  {getPrice()}  E£
             </p>
           </div>
         </div>
