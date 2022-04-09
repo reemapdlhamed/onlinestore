@@ -38,7 +38,7 @@ const Checkout = (props) => {
             {item.qty} X {item.title}
           </h6>
         </div>
-        <span className="text-muted">${item.price}</span>
+        <span className="text-muted">E£ {item.price}</span>
       </li>
     );
   };
