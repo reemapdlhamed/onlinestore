@@ -48,6 +48,9 @@ const Cart = () => {
         <div className="container ">
           <div className="alert alert-info text-center mt-3">
             <h3>Your Cart is Empty</h3>
+            <NavLink to="/products" className="btn btn-outline-dark  ms-2 px-3 py-2">
+            Shop Now 
+          </NavLink>
           </div>
         </div>
       </div>
