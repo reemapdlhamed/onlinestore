@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-
+const sendEmail = require("../service/emailTransptor");
 const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
 const { redirect } = require("express/lib/response");
@@ -171,4 +171,43 @@ exports.updateUser = (request, response, next) => {
       // error.message = "error happened while login3";
       next(error.message);
     });
+};
+
+//send verification email
+exports.sendVerificationEmail = async (req, res, next) => {
+  try {
+    const infoHash = {};
+    const user = req.user;
+    infoHash.user = user;
+    infoHash.id = user._id;
+    console.log(user);
+    const key = eval(process.env.mail_key);
+    const token = jwt.sign(infoHash, key, { expiresIn: "24h" });
+    const link = `${process.env.BASE_URL}/user/verify/${user._id}/${token}`;
+    //generate html code
+    const html = `<h3 style="color:blue;">Hello, ${user.fullName}</h3>
+    <p>E-mail verification was requested for this email address ${user.email}. If you requested this verification, click the link below :</p>
+    <p>
+    <p style="color:red;">This link is expired with in 24 hrs</p>
+      <a style="background-color:blue; color:white;padding:10px 20px;text-decoration:none; font-weight:bold;border-radius:7px" href="${link}">Verify Your Email</a>
+    </p>`;
+    await sendEmail(user.email, "Verify Email", html);
+    res.status(201).json({
+      data: "Registration successful ,An Email sent to your account please verify",
+      token,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+//verify email on link sent
+exports.emailVerify = async (req, res, next) => {
+  try {
+    const key = process.env.mail_key;
+    const user = await userVerify(req, key);
+    await user.update({ verified: true });
+    res.status(200).json("mail verified success");
+  } catch (error) {
+    next(error);
+  }
 };
