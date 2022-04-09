@@ -20,16 +20,24 @@ async function makePayToDB(prods) {
 }
 
 const Checkout = (props) => {
+  if(!props.location.state)
+  props.history.push("/payment");
+
+  const clearCart = ()=>{
+    localStorage.removeItem('persist:root');
+    props.history.push("/products");
+            window.location.reload()
+
+  }
+
   React.useEffect(() => {
   //  makePayToDB(state);
   }, []);
   const state = useSelector((state) => state.handleCart);
-
   var total = 0;
   const itemList = (item) => {
     total = total + item.price * item.qty;
 
-    console.log("X", total);
 
     return (
       <li className="list-group-item d-flex justify-content-between lh-sm">
@@ -75,7 +83,16 @@ const Checkout = (props) => {
                 </button>
               </div>
               <div style={{margin:"25px"}} >
-                  <StripeBtn total={total}  />
+                  {props.location.state&&props.location.state.paymentMethod==="card"&&
+                  
+                  <StripeBtn  total={total}  />}
+
+
+                  {props.location.state&&props.location.state.paymentMethod==="cod"&&
+                  <button  onClick={clearCart} >confirm with cash on delievery
+                  
+                  </button>  }
+
               </div>
           </div>
           <div className="col-md-7 col-lg-8"></div>

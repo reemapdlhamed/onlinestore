@@ -10,6 +10,8 @@ import NotFound from "./pages/NotFound";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Login from "../src/pages/Login/Login";
+import Payment from "../src/components/Payment";
+
 import Register from "../src/pages/register/register";
 import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -30,6 +32,8 @@ function App() {
         <Route exact path="/contact" component={Contact} />
         <Route path={"/login"} component={Login} />
         <Route path={"/register"} component={Register} />
+        <Route path={"/payment"} component={Payment} />
+
         <Route path={"*"} component={NotFound} />
       </Switch>
       {/* <Footer /> */}
