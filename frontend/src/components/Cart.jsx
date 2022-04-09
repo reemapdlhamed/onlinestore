@@ -39,10 +39,7 @@ const Cart = () => {
         return { ...previousState, p: priceTmp };
       });
   }
-  function getPrice() {
-    console.log(price.p);
-    return price.p;
-  }
+
   const emptyCart = () => {
     return (
       <div className="px-4 my-5 bg-light rounded-3 py-0">
@@ -114,8 +111,7 @@ const Cart = () => {
             <hr/>
           <div className="row justify-content-center">
             <NavLink
-              total={price.p}
-              to="/checkout"
+              to="/payment"
               className="btn btn-outline-dark mb-5 w-25 mx-auto "
             >
               Proceed to Checkout
