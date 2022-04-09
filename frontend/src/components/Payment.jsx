@@ -6,7 +6,7 @@ const PaymentScreen = ({ history }) => {
 
   const state = useSelector((state) => state.handleCart);
   console.log(state)
-  if(state.length==0)
+  if(state.length===0)
   {
     history.push("/"); 
   }

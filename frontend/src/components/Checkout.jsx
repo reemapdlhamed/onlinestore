@@ -25,7 +25,7 @@ const Checkout = (props) => {
 
   const clearCart = ()=>{
     localStorage.removeItem('persist:root');
-    props.history.push("/products");
+    props.history.push("/");
             window.location.reload()
 
   }
