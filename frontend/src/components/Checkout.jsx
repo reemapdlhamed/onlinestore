@@ -38,12 +38,11 @@ const Checkout = (props) => {
   const itemList = (item) => {
     total = total + item.price * item.qty;
 
-
     return (
       <li className="list-group-item d-flex justify-content-between lh-sm">
         <div>
           <h6 className="my-0">
-            {item.qty} X {item.title}
+            {item.qty} X {item.name}
           </h6>
         </div>
         <span className="text-muted">E£ {item.price}</span>
