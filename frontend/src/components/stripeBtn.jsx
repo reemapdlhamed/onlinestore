@@ -3,7 +3,7 @@ import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 
 const stripeBtn = (props) => {
-  const publishableKey = "pk_test_ZU3mlTy0q00DATc9EyF9A8jX";
+  const publishableKey = "pk_test_51KYAh7Fnja0F2DGHDY9fsDRS2ImeHhegy4pNuepcHaWjfXkPfePwmjl4e0LAOoIxPwKuNr6R1C6L61MtUkmhnkz000CQ1uElz2";
    
   const onToken = token => {
     const body = {
@@ -25,15 +25,17 @@ const stripeBtn = (props) => {
 
   return (
  <div>
-        <StripeCheckout
-          name="amoazona"
-          description="you have to pay"
-          amount={props.total*100}
-          token={token => this.props.handleToken(token)}
-          stripeKey={process.env.REACT_APP_STRIPE_KEY}
-        >
-          <button style={{margin:"0 auto", display:"block" }} className="btn btn-primary">PAY NOW {props.total}$</button>
-        </StripeCheckout>
+           <StripeCheckout
+      label={`pay ${props.total}$`} //Component button text
+      name="modal header" //Modal Header
+      description="modal description"
+      panelLabel="pay" //Submit button in modal
+      amount={props.total} //Amount in cents $9.99
+      token={onToken}
+      stripeKey={publishableKey}
+      billingAddress={false}
+    />
+
       </div> 
   );
 };
