@@ -11,6 +11,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Login from "../src/pages/Login/Login";
 import Payment from "../src/components/Payment";
+import Shipping from "../src/components/Shipping";
 
 import Register from "../src/pages/register/register";
 import { useState } from "react";
@@ -32,6 +33,8 @@ function App() {
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/contact" component={Contact} />
+        <Route exact path="/shipping" component={Shipping} />
+
         <Route path={"/login"} component={Login} />
         <Route path={"/register"} component={Register} />
         <Route path={"/payment"} component={Payment} />

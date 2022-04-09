@@ -2,6 +2,7 @@ import { useState, useEffect, React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { addCart, delCart, zeroCart } from "../redux/action";
+
 import StripeBtn from "./stripeBtn";
 
 const Cart = () => {
@@ -111,7 +112,7 @@ const Cart = () => {
             <hr/>
           <div className="row justify-content-center">
             <NavLink
-              to="/payment"
+              to="/shipping"
               className="btn btn-outline-dark mb-5 w-25 mx-auto "
             >
               Proceed to Checkout

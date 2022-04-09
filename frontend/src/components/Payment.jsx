@@ -1,22 +1,23 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { goToHome } from "../redux/action/Cart";
 
 const PaymentScreen = ({ history }) => {
 
   const state = useSelector((state) => state.handleCart);
   console.log(state)
-  if(state.length===0)
-  {
-    history.push("/"); 
-  }
+
   window.scrollTo(0, 0);
 
 
   const [paymentMethod, setPaymentMethod] = useState("card");
 
   const dispatch = useDispatch();
-
+  if(state.length===0)
+  {
+    dispatch(goToHome())
+  }
   const submitHandler = (e) => {
     e.preventDefault();
     history.push("/placeorder");

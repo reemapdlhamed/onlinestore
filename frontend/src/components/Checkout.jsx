@@ -1,7 +1,10 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import axios from "axios";
 import StripeBtn from "./stripeBtn";
+import { clearLocalStorageCart } from "../redux/action/Cart";
+import { goToHome } from "../redux/action/Cart";
+
 
 async function makePayToDB(prods) {
   try {
@@ -20,12 +23,23 @@ async function makePayToDB(prods) {
 }
 
 const Checkout = (props) => {
+
+
+
+  
+  const dispatch = useDispatch();
+
   if(!props.location.state)
   props.history.push("/payment");
 
+
+
+  
   const clearCart = ()=>{
-    localStorage.removeItem('persist:root');
+    //localStorage.removeItem('persist:root');
     props.history.push("/");
+    dispatch(clearLocalStorageCart());
+
             window.location.reload()
 
   }
@@ -34,6 +48,10 @@ const Checkout = (props) => {
   //  makePayToDB(state);
   }, []);
   const state = useSelector((state) => state.handleCart);
+  if(state.length===0)
+  {
+    dispatch(goToHome())
+  }
   var total = 0;
   const itemList = (item) => {
     total = total + item.price * item.qty;

@@ -1,9 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { clearLocalStorageCart } from "../redux/action/Cart";
+import { goToHome } from "../redux/action/Cart";
 
 const StripeBtn = (props) => {
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const publishableKey =
@@ -20,8 +24,10 @@ const StripeBtn = (props) => {
       .post("http://localhost:8080/payment", body)
       .then((response) => {
         console.log(response);
-        localStorage.removeItem('persist:root');
-        history.push("/")
+        dispatch(clearLocalStorageCart());
+
+        //localStorage.removeItem('persist:root');
+        dispatch(goToHome())
         window.location.reload()
       
       })
