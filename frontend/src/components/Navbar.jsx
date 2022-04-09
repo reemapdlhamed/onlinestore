@@ -27,7 +27,7 @@ const Navbar = () => {
     const name = email.substring(0, email.lastIndexOf("@"));
     button = (
       <>
-        <NavLink to="/products" className="btn btn-outline-primary">
+        <NavLink to="/profile" className="btn btn-outline-primary">
           <i className="fa fa-user me-1"></i> Welcome,{name}
         </NavLink>
         <button onClick={logOut} className="btn btn-outline-danger ms-2">
