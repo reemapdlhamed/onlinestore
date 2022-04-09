@@ -14,10 +14,10 @@ const Navbar = () => {
   if (!localStorage.getItem("email")) {
     button = (
       <>
-        <NavLink to="/login" className="btn btn-outline-dark">
+        <NavLink to="/login" className="btn btn-outline-primary">
           <i className="fa fa-sign-in me-1"></i> Login
         </NavLink>
-        <NavLink to="/register" className="btn btn-outline-dark ms-2">
+        <NavLink to="/register" className="btn btn-outline-primary ms-2">
           <i className="fa fa-user-plus me-1"></i> Register
         </NavLink>
       </>
@@ -27,11 +27,11 @@ const Navbar = () => {
     const name = email.substring(0, email.lastIndexOf("@"));
     button = (
       <>
-        <NavLink to="/products" className="btn btn-outline-dark">
-          <i className="fa fa-sign-in me-1"></i> Welcome,{name}
+        <NavLink to="/products" className="btn btn-outline-primary">
+          <i className="fa fa-user me-1"></i> Welcome,{name}
         </NavLink>
-        <button onClick={logOut} className="btn btn-outline-dark ms-2">
-          <i className="fa fa-sign-in me-1"></i> log Out
+        <button onClick={logOut} className="btn btn-outline-danger ms-2">
+          <i className="fa fa-sign-out me-1"></i> Log Out
         </button>
       </>
     );
@@ -83,7 +83,7 @@ const Navbar = () => {
 
             <div className="buttons">
               {button}
-              <NavLink to="/cart" className="btn btn-outline-dark ms-2">
+              <NavLink to="/cart" className="btn btn-outline-success ms-2">
                 <i className="fa fa-shopping-cart me-1"></i> Cart(
                 {state.length})
               </NavLink>
