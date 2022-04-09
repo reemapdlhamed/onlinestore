@@ -2,6 +2,7 @@ import { useState, useEffect,React } from "react";
 import {useSelector, useDispatch} from 'react-redux'
 import { NavLink } from 'react-router-dom';
 import { addCart, delCart, zeroCart } from '../redux/action';
+import StripeBtn from "./stripeBtn";
 
 
 const Cart = () => {
@@ -100,13 +101,12 @@ function getPrice()
                 <div className="container">
                     <div className="row justify-content-center">
                     
-                        <NavLink to="/checkout" className="btn btn-outline-dark mb-5 w-25 mx-auto">
+                        <NavLink total={price.p} to="/checkout" className="btn btn-outline-dark mb-5 w-25 mx-auto">
                             Proceed to Checkout
                         </NavLink>
             
                    
                         <p className="lead fw-bold w-25 mx-auto">
-                        {getPrice()} $
                     </p>
                     </div>
                 </div>

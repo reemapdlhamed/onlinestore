@@ -45,7 +45,8 @@ const categoryRouter = require("./routes/categoryRouter");
 const cartRouter = require("./routes/cartRouter");
 const adminRouter = require("./routes/adminRouter");
 const orderRouter = require("./routes/orderRouter");
-
+const payRouter = require("./routes/payRouter");
+app.use("/payment", payRouter);
 app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);

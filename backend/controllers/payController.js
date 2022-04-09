@@ -1,37 +1,34 @@
-const Pay = require("../models/pay");
-const stripe =require("stripe")(process.env.STRIPE_PRIVATE_KEY)
-exports.createPay = (request, response, next) => {
-  console.log(request.body)
-    let errors = validationResult(request);
-    if (!errors.isEmpty()) {
-      let error = new Error();
-      error.status = 422;
-      error.message = errors
-        .array()
-        .reduce((current, object) => current + object.msg + " ", "");
-      throw error;
-    }
-/*
-    try{
-const session = await stripe.checkout.session.create({
-  payment_method_types:['card'],
-  payment:'payment',
-  success_url:'${process.env.SERVER_URL}/success.html',
-  cancel_url:'${process.env.SERVER_URL}/cancel.html',
+const mongoose = require("mongoose");
+const order = require("./../models/order");
+const express = require("express");
+const { validationResult } = require("express-validator");
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-})
-    }
-    catch{
+//create new order
+exports.createPay = (req, res, next) => {
+    const body = {
+        source: req.body.token.id,
+        amount: req.body.amount,
+        currency: "usd"
+      };
+      stripe.charges.create(body, stripeChargeCallback(res));
+};
 
+exports.getPay = (req, res, next) => {
+    console.log("get")
+
+    res.send({
+        message: "Hello Stripe checkout server!",
+        timestamp: new Date().toISOString()
+      });
+
+};
+
+const stripeChargeCallback = res => (stripeErr, stripeRes) => {
+    console.log("ABC")
+    if (stripeErr) {
+      res.status(500).send({ error: stripeErr });
+    } else {
+      res.status(200).send({ success: stripeRes });
     }
-    */
-    let object = new order({
-      items: request.body.items
-    });
-    object
-      .save()
-      .then((data) => {
-        response.status(201).json({ message: "payment added", data });
-      })
-      .catch((error) => next(error.message));
   };
