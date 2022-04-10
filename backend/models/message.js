@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 // User Schema Or Document Structure
-const msgSchema = new mongoose.Schema({
+const message = new mongoose.Schema({
     name : {
         type : String,
         required : true
@@ -19,6 +19,6 @@ const msgSchema = new mongoose.Schema({
 
 
 // Create Model
-const Message = new mongoose.model("MESSAGE", msgSchema);
+const Message = new mongoose.model("MESSAGE", message);
 
 module.exports = Message;
