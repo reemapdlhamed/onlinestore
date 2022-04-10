@@ -47,6 +47,7 @@ const Navbar = () => {
           <NavLink className="navbar-brand" to="#">
             E-commerce
           </NavLink>
+          
           <button
             className="navbar-toggler"
             type="button"
