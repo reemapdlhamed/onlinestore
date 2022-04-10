@@ -101,6 +101,7 @@ const Product = () => {
                     className="vw-25"
                     value="notBad"
                     disabled 
+                    
                   />
                 </Stack>
 
