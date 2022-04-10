@@ -23,12 +23,12 @@ const Navbar = () => {
       </>
     );
   } else {
-    const email = localStorage.getItem("email");
-    const name = email.substring(0, email.lastIndexOf("@"));
+    // const email = localStorage.getItem("email");
+    // const name = email.substring(0, email.lastIndexOf("@"));
     button = (
       <>
         <NavLink to="/profile" className="btn btn-outline-primary">
-          <i className="fa fa-user me-1"></i> Welcome,{name}
+          <i className="fa fa-user me-1"></i> Welcome,{localStorage.getItem("name")}
         </NavLink>
         <button onClick={logOut} className="btn btn-outline-danger ms-2">
           <i className="fa fa-sign-out me-1"></i> Log Out
