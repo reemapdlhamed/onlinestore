@@ -98,7 +98,7 @@ const Product = () => {
                   <TextareaAutosize
                     aria-label="WRITE UR COMMENT"
                     // style={{ width: vw }}
-                    className="vw-25"
+                    className="bg-info vw-25 "
                     value="notBad"
                     disabled 
                     
