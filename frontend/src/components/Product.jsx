@@ -8,9 +8,11 @@ import { addItem } from "../redux/action/index";
 import { Rating } from "@mui/material";
 import axios from "axios";
 import { border } from "@mui/system";
-
+import Stack from "@mui/material/Stack";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+import Button from "@mui/material/Button";
 const Product = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -53,52 +55,22 @@ const Product = () => {
             alt={product.name}
             height="400px"
             width="400px"
-            style={{border :" 1px solid black"}}
+            // style={{border :" 1px solid black"}}
             className="py-3 px-3"
           />
-          <div className=" px-5 py-3">
-            <img
-            src={product.images}
-            alt={product.name}
-            height="80px"
-            width="80px"
-            style={{border :" 1px solid black"}}
-            className="py-3 px-3"
-          />
-          <img
-            src={product.images}
-            alt={product.name}
-            height="80px"
-            width="80px"
-            style={{border :" 1px solid black"}}
-            className="py-3 px-3"
-          />
-          <img
-            src={product.images}
-            alt={product.name}
-            height="80px"
-            width="80px"
-            style={{border :" 1px solid black"}}
-            className="py-3 px-3"
-          />
-          <img
-            src={product.images}
-            alt={product.name}
-            height="80px"
-            width="80px"
-            style={{border :"1px solid black"}}
-            className="py-3 px-3 "
-          />
-          </div>
-          
         </div>
         <div className="col-md-6">
-          <h4 className="text-uppercase text-black fw-bold display-6">{product.name}</h4>
-          
-          
-          <h3 className="lead fw-normal"> <p className="fw-bold ">DESC :</p> {product.description}</h3>
-          <h3 className=" fw-bold my-4 text-danger ">Price : {product.price} E£ </h3>
-          <Rating name="read-only" value={product.rating} readOnly  /> <hr/>
+          <h4 className="text-uppercase text-black fw-bold display-6">
+            {product.name}
+          </h4>
+          <h3 className="lead fw-normal">
+            {" "}
+            <p className="fw-bold ">DESC :</p> {product.description}
+          </h3>
+          <h3 className=" fw-bold my-4 text-danger ">
+            Price : {product.price} E£{" "}
+          </h3>
+          <Rating name="read-only" value={product.rating} readOnly /> <hr />
           <button
             className="btn btn-outline-dark px-4 py-2"
             onClick={() => addProduct(product)}
@@ -108,6 +80,35 @@ const Product = () => {
           <NavLink to="/cart" className="btn btn-dark ms-2 px-3 py-2">
             Go to Cart
           </NavLink>
+        </div>
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Show Reviews</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <h2 className="text-center">WRITE A REVIEW</h2>
+                <Stack spacing={2}>
+                  <Rating name="half-rating" defaultValue={1} precision={0.5} />
+                  <TextareaAutosize
+                    aria-label="WRITE UR COMMENT"
+                    minRows={3}
+                    placeholder="Minimum 3 rows"
+                    // style={{ width: vw }}
+                    className="vw-25"
+                  />
+                  <Button variant="contained" className="">
+                    SUBMIT
+                  </Button>
+                </Stack>
+              </div>
+            </div>
+          </div>
         </div>
       </>
     );
