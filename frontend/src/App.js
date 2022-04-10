@@ -18,27 +18,25 @@ import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import UserProfile from "./pages/userProfile/UserProfile";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <>
       <Navbar />
       <Switch>
-        <Route exact path={"/profile"} component={UserProfile}/>
         <Route exact path="/" component={Home} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/product/:id" component={Product} />
         <Route exact path="/about" component={About} />
         <Route exact path="/checkout" component={Checkout} />
-        <Route exact path="/cart" component={Cart} />
         <Route exact path="/contact" component={Contact} />
+        <Route exact path="/cart" component={Cart} />
         <Route exact path="/shipping" component={Shipping} />
-
         <Route path={"/login"} component={Login} />
         <Route path={"/register"} component={Register} />
         <Route path={"/payment"} component={Payment} />
-
+        <Route exact path={"/profile"} component={UserProfile}/>
         <Route path={"*"} component={NotFound} />
       </Switch>
       {/* <Footer /> */}

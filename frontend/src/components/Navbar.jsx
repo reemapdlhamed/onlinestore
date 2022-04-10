@@ -15,10 +15,10 @@ const Navbar = () => {
     button = (
       <>
         <NavLink to="/login" className="btn btn-outline-primary">
-          <i className="fa fa-sign-in me-1"></i> Login
+        <i className="fas fa-sign-in-alt me-1"></i> Login
         </NavLink>
         <NavLink to="/register" className="btn btn-outline-primary ms-2">
-          <i className="fa fa-user-plus me-1"></i> Register
+          <i className="fas fa-user-plus me-1"></i> Register
         </NavLink>
       </>
     );
@@ -28,10 +28,10 @@ const Navbar = () => {
     button = (
       <>
         <NavLink to="/profile" className="btn btn-outline-primary">
-          <i className="fa fa-user me-1"></i> Welcome,{localStorage.getItem("name")}
+          <i className="fas fa-user me-1"></i> Welcome,{localStorage.getItem("name")}
         </NavLink>
         <button onClick={logOut} className="btn btn-outline-danger ms-2">
-          <i className="fa fa-sign-out me-1"></i> Log Out
+        <i class="fas fa-sign-out-alt me-1"></i>  Log Out
         </button>
       </>
     );
@@ -47,6 +47,7 @@ const Navbar = () => {
           <NavLink className="navbar-brand" to="#">
             E-commerce
           </NavLink>
+          
           <button
             className="navbar-toggler"
             type="button"
@@ -85,7 +86,7 @@ const Navbar = () => {
             <div className="buttons">
               {button}
               <NavLink to="/cart" className="btn btn-outline-success ms-2">
-                <i className="fa fa-shopping-cart me-1"></i> Cart(
+                <i className="fas fa-shopping-cart me-1"></i> Cart(
                 {state.length})
               </NavLink>
             </div>

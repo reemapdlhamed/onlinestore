@@ -179,6 +179,7 @@ export default function UserProfile() {
 
                 <TextField
                   value={oldPassword}
+                  type="password"
                   onChange={(e) => OldPwd(e)}
                   id="standard-basic"
                   label="Password"
@@ -188,6 +189,7 @@ export default function UserProfile() {
 
                 <TextField
                   value={newPassword}
+                  type="password"
                   onChange={(e) => NewPwd(e)}
                   id="standard-basic"
                   label="New Password"

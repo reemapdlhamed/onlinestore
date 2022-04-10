@@ -1,5 +1,26 @@
-//HASSAN
+
 const mongoose = require("mongoose");
+
+const reviewSchema = new mongoose.Schema({
+  name :{
+    type:String ,
+    required :true
+  },
+  rating :{
+    type:Number ,
+    required :true
+  },
+  comment :{
+    type :String ,
+    required :true
+  },
+  user_id :{
+    type : mongoose.Schema.Types.ObjectId,
+    required :true ,
+    ref :"user"
+
+  }
+})
 
 const productSchema = new mongoose.Schema({
   // _id: mongoose.Types.ObjectId,

@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 
 const About = () => {
     return (
+        
         <div>
             <div className="container  my-5">
                 <div className="row">
@@ -18,6 +19,48 @@ const About = () => {
                     </div>
                 </div>
             </div>
+            <div className="our-work-process">
+  <div className="container">
+    <div className="row">
+      <div className="col-12">
+        <h2>Our Services Process</h2>
+      </div>
+      <div className="col-6 col-lg-3">
+        <div className="step-box">
+          <span className="step-number">1</span>
+          <div className="step-icon">
+          <i class="fas fa-adn"></i>
+          </div>
+          <label>Book Your Order</label>
+        </div>
+      </div>
+
+      <div className="col-6 col-lg-3">
+        <div className="step-box">
+          <span className="step-number">2</span>
+          <div className="step-icon"><i className="fas fa-archive" aria-hidden="true"></i></div>
+          <label>put it in The Cart</label>
+        </div>
+      </div>
+
+      <div className="col-6 col-lg-3">
+        <div className="step-box">
+          <span className="step-number">3</span>
+          <div className="step-icon"><i className="fas fa-truck" aria-hidden="true"></i></div>
+          <label>Payment</label>
+        </div>
+      </div>
+
+      <div className="col-6 col-lg-3">
+        <div className="step-box">
+          <span className="step-number">4</span>
+          <div className="step-icon"><i className="fas fa-thumbs-o-up" aria-hidden="true"></i></div>
+          <label>Deliver Your Things</label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
         </div>
     )
 }
