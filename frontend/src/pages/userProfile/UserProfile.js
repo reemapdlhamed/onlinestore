@@ -104,7 +104,8 @@ export default function UserProfile() {
         <div class="card-container col-md-5">
           <img
             class="round"
-            src="https://randomuser.me/api/portraits/women/79.jpg"
+            style={{ width: "140px" }}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRpEZxjP9nLQsGEntnPcYFGVXtNmFGysDTZA&usqp=CAU"
             alt="user"
           />
           <h3>{localStorage.getItem("name")}</h3>
@@ -129,9 +130,6 @@ export default function UserProfile() {
                 {...a11yProps(1)}
               />
             </Tabs>
-
-            {/* <button class="primary">Order List </button>
-            <button class="primary ghost">Setting</button> */}
           </div>
         </div>
 
@@ -224,46 +222,3 @@ export default function UserProfile() {
     </>
   );
 }
-
-{
-  /* 
-      <TextField
-        
-        value={localStorage.getItem("name")}
-        id="standard-basic"
-        label="Name"
-        variant="standard"
-      />
-      <FormControl variant="standard">
-        <InputLabel htmlFor="input-with-icon-adornment">Email</InputLabel>
-        <Input
-          id="input-with-icon-adornment"
-          value={localStorage.getItem("email")}
-          startAdornment={
-            <InputAdornment position="start">
-              <AccountCircle />
-            </InputAdornment>
-          }
-        />
-      </FormControl>
-      <TextField
-        value={oldPassword}
-        onChange={(e) => OldPwd(e)}
-        id="standard-basic"
-        label="Password"
-        variant="standard"
-      />
-      <TextField
-        value={newPassword}
-        onChange={(e) => NewPwd(e)}
-        id="standard-basic"
-        label="New Password"
-        variant="standard"
-      />
-      <Button onClick={changePwd} variant="dark">
-        Update Profile
-      </Button> */
-}
-// </>
-//   );
-// }
