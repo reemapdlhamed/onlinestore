@@ -41,6 +41,7 @@ const Navbar = () => {
       <nav
         className="navbar navbar-expand-lg navbar-light bg-white py-3
        shadow-sm"
+        style={{ position: "relative" }}
       >
         <div className="container">
           <NavLink className="navbar-brand" to="#">
