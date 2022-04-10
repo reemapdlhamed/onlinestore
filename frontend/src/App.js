@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from "react-redux";
 import UserProfile from "./pages/userProfile/UserProfile";
 import axios from "axios";
 import Footer from "./components/Footer";
+import FAQs from "./pages/FAQs";
 
  function App () {
   const dispatch = useDispatch();
@@ -54,14 +55,14 @@ import Footer from "./components/Footer";
         <Route exact path="/product/:id" component={Product} />
         <Route exact path="/about" component={About} />
         <Route exact path="/checkout" component={Checkout} />
-        <Route exact path="/cart" component={Cart} />
         <Route exact path="/contact" component={Contact} />
+        <Route exact path="/cart" component={Cart} />
         <Route exact path="/shipping" component={Shipping} />
-
         <Route path={"/login"} component={Login} />
         <Route path={"/register"} component={Register} />
         <Route path={"/payment"} component={Payment} />
-
+        <Route path={"/FAQs"} component={FAQs} />
+        <Route exact path={"/profile"} component={UserProfile}/>
         <Route path={"*"} component={NotFound} />
       </Switch>
       <Footer />

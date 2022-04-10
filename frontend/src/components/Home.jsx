@@ -133,7 +133,7 @@ const Home = () => {
             <Products_Card product={product}></Products_Card>
           )
         })}
-      </Container>
+      </Container>      
     </div>
   );
 };

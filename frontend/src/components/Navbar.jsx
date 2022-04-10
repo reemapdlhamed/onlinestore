@@ -15,7 +15,7 @@ const Navbar = () => {
     button = (
       <>
         <NavLink to="/login" className="btn btn-outline-primary">
-        <i class="fas fa-sign-in-alt me-1"></i> Login
+        <i className="fas fa-sign-in-alt me-1"></i> Login
         </NavLink>
         <NavLink to="/register" className="btn btn-outline-primary ms-2">
           <i className="fas fa-user-plus me-1"></i> Register
@@ -31,7 +31,7 @@ const Navbar = () => {
           <i className="fas fa-user me-1"></i> Welcome,{localStorage.getItem("name")}
         </NavLink>
         <button onClick={logOut} className="btn btn-outline-danger ms-2">
-        <i class="fas fa-sign-out-alt me-1"></i>  Log Out
+        <i className="fas fa-sign-out-alt me-1"></i>  Log Out
         </button>
       </>
     );
@@ -47,6 +47,7 @@ const Navbar = () => {
           <NavLink className="navbar-brand" to="#">
             E-commerce
           </NavLink>
+          
           <button
             className="navbar-toggler"
             type="button"
@@ -78,6 +79,11 @@ const Navbar = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/contact">
                   Contact
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/FAQs">
+                FAQs
                 </NavLink>
               </li>
             </ul>

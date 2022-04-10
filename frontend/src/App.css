@@ -1,10 +1,147 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+body {
+  color: #333;
+  background: #fcfcfc;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
+}
+
 /* Navbar */
 .navbar-nav a{
   font-size:18px ;
 }
-
+/* our servies */
+.fas {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+}
+.our-work-process {
+  background-color: #3287c0;
+  color: #fff;
+  text-align: center;
+  padding: 50px 0px 50px 0px;
+  font-family: arial;
+}
+.our-work-process h2 {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+.our-work-process .step-number {
+  background-color: #3498db;
+  font-size: 30px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 0px;
+  display: inline-block;
+  border: 3px solid #fff;
+  position: relative;
+  bottom: -26px;
+}
+.our-work-process .step-icon {
+  width: 80%;
+  height: 200px;
+  border: 3px solid #ffff;
+  border-radius: 8px;
+  margin: 0 auto;
+  transition: 0.5s;
+}
+.our-work-process .step-box:hover .step-icon{
+  background-color: #3498db;
+}
+.our-work-process .step-icon i {
+  font-size: 80px;
+  position: absolute;
+  top: 37%;
+  left: 0px;
+  right: 0px;
+}
+.our-work-process label {
+  font-size: 18px;
+  margin-top: 10px;
+}        
 /* Footer */
 .footer{
   background: rgb(0, 101, 219);
   background: linear-gradient(90deg, rgb(0,101,219) 40%, rgba(0, 212, 255, 1) 100%);
+}
+
+/* FAQs */
+
+.faq-header{
+  font-size: 42px;
+  border-bottom: 1px dotted #ccc;
+  padding: 24px;
+  text-align: center;
+
+}
+
+.faq-content {
+  margin: 0 auto;
+}
+
+.faq-question {
+  padding: 20px 0;
+  border-bottom: 1px dotted #ccc;
+}
+
+.panel-title {
+  font-size: 24px;
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 10px 10px 0 48px;
+  display: block;
+  cursor: pointer;
+}
+
+.panel-content {
+  font-size: 20px;
+  padding: 0px 14px;
+  margin: 0 40px;
+  height: 0;
+  overflow: hidden;
+  z-index: -1;
+  position: relative;
+  opacity: 0;
+  -webkit-transition: .4s ease;
+  -moz-transition: .4s ease;
+  -o-transition: .4s ease;
+  transition: .4s ease;
+}
+
+.panel:checked ~ .panel-content{
+  height: auto;
+  opacity: 1;
+  padding: 14px;
+}
+
+.plus {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 4px;
+  z-index: 5;
+  font-size: 42px;
+  line-height: 100%;
+  -webkit-user-select: none;    
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  -webkit-transition: .2s ease;
+  -moz-transition: .2s ease;
+  -o-transition: .2s ease;
+  transition: .2s ease;
+}
+
+.panel:checked ~ .plus {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.panel {
+  display: none;
 }

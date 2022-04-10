@@ -19,7 +19,13 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -48,7 +54,11 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
+function createData(ID, Name, Status, Total) {
+  return { ID, Name, Status, Total };
+}
 export default function UserProfile() {
+  const rows = [createData(localStorage.getItem("_id"))];
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -99,8 +109,7 @@ export default function UserProfile() {
   };
 
   return (
-    < >
-    
+    <>
       <div class="row">
         <div class="card-container col-md-5">
           <img
@@ -179,6 +188,7 @@ export default function UserProfile() {
 
                 <TextField
                   value={oldPassword}
+                  type="password"
                   onChange={(e) => OldPwd(e)}
                   id="standard-basic"
                   label="Password"
@@ -188,6 +198,7 @@ export default function UserProfile() {
 
                 <TextField
                   value={newPassword}
+                  type="password"
                   onChange={(e) => NewPwd(e)}
                   id="standard-basic"
                   label="New Password"
@@ -205,7 +216,37 @@ export default function UserProfile() {
               </form>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Setting
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>ID</TableCell>
+                      <TableCell align="right">Name</TableCell>
+                      <TableCell align="right">Status</TableCell>
+                      <TableCell align="right">Total</TableCell>
+                      {/* <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow
+                        key={row.ID}
+                        sx={{
+                          "&:last-child td, &:last-child th": { border: 0 },
+                        }}
+                      >
+                        <TableCell component="th" scope="row">
+                          {row.ID}
+                        </TableCell>
+                        <TableCell align="right">{row.Name}</TableCell>
+                        <TableCell align="right">{row.Status}</TableCell>
+                        <TableCell align="right">{row.Total}</TableCell>
+                        {/* <TableCell align="right">{row.protein}</TableCell> */}
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
             </TabPanel>
           </div>
           <div
