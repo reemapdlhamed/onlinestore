@@ -98,7 +98,7 @@ const Footer = () => {
   </section>
 
   <div className="text-center p-4" style={{backgroundColor: "black"}}>
-    <Link className="text-reset fw-bold" to="https://mdbootstrap.com/">ITI-Deagons-Team.com</Link>
+    <Link className="text-reset fw-bold" to="/">ITI-Dragons-Team</Link>
   </div>
 </footer>
   )

@@ -18,7 +18,7 @@ import { useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import UserProfile from "./pages/userProfile/UserProfile";
-// import Footer from "./components/Footer";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
 
         <Route path={"*"} component={NotFound} />
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
