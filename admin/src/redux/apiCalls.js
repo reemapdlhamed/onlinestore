@@ -15,6 +15,16 @@ import {
   addProductSuccess,
 } from "./productRedux";
 
+import {
+  getOrderStart,
+  getOrderSuccess,
+  getOrderFailure,
+  deleteOrderStart,
+  deleteOrderSuccess,
+  deleteOrderFailure
+
+} from "./orderRedux"
+
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
   try {
@@ -52,8 +62,14 @@ export const updateProduct = async (id, product, dispatch) => {
   dispatch(updateProductStart());
   try {
     // update
+    console.log("request ===");
+    console.log("id",id);
+    console.log("product",product);
+    const res = await userRequest.put(`/products/${id}`, product);
+    console.log("Update Result",res);
     dispatch(updateProductSuccess({ id, product }));
   } catch (err) {
+    console.log("error",err)
     dispatch(updateProductFailure());
   }
 };
@@ -66,5 +82,31 @@ export const addProduct = async (product, dispatch) => {
   } catch (err) {
     console.log("err", err);
     dispatch(addProductFailure());
+  }
+};
+
+
+//ORDERS
+//GET
+export const getOrders = async (dispatch) => {
+  dispatch(getOrderStart());
+  try {
+    const res = await userRequest.get("/orders");
+    console.log("res.data", res.data);
+    dispatch(getOrderSuccess(res.data));
+  } catch (err) {
+    dispatch(getOrderFailure());
+  }
+};
+
+//DELETE
+export const deleteOrder = async (id, dispatch) => {
+  dispatch(deleteOrderStart());
+  try {
+    const res = await userRequest.delete(`/orders/${id}`);
+    console.log(res);
+    dispatch(deleteOrderSuccess(id));
+  } catch (err) {
+    dispatch(deleteOrderFailure());
   }
 };

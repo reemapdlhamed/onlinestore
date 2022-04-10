@@ -3,13 +3,15 @@ import Login from "./pages/login/Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { productInputs, userInputs } from "./formSource";
 import "./style/dark.scss";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import ProductList from "./pages/productList/productList";
 import NewProduct from "./pages/newProduct/NewProduct";
+import Product from "./pages/product/Product";
+import OrdersList from "./pages/ordersList/OrdersList";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -37,10 +39,19 @@ function App() {
                 <Route path="products">
                   {/* <Route index element={<List />} /> */}
                   <Route index element={<ProductList />} />
-                  <Route path=":productId" element={<Single />} />
+                  <Route path=":productId" element={<Product />} />
                   <Route path="new" element={<NewProduct />} />
                 </Route>
+                <Route path="orders">
+                  {/* <Route index element={<List />} /> */}
+                  <Route index element={<OrdersList />} />
+                  {/* <Route path=":productId" element={<Product />} /> */}
+                  {/* <Route path="new" element={<NewProduct />} /> */}
+                </Route>
               </>
+            )}
+            {!isAdmin && (
+              <Route path="" element={<Navigate to="/login" replace />} />
             )}
           </Route>
         </Routes>
@@ -48,6 +59,5 @@ function App() {
     </div>
   );
 }
-
 
 export default App;

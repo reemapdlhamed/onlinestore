@@ -1,48 +1,45 @@
+import React from 'react'
+import Sidebar from '../../components/sidebar/Sidebar';
+import Navbar from '../../components/navbar/Navbar';
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
-import "./productList.scss"
-import { deleteProduct, getProducts } from "../../redux/apiCalls";
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { getOrders,deleteOrder} from '../../redux/apiCalls';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-export default function ProductList() {
-    
+
+const OrdersList = () => {
+
     const dispatch = useDispatch();
-    const products = useSelector((state) => state.product.products.data);
+    const orders = useSelector((state) => state.order.orders);
 
     useEffect(() => {
-        getProducts(dispatch);
-        console.log("products", products);
+        getOrders(dispatch);
     }, [dispatch]);
 
     const handleDelete = (id) => {
-        deleteProduct(id, dispatch);
+        deleteOrder(id, dispatch);
     };
+
 
     const columns = [
         { field: "_id", headerName: "ID", width: 220 },
-
+        { field: "customerName", headerName: "Customer", width: 160, },
+        { field: "phoneNumber", headerName: "Phone", width: 220 },
+        { field: "orderStatus", headerName: "Order Status", width: 220 },
+        { field: "totalPrice", headerName: "Price", width: 160, },
+        { field: "paymentType", headerName: "Payment Type", width: 160, },
+        { field: "paymentStatus", headerName: "Payment Status", width: 160, },
         {
-            field: "product",
-            headerName: "Product",
-            width: 300,
+            field: "orderItems", headerName: "items", width: 200,
             renderCell: (params) => {
                 return (
                     <div className="productListItem">
-                        <img className="productListImg" src={params.row.images[0]} alt="" />
-                        {params.row.name}
+                        {params.row.orderItems}
+
                     </div>
                 );
             },
-        },
-        { field: "quantity", headerName: "Quantiy", width: 220 },
-        //   { field: "inStock", headerName: "Stock", width: 200 },
-        {
-            field: "price",
-            headerName: "Price",
-            width: 160,
         },
         {
             field: "action",
@@ -51,13 +48,12 @@ export default function ProductList() {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={"/products/" + params.row._id}>
+                        <Link to={"/orders/" + params.row._id}>
                             <button className="productListEdit">Edit</button>
                         </Link>
                         <DeleteOutlineIcon
                             className="productListDelete"
                             onClick={() => handleDelete(params.row._id)}
-
                         />
                     </>
                 );
@@ -66,16 +62,12 @@ export default function ProductList() {
     ];
 
     return (
-
         <div className="list">
             <Sidebar />
-            <div className="productList">
+            <div className="listContainer">
                 <Navbar />
-                <Link to="/products/new" replace>
-                    <button className="productAddButton">Add New Product</button>
-                </Link>
                 <DataGrid
-                    rows={products}
+                    rows={orders}
                     disableSelectionOnClick
                     columns={columns}
                     getRowId={(row) => row._id}
@@ -85,5 +77,7 @@ export default function ProductList() {
                 />
             </div>
         </div>
-    );
+    )
 }
+
+export default OrdersList

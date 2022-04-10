@@ -100,7 +100,7 @@ exports.delete_product = (request, response, next) => {
     console.log("role is okay");
     Products.findByIdAndDelete({ _id: request.params.id })
       .then((data) => {
-        console.log("id:",request.params.id );
+        console.log("id:", request.params.id);
         response.status(201).json({ message: "deleted", data });
       })
       .catch((error) => {
@@ -110,6 +110,7 @@ exports.delete_product = (request, response, next) => {
     response.status(403).json({ message: "Not Autorized" });
   }
 };
+
 //-------------------------------------------------------------------------------------------------------
 exports.update_stock = (request, response, next) => {
   let errors = validationResult(request);
@@ -149,78 +150,91 @@ exports.update_stock = (request, response, next) => {
       next(error);
     });
 };
-//------------------------------------------------------------------------------------------------------------
-exports.update_product = (request, response, next) => {
-  if (request.role == "admin") {
-    Products.findByIdAndUpdate(
-      { _id: request.body.id },
+
+exports.update_product = async (req, res) => {
+  try {
+    const updatedProduct = await Products.findByIdAndUpdate(
+      req.params.id,
       {
-        $set: {
-          name: request.body.name,
-          price: request.body.price,
-          brand: request.body.brand,
-          category_id: request.body.category_id,
-          discount: request.body.discount,
-          reviews: request.body.reviews,
-          description: request.body.description,
-          images: request.body.images,
-          properties: request.body.properties,
-          quantity: request.body.quantity,
-          seller: request.body.seller,
-        },
-      }
-    )
-      .then((data) => {
-        response.status(201).json({ message: " updated", data });
-      })
-      .catch((error) => {
-        next(error);
-      });
-  } else if (request.role == "seller") {
-    Products.findById({ _id: request.body.id }).then((data) => {
-      if (request.id == data.seller.userID) {
-        Products.findByIdAndUpdate(
-          { _id: request.body.id },
-          {
-            $set: {
-              name: request.body.name,
-              price: request.body.price,
-              brand: request.body.brand,
-              category_id: request.body.category_id,
-              discount: request.body.discount,
-              reviews: request.body.reviews,
-              description: request.body.description,
-              images: request.body.images,
-              properties: request.body.properties,
-              quantity: request.body.quantity,
-              seller: request.body.seller,
-            },
-          }
-        )
-          .then((data) => {
-            response.status(201).json({ message: " updated", data });
-          })
-          .catch((error) => {
-            next(error);
-          });
-      } else {
-        response.status(404).json({ message: "You dont owne this product " });
-      }
-    });
-  } else {
-    response
-      .status(404)
-      .json({ message: "You should be admin or seller to delete product " });
+        $set: req.body,
+      },
+      { new: true }
+    );
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json(err.message);
   }
 };
 //------------------------------------------------------------------------------------------------------------
+// exports.update_product = (request, response, next) => {
+//   if (request.role == "admin") {
+//     Products.findByIdAndUpdate(
+//       { _id: request.body.id },
+//       {
+//         $set: {
+//           name: request.body.name,
+//           price: request.body.price,
+//           brand: request.body.brand,
+//           category_id: request.body.category_id,
+//           discount: request.body.discount,
+//           reviews: request.body.reviews,
+//           description: request.body.description,
+//           images: request.body.images,
+//           properties: request.body.properties,
+//           quantity: request.body.quantity,
+//           seller: request.body.seller,
+//         },
+//       }
+//     )
+//       .then((data) => {
+//         response.status(201).json({ message: " updated", data });
+//       })
+//       .catch((error) => {
+//         next(error);
+//       });
+//   } else if (request.role == "seller") {
+//     Products.findById({ _id: request.body.id }).then((data) => {
+//       if (request.id == data.seller.userID) {
+//         Products.findByIdAndUpdate(
+//           { _id: request.body.id },
+//           {
+//             $set: {
+//               name: request.body.name,
+//               price: request.body.price,
+//               brand: request.body.brand,
+//               category_id: request.body.category_id,
+//               discount: request.body.discount,
+//               reviews: request.body.reviews,
+//               description: request.body.description,
+//               images: request.body.images,
+//               properties: request.body.properties,
+//               quantity: request.body.quantity,
+//               seller: request.body.seller,
+//             },
+//           }
+//         )
+//           .then((data) => {
+//             response.status(201).json({ message: " updated", data });
+//           })
+//           .catch((error) => {
+//             next(error);
+//           });
+//       } else {
+//         response.status(404).json({ message: "You dont owne this product " });
+//       }
+//     });
+//   } else {
+//     response
+//       .status(404)
+//       .json({ message: "You should be admin or seller to delete product " });
+//   }
+// };
+//------------------------------------------------------------------------------------------------------------
 exports.show_product = (request, response, next) => {
   Products.findOne({ _id: request.params.id })
-  .populate("category_id",{name:1,_id:-1})
+    .populate("category_id", { name: 1, _id: -1 })
 
-   
-      .then((data) => {
-      
+    .then((data) => {
       response.status(200).json({ data });
     })
     .catch((error) => {

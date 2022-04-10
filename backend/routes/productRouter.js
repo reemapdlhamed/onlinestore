@@ -9,7 +9,6 @@ isAuth = require("./../MW/auth");
 router
   .route("/products")
   .get(controller.show_products)
-
   .post(
     isAuth,
     [
@@ -62,6 +61,9 @@ router
 router.route("/products/:id").get(controller.show_product);
 
 router.route("/products/:id").delete(isAuth, controller.delete_product);
+
+router.put("/products/:id", isAuth, controller.update_product);
+
 router
   .route("/products/stock")
   .put(
