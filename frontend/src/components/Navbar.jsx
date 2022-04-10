@@ -31,7 +31,7 @@ const Navbar = () => {
           <i className="fas fa-user me-1"></i> Welcome,{localStorage.getItem("name")}
         </NavLink>
         <button onClick={logOut} className="btn btn-outline-danger ms-2">
-        <i class="fas fa-sign-out-alt me-1"></i>  Log Out
+        <i className="fas fa-sign-out-alt me-1"></i>  Log Out
         </button>
       </>
     );
@@ -79,6 +79,11 @@ const Navbar = () => {
               <li className="nav-item">
                 <NavLink className="nav-link" to="/contact">
                   Contact
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink className="nav-link" to="/FAQs">
+                FAQs
                 </NavLink>
               </li>
             </ul>

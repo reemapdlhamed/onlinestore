@@ -19,6 +19,7 @@ import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import UserProfile from "./pages/userProfile/UserProfile";
 import Footer from "./components/Footer";
+import FAQs from "./pages/FAQs";
 
 function App() {
   return (
@@ -36,10 +37,11 @@ function App() {
         <Route path={"/login"} component={Login} />
         <Route path={"/register"} component={Register} />
         <Route path={"/payment"} component={Payment} />
+        <Route path={"/FAQs"} component={FAQs} />
         <Route exact path={"/profile"} component={UserProfile}/>
         <Route path={"*"} component={NotFound} />
       </Switch>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
