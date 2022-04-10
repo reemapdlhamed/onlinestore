@@ -48,7 +48,7 @@ const ShippingScreen = ({ history }) => {
           onSubmit={(values) => {
             console.log(values)
       
-
+            if(values.city!==""&&values.appartment!==""&&values.street!==""&&values.phone!=="")
             history.push("/payment");
           }}
         >
@@ -98,11 +98,11 @@ const ShippingScreen = ({ history }) => {
                 <div className="form-group">
                   <label htmlFor="city" className="mt-3"></label>
                   <Field name="city">
-                  
+
                     {({ field }) => (
-                      
+
                       <select {...field}>
-                      
+
                         <option value=""></option>
                         {govs.map((i) => (
                           <option key={i} value={i}>
