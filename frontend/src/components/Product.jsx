@@ -90,7 +90,7 @@ const Product = () => {
           <div className="col">
             <div className="card">
               <div className="card-body">
-                <h5 className="text-center">Show Reviews</h5>
+                <h5 className="text-center">Show Reviews :TODO</h5>
                 <Stack spacing={2}>
                   <h5>RATING</h5>
                   <Rating name="half-rating" defaultValue={2.5} precision={0.5} readOnly  />
@@ -111,7 +111,7 @@ const Product = () => {
           <div className="col">
             <div className="card">
               <div className="card-body">
-                <h2 className="text-center">WRITE A REVIEW</h2>
+                <h2 className="text-center">WRITE A REVIEW :TODO</h2>
                 <Stack spacing={2}>
                   <h3>RATING</h3>
                   <Rating name="half-rating" defaultValue={1} precision={0.5} />
@@ -123,7 +123,7 @@ const Product = () => {
                     // style={{ width: vw }}
                     className="vw-25"
                   />
-                  <Button variant="contained" onClick={Saving}>
+                  <Button variant="contained" onClick={Saving}> 
                     SUBMIT
                   </Button>
                 </Stack>
