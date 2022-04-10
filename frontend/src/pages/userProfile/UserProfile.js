@@ -99,7 +99,8 @@ export default function UserProfile() {
   };
 
   return (
-    <>
+    < >
+    
       <div class="row">
         <div class="card-container col-md-5">
           <img

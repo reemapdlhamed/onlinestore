@@ -3,14 +3,13 @@
 }
 
 body {
-  background-color: #a097c4;
   font-family: Montserrat, sans-serif;
-
+  background-color: #a097c4;
   /* display: flex; */
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
+  overflow: hidden;
   margin: 0px;
 }
 
