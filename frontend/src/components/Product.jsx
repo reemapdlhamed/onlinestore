@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../redux/action";
+import { addCart,addCartFirst } from "../redux/action";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
@@ -18,7 +18,8 @@ const Product = () => {
 
   const dispatch = useDispatch();
   const addProduct = (product) => {
-    dispatch(addCart(product));
+    window.location.reload()
+    dispatch(addCartFirst(product));
   };
   //changes
   useEffect(() => {

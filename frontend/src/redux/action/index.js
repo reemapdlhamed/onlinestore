@@ -1,14 +1,38 @@
 // For Add Item to Cart
+import axios from "axios";
+
 export const addCart = (product) => {
+
+
     return{
         type : "ADDITEM",
         payload : product
     }
+
+}
+export const addCartFirst = (product) => {
+
+
+    return{
+        type : "ADDITEMFIRST",
+        payload : product
+    }
+
 }
 
 
+export const addCartFromDB = (productArr) => {
+    return{
+        type : "ADDITEMS",
+        payload : productArr
+    }
+
+}
+
 // For Delete Item From Cart
 export const delCart = (product) => {
+    
+    
     return{
         type : "DELITEM",
         payload : product

@@ -3,6 +3,7 @@ import CategoryCard from "./CategoryCard";
 import Carousel from "react-bootstrap/Carousel";
 import { Col, Container, Row } from 'react-bootstrap';
 import  "bootstrap/dist/css/bootstrap.min.css";
+import { addCart } from "../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink } from 'react-router-dom'
@@ -10,6 +11,7 @@ import { getCategoriesList } from "../redux/action/Products";
 import axios from "axios";
 import Products_Card from "./Products_Card";
 const Home = () => {
+  const cartState = useSelector((state) => state.handleCart);
   const CategoriesList = useSelector((state)=>state.ProductsReducer.categories);
   const dispatch = useDispatch();
   const [products ,setProducts] = useState([])
@@ -21,6 +23,10 @@ const Home = () => {
     })
     .catch((err) => console.log(err));
     console.log(products)
+
+    
+
+
   },[])
   return (
     <div className="hero ">

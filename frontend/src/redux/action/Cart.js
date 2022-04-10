@@ -17,7 +17,7 @@ export const saveShippingAddress = (data) => (dispatch) => {
       type: 'CLEAR_CART',
     });
   
-    localStorage.removeItem('persist:root');
+    //localStorage.removeItem('persist:root');
     };
 
   
