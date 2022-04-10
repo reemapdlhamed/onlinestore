@@ -46,6 +46,10 @@ const Product = () => {
       </>
     );
   };
+  let Saving = () => {
+    console.log("Clicked");
+    
+    };
 
   const ShowProduct = () => {
     return (
@@ -82,28 +86,43 @@ const Product = () => {
             Go to Cart
           </NavLink>
         </div>
-        <div class="row row-cols-1 row-cols-md-2 g-4">
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Show Reviews</h5>
+        <div className="row row-cols-1 row-cols-md-2 g-4">
+          <div className="col">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="text-center">Show Reviews</h5>
+                <Stack spacing={2}>
+                  <h5>RATING</h5>
+                  <Rating name="half-rating" defaultValue={2.5} precision={0.5} readOnly  />
+                  <h5>COMMENT</h5>
+                  <TextareaAutosize
+                    aria-label="WRITE UR COMMENT"
+                    // style={{ width: vw }}
+                    className="vw-25"
+                    value="notBad"
+                    disabled 
+                  />
+                </Stack>
+
               </div>
             </div>
           </div>
-          <div class="col">
-            <div class="card">
-              <div class="card-body">
+          <div className="col">
+            <div className="card">
+              <div className="card-body">
                 <h2 className="text-center">WRITE A REVIEW</h2>
                 <Stack spacing={2}>
+                  <h3>RATING</h3>
                   <Rating name="half-rating" defaultValue={1} precision={0.5} />
+                  <h3>COMMENT</h3>
                   <TextareaAutosize
                     aria-label="WRITE UR COMMENT"
                     minRows={3}
-                    placeholder="Minimum 3 rows"
+                    placeholder="WRITE UR COMMENT"
                     // style={{ width: vw }}
                     className="vw-25"
                   />
-                  <Button variant="contained" className="">
+                  <Button variant="contained" onClick={Saving}>
                     SUBMIT
                   </Button>
                 </Stack>
