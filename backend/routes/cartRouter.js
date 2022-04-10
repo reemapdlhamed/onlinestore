@@ -18,8 +18,8 @@ router.route("/cart")
 .put(
   isAuth,
   [
-    body("product_id").isString().withMessage("invalid product id."),
-    body("quantity").isNumeric().withMessage("invalid product quantity."),
+    body("_id").isString().withMessage("invalid product id."),
+    body("qty").isNumeric().withMessage("invalid product quantity."),
   ],
   controller.updateQuantityCart
 )
@@ -27,6 +27,10 @@ router.route("/cart")
   isAuth,
   [body("product_id").isString().withMessage("invalid product id.")],
   controller.removeFromCart
+)
+.get(
+  isAuth,
+  controller.getCart
 )
 router.route("/cart/buy")
 .post(

@@ -1,3 +1,4 @@
+import axios from "axios";
 const cart = [];
 
 const handleCart = (state = cart, action) => {
@@ -6,17 +7,38 @@ const handleCart = (state = cart, action) => {
     case "ADDITEM":
       // Check if Product is Already Exist
       const exist = state.find((x) => x._id === product._id);
+      
       if (exist) {
-        if(exist.quantity===exist.qty)
-        return state.map((x) =>
-        x._id === product._id ? { ...x, qty: x.qty } : x
-      );     
+   
+        if (exist.quantity === exist.qty)
+          return state.map((x) =>
+            x._id === product._id ? { ...x, qty: x.qty } : x);
         // Increase the Quantity
+        let response = axios({
+          method: "put",
+          url: "http://localhost:8080/cart",
+          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+          data: { _id:product._id,qty:product.qty+1 },
+        }).then((res)=>{
+          console.log("RES",res)
+
+        } )
+
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty + 1 } : x
         );
       } else {
         const product = action.payload;
+
+        let response = axios({
+          method: "post",
+          url: "http://localhost:8080/cart",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          data: product,
+        });
+        console.log("RES",response)
         return [
           ...state,
           {
@@ -27,25 +49,67 @@ const handleCart = (state = cart, action) => {
       }
       break;
 
+    case "ADDITEMS":
+      // Check if Product is Already Exist
+      const ex = state.find((x) => x._id === product._id);
+      if (ex) {
+        if (ex.quantity === ex.qty)
+          return state.map((x) =>
+            x._id === product._id ? { ...x, qty: x.qty } : x
+          );
+        // Increase the Quantity
+        return state.map((x) =>
+          x._id === product._id ? { ...x, qty: x.qty + 1 } : x
+        );
+      } else {
+        const product = action.payload;
+
+        return [
+          ...state,
+          {
+            ...product,
+            
+          },
+        ];
+      }
+
+      break;
     case "DELITEM":
       const exist1 = state.find((x) => x._id === product._id);
-      if (exist1&&exist1.qty === 1) {
+      if (exist1 && exist1.qty === 1) {
         return state.map((x) =>
-        x._id === product._id ? { ...x, qty: x.qty } : x
-      );     
-     } else {
+          x._id === product._id ? { ...x, qty: x.qty } : x
+        );
+      } else {
+
+        let response = axios({
+          method: "put",
+          url: "http://localhost:8080/cart",
+          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+          data: { _id:product._id,qty:product.qty-1 },
+        });
+        
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty - 1 } : x
         );
       }
       break;
 
+    case "ZEROITEM":
+      const exist2 = state.find((x) => x._id === product._id);
 
-      case "ZEROITEM":
-        const exist2 = state.find((x) => x._id === product._id);
-        return state.filter((x) => x._id !== exist2._id);
-        
-        break;
+      let response = axios({
+        method: "delete",
+        url: "http://localhost:8080/cart",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        data: product,
+      });
+
+      return state.filter((x) => x._id !== exist2._id);
+
+      break;
     default:
       return state;
       break;

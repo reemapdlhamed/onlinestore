@@ -14,18 +14,41 @@ import Payment from "../src/components/Payment";
 import Shipping from "../src/components/Shipping";
 
 import Register from "../src/pages/register/register";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { addCart, delCart, zeroCart,addCartFromDB } from "./redux/action";
+import { useDispatch, useSelector } from "react-redux";
+
 import UserProfile from "./pages/userProfile/UserProfile";
+import axios from "axios";
 import Footer from "./components/Footer";
 
-function App() {
+ function App () {
+  const dispatch = useDispatch();
+  const cartState = useSelector((state) => state.handleCart);
+  useEffect(() => {
+
+    let res2 =  axios({
+      method: "get",
+      url: "http://localhost:8080/cart",
+      headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+    }).then((res) => {
+      for(let i=0;i<res.data.length;i++){
+        console.log("R",res.data[i])
+      dispatch(addCartFromDB(res.data[i]));
+      }
+      
+    });
+
+  }, []);
+ 
+  
   return (
     <>
       <Navbar />
       <Switch>
-        <Route exact path={"/profile"} component={UserProfile}/>
+        <Route exact path={"/profile"} component={UserProfile} />
         <Route exact path="/" component={Home} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/product/:id" component={Product} />
