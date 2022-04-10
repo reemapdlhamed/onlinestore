@@ -10,6 +10,15 @@ export const addCart = (product) => {
     }
 
 }
+export const addCartFirst = (product) => {
+
+
+    return{
+        type : "ADDITEMFIRST",
+        payload : product
+    }
+
+}
 
 
 export const addCartFromDB = (productArr) => {

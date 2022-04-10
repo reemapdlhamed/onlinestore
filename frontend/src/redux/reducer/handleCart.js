@@ -3,31 +3,35 @@ const cart = [];
 
 const handleCart = (state = cart, action) => {
   const product = action.payload;
+
   switch (action.type) {
     case "ADDITEM":
       // Check if Product is Already Exist
       const exist = state.find((x) => x._id === product._id);
-      
+
       if (exist) {
-   
+        console.log("if");
         if (exist.quantity === exist.qty)
           return state.map((x) =>
-            x._id === product._id ? { ...x, qty: x.qty } : x);
+            x._id === product._id ? { ...x, qty: x.qty } : x
+          );
         // Increase the Quantity
         let response = axios({
           method: "put",
           url: "http://localhost:8080/cart",
-          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-          data: { _id:product._id,qty:product.qty+1 },
-        }).then((res)=>{
-          console.log("RES",res)
-
-        } )
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          data: { _id: product._id, qty: product.qty + 1 },
+        }).then((res) => {
+          console.log("RES", res);
+        });
 
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty + 1 } : x
         );
       } else {
+        console.log("ELES");
         const product = action.payload;
 
         let response = axios({
@@ -38,7 +42,7 @@ const handleCart = (state = cart, action) => {
           },
           data: product,
         });
-        console.log("RES",response)
+        console.log("RES", response);
         return [
           ...state,
           {
@@ -49,6 +53,26 @@ const handleCart = (state = cart, action) => {
       }
       break;
 
+    case "ADDITEMFIRST":
+      const e = state.find((x) => x._id === product._id);
+      console.log(e)
+      if (!e) 
+        product.qty = 1;
+        let response2 = axios({
+          method: "post",
+          url: "http://localhost:8080/cart",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          data: product,
+        });
+        return state.map((x) =>
+          x._id === product._id ? { ...x, qty: x.qty } : x
+        );
+      
+
+
+      break;
     case "ADDITEMS":
       // Check if Product is Already Exist
       const ex = state.find((x) => x._id === product._id);
@@ -68,7 +92,6 @@ const handleCart = (state = cart, action) => {
           ...state,
           {
             ...product,
-            
           },
         ];
       }
@@ -81,14 +104,15 @@ const handleCart = (state = cart, action) => {
           x._id === product._id ? { ...x, qty: x.qty } : x
         );
       } else {
-
         let response = axios({
           method: "put",
           url: "http://localhost:8080/cart",
-          headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-          data: { _id:product._id,qty:product.qty-1 },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          data: { _id: product._id, qty: product.qty - 1 },
         });
-        
+
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty - 1 } : x
         );
