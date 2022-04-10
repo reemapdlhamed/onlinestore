@@ -23,7 +23,7 @@ const Contact = () => {
     // Store Object Data into Variables
     const {name, email, message} = msg;
     try {
-      const res = await fetch('/message', {
+      const res = await fetch('http://localhost:8080/message', {
         method : "POST",
         headers : {
           "Content-Type" : "application/json"

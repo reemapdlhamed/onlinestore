@@ -15,7 +15,7 @@ const Navbar = () => {
     button = (
       <>
         <NavLink to="/login" className="btn btn-outline-primary">
-        <i class="fas fa-sign-in-alt me-1"></i> Login
+        <i className="fas fa-sign-in-alt me-1"></i> Login
         </NavLink>
         <NavLink to="/register" className="btn btn-outline-primary ms-2">
           <i className="fas fa-user-plus me-1"></i> Register

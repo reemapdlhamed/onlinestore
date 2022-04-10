@@ -2,7 +2,56 @@
 .navbar-nav a{
   font-size:18px ;
 }
-
+/* our servies */
+.fas {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+}
+.our-work-process {
+  background-color: #3287c0;
+  color: #fff;
+  text-align: center;
+  padding: 50px 0px 50px 0px;
+  font-family: arial;
+}
+.our-work-process h2 {
+  font-size: 50px;
+  margin-bottom: 20px;
+}
+.our-work-process .step-number {
+  background-color: #3498db;
+  font-size: 30px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  padding: 0px;
+  display: inline-block;
+  border: 3px solid #fff;
+  position: relative;
+  bottom: -26px;
+}
+.our-work-process .step-icon {
+  width: 80%;
+  height: 200px;
+  border: 3px solid #ffff;
+  border-radius: 8px;
+  margin: 0 auto;
+  transition: 0.5s;
+}
+.our-work-process .step-box:hover .step-icon{
+  background-color: #3498db;
+}
+.our-work-process .step-icon i {
+  font-size: 80px;
+  position: absolute;
+  top: 37%;
+  left: 0px;
+  right: 0px;
+}
+.our-work-process label {
+  font-size: 18px;
+  margin-top: 10px;
+}        
 /* Footer */
 .footer{
   background: rgb(0, 101, 219);
