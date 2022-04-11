@@ -130,7 +130,7 @@ const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Info
+                  <i className="fas fa-user-plus me-1"></i> 
                 </Link>
 
                 <ul
@@ -157,7 +157,7 @@ const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  Welcome,{localStorage.getItem("name")}
+                  Hi,{localStorage.getItem("name")}
                 </Link>
 
                 <ul

@@ -1,5 +1,3 @@
-
-
 import React, { useState, useRef, useEffect, useContext } from "react";
 import AuthContext from "../../Context/AuthProvider";
 import Products from "./../Products/Products";
@@ -13,9 +11,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { Switch, Route } from "react-router-dom";
 import Product from "./../../components/Product";
 import Home from "./../../components/Home";
+import PasswordButton from "./../../components/PasswordButton";
 function Login() {
   const { setAuth } = useContext(AuthContext);
-
+  const [passwordShown, setPasswordShown] = useState(false);
   const emailRef = useRef();
   const errorRef = useRef();
   const [email, setEmail] = useState("");
@@ -38,7 +37,7 @@ function Login() {
 
         data: { email: email, password: password },
       });
-   
+
       localStorage.setItem("email", email);
       localStorage.setItem("accessToken", response.data.accessToken);
       localStorage.setItem("role", response.data.data.role);
@@ -53,12 +52,8 @@ function Login() {
       let data = response.data;
       console.log(data.accessToken);
 
-
-      
-
       return data;
     } catch (error) {
-     
       if (!error?.response) {
         setErrMsg("No Server Response");
       } else if (error.response?.status === 500) {
@@ -76,10 +71,19 @@ function Login() {
   // const name = email.substring(0, email.lastIndexOf("@"));
   const customId = "custom-id-yes";
   const difToast = () => {
-    toast.success("Login Success, Welcome " + {name:localStorage.getItem("name")}, {
-      theme: "dark",
-      toastId: customId,
-    });
+    toast.success(
+      "Login Success, Welcome " + { name: localStorage.getItem("name") },
+      {
+        theme: "dark",
+        toastId: customId,
+      }
+    );
+  };
+
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
   };
   return (
     <>
@@ -137,11 +141,19 @@ function Login() {
               />
               <h5>Password</h5>
               <input
-                type="password"
+                type={passwordShown ? "text" : "password"}
+                // type="password"
                 value={password}
                 required
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <i
+                onClick={togglePassword}
+                class="far fa-eye"
+                id="togglePassword"
+                style={{ marginLeft: " -30px", cursor: "pointer" }}
+              ></i>
+
               <button
                 // onClick={signIn}
                 type="submit"
