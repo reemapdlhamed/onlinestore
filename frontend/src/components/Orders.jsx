@@ -7,10 +7,9 @@ import { useParams } from "react-router-dom";
 
 
 const Orders = (props) => {
-  const { id } = useParams();
-console.log(id)
     const cartState = useSelector((state) => state.handleCart);
     const orderState = useSelector((state) => state.handleOrders);
+       console.log("ORDERSTATE",orderState)
        
     return (
       <div className="main_container">
