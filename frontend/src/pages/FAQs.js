@@ -4,10 +4,10 @@ import { NavLink } from "react-router-dom";
 const FAQs = () => {
   return (
     <>
-      <div className="faq-header">
-        <h3>Frequently Asked Questions</h3>
+      <div className="faq-header" >
+        <h3>Frequently Asked Questions
+        </h3>
       </div>
-
       <div className="faq-content">
         <div className="faq-question">
           <input id="q1" type="checkbox" className="panel" />
@@ -86,24 +86,17 @@ const FAQs = () => {
             will provide personal advice and discuss the project with you.{" "}
           </div>
         </div>
-
-        <div className="faq-question">
-          <input id="q7" type="checkbox" className="panel" />
-          <div className="plus">+</div>
-          <label htmlFor="q7" className="panel-title">
-            you Have another Question doesn't Exsist Here ?
-          </label>
-          <div className="panel-content">
-            We are glad to receive your question from here
-            <NavLink
+        </div>
+        <div className="text-center">
+          <h6>IF you Have any Other Question You Can Contact Us From Here !
+          <NavLink
               to="/contact"
               className="btn btn-outline-dark  ms-2 px-3 py-2"
             >
               Contact Us
             </NavLink>
-          </div>
+            </h6>
         </div>
-      </div>
     </>
   );
 };
