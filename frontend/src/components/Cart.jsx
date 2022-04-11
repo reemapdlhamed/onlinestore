@@ -15,6 +15,7 @@ const Cart = () => {
   const dispatch = useDispatch();
 
   const handleAdd = (item) => {
+    console.log("HANDLE ADD")
     if (item.quantity > item.qty) dispatch(addCart(item));
     price.p += item.price;
 

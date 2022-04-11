@@ -6,6 +6,7 @@ const handleCart = (state = cart, action) => {
 
   switch (action.type) {
     case "ADDITEM":
+      console.log("ADD ITEM")
       // Check if Product is Already Exist
       const exist = state.find((x) => x._id === product._id);
 
@@ -50,7 +51,6 @@ const handleCart = (state = cart, action) => {
       break;
 
     case "ADDITEMFIRST":
-      
       const e = state.find((x) => x._id === product._id);
       if (!e) {
         product.qty = 1;
