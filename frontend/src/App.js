@@ -70,7 +70,6 @@ import OrderDetails from "./components/OrderDetails";
         <Route exact path="/products" component={Products} />
         <Route exact path="/product/:id" component={Product} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/order-details" component={OrderDetails} />
         <Route exact path="/checkout" component={Checkout} />
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/cart" component={Cart} />
@@ -82,6 +81,7 @@ import OrderDetails from "./components/OrderDetails";
         <Route path={"/FAQs"} component={FAQs} />
         <Route exact path={"/profile"} component={UserProfile}/>
         <Route path={"/orders/:id"} component={Orders}/>
+        <Route path={"/order-details/:id"} component={OrderDetails}/>
 
         <Route path={"*"} component={NotFound} />
       </Switch>
