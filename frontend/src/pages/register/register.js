@@ -46,7 +46,6 @@ function register() {
   const [human, setHuman] = useState({
     verify: false,
   });
-  // const [verify, setVerify] = useState(false);
 
   useEffect(() => {
     userRef.current.focus();
@@ -310,9 +309,9 @@ function register() {
                 <FontAwesomeIcon icon={faInfoCircle} />
                 Must match the first password.
               </p>
-         
-                <ReCAPTCHA sitekey={SITE_KEY} onChange={onChange} />
-             
+
+              <ReCAPTCHA sitekey={SITE_KEY} onChange={onChange} />
+
               <button
                 disabled={
                   !validEmail ||
