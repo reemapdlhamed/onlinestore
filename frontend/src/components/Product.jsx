@@ -11,10 +11,19 @@ import { border } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
+
+
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  const[review ,setReview] = useState(
+    {
+      review: "",
+      comment:""
+    }
+  );
+  // const[comment ,setComment] =useState();
 
   const dispatch = useDispatch();
   const addProduct = (product) => {
@@ -48,6 +57,11 @@ const Product = () => {
   };
   let Saving = () => {
     console.log("Clicked");
+    setReview({
+      ...review,
+      review:3,
+      comment:"test"
+    })
     
     };
 
@@ -93,13 +107,13 @@ const Product = () => {
                 <h5 className="text-center">Show Reviews :TODO</h5>
                 <Stack spacing={2}>
                   <h5>RATING</h5>
-                  <Rating name="half-rating" defaultValue={2.5} precision={0.5} readOnly  />
+                  <Rating name="half-rating" defaultValue={review.review}  readOnly  />
                   <h5>COMMENT</h5>
                   <TextareaAutosize
                     aria-label="WRITE UR COMMENT"
                     // style={{ width: vw }}
                     className="bg-info vw-25 "
-                    value="notBad"
+                    value={review.comment}
                     disabled 
                     
                   />
