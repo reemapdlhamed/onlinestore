@@ -5,15 +5,7 @@ const { validationResult } = require("express-validator");
 
 //create new order
 exports.createOrders = (request, response, next) => {
-  let errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    let error = new Error();
-    error.status = 422;
-    error.message = errors
-      .array()
-      .reduce((current, object) => current + object.msg + " ", "");
-    throw error;
-  }
+
   let object = new order({
     customerName: request.body.customerName,
     customerID: request.body.customerID,
@@ -30,7 +22,10 @@ exports.createOrders = (request, response, next) => {
     .save()
     .then((data) => {
       response.status(201).json({ message: "order added", data });
-    })
+      console.log("DOE")
+    }
+    
+    )
     .catch((error) => next(error.message));
 };
 

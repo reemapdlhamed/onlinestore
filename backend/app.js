@@ -46,11 +46,15 @@ const cartRouter = require("./routes/cartRouter");
 const adminRouter = require("./routes/adminRouter");
 const orderRouter = require("./routes/orderRouter");
 const payRouter = require("./routes/payRouter");
+// const message = require("./routes/messageRouter");
+
 app.use("/payment", payRouter);
 app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);
 app.use(cartRouter);
+// app.use(message);
+
 
 app.use("/orders", orderRouter);
 app.use("/admin", adminRouter);
