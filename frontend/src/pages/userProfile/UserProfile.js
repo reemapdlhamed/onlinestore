@@ -231,6 +231,7 @@ export default function UserProfile() {
                     {rows.map((row) => (
                       <TableRow
                         key={row.ID}
+                        x
                         sx={{
                           "&:last-child td, &:last-child th": { border: 0 },
                         }}
