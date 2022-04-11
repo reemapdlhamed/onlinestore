@@ -22,7 +22,7 @@ function Products_Card(props) {
   return (
     <Card
       className="Card1"
-      style={{ width: "300px", height: "400px", marginBottom: "50px" }}
+      style={{ width: "300px", height: "500px", marginBottom: "50px" }}
     >
       <CardMedia
         style={{ objectFit: "contain" }}
