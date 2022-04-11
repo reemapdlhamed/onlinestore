@@ -16,7 +16,6 @@ const Product = () => {
 
   const dispatch = useDispatch();
   const addProduct = (product) => {
-    window.location.reload()
     dispatch(addCartFirst(product));
   };
   //changes

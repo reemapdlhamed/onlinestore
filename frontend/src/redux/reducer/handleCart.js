@@ -54,9 +54,9 @@ const handleCart = (state = cart, action) => {
       break;
 
     case "ADDITEMFIRST":
+      
       const e = state.find((x) => x._id === product._id);
-      console.log(e)
-      if (!e) 
+      if (!e) {
         product.qty = 1;
         let response2 = axios({
           method: "post",
@@ -66,6 +66,16 @@ const handleCart = (state = cart, action) => {
           },
           data: product,
         });
+        console.log("P",product)
+        
+        
+        return [
+          ...state,
+          {
+            ...product,
+          },
+        ];
+      }
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty } : x
         );
@@ -113,9 +123,12 @@ const handleCart = (state = cart, action) => {
           data: { _id: product._id, qty: product.qty - 1 },
         });
 
+        
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty - 1 } : x
         );
+        
+        
       }
       break;
 
