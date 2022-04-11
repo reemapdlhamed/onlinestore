@@ -1,50 +1,62 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import React from "react";
+// import { NavLink } from 'react-router-dom'
 
-function createData(name, calories, fat, carbs) {
-  return { name, calories, fat, carbs };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-];
-
-export default function BasicTable() {
+function OrderDetails() {
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Image</TableCell>
-            <TableCell align="right">Title</TableCell>
-            <TableCell align="right">Quantity</TableCell>
-            <TableCell align="right">Subtotal</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className=" row order-products justify-content-between">
+      <div className="col-lg-8 mt-5 mx-5">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div className="col-lg-3 d-flex align-items-end flex-column mt-5  px-5  subtotal-order">
+        <table className="table table-striped ">
+          <tbody>
+            <tr>
+              <td>
+                <strong>Products</strong>
+              </td>
+              <td>$50</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Shipping</strong>
+              </td>
+              <td>$50</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Tax</strong>
+              </td>
+              <td>$50</td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Total</strong>
+              </td>
+              <td>$10000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
+
+export default OrderDetails;
