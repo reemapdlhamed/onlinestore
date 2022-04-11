@@ -10,7 +10,6 @@ const handleCart = (state = cart, action) => {
       const exist = state.find((x) => x._id === product._id);
 
       if (exist) {
-        console.log("if");
         if (exist.quantity === exist.qty)
           return state.map((x) =>
             x._id === product._id ? { ...x, qty: x.qty } : x
@@ -24,14 +23,12 @@ const handleCart = (state = cart, action) => {
           },
           data: { _id: product._id, qty: product.qty + 1 },
         }).then((res) => {
-          console.log("RES", res);
         });
 
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty + 1 } : x
         );
       } else {
-        console.log("ELES");
         const product = action.payload;
 
         let response = axios({
@@ -42,7 +39,6 @@ const handleCart = (state = cart, action) => {
           },
           data: product,
         });
-        console.log("RES", response);
         return [
           ...state,
           {
@@ -66,7 +62,6 @@ const handleCart = (state = cart, action) => {
           },
           data: product,
         });
-        console.log("P",product)
         
         
         return [
