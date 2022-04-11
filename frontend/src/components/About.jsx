@@ -29,7 +29,7 @@ const About = () => {
         <div className="step-box">
           <span className="step-number">1</span>
           <div className="step-icon">
-          <i class="fas fa-adn"></i>
+          <i className="fas fa-adn"></i>
           </div>
           <label>Book Your Order</label>
         </div>
