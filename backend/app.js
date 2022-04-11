@@ -40,21 +40,19 @@ app.listen(process.env.PORT_NUMBER);
 //Import Routes
 const authenticationRouter = require("./routes/authRouter");
 
-
 const productRouter = require("./routes/productRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const cartRouter = require("./routes/cartRouter");
-const adminRouter = require("./routes/adminRouter");
+// const adminRouter = require("./routes/adminRouter");
 const orderRouter = require("./routes/orderRouter");
-
+const userRouter = require("./routes/userRouter");
 app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);
 app.use(cartRouter);
-
-app.use("/orders",orderRouter);
-app.use("/admin",adminRouter);
-
+app.use(userRouter);
+app.use("/orders", orderRouter);
+// app.use("/admin",adminRouter);
 
 //Not found MW
 app.use((request, response) => {

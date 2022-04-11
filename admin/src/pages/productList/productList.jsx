@@ -8,7 +8,7 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 export default function ProductList() {
-    
+
     const dispatch = useDispatch();
     const products = useSelector((state) => state.product.products.data);
 
@@ -70,7 +70,6 @@ export default function ProductList() {
         <div className="list">
             <Sidebar />
             <div className="productList">
-                <Navbar />
                 <Link to="/products/new" replace>
                     <button className="productAddButton">Add New Product</button>
                 </Link>

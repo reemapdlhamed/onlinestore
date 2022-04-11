@@ -29,8 +29,8 @@ export const orderSlice = createSlice({
     },
     deleteOrderSuccess: (state, action) => {
       state.isFetching = false;
-      state.products.splice(
-        state.products.findIndex((item) => item._id === action.payload),
+      state.orders.splice(
+        state.orders.findIndex((item) => item._id === action.payload),
         1
       );
     },

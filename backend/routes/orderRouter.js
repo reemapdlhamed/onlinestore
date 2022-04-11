@@ -32,6 +32,8 @@ router
 
 // GET> /orders/:id > Get Some Order for customer
 router.route("/:customerId").get(isAuth, controller.getMyOrdersByID);
+//Delete an order
+router.route("/:id").delete(isAuth, controller.deleteOrder);
 
 //TODO Later
 // router.route("/:id/pay").put(isAuth, controller.updateOrderToPaid);

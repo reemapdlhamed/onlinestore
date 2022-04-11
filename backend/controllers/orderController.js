@@ -140,7 +140,7 @@ exports.updateOrderToPaid = (request, response, next) => {
   }
 };
 
-//delete order
+// delete order
 //   exports.deleteOrder = (request, response, next) => {
 //   let errors = validationResult(request);
 //   if (!errors.isEmpty()) {
@@ -163,3 +163,19 @@ exports.updateOrderToPaid = (request, response, next) => {
 //     throw new Error("Not Authorized. Only admin or customer can do that");
 //   }
 // };
+
+
+exports.deleteOrder = (request, response, next) => {
+  if (request.role == "admin") {
+
+    order.findByIdAndDelete({ _id: request.params.id })
+      .then((data) => {
+        response.status(201).json({ message: "deleted", data });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  } else {
+    response.status(403).json({ message: "Not Autorized" });
+  }
+};

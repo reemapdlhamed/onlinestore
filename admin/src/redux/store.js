@@ -1,10 +1,12 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import userReducer from "./userRedux";
+import userReducer from "./loginRedux";
 import productReducer from "./productRedux";
 import orderReducer from "./orderRedux";
 import { orderSlice } from "./orderRedux";
 import { productSlice } from "./productRedux";
-import { userSlice } from "./userRedux";
+import { userSlice } from "./loginRedux";
+import { usersSlice } from "./userRedux";
+
 import {
   persistStore,
   persistReducer,
@@ -30,6 +32,7 @@ const persistConfig = {
 // });
 const rootReducer = combineReducers({
   user: userSlice.reducer,
+  users:usersSlice.reducer,
   product: productSlice.reducer,
   order: orderSlice.reducer,
 });

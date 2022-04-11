@@ -1,4 +1,4 @@
-import { loginFailure, loginStart, loginSuccess } from "./userRedux";
+import { loginFailure, loginStart, loginSuccess } from "./loginRedux";
 import { publicRequest, userRequest } from "../requestMethods";
 import {
   getProductFailure,
@@ -21,9 +21,17 @@ import {
   getOrderFailure,
   deleteOrderStart,
   deleteOrderSuccess,
-  deleteOrderFailure
+  deleteOrderFailure,
+} from "./orderRedux";
 
-} from "./orderRedux"
+import {
+  getUserStart,
+  getUserSuccess,
+  getUserFailure,
+  deleteUserStart,
+  deleteUserSuccess,
+  deleteUserFailure,
+} from "./userRedux"
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart());
@@ -63,13 +71,13 @@ export const updateProduct = async (id, product, dispatch) => {
   try {
     // update
     console.log("request ===");
-    console.log("id",id);
-    console.log("product",product);
+    console.log("id", id);
+    console.log("product", product);
     const res = await userRequest.put(`/products/${id}`, product);
-    console.log("Update Result",res);
+    console.log("Update Result", res);
     dispatch(updateProductSuccess({ id, product }));
   } catch (err) {
-    console.log("error",err)
+    console.log("error", err);
     dispatch(updateProductFailure());
   }
 };
@@ -77,14 +85,13 @@ export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
     const res = await userRequest.post(`/products`, product);
-    console.log("res",res.data.data);
+    console.log("res", res.data.data);
     dispatch(addProductSuccess(res.data.data));
   } catch (err) {
     console.log("err", err);
     dispatch(addProductFailure());
   }
 };
-
 
 //ORDERS
 //GET
@@ -104,9 +111,23 @@ export const deleteOrder = async (id, dispatch) => {
   dispatch(deleteOrderStart());
   try {
     const res = await userRequest.delete(`/orders/${id}`);
-    console.log(res);
+    console.log(res.data);
     dispatch(deleteOrderSuccess(id));
   } catch (err) {
     dispatch(deleteOrderFailure());
   }
 };
+
+//USERS
+export const getUsers = async (dispatch) => {
+  dispatch(getUserStart());
+  try {
+    const res = await userRequest.get("/users");
+    console.log("res.data", res.data);
+    dispatch(getUserSuccess(res.data));
+  } catch (err) {
+    dispatch(getUserFailure());
+  }
+};
+
+//TODO: DeleteUsers > update backend

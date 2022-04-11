@@ -5,8 +5,11 @@ import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getOrders,deleteOrder} from '../../redux/apiCalls';
+import { getOrders, deleteOrder } from '../../redux/apiCalls';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { Button } from '@mui/material';
+import { display } from '@mui/system';
+
 
 const OrdersList = () => {
 
@@ -21,26 +24,47 @@ const OrdersList = () => {
         deleteOrder(id, dispatch);
     };
 
+    function getAdress(params) {
+        return `country: ${params.row.shippingAddress.country || ''} ${params.row.shippingAddress.city || ''}`;
+    }
 
     const columns = [
         { field: "_id", headerName: "ID", width: 220 },
-        { field: "customerName", headerName: "Customer", width: 160, },
-        { field: "phoneNumber", headerName: "Phone", width: 220 },
-        { field: "orderStatus", headerName: "Order Status", width: 220 },
+        { field: "customerName", headerName: "Customer", width: 120, },
+        { field: "phoneNumber", headerName: "Phone", width: 160 },
+        { field: "orderStatus", headerName: "Order Status", width: 160 },
         { field: "totalPrice", headerName: "Price", width: 160, },
-        { field: "paymentType", headerName: "Payment Type", width: 160, },
-        { field: "paymentStatus", headerName: "Payment Status", width: 160, },
         {
-            field: "orderItems", headerName: "items", width: 200,
+            field: "shippingAddress", headerName: "Address", width: 160,
+            // valueGetter: getAdress
             renderCell: (params) => {
-                return (
-                    <div className="productListItem">
-                        {params.row.orderItems}
-
-                    </div>
-                );
-            },
+                return <div style={{ colore: "red" }}>
+                    <p><strong>country: </strong>{params.row.shippingAddress.country}</p>
+                    <p><strong>city: </strong>{params.row.shippingAddress.city}</p>
+                    <p><strong>postalCode: </strong>{params.row.shippingAddress.postalCode}</p>
+                    <p><strong>street: </strong>{params.row.shippingAddress.street}</p>
+                    <p><strong>Building: </strong>{params.row.shippingAddress.building}</p>
+                </div>
+            }
         },
+        {
+            field: "createdAt", headerName: "created At", width: 200,
+            valueFormatter: (params) => { return new Date(params.value).toLocaleString() }
+        },
+
+        // { field: "paymentType", headerName: "Payment Type", width: 160, },
+        // { field: "paymentStatus", headerName: "Payment Status", width: 160, },
+        // {
+        //     field: "orderItems", headerName: "items", width: 200,
+        //     renderCell: (params) => {
+        //         return (
+        //             <div className="productListItem">
+        //                 {params.row.orderItems}
+
+        //             </div>
+        //         );
+        //     },
+        // },
         {
             field: "action",
             headerName: "Action",
@@ -65,16 +89,23 @@ const OrdersList = () => {
         <div className="list">
             <Sidebar />
             <div className="listContainer">
-                <Navbar />
                 <DataGrid
                     rows={orders}
                     disableSelectionOnClick
                     columns={columns}
                     getRowId={(row) => row._id}
-                    pageSize={10}
-                    rowsPerPageOptions={[10]}
+                    pageSize={8}
+                    rowsPerPageOptions={[8]}
+                    rowHeight={120}
+                    sx={{
 
+                        boxShadow: 2,
+                        border: 2,
+                        borderColor: 'rgb(230, 227, 227);',
+                        margin: '1em',
+                    }}
                 />
+
             </div>
         </div>
     )
