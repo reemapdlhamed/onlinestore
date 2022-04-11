@@ -26,7 +26,7 @@ function register() {
   const emailRef = useRef();
   const errRef = useRef();
   const userRef = useRef();
-
+  const [passwordShown, setPasswordShown] = useState(false);
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
 
@@ -133,7 +133,11 @@ function register() {
       toastId: customId,
     });
   };
-
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
+  };
   return (
     <>
       {success ? (
@@ -257,7 +261,7 @@ function register() {
                 />
               </h5>
               <input
-                type="password"
+                type={passwordShown ? "text" : "password"}
                 id="passwoed"
                 required
                 onChange={(e) => setPassword(e.target.value)}
@@ -266,6 +270,12 @@ function register() {
                 onFocus={() => setpasswordFocus(true)}
                 onBlur={() => setpasswordFocus(false)}
               />
+              <i
+                onClick={togglePassword}
+                class="far fa-eye"
+                id="togglePassword"
+                style={{ marginLeft: " -30px", cursor: "pointer" }}
+              ></i>
               <p
                 id="passwordnote"
                 className={
@@ -291,7 +301,7 @@ function register() {
                 />
               </h5>
               <input
-                type="password"
+                type={passwordShown ? "text" : "password"}
                 id="confirm_password"
                 value={matchPassword}
                 required
@@ -301,6 +311,12 @@ function register() {
                 onFocus={() => setMatchFocus(true)}
                 onBlur={() => setMatchFocus(false)}
               />
+              <i
+                onClick={togglePassword}
+                class="far fa-eye"
+                id="togglePassword"
+                style={{ marginLeft: " -30px", cursor: "pointer" }}
+              ></i>
               <p
                 id="confirmnote"
                 className={

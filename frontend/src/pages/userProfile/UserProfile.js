@@ -25,6 +25,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import IconButton from "@mui/material/IconButton";
+import FilledInput from "@mui/material/FilledInput";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import FormHelperText from "@mui/material/FormHelperText";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -57,6 +64,15 @@ function createData(ID, Name, Status, Total) {
   return { ID, Name, Status, Total };
 }
 export default function UserProfile() {
+  const [passwordShown, setPasswordShown] = useState(false);
+  const [values, setValues] = React.useState({
+    amount: "",
+    password: "",
+    weight: "",
+    weightRange: "",
+    showPassword: false,
+  });
+
   const rows = [createData(localStorage.getItem("_id"))];
   const [value, setValue] = React.useState(0);
 
@@ -64,6 +80,7 @@ export default function UserProfile() {
     setValue(newValue);
   };
   const [success, setSucces] = useState(false);
+
   let newPassword;
   let oldPassword;
   const NewPwd = (e) => {
@@ -105,6 +122,12 @@ export default function UserProfile() {
       theme: "dark",
       toastId: customId,
     });
+  };
+
+  const togglePassword = () => {
+    // When the handler is invoked
+    // inverse the boolean state of passwordShown
+    setPasswordShown(!passwordShown);
   };
 
   return (
@@ -187,17 +210,26 @@ export default function UserProfile() {
 
                 <TextField
                   value={oldPassword}
-                  type="password"
+                  type={passwordShown ? "text" : "password"}
                   onChange={(e) => OldPwd(e)}
                   id="standard-basic"
                   label="Password"
                   variant="standard"
                   className="w-50"
                 />
-
+                <i
+                  onClick={togglePassword}
+                  class="far fa-eye"
+                  id="togglePassword"
+                  style={{
+                    paddingLeft: "3rem",  
+                    marginLeft: " 75rem",
+                    cursor: "pointer",
+                  }}
+                ></i>
                 <TextField
                   value={newPassword}
-                  type="password"
+                  type={passwordShown ? "text" : "password"}
                   onChange={(e) => NewPwd(e)}
                   id="standard-basic"
                   label="New Password"
