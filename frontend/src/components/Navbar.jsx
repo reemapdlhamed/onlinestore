@@ -175,7 +175,7 @@ const Navbar = () => {
                 {state.length})
               </NavLink>
               <NavLink to="/FAQs" className="btn btn-outline-primary ms-2">
-                <i className="far fa-question-circle me-1"></i>FAQs
+                <i className="far fa-question-circle me-1"></i>Help
               </NavLink>
             </div>
           </div>
