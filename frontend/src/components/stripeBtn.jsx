@@ -7,8 +7,36 @@ import { clearLocalStorageCart } from "../redux/action/Cart";
 import { goToHome } from "../redux/action/Cart";
 
 const StripeBtn = (props) => {
-  const dispatch = useDispatch();
+
+
+
+
   const history = useHistory();
+
+
+  const clearCart = ()=>{
+    console.log("LOCAL",localStorage.getItem("form"))
+    let res2 =  axios({
+      method: "post",
+      url: "http://localhost:8080/cart/buy",
+      headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+      data: JSON.parse(localStorage.getItem("form")),
+      
+    }).then((res) => {
+      console.log("ORDER DONE")
+     
+    });
+  
+
+
+    history.push("/");
+
+        window.location.reload()
+
+  }
+
+
+  const dispatch = useDispatch();
 
   const publishableKey =
     "pk_test_51KYAh7Fnja0F2DGHDY9fsDRS2ImeHhegy4pNuepcHaWjfXkPfePwmjl4e0LAOoIxPwKuNr6R1C6L61MtUkmhnkz000CQ1uElz2";
@@ -23,13 +51,13 @@ const StripeBtn = (props) => {
     axios
       .post("http://localhost:8080/payment", body)
       .then((response) => {
-        console.log(response);
-        dispatch(clearLocalStorageCart());
+       // console.log(response);
+       // dispatch(clearLocalStorageCart());
 
         //localStorage.removeItem('persist:root');
-        dispatch(goToHome())
-        window.location.reload()
-      
+        //dispatch(goToHome())
+       // window.location.reload()
+      clearCart()
       })
       .catch((error) => {
         console.log("Payment Error: ", error);

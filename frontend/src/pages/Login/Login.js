@@ -311,6 +311,7 @@ function Login() {
       localStorage.setItem("role", response.data.data.role);
       localStorage.setItem("name", response.data.data.name);
       localStorage.setItem("order", response.data.data.orders);
+      localStorage.setItem("_id", response.data.data._id);
 
       localStorage.setItem("data", response.data.data);
 
