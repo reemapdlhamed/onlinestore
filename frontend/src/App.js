@@ -78,7 +78,7 @@ import FAQs from "./pages/FAQs";
         <Route path={"/payment"} component={Payment} />
         <Route path={"/FAQs"} component={FAQs} />
         <Route exact path={"/profile"} component={UserProfile}/>
-        <Route exact path={"/orders"} component={Orders}/>
+        <Route path={`/orders`} component={Orders}/>
 
         <Route path={"*"} component={NotFound} />
       </Switch>
