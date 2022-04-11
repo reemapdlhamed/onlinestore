@@ -5,25 +5,32 @@ import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { addItem } from "../redux/action/index";
-import { Rating } from "@mui/material";
+import { Rating,Card,CardContent,Typography,TextField,Alert,AlertTitle } from "@mui/material";
 import axios from "axios";
 import { border } from "@mui/system";
 import Stack from "@mui/material/Stack";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
-
+import SendIcon from '@mui/icons-material/Send';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
-  const[review ,setReview] = useState(
-    {
-      review: "",
-      comment:""
-    }
-  );
-  // const[comment ,setComment] =useState();
+  const[reviews ,setReviews] = useState([]);
+  const [popup,setPopup] = useState("");
+  const [reviewForm,setReviewForm] = useState("d-none")
+  
+
+
+  let newReview = {
+    title:"",
+    description:"",
+    userID:"",
+    rating:"",
+    user:""
+  };
 
   const dispatch = useDispatch();
   const addProduct = (product) => {
@@ -33,9 +40,59 @@ const Product = () => {
   useEffect(() => {
     axios.get(`http://localhost:8080/product/${id}`).then((res) => {
       setProduct(res.data.data[0]);
-      console.log(res.data.data);
+      setReviews(res.data.data[0].reviews);
     });
   }, []);
+  function sendReview(){
+    if(localStorage.getItem('accessToken') === null){
+      setPopup(<>
+        <Alert severity="error">
+        <AlertTitle>Error</AlertTitle>
+        opps! , Review Failed — <strong>You should login to add review</strong>
+        </Alert>
+        <NavLink style={{width:"25%"}} to="/login" className="btn btn-dark ms-2 px-3 py-2">
+            Login now
+          </NavLink>
+        </>)
+    }
+    else{
+      newReview.userID = localStorage.getItem('_id');
+      newReview.user = localStorage.getItem('name');
+      axios({
+        method: "put",
+        url: "http://localhost:8080/review",
+
+        data: {
+          id: product._id,
+          new_review:newReview
+        },
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        setPopup(<>
+          <Alert severity="success">
+          <AlertTitle>Success</AlertTitle>
+          Thank You For your Review — <strong>Have a Good Day</strong>
+          </Alert></>)
+      })
+      .catch((error) => {
+        setPopup(<>
+          <Alert severity="error">
+          <AlertTitle>Error</AlertTitle>
+          opps! , Review Failed — <strong>One of the required fields is empty or wrong</strong>
+          </Alert></>)
+      });  
+    }
+    
+  }
+  function showAddReview(){
+    setReviewForm("d-flex flex-column flex-wrap justify-content-between")
+  }
+  function closeAddReview(){
+    setReviewForm("d-none")
+  }
   const Loading = () => {
     return (
       <>
@@ -54,18 +111,18 @@ const Product = () => {
       </>
     );
   };
-  let Saving = () => {
-    console.log("Clicked");
-    setReview({
-      ...review,
-      review:3,
-      comment:"test"
-    })
+  // let Saving = () => {
+  //   console.log("Clicked");
+  //   setReview({
+  //     ...review,
+  //     review:3,
+  //     comment:"test"
+  //   })
     
-    };
-    useEffect(()=>{
-      console.log("UPDATED");
-    },[review])
+  //   };
+  //   useEffect(()=>{
+  //     console.log("UPDATED");
+  //   },[review])
 
   const ShowProduct = () => {
     return (
@@ -101,51 +158,50 @@ const Product = () => {
           <NavLink to="/cart" className="btn btn-dark ms-2 px-3 py-2">
             Go to Cart
           </NavLink>
+          <button
+            style={{marginLeft:"10px"}}
+            className="btn btn-outline-primary px-4 py-2"
+            onClick={showAddReview}
+          >
+            Add Review
+          </button>
         </div>
+        <div  style={{height:"400px",width:"550px",border:"2px solid #eee",padding:"10px"}} className={reviewForm}>
+          <TextField className="title"   style={{width:"60%"}} onChange={(event) => {newReview.title=event.target.value}} id="demo-helper-text-misaligned-no-helper" label="Review Title" />
+          <TextField className="comment"  style={{width:"60%"}} onChange={(event) => { newReview.description=event.target.value}} id="demo-helper-text-misaligned-no-helper" label="Comment" />
+          <Rating name="simple-controlled" onChange={(event) => { newReview.rating = +event.target.value}}/>
+          {popup}
+          <Button style={{width:"20%",margin:"10px"}} onClick={sendReview} variant="contained" endIcon={<SendIcon />}>
+            Send
+          </Button>
+          <Button style={{width:"20%",margin:"10px"}} onClick={closeAddReview} variant="contained" color="error" endIcon={<CloseIcon />}>Close</Button>
+          </div>
         <div className="row row-cols-1 row-cols-md-2 g-4">
           <div className="col">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="text-center">Show Reviews :TODO</h5>
-                <Stack spacing={2}>
-                  <h5>RATING</h5>
-                  <Rating name="half-rating" defaultValue={review.review}  readOnly  />
-                  <h5>COMMENT</h5>
-                  <TextareaAutosize
-                    aria-label="WRITE UR COMMENT"
-                    // style={{ width: vw }}
-                    className="bg-info vw-25 "
-                    value={review.comment}
-                    disabled 
-                    
-                  />
-                </Stack>
+          {reviews.map((review)=>{
+              return(
+                <Card sx={{ minWidth: 275 }} style={{marginBottom:"30px",border:"2px solid lightblue"}}>
+                  <CardContent>
+                    <Typography style={{color:"#999",fontWeight:"bolder"}} variant="h4" component="div">
+                      {review.title}
+                    </Typography>
+                    <Typography style={{color:"7A0BC0",fontWeight:'bold'}}  sx={{ mb: 1.5 }} color="text.secondary">
+                      {review.user}
+                    </Typography>
+                    <hr style={{color:"blue"}}></hr>
+                    <Typography variant="body2">
+                      {review.description}
+                      <br />
 
-              </div>
-            </div>
+                    </Typography>
+                    <Rating name="read-only" value={review.rating} readOnly />
+                  </CardContent>
+                </Card>
+              )
+            })}
+            
           </div>
-          <div className="col">
-            <div className="card">
-              <div className="card-body">
-                <h2 className="text-center">WRITE A REVIEW :TODO</h2>
-                <Stack spacing={2}>
-                  <h3>RATING</h3>
-                  <Rating name="half-rating" defaultValue={1} precision={0.5} />
-                  <h3>COMMENT</h3>
-                  <TextareaAutosize
-                    aria-label="WRITE UR COMMENT"
-                    minRows={3}
-                    placeholder="WRITE UR COMMENT"
-                    // style={{ width: vw }}
-                    className="vw-25"
-                  />
-                  <Button variant="contained" onClick={Saving}> 
-                    SUBMIT
-                  </Button>
-                </Stack>
-              </div>
-            </div>
-          </div>
+          
         </div>
       </>
     );
