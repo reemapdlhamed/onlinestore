@@ -5,6 +5,7 @@ import axios from "../../api/axios";
 import { useRef, useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Switch, Route } from "react-router-dom";
+import ReCAPTCHA from "react-google-recaptcha";
 import "./register.css";
 import {
   faCheck,
@@ -15,11 +16,12 @@ import Products from "./../Products/Products";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Home from "./../../components/Home";
 import Login from "./../Login/Login";
+import { setNestedObjectValues } from "formik";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const EMAIL_REGEX = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
-
+const SITE_KEY = "6LetS2UfAAAAAI9d87vH8yfISqeSi5VRoUhraUlW";
 function register() {
   const emailRef = useRef();
   const errRef = useRef();
@@ -27,6 +29,7 @@ function register() {
 
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
+
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [validName, setValidName] = useState(false);
   const [validEmail, setValidEmail] = useState(false);
@@ -40,6 +43,11 @@ function register() {
   const [matchFocus, setMatchFocus] = useState(false);
   const [errorMsg, setErrprMsg] = useState("");
   const [success, SetSuccess] = useState(false);
+  const [human, setHuman] = useState({
+    verify: false,
+  });
+  // const [verify, setVerify] = useState(false);
+
   useEffect(() => {
     userRef.current.focus();
   }, []);
@@ -69,44 +77,6 @@ function register() {
     setErrprMsg("");
   }, [user, password, matchPassword]);
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   // if button enabled with JS hack
-  //   const v1 = USER_REGEX.test(user);
-  //   const v2 = PWD_REGEX.test(password);
-  //   if (!v1 || !v2) {
-  //     setErrprMsg("Invalid Entry");
-  //     return;
-  //   }
-  //   try {
-  //     const response = await axios.post(
-  //       REGISTER_URL,
-  //       JSON.stringify({ user, password }),
-  //       {
-  //         headers: { "Content-Type": "application/json" },
-  //         withCredentials: true,
-  //       }
-  //     );
-  //     console.log(response?.data);
-  //     console.log(response?.accessToken);
-  //     console.log(JSON.stringify(response));
-  //     SetSuccess(true);
-  //     //clear state and controlled inputs
-  //     //need value attrib on inputs for this
-  //     setUser("");
-  //     setPassword("");
-  //     setMatchPassword("");
-  //   } catch (err) {
-  //     if (!err?.response) {
-  //       setErrprMsg("No Server Response");
-  //     } else if (err.response?.status === 409) {
-  //       setErrprMsg("Username Taken");
-  //     } else {
-  //       setErrprMsg("Registration Failed");
-  //     }
-  //     errRef.current.focus();
-  //   }
-  // };
   async function registerHandler(e) {
     e.preventDefault();
     const v1 = USER_REGEX.test(user);
@@ -128,6 +98,7 @@ function register() {
           confirmpassword: matchPassword,
         },
       });
+
       SetSuccess(true);
       let data = res.data;
       console.log(data);
@@ -142,10 +113,17 @@ function register() {
         setErrprMsg("Registration Failed");
       }
       errRef.current.focus();
-      // this is the main part. Use the response property from the error object
 
       return err.response;
     }
+  }
+
+  function onChange(value) {
+    setHuman((previousState) => {
+      return { ...previousState, verify: true };
+    });
+
+    console.log("Captcha value:", value);
   }
 
   const customId = "custom-id-yes";
@@ -332,9 +310,16 @@ function register() {
                 <FontAwesomeIcon icon={faInfoCircle} />
                 Must match the first password.
               </p>
+         
+                <ReCAPTCHA sitekey={SITE_KEY} onChange={onChange} />
+             
               <button
                 disabled={
-                  !validEmail || !validName || !validPassword || !validMatch
+                  !validEmail ||
+                  !validName ||
+                  !validPassword ||
+                  !validMatch ||
+                  !human.verify
                     ? true
                     : false
                 }
