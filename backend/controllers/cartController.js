@@ -204,6 +204,11 @@ exports.confirmCart = async (request, response, next) => {
 
 
   const user = await User.findOne({ email: request.email });
+  var totalPric=0;
+  for (i=0;i<user.cart.length;i++)
+  {
+totalPric+=user.cart[i].price
+  }
   try {
     console.log(request.body)
     axios.post(
@@ -213,7 +218,7 @@ exports.confirmCart = async (request, response, next) => {
         customerName: user.name,
         phoneNumber: request.body.phone,
         paymentType: "cod",
-
+        totalPrice:totalPric,
         //here we put the user's cart into the order collection
         orderItems: user.cart,
 
