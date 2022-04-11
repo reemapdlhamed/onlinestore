@@ -1,4 +1,3 @@
-// import React from "react";
 import * as React from "react";
 import axios from "../../api/axios";
 import Input from "@mui/material/Input";
@@ -242,7 +241,7 @@ export default function UserProfile() {
                         <TableCell align="right">
                           {row.Name} {localStorage.getItem("name")}
                         </TableCell>
-                        <TableCell align="right">{row.Status}</TableCell>
+                        <TableCell align="right">{row.Status} </TableCell>
                         <TableCell align="right">{row.Total}</TableCell>
                       </TableRow>
                     ))}
@@ -261,8 +260,6 @@ export default function UserProfile() {
           </div>
         </div>
       </div>
-
-      {/* </div> */}
     </>
   );
 }
