@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, {useState} from "react";
-
+import  "bootstrap/dist/css/bootstrap.min.css";
+import { Alert,AlertTitle } from "@mui/material";
 const Contact = () => {
 
   const [msg, setMsg] = useState({
@@ -7,6 +9,7 @@ const Contact = () => {
     email : "",
     message : ""
   });
+  const [popup, setPopup] = useState("");
 
   // Handle Inputs
   const handleChange = (event) =>{
@@ -15,40 +18,61 @@ const Contact = () => {
 
     setMsg({...msg, [name]:value});
   }
-
   // Handle Submit
   const handleSubmit = async (event)=>{
     event.preventDefault();
+    axios.post('http://localhost:8080/message',msg)
+      .then((res)=>{
+        setMsg({
+                name : "",
+                email : "",
+                message : ""
+              })
+        setPopup(<>
+          <Alert severity="success">
+          <AlertTitle>Success</AlertTitle>
+          Thank You For Contacting Us — <strong>Have Good Day</strong>
+          </Alert></>)
+        
+      })
+      .catch((err)=>{
+        setPopup(<>
+        <Alert severity="error">
+        <AlertTitle>Error</AlertTitle>
+        opps! , Message Failed — <strong>One of the required fields is empty or wrong</strong>
+        </Alert></>)
+      })
     // Object DeStructuring
     // Store Object Data into Variables
-    const {name, email, message} = msg;
-    try {
-      const res = await fetch('http://localhost:8080/message', {
-        method : "POST",
-        headers : {
-          "Content-Type" : "application/json"
-        },
-        body : JSON.stringify({
-          name, email, message
-        })
-      })
-      console.log(res.status)
-      if(res.status === 400 || !res){
-        window.alert("Message Not Sent. Try Again Later")
-      }else{
-        // You need to Restart the Server for Proxy Works
-        // Now Try Again
-        window.alert("Message Sent");
-        setMsg({
-          name : "",
-          email : "",
-          message : ""
-        })
+    // const {name, email, message} = msg;
+    // try {
+    //   const res = await fetch('http://localhost:8080/message', {
+    //     method : "POST",
+    //     headers : {
+    //       "Content-Type" : "application/json"
+    //     },
+    //     body : JSON.stringify({
+    //       name, email, message
+    //     })
+    //   })
+    //   console.log(res.status)
+    //   if(res.status === 400 || !res){
+    //     window.alert("Message Not Sent. Try Again Later")
+    //   }else{
+    //     // You need to Restart the Server for Proxy Works
+    //     // Now Try Again
+    //     window.alert("Message Sent");
+    //     setMsg({
+    //       name : "",
+    //       email : "",
+    //       message : ""
+    //     })
         
-      }
-    } catch (error) {
-      console.log(error);
-    }
+    //   }
+    // } catch (error) {
+    //   window.alert(error)
+    //   console.log(error);
+    // }
   }
 
   return (
@@ -67,6 +91,7 @@ const Contact = () => {
             <div className="col-md-6">
               <img src="/assets/images/contact.png" alt="Contact" className="w-75" />
             </div>
+            {popup}
             <div className="col-md-6">
               <form onSubmit={handleSubmit} method="POST">
                 <div className="mb-3">

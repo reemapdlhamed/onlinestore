@@ -293,8 +293,8 @@ exports.edit_review = (request, response, next) => {
 };
 //-----------------------------------------------------------------------------------------------------------
 exports.delete_review = (request, response, next) => {
-  Products.updateOne({"_id":request.body.id},{
-    $pull:{reviews:{userID:request.id}}
+  Products.updateOne({"reviews._id":request.body.id},{
+    $pull:{reviews:{_id:request.body.id}}
   })
     .then((data) => {
       response.status(200).json({ message: "deleted", data });
