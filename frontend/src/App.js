@@ -81,7 +81,7 @@ import OrderDetails from "./components/OrderDetails";
         <Route path={"/payment"} component={Payment} />
         <Route path={"/FAQs"} component={FAQs} />
         <Route exact path={"/profile"} component={UserProfile}/>
-        <Route path={`/orders`} component={Orders}/>
+        <Route path={"/orders/:id"} component={Orders}/>
 
         <Route path={"*"} component={NotFound} />
       </Switch>

@@ -99,7 +99,6 @@ const handleCart = (state = cart, action) => {
       break;
 
     case "ADDORDERS":
-      console.log(product);
       const orders = state.find((x) => x._id === product._id);
       if (orders) {
         if (orders.quantity === orders.qty)
