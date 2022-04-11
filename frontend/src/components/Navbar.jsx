@@ -77,6 +77,17 @@ const Navbar = () => {
               </li>
               <li className="nav-item">
                 <NavLink
+                  className="nav-link "
+                  activeStyle={{
+                    color: "black",
+                  }}
+                  to="/order-details"
+                >
+                  Orders
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink
                   className="nav-link"
                   activeStyle={{
                     color: "blue",

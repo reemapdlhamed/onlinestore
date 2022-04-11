@@ -29,6 +29,14 @@ export const addCartFromDB = (productArr) => {
 
 }
 
+export const addOrdersFromDB = (productsArr) => {
+    return{
+        type : "ADDORDERS",
+        payload : productsArr
+    }
+
+}
+
 // For Delete Item From Cart
 export const delCart = (product) => {
     

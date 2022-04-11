@@ -22,8 +22,7 @@ const handleCart = (state = cart, action) => {
             Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
           },
           data: { _id: product._id, qty: product.qty + 1 },
-        }).then((res) => {
-        });
+        }).then((res) => {});
 
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty + 1 } : x
@@ -50,7 +49,6 @@ const handleCart = (state = cart, action) => {
       break;
 
     case "ADDITEMFIRST":
-      
       const e = state.find((x) => x._id === product._id);
       if (!e) {
         product.qty = 1;
@@ -62,8 +60,7 @@ const handleCart = (state = cart, action) => {
           },
           data: product,
         });
-        
-        
+
         return [
           ...state,
           {
@@ -71,11 +68,9 @@ const handleCart = (state = cart, action) => {
           },
         ];
       }
-        return state.map((x) =>
-          x._id === product._id ? { ...x, qty: x.qty } : x
-        );
-      
-
+      return state.map((x) =>
+        x._id === product._id ? { ...x, qty: x.qty } : x
+      );
 
       break;
     case "ADDITEMS":
@@ -83,6 +78,30 @@ const handleCart = (state = cart, action) => {
       const ex = state.find((x) => x._id === product._id);
       if (ex) {
         if (ex.quantity === ex.qty)
+          return state.map((x) =>
+            x._id === product._id ? { ...x, qty: x.qty } : x
+          );
+        // Increase the Quantity
+        return state.map((x) =>
+          x._id === product._id ? { ...x, qty: x.qty + 1 } : x
+        );
+      } else {
+        const product = action.payload;
+
+        return [
+          ...state,
+          {
+            ...product,
+          },
+        ];
+      }
+
+      break;
+
+    case "ADDORDERS":
+      const orders = state.find((x) => x._id === product._id);
+      if (orders) {
+        if (orders.quantity === orders.qty)
           return state.map((x) =>
             x._id === product._id ? { ...x, qty: x.qty } : x
           );
@@ -118,12 +137,9 @@ const handleCart = (state = cart, action) => {
           data: { _id: product._id, qty: product.qty - 1 },
         });
 
-        
         return state.map((x) =>
           x._id === product._id ? { ...x, qty: x.qty - 1 } : x
         );
-        
-        
       }
       break;
 
