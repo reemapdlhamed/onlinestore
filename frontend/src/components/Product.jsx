@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart } from "../redux/action";
+import { addCart,addCartFirst } from "../redux/action";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
@@ -8,15 +8,26 @@ import { addItem } from "../redux/action/index";
 import { Rating } from "@mui/material";
 import axios from "axios";
 import { border } from "@mui/system";
+import Stack from "@mui/material/Stack";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
+import Button from "@mui/material/Button";
+
 
 const Product = () => {
-  const {id} = useParams();
+  const { id } = useParams();
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  const[review ,setReview] = useState(
+    {
+      review: "",
+      comment:""
+    }
+  );
+  // const[comment ,setComment] =useState();
 
   const dispatch = useDispatch();
   const addProduct = (product) => {
-    dispatch(addCart(product));
+    dispatch(addCartFirst(product));
   };
   //changes
   useEffect(() => {
@@ -43,6 +54,18 @@ const Product = () => {
       </>
     );
   };
+  let Saving = () => {
+    console.log("Clicked");
+    setReview({
+      ...review,
+      review:3,
+      comment:"test"
+    })
+    
+    };
+    useEffect(()=>{
+      console.log("UPDATED");
+    },[review])
 
   const ShowProduct = () => {
     return (
@@ -53,52 +76,22 @@ const Product = () => {
             alt={product.name}
             height="400px"
             width="400px"
-            style={{border :" 1px solid black"}}
+            // style={{border :" 1px solid black"}}
             className="py-3 px-3"
           />
-          <div className=" px-5 py-3">
-            <img
-            src={product.images}
-            alt={product.name}
-            height="80px"
-            width="80px"
-            style={{border :" 1px solid black"}}
-            className="py-3 px-3"
-          />
-          <img
-            src={product.images}
-            alt={product.name}
-            height="80px"
-            width="80px"
-            style={{border :" 1px solid black"}}
-            className="py-3 px-3"
-          />
-          <img
-            src={product.images}
-            alt={product.name}
-            height="80px"
-            width="80px"
-            style={{border :" 1px solid black"}}
-            className="py-3 px-3"
-          />
-          <img
-            src={product.images}
-            alt={product.name}
-            height="80px"
-            width="80px"
-            style={{border :"1px solid black"}}
-            className="py-3 px-3 "
-          />
-          </div>
-          
         </div>
         <div className="col-md-6">
-          <h4 className="text-uppercase text-black fw-bold display-6">{product.name}</h4>
-          
-          
-          <h3 className="lead fw-normal"> <p className="fw-bold ">DESC :</p> {product.description}</h3>
-          <h3 className=" fw-bold my-4 text-danger ">Price : {product.price} E£ </h3>
-          <Rating name="read-only" value={product.rating} readOnly  /> <hr/>
+          <h4 className="text-uppercase text-black fw-bold display-6">
+            {product.name}
+          </h4>
+          <h3 className="lead fw-normal">
+            {" "}
+            <p className="fw-bold ">DESC :</p> {product.description}
+          </h3>
+          <h3 className=" fw-bold my-4 text-danger ">
+            Price : {product.price} E£{" "}
+          </h3>
+          <Rating name="read-only" value={product.rating} readOnly /> <hr />
           <button
             className="btn btn-outline-dark px-4 py-2"
             onClick={() => addProduct(product)}
@@ -108,6 +101,51 @@ const Product = () => {
           <NavLink to="/cart" className="btn btn-dark ms-2 px-3 py-2">
             Go to Cart
           </NavLink>
+        </div>
+        <div className="row row-cols-1 row-cols-md-2 g-4">
+          <div className="col">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="text-center">Show Reviews :TODO</h5>
+                <Stack spacing={2}>
+                  <h5>RATING</h5>
+                  <Rating name="half-rating" defaultValue={review.review}  readOnly  />
+                  <h5>COMMENT</h5>
+                  <TextareaAutosize
+                    aria-label="WRITE UR COMMENT"
+                    // style={{ width: vw }}
+                    className="bg-info vw-25 "
+                    value={review.comment}
+                    disabled 
+                    
+                  />
+                </Stack>
+
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card">
+              <div className="card-body">
+                <h2 className="text-center">WRITE A REVIEW :TODO</h2>
+                <Stack spacing={2}>
+                  <h3>RATING</h3>
+                  <Rating name="half-rating" defaultValue={1} precision={0.5} />
+                  <h3>COMMENT</h3>
+                  <TextareaAutosize
+                    aria-label="WRITE UR COMMENT"
+                    minRows={3}
+                    placeholder="WRITE UR COMMENT"
+                    // style={{ width: vw }}
+                    className="vw-25"
+                  />
+                  <Button variant="contained" onClick={Saving}> 
+                    SUBMIT
+                  </Button>
+                </Stack>
+              </div>
+            </div>
+          </div>
         </div>
       </>
     );

@@ -3,21 +3,19 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap.bundle';
 import '../node_modules/font-awesome/css/font-awesome.min.css'
 import '../node_modules/@fortawesome/fontawesome-free/css/all.min.css'
 import { BrowserRouter } from 'react-router-dom';
 import {Provider} from 'react-redux';
-import {store,persistor} from './redux/store';
-import {PersistGate} from "redux-persist/lib/integration/react";
+import {store} from './redux/store';
 
 ReactDOM.render(
-  <PersistGate persistor={persistor} >
   <BrowserRouter>
   <Provider store ={store} >
     <App />
     </Provider>
-  </BrowserRouter>
-  </PersistGate>,
+  </BrowserRouter>,
 
   document.getElementById('root')
 );

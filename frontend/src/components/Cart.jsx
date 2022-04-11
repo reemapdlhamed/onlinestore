@@ -2,16 +2,14 @@ import { useState, useEffect, React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { addCart, delCart, zeroCart } from "../redux/action";
-
+import axios from "axios";
 import StripeBtn from "./stripeBtn";
 
 const Cart = () => {
   const [price, setPrice] = useState({
     p: 0,
   });
-  useEffect(() => {
-    changePrice();
-  }, []);
+
 
   const state = useSelector((state) => state.handleCart);
   const dispatch = useDispatch();
@@ -19,6 +17,8 @@ const Cart = () => {
   const handleAdd = (item) => {
     if (item.quantity > item.qty) dispatch(addCart(item));
     price.p += item.price;
+
+
   };
   const handleDel = (item) => {
     dispatch(delCart(item));
@@ -30,16 +30,10 @@ const Cart = () => {
     price.p -= item.price * item.qty;
   };
 
-  function changePrice() {
-    var priceTmp = 0;
-    for (var i = 0; i < state.length; i++) {
-      priceTmp += state[i].qty * state[i].price;
-    }
-    if (priceTmp != price.p)
-      setPrice((previousState) => {
-        return { ...previousState, p: priceTmp };
-      });
-  }
+  
+
+  
+
 
   const emptyCart = () => {
     return (
@@ -51,7 +45,7 @@ const Cart = () => {
               to="/products"
               className="btn btn-outline-dark  ms-2 px-3 py-2"
             >
-             SHOPPING NOW
+              SHOPPING NOW
             </NavLink>
           </div>
         </div>
@@ -78,14 +72,16 @@ const Cart = () => {
                 />
               </div>
               <div className="col-md-4">
-                <h3>{product.name}</h3><hr/>
+                <h3>{product.name}</h3>
+                <hr />
                 <h5>Price : {product.price} E£</h5>
                 <h5>Quantity : {product.qty}</h5>
 
                 <p className="lead fw-bold hide">
                   {product.qty} X ${product.price} = E£
                   {product.qty * product.price}
-                </p><br/>
+                </p>
+                <br />
                 <button
                   className="btn btn-outline-danger me-4"
                   onClick={() => handleDel(product)}
@@ -94,7 +90,9 @@ const Cart = () => {
                 </button>
                 <button
                   className="btn btn-outline-success"
-                  onClick={() => handleAdd(product)}
+                  onClick={() => {
+                    handleAdd(product);
+                  }}
                 >
                   <i className="fa fa-plus"></i>
                 </button>
@@ -109,7 +107,7 @@ const Cart = () => {
     return (
       <>
         <div className="container">
-            <hr/>
+          <hr />
           <div className="row justify-content-center">
             <NavLink
               to="/shipping"

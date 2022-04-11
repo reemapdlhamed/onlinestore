@@ -36,11 +36,24 @@ const Checkout = (props) => {
 
   
   const clearCart = ()=>{
-    //localStorage.removeItem('persist:root');
-    props.history.push("/");
-    dispatch(clearLocalStorageCart());
+    console.log("LOCAL",localStorage.getItem("form"))
+    let res2 =  axios({
+      method: "post",
+      url: "http://localhost:8080/cart/buy",
+      headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+      data: JSON.parse(localStorage.getItem("form")),
+      
+    }).then((res) => {
+      console.log("ORDER DONE")
+     
+    });
+  
 
-            window.location.reload()
+
+    props.history.push("/");
+    //dispatch(clearLocalStorageCart());
+
+        window.location.reload()
 
   }
 
