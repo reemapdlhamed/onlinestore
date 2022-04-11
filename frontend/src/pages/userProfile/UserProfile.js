@@ -238,10 +238,11 @@ export default function UserProfile() {
                         <TableCell component="th" scope="row">
                           {row.ID}
                         </TableCell>
-                        <TableCell align="right">{row.Name}</TableCell>
+                        <TableCell align="right">
+                          {row.Name} {localStorage.getItem("name")}
+                        </TableCell>
                         <TableCell align="right">{row.Status}</TableCell>
                         <TableCell align="right">{row.Total}</TableCell>
-                        {/* <TableCell align="right">{row.protein}</TableCell> */}
                       </TableRow>
                     ))}
                   </TableBody>
