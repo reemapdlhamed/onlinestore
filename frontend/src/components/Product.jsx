@@ -64,6 +64,9 @@ const Product = () => {
     })
     
     };
+    useEffect(()=>{
+      console.log("UPDATED");
+    },[review])
 
   const ShowProduct = () => {
     return (
