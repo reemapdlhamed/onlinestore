@@ -18,7 +18,7 @@ import Register from "../src/pages/register/register";
 import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { addCart, delCart, zeroCart,addCartFromDB } from "./redux/action";
+import { addCart, delCart, zeroCart,addCartFromDB,addOrdersFromDB } from "./redux/action";
 import { useDispatch, useSelector } from "react-redux";
 
 import UserProfile from "./pages/userProfile/UserProfile";
@@ -29,6 +29,8 @@ import FAQs from "./pages/FAQs";
  function App () {
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state.handleCart);
+  const orderState = useSelector((state) => state.handleOrders);
+
   useEffect(() => {
 
     let res2 =  axios({
@@ -40,7 +42,19 @@ import FAQs from "./pages/FAQs";
         console.log("R",res.data[i])
       dispatch(addCartFromDB(res.data[i]));
       }
-      
+    
+    });
+
+
+    let res3 =  axios({
+      method: "get",
+      url: `http://localhost:8080/orders/${localStorage.getItem("_id")}`,
+      headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
+      data:{role:localStorage.getItem("role")}
+    }).then((res) => {
+      for(let i=0;i<res.data.length;i++){
+      dispatch(addOrdersFromDB(res.data[i]));
+      }
     });
 
   }, []);

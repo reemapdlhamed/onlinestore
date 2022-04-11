@@ -31,6 +31,7 @@ exports.createOrders = (request, response, next) => {
 
 //getMyOrdersByID
 exports.getMyOrdersByID = (request, response, next) => {
+
   let errors = validationResult(request);
   if (!errors.isEmpty()) {
     let error = new Error();

@@ -2,14 +2,17 @@ import React from "react";
 import '../App.css'
 //Bootstrap for responsiveness
 import 'bootstrap/dist/css/bootstrap.min.css';
-class App extends React.Component {
- 
-  render() {
+import { useDispatch,useSelector } from "react-redux";
+
+
+const Orders = (props) => {
+    const cartState = useSelector((state) => state.handleCart);
+    const orderState = useSelector((state) => state.handleOrders);
+       console.log("ORDERSTATE",orderState)
+       
     return (
       <div className="main_container">
      
-     
-      
             
         <div class="container padding-bottom-3x mb-1">
         <div class="card mb-3">
@@ -65,5 +68,5 @@ class App extends React.Component {
       </div>
     );
   }
-}
-export default App;
+
+export default Orders;
