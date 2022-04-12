@@ -21,17 +21,48 @@ export default function Product() {
     const dispatch = useDispatch();
     // const [productEdit, setProductEdit] = useState({ name: "", price: "", quantity: "", description: "", rating: "", properties: {} });
     const [productEdit, setProductEdit] = useState({});
-    const [image,setImage] = useState("");
+    const [image, setImage] = useState("");
+    const [properties, setProperties] = useState("");
+
     const handleChange = (e) => {
         setProductEdit((prev) => {
             return { ...prev, [e.target.name]: e.target.value };
         });
     };
 
-    const handleImageChange = (e) =>{
+    const handleImageChange = (e) => {
         setImage(e.target.value);
         // setProductEdit({...productEdit,images:[e.target.value]})
     }
+
+    // const handlePropertiesChange = (e) => {
+    //     let input = e.target.value;
+    //     let prop = {};
+    //     for (let p of input.split(",")) {
+    //         prop[p.split(":")[0]?.trim()] = p.split(":")[1]?.trim();
+    //     }
+    //     setProperties(prop);
+    // };
+    const strToObj = (str) =>{
+        let properties = {};
+        for (let p of str.split(",")) {
+            properties[p.split(":")[0]?.trim()] = p.split(":")[1]?.trim();
+        }
+
+        return properties;
+    }
+
+    const objToString = (obj) => {
+        let str = "";
+        for (let p in obj) {
+            // prop[p.split(":")[0]?.trim()] = p.split(":")[1]?.trim();
+            str += p + ": " + obj[p] + ", ";
+        }
+        str = str.slice(0, -2);
+        return str;
+    };
+
+
 
 
     const product = useSelector((state) =>
@@ -41,6 +72,7 @@ export default function Product() {
     useEffect(() => {
         console.log("product", product);
         setProductEdit(product);
+        setProperties(objToString(product.properties));
         setImage(product.images[0]);
     }, [productId]);
 
@@ -49,8 +81,8 @@ export default function Product() {
         e.preventDefault();
         // let product = { ...inputs, category_id: category, properties: properties, images: [image] };
         console.dir(productEdit);
-        let product = {...productEdit,images:[image]};
-        console.log("finalPro",product)
+        let product = { ...productEdit, images: [image],properties:strToObj(properties) };
+        console.log("finalPro", product)
 
         try {
             updateProduct(product._id, product, dispatch);
@@ -73,7 +105,7 @@ export default function Product() {
                             <div className="userShowBottom">
                                 <span className="userShowTitle">Product Details</span>
                                 <div className="userShowInfo">
-                                <img src={product.images[0]} style={{height:"150px"}} alt="" />
+                                    <img src={product.images[0]} style={{ height: "150px" }} alt="" />
                                 </div>
                                 <div className="userShowInfo">
                                     <span className="userShowInfoTitle"><strong>Name: </strong>{product.name}</span>
@@ -166,6 +198,18 @@ export default function Product() {
                                             value={productEdit.rating}
                                             onChange={handleChange}
                                             name="rating"
+                                        />
+                                    </div>
+
+                                    <div className="userUpdateItem">
+                                        <label>Properties</label>
+                                        <input
+                                            type="text"
+                                            className="userUpdateInput"
+                                            value={properties}
+                                            onChange={(e)=>{setProperties(e.target.value)}}
+                                            name="rating"
+                                            placeholder="screan size: 15.6 inches, Hard disk size: 1256, Graphics: Dedicated"
                                         />
                                     </div>
 
