@@ -10,7 +10,7 @@ const About = () => {
             <h1 className="text-primary fw-bold mb-4 py-0">About Us</h1>
             <p className="lead mb-4">
               We Are a Team in Iti-Mansoura , we develope this website to our
-              graduation project <hr />
+              graduation project, 
               Lorem ipsum dolor sit amet consectetur adipisicing elit.
               Praesentium, illum, laudantium eligendi odio cum expedita mollitia
               corporis totam distinctio esse vitae commodi culpa ipsa

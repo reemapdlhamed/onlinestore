@@ -5,15 +5,15 @@ const FAQs = () => {
   return (
     <>
       <div className="content py-4">
-        <div classNameName="faq-header">
+        <div className="faq-header">
           <h1>
-            Frequently Asked Questions <i class="far fa-question-circle"></i>
+            Frequently Asked Questions <i className="far fa-question-circle"></i>
           </h1>
           <hr />
         </div>
 
         <h3>
-          <i class="far fa-question-circle"></i> Most Common Question{" "}
+          <i className="far fa-question-circle"></i> Most Common Question{" "}
         </h3>
         <hr />
         <div>
@@ -24,7 +24,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question1" className="question">
+          <label htmlFor="question1" className="question">
             How is quality ensured?{" "}
           </label>
           <div className="answers">
@@ -47,7 +47,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question2" className="question">
+          <label htmlFor="question2" className="question">
             Where do you deliver?
           </label>
           <div className="answers">
@@ -69,7 +69,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question3" className="question">
+          <label htmlFor="question3" className="question">
             When will my order be shipped?
           </label>
           <div className="answers">
@@ -92,7 +92,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question4" className="question">
+          <label htmlFor="question4" className="question">
             How can I place orders?
           </label>
           <div className="answers">
@@ -112,7 +112,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question5" className="question">
+          <label htmlFor="question5" className="question">
             What is the charge for processing?
           </label>
           <div className="answers">
@@ -131,7 +131,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question6" className="question">
+          <label htmlFor="question6" className="question">
             Which method of ordering is best for me?
           </label>
           <div className="answers">
@@ -148,7 +148,7 @@ const FAQs = () => {
         <hr />
 
         <h3>
-          <i class="far fa-question-circle"></i> PURCHASE, ORDERING, & RETURNS
+          <i className="far fa-question-circle"></i> PURCHASE, ORDERING, & RETURNS
         </h3>
         <hr />
 
@@ -160,7 +160,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question11" className="question">
+          <label htmlFor="question11" className="question">
             What is the "S&L" price?
           </label>
           <div className="answers">
@@ -178,7 +178,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question12" className="question">
+          <label htmlFor="question12" className="question">
             How do I order Cavendish Square Materials?
           </label>
           <div className="answers">
@@ -227,7 +227,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question13" className="question">
+          <label htmlFor="question13" className="question">
             How do I redeem coupons/discounts/online purchase bonuses?
           </label>
           <div className="answers">
@@ -256,7 +256,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question14" className="question">
+          <label htmlFor="question14" className="question">
             How long will it take for me to receive my order once it has been
             placed?
           </label>
@@ -277,7 +277,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question15" className="question">
+          <label htmlFor="question15" className="question">
             What happens when an item is Out of Stock? Does that mean it will be
             backordered?
           </label>
@@ -319,7 +319,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question16" className="question">
+          <label htmlFor="question16" className="question">
             What is your return policy?
           </label>
           <div className="answers">
@@ -340,7 +340,7 @@ const FAQs = () => {
         <hr />
 
         <h3>
-          <i class="far fa-question-circle"></i> TAX &amp; SHIPPING
+          <i className="far fa-question-circle"></i> TAX &amp; SHIPPING
         </h3>
         <hr />
 
@@ -352,7 +352,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question17" className="question">
+          <label htmlFor="question17" className="question">
             Do you charge sales tax?
           </label>
           <div className="answers">
@@ -367,7 +367,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question18" className="question">
+          <label htmlFor="question18" className="question">
             What is the cost for shipping & handling?
           </label>
           <div className="answers">
@@ -384,7 +384,7 @@ const FAQs = () => {
         <hr />
 
         <h3>
-          <i class="far fa-question-circle"></i> CUSTOMER SERVICE
+          <i className="far fa-question-circle"></i> CUSTOMER SERVICE
         </h3>
         <hr />
 
@@ -396,7 +396,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question24" className="question">
+          <label htmlFor="question24" className="question">
             What are your customer services?
           </label>
           <div className="answers">
@@ -434,7 +434,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question25" className="question">
+          <label htmlFor="question25" className="question">
             May I submit a question for FAQ?
           </label>
           <div className="answers">
@@ -446,7 +446,7 @@ const FAQs = () => {
         <hr />
 
         <h3>
-          <i class="far fa-question-circle"></i> USING THIS WEBSITE
+          <i className="far fa-question-circle"></i> USING THIS WEBSITE
         </h3>
         <hr />
 
@@ -458,7 +458,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question26" className="question">
+          <label htmlFor="question26" className="question">
             What are the benefits of registering for an online user account?
           </label>
           <div className="answers">
@@ -486,7 +486,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question27" className="question">
+          <label htmlFor="question27" className="question">
             What if I lose my username/password or I cannot log into my account?
           </label>
           <div className="answers">
@@ -507,7 +507,7 @@ const FAQs = () => {
             className="questions"
           />
           <div className="plus">+</div>
-          <label for="question28" className="question">
+          <label htmlFor="question28" className="question">
             Who do I contact with feedback regarding this site?
           </label>
           <div className="answers">
@@ -520,7 +520,7 @@ const FAQs = () => {
           <hr />
 
           <h3>
-            <i class="far fa-question-circle"></i> DOMESTIC &amp; INTERNATIONAL
+            <i className="far fa-question-circle"></i> DOMESTIC &amp; INTERNATIONAL
             SALES
           </h3>
           <hr />
@@ -533,7 +533,7 @@ const FAQs = () => {
               className="questions"
             />
             <div className="plus">+</div>
-            <label for="question20" className="question">
+            <label htmlFor="question20" className="question">
               How can I find my local sales representative?
             </label>
             <div className="answers">
@@ -552,7 +552,7 @@ const FAQs = () => {
               className="questions"
             />
             <div className="plus">+</div>
-            <label for="question21" className="question">
+            <label htmlFor="question21" className="question">
               How do I purchase books if I live outside of the United States?
             </label>
             <div className="answers">
@@ -572,7 +572,7 @@ const FAQs = () => {
               className="questions"
             />
             <div className="plus">+</div>
-            <label for="question22" className="question">
+            <label htmlFor="question22" className="question">
               Do you have distributors outside of the United States?
             </label>
             <div className="answers"></div>
@@ -585,7 +585,7 @@ const FAQs = () => {
               className="questions"
             />
             <div className="plus">+</div>
-            <label for="question23" className="question">
+            <label htmlFor="question23" className="question">
               How can I obtain a copy of your catalogs and brochures?
             </label>
             <div className="answers">
@@ -600,7 +600,7 @@ const FAQs = () => {
           <hr />
 
           <h3>
-            <i class="far fa-question-circle"></i> RIGHTS &amp; USAGE
+            <i className="far fa-question-circle"></i> RIGHTS &amp; USAGE
           </h3>
           <hr />
 
@@ -612,7 +612,7 @@ const FAQs = () => {
               className="questions"
             />
             <div className="plus">+</div>
-            <label for="question19" className="question">
+            <label htmlFor="question19" className="question">
               How do I inquire about reproduction, translation, electronic
               publishing, or subsidiary rights?
             </label>
