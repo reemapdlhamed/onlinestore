@@ -38,7 +38,7 @@ const Home = () => {
             alt="First slide"
           />
           <Carousel.Caption>
-            <h3>NEW SEASON ARRIVALS</h3>
+            <h4>NEW SEASON ARRIVALS</h4>
             <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
             <NavLink
               to="/products"
@@ -55,7 +55,7 @@ const Home = () => {
             alt="Second slide"
           />
           <Carousel.Caption>
-            <h3>NEW SEASON ARRIVALS</h3>
+            <h4>NEW SEASON ARRIVALS</h4>
             <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
             <NavLink
               to="/products"
@@ -72,7 +72,7 @@ const Home = () => {
             alt="third slide"
           />
           <Carousel.Caption>
-            <h3>NEW SEASON ARRIVALS</h3>
+            <h4>NEW SEASON ARRIVALS</h4>
             <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
             <NavLink
               to="/products"
@@ -86,7 +86,7 @@ const Home = () => {
           <img className="d-block w-100" src="/assets/4.jpg" alt="four slide" />
 
           <Carousel.Caption>
-            <h3>NEW SEASON ARRIVALS</h3>
+            <h4>NEW SEASON ARRIVALS</h4>
             <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
             <NavLink
               to="/products"
@@ -100,7 +100,7 @@ const Home = () => {
           <img className="d-block w-100" src="/assets/5.jpg" alt="five slide" />
 
           <Carousel.Caption>
-            <h3>NEW SEASON ARRIVALS</h3>
+            <h4>NEW SEASON ARRIVALS</h4>
             <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
             <NavLink
               to="/products"
