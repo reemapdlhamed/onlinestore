@@ -20,45 +20,49 @@ export default function BasicTable() {
     if (orderState[i]._id && id === orderState[i]._id) {
       itemz.push(orderState[i].orderItems);
       infoz.push(orderState[i]);
-
     }
   }
 
   console.log(infoz[0]);
 
   return (
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Image</TableCell>
-            <TableCell align="right">name</TableCell>
-            <TableCell align="right">quantity</TableCell>
-            <TableCell align="right">price</TableCell>
-            <TableCell align="right">status</TableCell>
-
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {itemz.length > 0 &&
-            itemz[0].map((row) => (
-              <TableRow
-                key={row.name}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  <img src={row.images[0]} height="200px" width="180px" />
-                </TableCell>
-                <TableCell align="right">{row.name}</TableCell>
-                <TableCell align="right">{row.qty}</TableCell>
-                <TableCell align="right">{row.price}</TableCell>
-                <TableCell align="right">{infoz[0].paymentStatus}</TableCell>
-
-              </TableRow>
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <div className="min-vh-100">
+      <TableContainer component={Paper} className="container my-5 ">
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell>Image</TableCell>
+              <TableCell align="right">name</TableCell>
+              <TableCell align="right">quantity</TableCell>
+              <TableCell align="right">price</TableCell>
+              <TableCell align="right">status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {itemz.length > 0 &&
+              itemz[0].map((row) => (
+                <TableRow
+                  key={row.name}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell component="th" scope="row">
+                    <img
+                      src={row.images[0]}
+                      height="200px"
+                      width="180px"
+                      alt={row.name}
+                    />
+                  </TableCell>
+                  <TableCell align="right">{row.name}</TableCell>
+                  <TableCell align="right">{row.qty}</TableCell>
+                  <TableCell align="right">{row.price}</TableCell>
+                  <TableCell align="right">{infoz[0].paymentStatus}</TableCell>
+                </TableRow>
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
 
     // import { NavLink } from 'react-router-dom'
     /*

@@ -153,7 +153,7 @@ export default function UserProfile() {
 
   return (
     <>
-      <div class="row">
+      <div class="row min-vh-100">
         <div class="card-container col-md-5">
           <img
             class="round"
@@ -267,8 +267,8 @@ export default function UserProfile() {
                 </Button>
               </form>
             </TabPanel>
-            <TabPanel value={value} index={1}>
-              <TableContainer component={Paper}>
+            <TabPanel value={value} index={1} >
+              <TableContainer component={Paper} className="my-5 mx-5">
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
