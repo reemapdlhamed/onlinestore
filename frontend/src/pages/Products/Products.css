@@ -5,6 +5,35 @@
     border: 2px solid #eee;
     transform:scale(120%);
 }
+.Card1:hover img{
+    filter: grayscale();
+}
+.Card1:hover .Card1-content{
+    height: 100%;
+    opacity: 0.8;
+    border-radius: 5px;
+    
+}
+.Card1{
+    position: relative;
+    transition-duration: 0.5s;
+    color: white;
+margin: 20px;    
+}
+.Card1-content{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 0;
+    opacity: 0;
+    background-color: black;
+    transition-duration: 0.5s;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+}
 .category-card{
     width: 30%;
     border: solid 2px #eee;
