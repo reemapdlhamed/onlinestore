@@ -80,7 +80,7 @@ export default function UserProfile() {
   var rows = [];
 
   for (let i = 0; i < orderState.length; i++) {
-    if (orderState[i]._id) {
+    if (orderState[i]._id&&orderState[i].customerName&&orderState[i].paymentStatus&&orderState[i].totalPrice) {
 
 
       rows.push({
