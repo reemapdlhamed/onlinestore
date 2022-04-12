@@ -54,7 +54,7 @@ const Orders = (props) => {
               <span class="text-medium">Shipped Via:</span> DHL
             </div>
             <div class="w-100 text-center py-1 px-2">
-              <span class="text-medium">Status:</span> Packing
+              <span class="text-medium">Status:</span> {orderStatus}
             </div>
             <div class="w-100 text-center py-1 px-2">
               <span class="text-medium">Expected Date:</span> APR 27, 2021
