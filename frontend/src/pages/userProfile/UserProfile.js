@@ -222,7 +222,7 @@ export default function UserProfile() {
                   class="far fa-eye"
                   id="togglePassword"
                   style={{
-                    paddingLeft: "3rem",  
+                    paddingLeft: "3rem",
                     marginLeft: " 75rem",
                     cursor: "pointer",
                   }}
