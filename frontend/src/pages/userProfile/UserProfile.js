@@ -94,7 +94,6 @@ export default function UserProfile() {
     }
   }
 
-  console.log("rows", rows);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {

@@ -10,20 +10,25 @@ import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function BasicTable() {
-  const { id } = useParams();
-  const orderState = useSelector((state) => state.handleOrders);
-  var itemz = [];
-  var infoz = [];
 
+
+export default function BasicTable() {
+
+  const { id } = useParams();
+  console.log("IDDD",id)
+  var itemz = [];
+var infoz = [];
+  const orderState = useSelector((state) => state.handleOrders);
   for (let i = 0; i < orderState.length; i++) {
     if (orderState[i]._id && id === orderState[i]._id) {
+      console.log("STATE",orderState)
       itemz.push(orderState[i].orderItems);
       infoz.push(orderState[i]);
+      
     }
   }
+  console.log(itemz)
 
-  console.log(infoz[0]);
 
   return (
     <div className="min-vh-100">

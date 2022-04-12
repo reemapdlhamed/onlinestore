@@ -13,7 +13,15 @@ const Orders = (props) => {
   const cartState = useSelector((state) => state.handleCart);
   const orderState = useSelector((state) => state.handleOrders);
 
-  console.log(orderState[1]);
+  var infoz=[]
+  for (let i = 0; i < orderState.length; i++) {
+    if (orderState[i]._id && id === orderState[i]._id) {
+      
+      infoz.push(orderState[i]);
+      break;
+    }
+  }
+  console.log("INFOZ",infoz)
   return (
     <div className="main_container min-vh-100 py-5">
       <div class="container padding-bottom-3x mb-1">
