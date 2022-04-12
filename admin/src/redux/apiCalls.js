@@ -31,6 +31,9 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  updateUserStart,
+  updateUserSuccess,
+  updateUserFailure
 } from "./userRedux"
 
 export const login = async (dispatch, user) => {
@@ -81,6 +84,7 @@ export const updateProduct = async (id, product, dispatch) => {
     dispatch(updateProductFailure());
   }
 };
+
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
@@ -130,4 +134,25 @@ export const getUsers = async (dispatch) => {
   }
 };
 
-//TODO: DeleteUsers > update backend
+export const deleteUser = async (id,dispatch)=>{
+  dispatch(deleteUserStart());
+  try {
+    const res = await userRequest.delete(`/users/${id}`);
+    console.log(res.data);
+    dispatch(deleteUserSuccess(id));
+  } catch (err) {
+    dispatch(deleteUserFailure());
+  }
+};
+
+export const updateUser = async (id, user, dispatch) => {
+  dispatch(updateUserStart());
+  try {
+    const res = await userRequest.put(`/users/${id}`, user);
+    console.log("Update Result", res);
+    dispatch(updateUserSuccess({ id, user }));
+  } catch (err) {
+    console.log("error", err);
+    dispatch(updateUserFailure());
+  }
+};

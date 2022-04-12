@@ -37,6 +37,7 @@ export default function ProductList() {
                 );
             },
         },
+        { field: "brand", headerName: "Brand", width: 220 },
         { field: "quantity", headerName: "Quantiy", width: 220 },
         //   { field: "inStock", headerName: "Stock", width: 200 },
         {
@@ -69,19 +70,25 @@ export default function ProductList() {
 
         <div className="list">
             <Sidebar />
-            <div className="productList">
-                <Link to="/products/new" replace>
-                    <button className="productAddButton">Add New Product</button>
-                </Link>
-                <DataGrid
-                    rows={products}
-                    disableSelectionOnClick
-                    columns={columns}
-                    getRowId={(row) => row._id}
-                    pageSize={10}
-                    rowsPerPageOptions={[10]}
+            <div className="dataContainer">
 
-                />
+                <div className="datagrid">
+                    <DataGrid
+                        rows={products}
+                        disableSelectionOnClick
+                        columns={columns}
+                        getRowId={(row) => row._id}
+                        pageSize={10}
+                        rowsPerPageOptions={[10]}
+
+                    />
+                </div>
+
+                <Link to="/products/new" replace>
+                    <button className="addButton">Add New Product</button>
+                </Link>
+
+
             </div>
         </div>
     );

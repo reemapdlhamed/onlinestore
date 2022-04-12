@@ -1,149 +1,156 @@
-import { useState } from "react";
-import "./newProduct.css";
+import "./newProduct.scss";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Navbar from "../../components/navbar/Navbar";
+import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
+import { useEffect, useState } from "react";
 import { addProduct } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
-// import {
-//   getStorage,
-//   ref,
-//   uploadBytesResumable,
-//   getDownloadURL,
-// } from "firebase/storage";
-// import app from "../../firebase";
+import { MenuItem, Select } from "@mui/material";
+import axios from "axios";
 
-export default function NewProduct() {
-  const [inputs, setInputs] = useState({});
-  const [file, setFile] = useState(null);
-  const [cat, setCat] = useState([]);
-  const dispatch = useDispatch();
+const NewProduct = () => {
 
-  const handleChange = (e) => {
-    setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
-    });
-  };
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
-  };
-const handleClick = (e) =>{
-    e.preventDefault();
-}
-//   const handleClick = (e) => {
-//     e.preventDefault();
-//     const fileName = new Date().getTime() + file.name;
-//     const storage = getStorage(app);
-//     const storageRef = ref(storage, fileName);
-//     const uploadTask = uploadBytesResumable(storageRef, file);
+    const getOptions = async () => {
+        const res = await axios.get('http://localhost:8080/categories')
+        const data = res.data.data;
+        console.log("cat data", data);
 
-//     // Register three observers:
-//     // 1. 'state_changed' observer, called any time the state changes
-//     // 2. Error observer, called on failure
-//     // 3. Completion observer, called on successful completion
-//     uploadTask.on(
-//       "state_changed",
-//       (snapshot) => {
-//         // Observe state change events such as progress, pause, and resume
-//         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-//         const progress =
-//           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-//         console.log("Upload is " + progress + "% done");
-//         switch (snapshot.state) {
-//           case "paused":
-//             console.log("Upload is paused");
-//             break;
-//           case "running":
-//             console.log("Upload is running");
-//             break;
-//           default:
-//         }
-//       },
-//       (error) => {
-//         // Handle unsuccessful uploads
-//       },
-//       () => {
-//         // Handle successful uploads on complete
-//         // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-//         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-//           const product = { ...inputs, img: downloadURL, categories: cat };
-//           addProduct(product, dispatch);
-//         });
-//       }
-//     );
-//   };
+        // const options = data.map(d => ({
+        //     "value": d._id,
+        //     "label": d.name
+        // }))
 
-  return (
-    <div className="newProduct">
-      <h1 className="addProductTitle">New Product</h1>
-      <form className="addProductForm">
-        <div className="addProductItem">
-          <label>Image</label>
-          <input
-            type="text"
-            id="file"
-            placeholder="image link"
-            onChange={handleChange}
-          />
+        setCatOptions(data);
+    }
+    const [file, setFile] = useState("");
+    const [properties, setProperties] = useState({});
+    const [image, setImage] = useState("");
+    const [inputs, setInputs] = useState({});
+    const [catOptions, setCatOptions] = useState([]);
+    const [category, setCategory] = useState("");
+    useEffect(() => {
+        getOptions();
+        console.log("options", catOptions);
+    }, []);
+    const dispatch = useDispatch();
+
+
+    const handlePropertiesChange = (e) => {
+        let input = e.target.value;
+        let prop = {};
+        for (let p of input.split(",")) {
+            prop[p.split(":")[0]?.trim()] = p.split(":")[1]?.trim();
+        }
+        setProperties(prop);
+    };
+
+    const handleChange = (e) => {
+        setInputs((prev) => {
+            return { ...prev, [e.target.name]: e.target.value };
+        });
+    };
+
+    let handleSubmit = async (e) => {
+        let product = { ...inputs, category_id: category, properties: properties, images: [image] };
+        console.log(product);
+        e.preventDefault();
+        try {
+            addProduct(product, dispatch);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    return (
+        <div className="new">
+            <Sidebar />
+            <div className="newContainer">
+                <Navbar />
+                <div className="top">
+                    <h1>Add new Product</h1>
+                </div>
+                <div className="bottom">
+                    <div className="left">
+                        <img
+                            src={
+                                file
+                                    ? URL.createObjectURL(file)
+                                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                            }
+                            alt=""
+                        />
+                    </div>
+                    <div className="right">
+                        <form onSubmit={handleSubmit}>
+                            <div className="formInput">
+                                <label htmlFor="file">
+                                    Image: <DriveFolderUploadOutlinedIcon className="icon" />
+                                </label>
+                                <input
+                                    type="file"
+                                    id="file"
+                                    onChange={(e) => setFile(e.target.files[0])}
+                                    style={{ display: "none" }}
+                                />
+                            </div>
+
+                            <div className="formInput">
+                                <label>Name</label>
+                                <input type="text" placeholder="Galaxy S22" name="name" onChange={handleChange} />
+                            </div>
+
+                            <div className="formInput">
+                                <label>Brand</label>
+                                <input type="text" placeholder="Samsung" name="brand" onChange={handleChange} />
+
+                            </div>
+
+                            <div className="formInput">
+                                <label>Description</label>
+                                <input type="text" name="description" onChange={handleChange} />
+                            </div>
+
+                            <div className="formInput">
+                                <label>Properties</label>
+                                <input type="text" name="properties" onChange={handlePropertiesChange} placeholder="Memory:8GB, Colour:Black"/>
+                            </div>
+
+
+                            <div className="formInput">
+                                <label>Quantity</label>
+                                <input type="number" placeholder="1" name="quantity" onChange={handleChange} />
+                            </div>
+
+
+                            <div className="formInput">
+                                <label>Price</label>
+                                <input type="number" placeholder="999" name="price" onChange={handleChange} />
+                            </div>
+
+                            <div className="formInput">
+                                <label>image url</label>
+                                <input type="text" name="image" onChange={(e) => { setImage(e.target.value) }} />
+                            </div>
+
+                            <div className="formInput">
+                                <label>Category</label>
+                                <Select onChange={(e) => setCategory(e.target.value)}>
+                                    {
+                                        catOptions.map(d => {
+                                            return <MenuItem value={d._id}>{d.name}</MenuItem>
+                                        })
+                                    }
+                                </Select>
+                            </div>
+
+
+                            <button type="submit">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div className="addProductItem">
-          <label>Name</label>
-          <input
-            name="name"
-            type="text"
-            placeholder="Galaxy S22"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>Brand</label>
-          <input
-            name="brand"
-            type="text"
-            placeholder="samsung"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>quantity</label>
-          <input
-            name="quantity"
-            type="number"
-            placeholder="100"
-            onChange={handleChange}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>Description</label>
-          <input
-            name="description"
-            type="text"
-            placeholder="description..."
-            onChange={handleChange}
-          />
-        </div>
-        <div className="addProductItem">
-          <label>Price</label>
-          <input
-            name="price"
-            type="number"
-            placeholder="100"
-            onChange={handleChange}
-          />
-        </div>
-        
-        <div className="addProductItem">
-          <label>Categories</label>
-          <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
-        </div>
-        <div className="addProductItem">
-          <label>Stock</label>
-          <select name="inStock" onChange={handleChange}>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
-        <button onClick={handleClick} className="addProductButton">
-          Create
-        </button>
-      </form>
-    </div>
-  );
-}
+    );
+};
+
+export default NewProduct;

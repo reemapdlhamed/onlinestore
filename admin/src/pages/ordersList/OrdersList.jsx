@@ -29,24 +29,26 @@ const OrdersList = () => {
     }
 
     const columns = [
-        { field: "_id", headerName: "ID", width: 220 },
+        { field: "_id", headerName: "ID", width: 240 },
         { field: "customerName", headerName: "Customer", width: 120, },
-        { field: "phoneNumber", headerName: "Phone", width: 160 },
+        // { field: "phoneNumber", headerName: "Phone", width: 160 },
+        { field: "totalPrice", headerName: "Price", width: 120, },
         { field: "orderStatus", headerName: "Order Status", width: 160 },
-        { field: "totalPrice", headerName: "Price", width: 160, },
-        {
-            field: "shippingAddress", headerName: "Address", width: 160,
-            // valueGetter: getAdress
-            renderCell: (params) => {
-                return <div style={{ colore: "red" }}>
-                    <p><strong>country: </strong>{params.row.shippingAddress.country}</p>
-                    <p><strong>city: </strong>{params.row.shippingAddress.city}</p>
-                    <p><strong>postalCode: </strong>{params.row.shippingAddress.postalCode}</p>
-                    <p><strong>street: </strong>{params.row.shippingAddress.street}</p>
-                    <p><strong>Building: </strong>{params.row.shippingAddress.building}</p>
-                </div>
-            }
-        },
+        { field: "paymentType", headerName: "payment Type", width: 160 },
+        { field: "paymentStatus", headerName: "payment Status", width: 160 },
+        // {
+        //     field: "shippingAddress", headerName: "Address", width: 160,
+        //     // valueGetter: getAdress
+        //     renderCell: (params) => {
+        //         return <div style={{ colore: "red" }}>
+        //             <p><strong>country: </strong>{params.row.shippingAddress.country}</p>
+        //             <p><strong>city: </strong>{params.row.shippingAddress.city}</p>
+        //             <p><strong>postalCode: </strong>{params.row.shippingAddress.postalCode}</p>
+        //             <p><strong>street: </strong>{params.row.shippingAddress.street}</p>
+        //             <p><strong>Building: </strong>{params.row.shippingAddress.building}</p>
+        //         </div>
+        //     }
+        // },
         {
             field: "createdAt", headerName: "created At", width: 200,
             valueFormatter: (params) => { return new Date(params.value).toLocaleString() }
@@ -88,24 +90,18 @@ const OrdersList = () => {
     return (
         <div className="list">
             <Sidebar />
-            <div className="listContainer">
-                <DataGrid
-                    rows={orders}
-                    disableSelectionOnClick
-                    columns={columns}
-                    getRowId={(row) => row._id}
-                    pageSize={8}
-                    rowsPerPageOptions={[8]}
-                    rowHeight={120}
-                    sx={{
-
-                        boxShadow: 2,
-                        border: 2,
-                        borderColor: 'rgb(230, 227, 227);',
-                        margin: '1em',
-                    }}
-                />
-
+            <div className="dataContainer">
+                <div className="datagrid">
+                    <DataGrid
+                        rows={orders}
+                        disableSelectionOnClick
+                        columns={columns}
+                        getRowId={(row) => row._id}
+                        pageSize={5}
+                        rowsPerPageOptions={[5]}
+                   
+                    />
+                </div>
             </div>
         </div>
     )

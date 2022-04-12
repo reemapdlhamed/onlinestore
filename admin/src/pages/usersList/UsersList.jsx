@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { getUsers } from '../../redux/apiCalls';
+import { getUsers, deleteUser } from '../../redux/apiCalls';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Button } from '@mui/material';
 import { display } from '@mui/system';
+import "./usersList.scss"
 
 
 const UsersList = () => {
@@ -20,15 +21,15 @@ const UsersList = () => {
     }, [dispatch]);
 
     const handleDelete = (id) => {
-        // deleteOrder(id, dispatch);
+        deleteUser(id, dispatch);
     };
 
     const columns = [
-        { field: "_id", headerName: "ID", width: 220 },
-        { field: "name", headerName: "Name", width: 220 },
-        { field: "email", headerName: "email", width: 220 },
+        { field: "_id", headerName: "ID", width: 250 },
+        { field: "name", headerName: "Name", width: 250 },
+        { field: "email", headerName: "email", width: 250 },
         { field: "role", headerName: "role", width: 220 },
-    
+
         {
             field: "action",
             headerName: "Action",
@@ -36,7 +37,7 @@ const UsersList = () => {
             renderCell: (params) => {
                 return (
                     <>
-                        <Link to={"/orders/" + params.row._id}>
+                        <Link to={"/users/" + params.row._id}>
                             <button className="productListEdit">Edit</button>
                         </Link>
                         <DeleteOutlineIcon
@@ -48,27 +49,30 @@ const UsersList = () => {
             },
         },
     ];
+    // <div className="list">
+    // <Sidebar />
+    // <div className="listContainer">
+    //     <DataGrid
 
     return (
         <div className="list">
             <Sidebar />
-            <div className="listContainer">
-                <DataGrid
-                    rows={users}
-                    disableSelectionOnClick
-                    columns={columns}
-                    getRowId={(row) => row._id}
-                    pageSize={8}
-                    rowsPerPageOptions={[8]}
-                    rowHeight={120}
-                    sx={{
+            <div className="dataContainer">
+                <div className="datagrid">
+                    <DataGrid
+                        rows={users}
+                        disableSelectionOnClick
+                        columns={columns}
+                        getRowId={(row) => row._id}
+                        pageSize={13}
+                        rowsPerPageOptions={[2]}
+                        pagination
 
-                        boxShadow: 2,
-                        border: 2,
-                        borderColor: 'rgb(230, 227, 227);',
-                        margin: '1em',
-                    }}
-                />
+                    />
+                </div>
+                <Link to="/users/new" replace>
+                    <button className="addButton">Add New User</button>
+                </Link>
 
             </div>
         </div>
