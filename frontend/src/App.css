@@ -68,84 +68,93 @@ body {
 }
 
 /* FAQs */
-
-.faq-header{
-  font-size: 42px;
-  border-bottom: 1px dotted #ccc;
-  padding: 24px;
-  text-align: center;
+h1 {
+ font-family: "Lato", sans-serif;
+font-weight: 700;
+font-style: normal;
+color: #4fa9e5;
+  font-size: 32px;
+  text-align: center; 
+}
+h3{
+  color: #4fa9e5;
 
 }
-
-.faq-content {
+.content {
+  width: 80%;
+  padding: 20px;
   margin: 0 auto;
+  padding: 0 60px 0 0;
 }
 
-.faq-question {
-  padding: 20px 0;
-  border-bottom: 1px dotted #ccc;
+.centerplease {
+  margin: 0 auto;
+  max-width: 270px;
+  font-size: 40px;
 }
 
-.panel-title {
-  font-size: 24px;
-  width: 100%;
+.question {
+  color: #fff;
   position: relative;
+  background: #617f8f;
   margin: 0;
-  padding: 10px 10px 0 48px;
+  padding: 10px 10px 10px 50px;
   display: block;
+  width:100%;
   cursor: pointer;
 }
 
-.panel-content {
-  font-size: 20px;
-  padding: 0px 14px;
-  margin: 0 40px;
+.answers {
+  font-weight:300;
+  background: #f2f2f2;
+  padding: 0px 15px;
+  margin: 0px 0;
   height: 0;
   overflow: hidden;
   z-index: -1;
   position: relative;
   opacity: 0;
-  -webkit-transition: .4s ease;
-  -moz-transition: .4s ease;
-  -o-transition: .4s ease;
-  transition: .4s ease;
+  -webkit-transition: .7s ease;
+  -moz-transition: .7s ease;
+  -o-transition: .7s ease;
+  transition: .7s ease;
 }
 
-.panel:checked ~ .panel-content{
+.questions:checked ~ .answers{
   height: auto;
   opacity: 1;
-  padding: 14px;
+  padding: 15px;
 }
 
 .plus {
+  color:#fff;
   position: absolute;
-  margin-left: 20px;
-  margin-top: 4px;
+  margin-left: 10px;
+  margin-top: 5px;
   z-index: 5;
-  font-size: 42px;
+  font-size: 2em;
   line-height: 100%;
   -webkit-user-select: none;    
   -moz-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  -webkit-transition: .2s ease;
-  -moz-transition: .2s ease;
-  -o-transition: .2s ease;
-  transition: .2s ease;
+  -webkit-transition: .3s ease;
+  -moz-transition: .3s ease;
+  -o-transition: .3s ease;
+  transition: .3s ease;
 }
 
-.panel:checked ~ .plus {
+.questions:checked ~ .plus {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
-.panel {
+.questions {
   display: none;
 }
-
 
 
 

@@ -39,7 +39,7 @@ const Cart = () => {
   const emptyCart = () => {
     return (
       <div className="px-4 my-5 bg-light rounded-3 py-0">
-        <div className="container ">
+        <div className="container min-vh-100">
           <div className="alert alert-info text-center mt-3">
             <h3>Your Cart is Empty</h3>
             <NavLink

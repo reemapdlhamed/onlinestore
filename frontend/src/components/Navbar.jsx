@@ -182,11 +182,12 @@ const Navbar = () => {
             <div className="buttons">
               {button}
               <NavLink to="/cart" className="btn btn-outline-success ms-2">
-                <i className="fas fa-shopping-cart me-1"></i> Cart(
-                {state.length})
+                <i className="fas fa-shopping-cart fa-1x"></i> <b><sup>(
+                {state.length})</sup></b>
               </NavLink>
+
               <NavLink to="/FAQs" className="btn btn-outline-primary ms-2">
-                <i className="far fa-question-circle me-1"></i>Help
+                <i className="far fa-question-circle fa-1x"></i>
               </NavLink>
             </div>
           </div>
