@@ -95,9 +95,9 @@ const Orders = (props) => {
           <NavLink
           
           to={`../order-details/${id}`}
-          className=" btn-outline-dark  ms-2 px-3 py-2"
+          className="btn btn-outline-dark  ms-2 px-3 py-2"
         >
-          {id}
+          view order details
         </NavLink>
           </div>
         </div>
