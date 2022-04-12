@@ -86,7 +86,7 @@ export default function UserProfile() {
       rows.push({
         id: orderState[i]._id,
         customerName: orderState[i].customerName,
-        paymentStatus: orderState[i].paymentStatus,
+        orderStatus: orderState[i].orderStatus,
         totalPrice: orderState[i].totalPrice,
       });
 
@@ -299,7 +299,7 @@ export default function UserProfile() {
                         <TableCell align="right">
                           {row.Name} {localStorage.getItem("name")}
                         </TableCell>
-                        <TableCell align="right">{row.paymentStatus} </TableCell>
+                        <TableCell align="right">{row.orderStatus} </TableCell>
                         <TableCell align="right">{row.totalPrice}</TableCell>
                       </TableRow>
                     ))}
