@@ -70,7 +70,7 @@ const Checkout = (props) => {
     total = total + item.price * item.qty;
 
     return (
-      <li className="list-group-item d-flex justify-content-between lh-sm">
+      <li className="list-group-item d-flex justify-content-between lh-sm ">
         <div>
           <h6 className="my-0">
             {item.qty} X {item.name}
@@ -83,7 +83,7 @@ const Checkout = (props) => {
 
   return (
     <>
-      <div  className="container my-5">
+      <div  className="container my-5 min-vh-100">
         <div  style={{margin:"0 auto",display:"block"}}  className="row g-5">
           <div style={{margin:"0 auto",display:"block" }}   className="col-md-5 col-lg-4 order-md-last">
             <h4 className="d-flex justify-content-between align-items-center mb-3">
