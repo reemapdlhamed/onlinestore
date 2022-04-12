@@ -15,19 +15,17 @@ import { useDispatch, useSelector } from "react-redux";
 export default function BasicTable() {
 
   const { id } = useParams();
-  console.log("IDDD",id)
   var itemz = [];
 var infoz = [];
   const orderState = useSelector((state) => state.handleOrders);
+  if(infoz.length===0)
   for (let i = 0; i < orderState.length; i++) {
     if (orderState[i]._id && id === orderState[i]._id) {
-      console.log("STATE",orderState)
       itemz.push(orderState[i].orderItems);
       infoz.push(orderState[i]);
-      
+      break;
     }
   }
-  console.log(itemz)
 
 
   return (
