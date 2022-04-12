@@ -124,7 +124,7 @@ const Home = () => {
         className="d-flex flex-wrap justify-content-around"
         style={{
           marginTop: "70px",
-          backgroundColor: "#eee",
+          backgroundColor: "#F7F7F7",
           paddingTop: "40px",
         }}
       >

@@ -78,7 +78,7 @@ const Contact = () => {
   return (
     <div>
       <section id="contact">
-        <div className="container my-5 py-0">
+        <div className="container my-5 py-0 min-vh-100">
           <div className="row mb-5">
             <div className="col-12">
               <h1 className="display-6 text-center mb-4">

@@ -15,7 +15,7 @@ const Orders = (props) => {
 
   console.log(orderState[1]);
   return (
-    <div className="main_container">
+    <div className="main_container min-vh-100 py-5">
       <div class="container padding-bottom-3x mb-1">
         <div class="card mb-3">
           <div class="p-4 text-center text-white text-lg bg-dark rounded-top">
