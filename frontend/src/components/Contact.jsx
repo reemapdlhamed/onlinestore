@@ -86,12 +86,12 @@ const Contact = () => {
               </h1>
               <hr className="w-25 mx-auto" />
             </div>
+            {popup}
           </div>
           <div className="row">
             <div className="col-md-6">
               <img src="/assets/images/contact.png" alt="Contact" className="w-75" />
             </div>
-            {popup}
             <div className="col-md-6">
               <form onSubmit={handleSubmit} method="POST">
                 <div className="mb-3">

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink ,Link} from 'react-router-dom'
 
 const About = () => {
     return (
@@ -18,50 +18,129 @@ const About = () => {
                         <img src="/assets/images/about.png" alt="About Us" height="400px" width="400px" />
                     </div>
                 </div>
-            </div>
-            <div className="our-work-process">
-  <div className="container">
-    <div className="row">
-      <div className="col-12">
-        <h2>Our Services Process</h2>
-      </div>
-      <div className="col-6 col-lg-3">
-        <div className="step-box">
-          <span className="step-number">1</span>
-          <div className="step-icon">
-          <i className="fas fa-adn"></i>
+                <div className="testimonials" id="testimonials">
+      <h2 className="main-title">Our Team Members</h2>
+      <div className="container">
+        <div className="box">
+          <img src="/assets/avatar-01.png" alt="" />
+          <h3>Abdelrhman Zaki</h3>
+          <span className="title">Full Stack Developer</span>
+          <div className="rate">
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="far fa-star"></i>
           </div>
-          <label>Book Your Order</label>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis voluptatum, amet est natus
+            quaerat ducimus
+          </p>
         </div>
-      </div>
-
-      <div className="col-6 col-lg-3">
-        <div className="step-box">
-          <span className="step-number">2</span>
-          <div className="step-icon"><i className="fas fa-archive" aria-hidden="true"></i></div>
-          <label>put it in The Cart</label>
+        <div className="box">
+          <img src="/assets/avatar-02.png" alt="" />
+          <h3>Adel Elfar</h3>
+          <span className="title">Full Stack Developer</span>
+          <div className="rate">
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="far fa-star"></i>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis voluptatum, amet est natus
+            quaerat ducimus
+          </p>
         </div>
-      </div>
-
-      <div className="col-6 col-lg-3">
-        <div className="step-box">
-          <span className="step-number">3</span>
-          <div className="step-icon"><i className="fas fa-truck" aria-hidden="true"></i></div>
-          <label>Payment</label>
+        <div className="box">
+          <img src="/assets/avatar-04.png" alt="" />
+          <h3>Hassan Osama</h3>
+          <span className="title">Full Stack Developer</span>
+          <div className="rate">
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="far fa-star"></i>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis voluptatum, amet est natus
+            quaerat ducimus
+          </p>
         </div>
-      </div>
-
-      <div className="col-6 col-lg-3">
-        <div className="step-box">
-          <span className="step-number">4</span>
-          <div className="step-icon"><i className="fas fa-thumbs-o-up" aria-hidden="true"></i></div>
-          <label>Deliver Your Things</label>
+        <div className="box">
+          <img src="/assets/avatar-03.png" alt="" />
+          <h3>Amed ElManzlawy</h3>
+          <span className="title">Full Stack Developer</span>
+          <div className="rate">
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="far fa-star"></i>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis voluptatum, amet est natus
+            quaerat ducimus
+          </p>
+        </div>
+        <div className="box">
+          <img src="/assets/avatar-05.png" alt="" />
+          <h3>Ahmed Kamal</h3>
+          <span className="title">Full Stack Developer</span>
+          <div className="rate">
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="far fa-star"></i>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis voluptatum, amet est natus
+            quaerat ducimus
+          </p>
+        </div>
+        <div className="box">
+          <img src="/assets/avatar-06.png" alt="" />
+          <h3>Reem Abdelhamid</h3>
+          <span className="title">Full Stack Developer</span>
+          <div className="rate">
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="filled fas fa-star"></i>
+            <i className="far fa-star"></i>
+          </div>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores et reiciendis voluptatum, amet est natus
+            quaerat ducimus
+          </p>
         </div>
       </div>
     </div>
-  </div>
-</div>
+    <div className="features" id="features">
+      <h2 className="main-title">Features</h2>
+      <div className="container">
+        <div className="box quality">
+          <div className="img-holder"><img src="/assets/features-01.jpg" alt="" /></div>
+          <h2>Quality</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum hic veniam eligendi minima</p>
         </div>
+        <div className="box time">
+          <div className="img-holder"><img src="/assets/features-02.jpg" alt="" /></div>
+          <h2>Time</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum hic veniam eligendi minima</p>
+        </div>
+        <div className="box passion">
+          <div className="img-holder"><img src="/assets/features-03.jpg" alt="" /></div>
+          <h2>Passion</h2>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit harum hic veniam eligendi minima</p>
+        </div>
+      </div>
+    </div>
+            </div>
+    </div>
     )
 }
 
