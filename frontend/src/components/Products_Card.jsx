@@ -22,7 +22,7 @@ function Products_Card(props) {
   return (
     <Card
       className="Card1"
-      style={{ width: "250px", height: "300px", marginBottom: "50px" }}
+      style={{ width: "200px", height: "250px", marginBottom: "50px" }}
     >
       <CardMedia
         style={{ objectFit: "contain" }}
@@ -33,7 +33,7 @@ function Products_Card(props) {
       />
       <CardContent className="Card1-content"
       >
-        <Typography style={{color:"white"}} gutterBottom variant="h5" component="div">
+        <Typography style={{color:"white"}} gutterBottom variant="h7" component="div">
           {props.product.name}
         </Typography>
         <Typography style={{color:"white"}} gutterBottom variant="h7" component="div">
