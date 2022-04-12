@@ -83,7 +83,7 @@ const About = () => {
             </div>
             <div className="box">
               <img src="/assets/avatar-03.png" alt="" />
-              <h3>Amed ElManzlawy</h3>
+              <h3>Ahmed ElManzlawy</h3>
               <span className="title">Full Stack Developer</span>
               <div className="rate">
                 <i className="filled fas fa-star"></i>
