@@ -98,29 +98,7 @@ const handleCart = (state = cart, action) => {
 
       break;
 
-    case "ADDORDERS":
-      const orders = state.find((x) => x._id === product._id);
-      if (orders) {
-        if (orders.quantity === orders.qty)
-          return state.map((x) =>
-            x._id === product._id ? { ...x, qty: x.qty } : x
-          );
-        // Increase the Quantity
-        return state.map((x) =>
-          x._id === product._id ? { ...x, qty: x.qty + 1 } : x
-        );
-      } else {
-        const product = action.payload;
 
-        return [
-          ...state,
-          {
-            ...product,
-          },
-        ];
-      }
-
-      break;
     case "DELITEM":
       const exist1 = state.find((x) => x._id === product._id);
       if (exist1 && exist1.qty === 1) {
