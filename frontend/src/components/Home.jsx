@@ -120,7 +120,7 @@ const Home = () => {
         })}
       </Container>
       <Container
-        fluid
+        fluid="true"
         className="d-flex flex-wrap justify-content-around"
         style={{
           marginTop: "70px",
@@ -130,7 +130,7 @@ const Home = () => {
       >
         <div
           style={{ width: "100%" }}
-          fluid
+          fluid="true"
           className="d-flex flex-wrap justify-content-center"
         >
           <h1 style={{ width: "80%", textAlign: "center", color: "#999" }}>

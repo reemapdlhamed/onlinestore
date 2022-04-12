@@ -155,17 +155,17 @@ export default function UserProfile() {
 
   return (
     <>
-      <div class="row min-vh-100">
-        <div class="card-container col-md-5">
+      <div className="row min-vh-100">
+        <div className="card-container col-md-5">
           <img
-            class="round"
+            className="round"
             style={{ width: "140px" }}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRpEZxjP9nLQsGEntnPcYFGVXtNmFGysDTZA&usqp=CAU"
             alt="user"
           />
           <h3>{localStorage.getItem("name")}</h3>
 
-          <div class="buttons">
+          <div className="buttons">
             <Tabs
               value={value}
               onChange={handleChange}
@@ -174,14 +174,14 @@ export default function UserProfile() {
             >
               <Tab
                 label="Setting"
-                class="primary "
+                className="primary "
                 style={{ padding: "1rem", color: "white" }}
                 {...a11yProps(0)}
               />
               <Tab
                 label="Order List"
                 style={{ color: "white" }}
-                class="primary ghost"
+                className="primary ghost"
                 {...a11yProps(1)}
               />
             </Tabs>
@@ -189,11 +189,11 @@ export default function UserProfile() {
         </div>
 
         <div
-          class="tab-content col-md-7 pb-5 pt-lg-0  "
+          className="tab-content col-md-7 pb-5 pt-lg-0  "
           id="v-pills-tabContent"
         >
           <div
-            class="tab-pane fade show active"
+            className="tab-pane fade show active"
             id="v-pills-home"
             role="tabpanel"
             aria-labelledby="v-pills-home-tab"
@@ -242,7 +242,7 @@ export default function UserProfile() {
                 />
                 <i
                   onClick={togglePassword}
-                  class="far fa-eye"
+                  className="far fa-eye"
                   id="togglePassword"
                   style={{
                     paddingLeft: "3rem",
@@ -311,7 +311,7 @@ export default function UserProfile() {
             </TabPanel>
           </div>
           <div
-            class="tab-pane fade"
+            className="tab-pane fade"
             id="v-pills-profile"
             role="tabpanel"
             aria-labelledby="v-pills-profile-tab"
