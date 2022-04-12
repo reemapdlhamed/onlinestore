@@ -56,7 +56,7 @@ export default function BasicTable() {
                   <TableCell align="right">{row.name}</TableCell>
                   <TableCell align="right">{row.qty}</TableCell>
                   <TableCell align="right">{row.price}</TableCell>
-                  <TableCell align="right">{infoz[0].paymentStatus}</TableCell>
+                  <TableCell align="right">{infoz[0].orderStatus}</TableCell>
                 </TableRow>
               ))}
           </TableBody>
