@@ -10,6 +10,7 @@ import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import Home from "../../components/Home";
 import { Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { border } from "@mui/system";
 import "./userProfile.css";
@@ -25,6 +26,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
+
+import IconButton from "@mui/material/IconButton";
+import FilledInput from "@mui/material/FilledInput";
+import OutlinedInput from "@mui/material/OutlinedInput";
+import FormHelperText from "@mui/material/FormHelperText";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useDispatch, useSelector } from "react-redux";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -67,7 +78,25 @@ export default function UserProfile() {
     showPassword: false,
   });
 
-  const rows = [createData(localStorage.getItem("_id"))];
+  const orderState = useSelector((state) => state.handleOrders);
+
+  var rows = [];
+
+  for (let i = 0; i < orderState.length; i++) {
+    if (orderState[i]._id&&orderState[i].customerName&&orderState[i].paymentStatus&&orderState[i].totalPrice) {
+
+
+      rows.push({
+        id: orderState[i]._id,
+        customerName: orderState[i].customerName,
+        orderStatus: orderState[i].orderStatus,
+        totalPrice: orderState[i].totalPrice,
+      });
+
+   
+    }
+  }
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -126,7 +155,7 @@ export default function UserProfile() {
 
   return (
     <>
-      <div class="row">
+      <div class="row min-vh-100">
         <div class="card-container col-md-5">
           <img
             class="round"
@@ -240,8 +269,8 @@ export default function UserProfile() {
                 </Button>
               </form>
             </TabPanel>
-            <TabPanel value={value} index={1}>
-              <TableContainer component={Paper}>
+            <TabPanel value={value} index={1} >
+              <TableContainer component={Paper} className="my-5 mx-5">
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
@@ -262,13 +291,18 @@ export default function UserProfile() {
                         }}
                       >
                         <TableCell component="th" scope="row">
-                          {row.ID}
+                        <NavLink
+                        to={`orders/${row.id}`}
+                        className=" btn-outline-dark  ms-2 px-3 py-2"
+                      >
+                        {row.id}
+                      </NavLink>
                         </TableCell>
                         <TableCell align="right">
                           {row.Name} {localStorage.getItem("name")}
                         </TableCell>
-                        <TableCell align="right">{row.Status} </TableCell>
-                        <TableCell align="right">{row.Total}</TableCell>
+                        <TableCell align="right">{row.orderStatus} </TableCell>
+                        <TableCell align="right">{row.totalPrice}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

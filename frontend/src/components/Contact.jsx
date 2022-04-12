@@ -78,7 +78,7 @@ const Contact = () => {
   return (
     <div>
       <section id="contact">
-        <div className="container my-5 py-0">
+        <div className="container my-5 py-0 min-vh-100">
           <div className="row mb-5">
             <div className="col-12">
               <h1 className="display-6 text-center mb-4">
@@ -86,12 +86,12 @@ const Contact = () => {
               </h1>
               <hr className="w-25 mx-auto" />
             </div>
+            {popup}
           </div>
           <div className="row">
             <div className="col-md-6">
               <img src="/assets/images/contact.png" alt="Contact" className="w-75" />
             </div>
-            {popup}
             <div className="col-md-6">
               <form onSubmit={handleSubmit} method="POST">
                 <div className="mb-3">

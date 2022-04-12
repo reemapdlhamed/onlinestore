@@ -22,26 +22,21 @@ function Products_Card(props) {
   return (
     <Card
       className="Card1"
-      style={{ width: "300px", height: "500px", marginBottom: "50px" }}
+      style={{ width: "200px", height: "250px", marginBottom: "50px" }}
     >
       <CardMedia
         style={{ objectFit: "contain" }}
         component="img"
-        height="60%"
+        height="100%"
         image={props.product.images[0]}
         alt="green iguana"
       />
-      <CardContent
-        style={{
-          border: "1px solid #eee",
-          height: "40%",
-          backgroundColor: "#F4F9F9",
-        }}
+      <CardContent className="Card1-content"
       >
-        <Typography gutterBottom variant="h7" component="div">
+        <Typography style={{color:"white"}} gutterBottom variant="h7" component="div">
           {props.product.name}
         </Typography>
-        <Typography gutterBottom variant="h7" component="div">
+        <Typography style={{color:"white"}} gutterBottom variant="h7" component="div">
           {props.product.price} E£
         </Typography>
         <Rating name="read-only" value={props.product.rating} readOnly />
