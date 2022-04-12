@@ -10,6 +10,7 @@ import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import Home from "../../components/Home";
 import { Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { border } from "@mui/system";
 import "./userProfile.css";
@@ -31,6 +32,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import FormHelperText from "@mui/material/FormHelperText";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { useDispatch, useSelector } from "react-redux";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -73,7 +75,26 @@ export default function UserProfile() {
     showPassword: false,
   });
 
-  const rows = [createData(localStorage.getItem("_id"))];
+  const orderState = useSelector((state) => state.handleOrders);
+
+  var rows = [];
+
+  for (let i = 0; i < orderState.length; i++) {
+    if (orderState[i]._id) {
+
+
+      rows.push({
+        id: orderState[i]._id,
+        customerName: orderState[i].customerName,
+        paymentStatus: orderState[i].paymentStatus,
+        totalPrice: orderState[i].totalPrice,
+      });
+
+   
+    }
+  }
+
+  console.log("rows", rows);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -222,7 +243,7 @@ export default function UserProfile() {
                   class="far fa-eye"
                   id="togglePassword"
                   style={{
-                    paddingLeft: "3rem",  
+                    paddingLeft: "3rem",
                     marginLeft: " 75rem",
                     cursor: "pointer",
                   }}
@@ -268,13 +289,18 @@ export default function UserProfile() {
                         }}
                       >
                         <TableCell component="th" scope="row">
-                          {row.ID}
+                        <NavLink
+                        to={`orders/${row.id}`}
+                        className=" btn-outline-dark  ms-2 px-3 py-2"
+                      >
+                        {row.id}
+                      </NavLink>
                         </TableCell>
                         <TableCell align="right">
                           {row.Name} {localStorage.getItem("name")}
                         </TableCell>
-                        <TableCell align="right">{row.Status} </TableCell>
-                        <TableCell align="right">{row.Total}</TableCell>
+                        <TableCell align="right">{row.paymentStatus} </TableCell>
+                        <TableCell align="right">{row.totalPrice}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
