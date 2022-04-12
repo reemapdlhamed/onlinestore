@@ -43,7 +43,7 @@ const Navbar = () => {
       <nav
         className="navbar navbar-expand-lg navbar-light bg-white py-2
        shadow-sm"
-        style={{ position: "relative" }}
+        style={{ position: "relative" , zIndex:"2"}}
       >
         <div className="container">
           <NavLink className="navbar-brand" to="#">

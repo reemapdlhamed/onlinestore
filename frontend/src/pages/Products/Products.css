@@ -46,12 +46,12 @@ margin: 40px;
 }
 .products-sidebar{
     width: 20%;
-    height: 80vh;
+    height: 90vh;
     background-color: #61A4BC;
     border: 2px solid #eee;
     position: fixed;
     left: 0;
-    top:90px;
+    top:65px;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
     box-shadow: 11px 0px 20px 0px #dee2e682;
