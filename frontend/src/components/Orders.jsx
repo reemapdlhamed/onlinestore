@@ -106,7 +106,7 @@ const Orders = (props) => {
           </div>
         </div>
         <div className="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
-          <div className="custom-control custom-checkbox mr-3">
+          {/* <div className="custom-control custom-checkbox mr-3">
             <input
               className="custom-control-input"
               type="checkbox"
@@ -116,12 +116,12 @@ const Orders = (props) => {
             <label className="custom-control-label" htmlFor="notify_me">
               Notify me when order is delivered
             </label>
-          </div>
+          </div> */}
           <div className="text-left text-sm-right">
             <BrowserRouter basename="/calendar" />
             <NavLink
               to={`../order-details/${id}`}
-              classNameName="btn btn-outline-dark  ms-2 px-3 py-2"
+              className="btn btn-outline-dark  ms-2 px-3 py-2"
             >
               view order details
             </NavLink>

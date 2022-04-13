@@ -294,10 +294,11 @@ const FAQs = () => {
               online), please specify how you would wish to process backorders
               if they occur.{" "}
             </p>
+            <ul>
             <p>
               Selections include:
               <br />
-              <ul>
+              
                 <li>
                   Billing at the time of order processing or billing when the
                   backordered item(s) ship
@@ -307,8 +308,8 @@ const FAQs = () => {
                   termination date when an order should be canceled if items
                   still remain on backorder status on that date
                 </li>
+              </p>
               </ul>
-            </p>
           </div>
         </div>
         <div>
