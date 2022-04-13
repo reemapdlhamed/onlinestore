@@ -138,16 +138,16 @@ const Product = () => {
           />
         </div>
         <div className="col-md-6">
-          <h4 className="text-uppercase text-black fw-bold display-6">
+          <h5 className="text-uppercase text-black fw-bold display-6">
             {product.name}
-          </h4>
-          <h3 className="lead fw-normal">
+          </h5>
+          <h4 className="lead fw-normal">
             {" "}
             <p className="fw-bold ">DESC :</p> {product.description}
-          </h3>
-          <h3 className=" fw-bold my-4 text-danger ">
+          </h4>
+          <h4 className=" fw-bold my-4 text-danger ">
             Price : {product.price} E£{" "}
-          </h3>
+          </h4>
           <Rating name="read-only" value={product.rating} readOnly /> <hr />
           <button
             className="btn btn-outline-dark px-4 py-2"

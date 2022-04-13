@@ -39,59 +39,70 @@ function Products() {
   }
 
   return (
-    <Container style={{padding:"0" ,position:"relative"}} fluid className="d-flex flex-wrap justify-content-end min-vh-100">
+    <Container
+      style={{ padding: "0", position: "relative" }}
+      fluid="true"
+      className="d-flex flex-wrap justify-content-end min-vh-100"
+    >
       <div className="products-sidebar">
-      <div
-        className="d-flex flex-column flex-wrap justify-content-around align-content-center"
-        style={{
-          width: "80%",
-          height:"20%",
-          border: "solid 2px #eee",
-          borderRadius: "10px",
-          marginTop: "10px",
-        }}
-      >
-        <h5 style={{color:"gold"}}>Filter By Name</h5>
-        <TextField
-        style={{ width: "80%" }}
-        id="outlined-basic"
-        label="Product Name"
-        value={searchWord}
-        variant="outlined"
-        onChange={(e) => searchHandel(e)}
-      />
-      </div>
-      
-      <div
-        className="d-flex flex-column flex-wrap justify-content-around align-content-center"
-        style={{
-          width: "80%",
-          height:"70%",
-          border: "solid 2px #eee",
-          borderRadius: "10px",
-          marginBottom: "10px",
-        }}
-      >
-        <h5 style={{color:"gold"}}>Filter By Category</h5>
-        <Chip style={{color:"white"}} label="All" onClick={() => categoryClick({ _id: "" })} />
-        {CategoriesList.map((cat) => {
-          return <Chip style={{color:"white"}} label={cat.name} onClick={() => categoryClick(cat)} />;
-        })}
-      </div>
-      </div >
-      <div style={{width:"25%"}}>
+        <div
+          className="d-flex flex-column flex-wrap justify-content-around align-content-center"
+          style={{
+            width: "80%",
+            height: "20%",
+            border: "solid 2px #eee",
+            borderRadius: "10px",
+            marginTop: "10px",
+          }}
+        >
+          <h5 style={{ color: "gold" }}>Filter By Name</h5>
+          <TextField
+            style={{ width: "80%" }}
+            id="outlined-basic"
+            label="Product Name"
+            value={searchWord}
+            variant="outlined"
+            onChange={(e) => searchHandel(e)}
+          />
+        </div>
 
+        <div
+          className="d-flex flex-column flex-wrap justify-content-around align-content-center"
+          style={{
+            width: "80%",
+            height: "70%",
+            border: "solid 2px #eee",
+            borderRadius: "10px",
+            marginBottom: "10px",
+          }}
+        >
+          <h5 style={{ color: "gold" }}>Filter By Category</h5>
+          <Chip
+            style={{ color: "white" }}
+            label="All"
+            onClick={() => categoryClick({ _id: "" })}
+          />
+          {CategoriesList.map((cat) => {
+            return (
+              <Chip
+                style={{ color: "white" }}
+                label={cat.name}
+                onClick={() => categoryClick(cat)}
+              />
+            );
+          })}
+        </div>
       </div>
+      <div style={{ width: "25%" }}></div>
       <Container
-      className="d-flex flex-wrap justify-content-around min-vh-100" style={{width:"70%",marginTop:"50px"}}>
-      
-      
-      {ProductsList.map((product) => {
-        return <Products_Card product={product}></Products_Card>;
-      })}
+        className="d-flex flex-wrap justify-content-around min-vh-100"
+        style={{ width: "70%", marginTop: "50px" }}
+      >
+        {ProductsList.map((product) => {
+          return <Products_Card product={product}></Products_Card>;
+        })}
+      </Container>
     </Container>
-    </Container>
-    
   );
 }
 
