@@ -1,6 +1,6 @@
 import React from "react";
 import "../App.css";
-//Bootstrap for responsiveness
+//Bootstrap htmlFor responsiveness
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -43,81 +43,81 @@ const Orders = (props) => {
   console.log("pending", pending);
   return (
     <div className="main_container min-vh-100 py-5">
-      <div class="container padding-bottom-3x mb-1">
-        <div class="card mb-3">
-          <div class="p-4 text-center text-white text-lg bg-dark rounded-top">
-            <span class="text-uppercase">Tracking Order No - </span>
-            <span class="text-medium">001698653lp</span>
+      <div className="container padding-bottom-3x mb-1">
+        <div className="card mb-3">
+          <div className="p-4 text-center text-white text-lg bg-dark rounded-top">
+            <span className="text-uppercase">Tracking Order No - </span>
+            <span className="text-medium">001698653lp</span>
           </div>
-          <div class="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
-            <div class="w-100 text-center py-1 px-2">
-              <span class="text-medium">Shipped Via:</span> DHL
+          <div className="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
+            <div className="w-100 text-center py-1 px-2">
+              <span className="text-medium">Shipped Via:</span> DHL
             </div>
-            <div class="w-100 text-center py-1 px-2">
-              <span class="text-medium">Status:</span> {orderStatus}
+            <div className="w-100 text-center py-1 px-2">
+              <span className="text-medium">Status:</span> {orderStatus}
             </div>
-            <div class="w-100 text-center py-1 px-2">
-              <span class="text-medium">Expected Date:</span> APR 27, 2021
+            <div className="w-100 text-center py-1 px-2">
+              <span className="text-medium">Expected Date:</span> APR 27, 2021
             </div>
           </div>
-          <div class="card-body">
-            <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-              <div class="step completed" >
-                <div class="step-icon-wrap">
-                  <div class="step-icon">
-                    <i class="pe-7s-cart"></i>
+          <div className="card-body">
+            <div className="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
+              <div className="step completed" >
+                <div className="step-icon-wrap">
+                  <div className="step-icon">
+                    <i className="pe-7s-cart"></i>
                   </div>
                 </div>
-                <h4 class="step-title">Confirmed Order</h4>
+                <h4 className="step-title">Confirmed Order</h4>
               </div>
-              <div class={pending}>
-                <div class="step-icon-wrap">
-                  <div class="step-icon">
-                    <i class="pe-7s-config"></i>
+              <div className={pending}>
+                <div className="step-icon-wrap">
+                  <div className="step-icon">
+                    <i className="pe-7s-config"></i>
                   </div>
                 </div>
-                <h4 class="step-title">Processing Order</h4>
+                <h4 className="step-title">Processing Order</h4>
               </div>
-              <div class={packed}>
-                <div class="step-icon-wrap">
-                  <div class="step-icon">
-                    <i class="pe-7s-shopbag"></i>
+              <div className={packed}>
+                <div className="step-icon-wrap">
+                  <div className="step-icon">
+                    <i className="pe-7s-shopbag"></i>
                   </div>
                 </div>
-                <h4 class="step-title">Packing</h4>
+                <h4 className="step-title">Packing</h4>
               </div>
-              <div class={shipped}>
-                <div class="step-icon-wrap">
-                  <div class="step-icon">
-                    <i class="pe-7s-car"></i>
+              <div className={shipped}>
+                <div className="step-icon-wrap">
+                  <div className="step-icon">
+                    <i className="pe-7s-car"></i>
                   </div>
                 </div>
-                <h4 class="step-title">Product Dispatched</h4>
+                <h4 className="step-title">Product Dispatched</h4>
               </div>
-              <div class={delivered}>
-                <div class="step-icon-wrap">
-                  <div class="step-icon">
-                    <i class="pe-7s-home"></i>
+              <div className={delivered}>
+                <div className="step-icon-wrap">
+                  <div className="step-icon">
+                    <i className="pe-7s-home"></i>
                   </div>
                 </div>
-                <h4 class="step-title">Product Delivered</h4>
+                <h4 className="step-title">Product Delivered</h4>
               </div>
             </div>
           </div>
         </div>
-        <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
-          <div class="custom-control custom-checkbox mr-3">
+        <div className="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
+          {/* <div className="custom-control custom-checkbox mr-3">
             <input
-              class="custom-control-input"
+              className="custom-control-input"
               type="checkbox"
               id="notify_me"
               checked=""
             />
-            <label class="custom-control-label" for="notify_me">
+            <label className="custom-control-label" htmlFor="notify_me">
               Notify me when order is delivered
             </label>
-          </div>
-          <div class="text-left text-sm-right">
+          </div> */}
+          <div className="text-left text-sm-right">
             <BrowserRouter basename="/calendar" />
             <NavLink
               to={`../order-details/${id}`}
