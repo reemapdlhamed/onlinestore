@@ -127,7 +127,7 @@ function Products() {
         onChange={(e) => searchHandel(e)}
       />
 
-<List
+        <List
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
           component="nav"
           aria-labelledby="nested-list-subheader">
@@ -174,6 +174,7 @@ function Products() {
         
       
       </div >
+      
       <Container
       className="d-flex flex-wrap justify-content-around min-vh-100" style={{width:"100%",marginTop:"50px"}}>
       
@@ -181,9 +182,8 @@ function Products() {
       {ProductsList.map((product) => {
         return <Products_Card product={product}></Products_Card>;
       })}
+      </Container>
     </Container>
-    </Container>
-    
   );
 }
 

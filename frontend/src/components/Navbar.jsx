@@ -43,13 +43,13 @@ const Navbar = () => {
       <nav
         className="navbar navbar-expand-lg navbar-light bg-white py-2
        shadow-sm"
-        style={{ position: "relative" , zIndex:"2"}}
+        style={{ position: "relative", zIndex: "2" }}
       >
         <div className="container">
           <NavLink className="navbar-brand" to="#">
             E-commerce
           </NavLink>
-
+          {/* <Link to="/wwishlist/wishlist">Wishlist</Link> */}
           <button
             className="navbar-toggler"
             type="button"
@@ -130,7 +130,7 @@ const Navbar = () => {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
-                  <i className="fas fa-user-plus me-1"></i> 
+                  <i className="fas fa-user-plus me-1"></i>
                 </Link>
 
                 <ul
@@ -179,11 +179,13 @@ const Navbar = () => {
               </div>
             )}
 
-            <div className="buttons">
+            <div className="buttons  my-3">
               {button}
-              <NavLink to="/cart" className="btn btn-outline-success ms-2">
-                <i className="fas fa-shopping-cart fa-1x"></i> <b><sup>(
-                {state.length})</sup></b>
+              <NavLink to="/cart" className="btn btn-outline-success ms-2 ">
+                <i className="fas fa-shopping-cart fa-1x"></i>{" "}
+                <b>
+                  <sup>({state.length})</sup>
+                </b>
               </NavLink>
 
               <NavLink to="/FAQs" className="btn btn-outline-primary ms-2">

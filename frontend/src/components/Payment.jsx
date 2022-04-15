@@ -25,8 +25,7 @@ const PaymentScreen = ({ history }) => {
   return (
     <>
       <div
-        style={{ marginTop: "100px" }}
-        className="container d-flex justify-content-center align-items-center login-center"
+        className="container d-flex justify-content-center align-items-center login-center min-vh-100"
       >
         <form
           className="Login2 col-md-8 col-lg-4 col-11"

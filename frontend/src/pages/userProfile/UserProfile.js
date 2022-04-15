@@ -26,6 +26,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+
+
 import IconButton from "@mui/material/IconButton";
 import FilledInput from "@mui/material/FilledInput";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -33,6 +35,7 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useDispatch, useSelector } from "react-redux";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -80,13 +83,13 @@ export default function UserProfile() {
   var rows = [];
 
   for (let i = 0; i < orderState.length; i++) {
-    if (orderState[i]._id) {
+    if (orderState[i]._id&&orderState[i].customerName&&orderState[i].paymentStatus&&orderState[i].totalPrice) {
 
 
       rows.push({
         id: orderState[i]._id,
         customerName: orderState[i].customerName,
-        paymentStatus: orderState[i].paymentStatus,
+        orderStatus: orderState[i].orderStatus,
         totalPrice: orderState[i].totalPrice,
       });
 
@@ -94,7 +97,6 @@ export default function UserProfile() {
     }
   }
 
-  console.log("rows", rows);
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -153,17 +155,17 @@ export default function UserProfile() {
 
   return (
     <>
-      <div class="row min-vh-100">
-        <div class="card-container col-md-5">
+      <div className="row min-vh-100">
+        <div className="card-container col-md-5">
           <img
-            class="round"
+            className="round"
             style={{ width: "140px" }}
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRpEZxjP9nLQsGEntnPcYFGVXtNmFGysDTZA&usqp=CAU"
             alt="user"
           />
           <h3>{localStorage.getItem("name")}</h3>
 
-          <div class="buttons">
+          <div className="buttons">
             <Tabs
               value={value}
               onChange={handleChange}
@@ -172,14 +174,14 @@ export default function UserProfile() {
             >
               <Tab
                 label="Setting"
-                class="primary "
+                className="primary "
                 style={{ padding: "1rem", color: "white" }}
                 {...a11yProps(0)}
               />
               <Tab
                 label="Order List"
                 style={{ color: "white" }}
-                class="primary ghost"
+                className="primary ghost"
                 {...a11yProps(1)}
               />
             </Tabs>
@@ -187,11 +189,11 @@ export default function UserProfile() {
         </div>
 
         <div
-          class="tab-content col-md-7 pb-5 pt-lg-0  "
+          className="tab-content col-md-7 pb-5 pt-lg-0  "
           id="v-pills-tabContent"
         >
           <div
-            class="tab-pane fade show active"
+            className="tab-pane fade show active"
             id="v-pills-home"
             role="tabpanel"
             aria-labelledby="v-pills-home-tab"
@@ -240,7 +242,7 @@ export default function UserProfile() {
                 />
                 <i
                   onClick={togglePassword}
-                  class="far fa-eye"
+                  className="far fa-eye"
                   id="togglePassword"
                   style={{
                     paddingLeft: "3rem",
@@ -299,7 +301,7 @@ export default function UserProfile() {
                         <TableCell align="right">
                           {row.Name} {localStorage.getItem("name")}
                         </TableCell>
-                        <TableCell align="right">{row.paymentStatus} </TableCell>
+                        <TableCell align="right">{row.orderStatus} </TableCell>
                         <TableCell align="right">{row.totalPrice}</TableCell>
                       </TableRow>
                     ))}
@@ -309,7 +311,7 @@ export default function UserProfile() {
             </TabPanel>
           </div>
           <div
-            class="tab-pane fade"
+            className="tab-pane fade"
             id="v-pills-profile"
             role="tabpanel"
             aria-labelledby="v-pills-profile-tab"

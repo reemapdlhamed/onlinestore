@@ -65,7 +65,6 @@ function Login() {
       }
       errorRef.current.focus();
     }
-    console.log(password, email);
   }
 
   // const name = email.substring(0, email.lastIndexOf("@"));

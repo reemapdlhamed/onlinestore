@@ -36,12 +36,8 @@ const ShippingScreen = ({ history }) => {
   return (
     <>
       <div
-        style={{
-          margin: "0 auto",
-          display: "block",
-          marginTop: "200px",
-        }}
-        className="container d-flex justify-content-center align-items-center login-center"
+
+        className="container d-flex justify-content-center align-items-center login-center min-vh-100"
       >
         <Formik
           initialValues={{}}

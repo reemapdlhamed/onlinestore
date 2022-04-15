@@ -110,6 +110,12 @@ const Cart = () => {
         <div className="container">
           <hr />
           <div className="row justify-content-center">
+          <NavLink
+              to="/products"
+              className="btn btn-outline-dark mb-5 w-25 mx-auto "
+            >
+              Continue To Shopping
+            </NavLink>
             <NavLink
               to="/shipping"
               className="btn btn-outline-dark mb-5 w-25 mx-auto "
