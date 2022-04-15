@@ -4,7 +4,7 @@ const { body } = require("express-validator");
 const controller = require("./../controllers/productController");
 isAuth = require("./../MW/auth");
 
-// router.route("/products/:category_id").get(controller.show_products_category);
+router.route("/products/:category_id").get(controller.show_products_category);
 
 router
   .route("/products")
@@ -15,7 +15,6 @@ router
       body("name").notEmpty().withMessage("invalid Name."),
       body("price").isNumeric().withMessage("enter valid price"),
       body("brand").isString().withMessage("enter brand name"),
-      // body("seller").notEmpty().withMessage("add seller info"),
       body("quantity").isNumeric().withMessage("enter number"),
       body("category_id").notEmpty().withMessage("enter valid category id"),
       // body("discount").isNumeric().withMessage("enter discount if exist"),
@@ -58,12 +57,29 @@ router
     controller.add_review
   );
 
-router.route("/products/:id").get(controller.show_product);
+// router.route("/products/:id").get(controller.show_product);//TODO: Change to product/
 
 router.route("/products/:id").delete(isAuth, controller.delete_product);
 
 router.put("/products/:id", isAuth, controller.update_product);
 
+  router
+  .route("/search")
+  .post(
+    controller.search_products
+    );
+  router
+  .route("/random")
+  .get(
+    controller.random_products
+    );
+    
+
+    router
+      .route("/product/:id")
+      .get(
+        controller.show_product
+      );
 router
   .route("/products/stock")
   .put(

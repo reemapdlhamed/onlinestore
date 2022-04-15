@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const uniqueArrayPlugin = require('mongoose-unique-array');
 
 const userSchema = new mongoose.Schema({
   // _id: mongoose.Types.ObjectId,
@@ -6,7 +7,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
     trim: true,
-    max: 50
+    max: 50,
   },
 
   email: {
@@ -45,13 +46,29 @@ const userSchema = new mongoose.Schema({
       max: 100,
     },
   },
-  cart: [   
+  cart: [
     {
       product_id: {
         type: mongoose.Types.ObjectId,
         ref: "product",
       },
-      quantity: { type: Number, min: 1, max: 100 },
+      qty: { type: Number},
+      quantity: { type: Number },
+
+      rating: { type: Number, min: 1, max: 5 },
+      review: { type: Array },
+
+      discount: { type: Number },
+
+      brand: { type: String, min: 1, max: 100 },
+      name: { type: String, min: 1, max: 100 },
+
+      description: { type: String, min: 1, max: 100 },
+      images: { type: Array },
+
+      category_id: { type: Object },
+      properties: { type: Object },
+
       price: { type: Number, min: 1 },
     },
   ],
@@ -67,5 +84,5 @@ const userSchema = new mongoose.Schema({
 
   products: [{ type: mongoose.Types.ObjectId, ref: "product" }],
 });
-
+userSchema.plugin(uniqueArrayPlugin);
 module.exports = mongoose.model("user", userSchema);

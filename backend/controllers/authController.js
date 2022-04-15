@@ -1,7 +1,7 @@
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
-
+const sendEmail = require("../service/emailTransptor");
 const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
 const { redirect } = require("express/lib/response");
@@ -11,6 +11,7 @@ require("dotenv").config();
 const asyncHandler = require("express-async-handler");
 
 exports.userLogin = (request, response, next) => {
+  console.log(request.body);
   let errors = validationResult(request);
   if (!errors.isEmpty()) {
     let error = new Error();
@@ -26,11 +27,12 @@ exports.userLogin = (request, response, next) => {
       if (data == null) {
         throw new Error("email not found1");
       }
+      console.log("2");
       encrypted = data.password;
 
       bcrypt.compare(request.body.password, encrypted).then(function (result) {
         if (result) {
-          let token = jwt.sign(
+          let accessToken = jwt.sign(
             {
               role: data.role,
               id: data._id,
@@ -39,7 +41,7 @@ exports.userLogin = (request, response, next) => {
             process.env.SECRET_KEY,
             { expiresIn: "365d" }
           );
-          response.json({ data, token });
+          response.json({ data, accessToken });
           // response.redirect("http://127.0.0.1:5500/index.html")
         } else {
           next(new Error("wrong pass"));
@@ -86,7 +88,7 @@ exports.changePass = (request, response, next) => {
             password: bcrypt.hashSync(request.body.newPassword, 10),
           },
         }).then((data) => {
-          if (data == null) next(new Error("User not fount"));
+          if (data == null) next(new Error("User not found"));
           response.json({ message: "password changed" });
           // else response.redirect("http://127.0.0.1:5500/index.html")
         });
@@ -169,4 +171,43 @@ exports.updateUser = (request, response, next) => {
       // error.message = "error happened while login3";
       next(error.message);
     });
+};
+
+//send verification email
+exports.sendVerificationEmail = async (req, res, next) => {
+  try {
+    const infoHash = {};
+    const user = req.user;
+    infoHash.user = user;
+    infoHash.id = user._id;
+    console.log(user);
+    const key = eval(process.env.mail_key);
+    const token = jwt.sign(infoHash, key, { expiresIn: "24h" });
+    const link = `${process.env.BASE_URL}/user/verify/${user._id}/${token}`;
+    //generate html code
+    const html = `<h3 style="color:blue;">Hello, ${user.fullName}</h3>
+    <p>E-mail verification was requested for this email address ${user.email}. If you requested this verification, click the link below :</p>
+    <p>
+    <p style="color:red;">This link is expired with in 24 hrs</p>
+      <a style="background-color:blue; color:white;padding:10px 20px;text-decoration:none; font-weight:bold;border-radius:7px" href="${link}">Verify Your Email</a>
+    </p>`;
+    await sendEmail(user.email, "Verify Email", html);
+    res.status(201).json({
+      data: "Registration successful ,An Email sent to your account please verify",
+      token,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+//verify email on link sent
+exports.emailVerify = async (req, res, next) => {
+  try {
+    const key = process.env.mail_key;
+    const user = await userVerify(req, key);
+    await user.update({ verified: true });
+    res.status(200).json("mail verified success");
+  } catch (error) {
+    next(error);
+  }
 };

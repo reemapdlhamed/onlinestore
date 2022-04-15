@@ -3,13 +3,13 @@ const router = express.Router();
 const controller = require("../controllers/authController");
 const { body, query, param } = require("express-validator");
 const isAuth = require("../MW/auth");
-
+const emailVerify = require("../controllers/authController");
 // const {isAuth} = require("../MW/auth")
 
 router.post(
   "/login",
   [
-    body("email").isEmail().withMessage("Email is not valid"),
+    body("email").notEmpty().withMessage("Email is not valid"),
     body("password").notEmpty().withMessage("password should not be empty"),
   ],
   controller.userLogin
@@ -51,6 +51,14 @@ router.put(
   [body("email").isEmail().withMessage("invalid Email.")],
   isAuth,
   controller.updateUser
+);
+
+//Email Verify
+router.get(
+  "/user/verify/:id/:token",
+  [],
+  isAuth,
+  controller.sendVerificationEmail
 );
 
 module.exports = router;

@@ -13,16 +13,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(morgan("tiny"));
 
 //CORS
-// app.use(cors());
-app.use((request, response, next) => {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header(
-    "Access-Control-Allow-Methods",
-    "GET,POST,DELETE,PUT,OPTIONS"
+ app.use(cors());
+ app.use((request, response, next) => {
+   response.header("Access-Control-Allow-Origin", "*");
+   response.header(
+     "Access-Control-Allow-Methods",
+     "GET,POST,DELETE,PUT,OPTIONS"
   );
-  response.header("Access-Control-Allow-Headers", "Content-Type,Authorization");
-  next();
-});
+   response.header("Access-Control-Allow-Headers", "Content-Type,Authorization");
+   next();
+ });
 
 //Connect to DB
 mongoose
@@ -46,13 +46,20 @@ const cartRouter = require("./routes/cartRouter");
 // const adminRouter = require("./routes/adminRouter");
 const orderRouter = require("./routes/orderRouter");
 const userRouter = require("./routes/userRouter");
+const payRouter = require("./routes/payRouter");
+const messageRouter = require("./routes/messageRouter");
+// const message = require("./routes/messageRouter");
+
+app.use("/payment", payRouter);
 app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);
 app.use(cartRouter);
 app.use(userRouter);
 app.use("/orders", orderRouter);
-// app.use("/admin",adminRouter);
+
+app.use(messageRouter);
+
 
 //Not found MW
 app.use((request, response) => {

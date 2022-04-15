@@ -23,6 +23,42 @@ exports.show_products = (request, response, next) => {
     });
 };
 //-----------------------------------------------------------------------------------------------
+exports.random_products = (request, response, next) => {
+  Products.find({})
+    .limit(8)
+    .then((data) => {
+      response.status(200).json({ data });
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
+//-----------------------------------------------------------------------------------------------
+exports.search_products = (request, response, next) => {
+  const s = request.body.word;
+  const regex = new RegExp(s, "i");
+  if (request.body.category_id == "") {
+    Products.find({ name: { $regex: regex } })
+      .then((data) => {
+        response.status(200).json({ data });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  } else {
+    Products.find({
+      name: { $regex: regex },
+      category_id: request.body.category_id,
+    })
+      .then((data) => {
+        response.status(200).json({ data });
+      })
+      .catch((error) => {
+        next(error);
+      });
+  }
+};
+//-----------------------------------------------------------------------------------------------
 exports.add_product = (request, response, next) => {
   let errors = validationResult(request);
   if (!errors.isEmpty()) {
@@ -45,7 +81,7 @@ exports.add_product = (request, response, next) => {
       images: request.body.images,
       properties: request.body.properties,
       quantity: request.body.quantity,
-      seller: request.body.seller,
+      rating: request.body.rating,
     });
     object
       .save()
@@ -165,6 +201,70 @@ exports.update_product = async (req, res) => {
     res.status(500).json(err.message);
   }
 };
+//-------------------------------------------------------------------------------------------------------------
+// exports.update_product = (request, response, next) => {
+//   if (request.role == "admin") {
+//     Products.findByIdAndUpdate(
+//       { _id: request.body.id },
+//       {
+//         $set: {
+//           name: request.body.name,
+//           price: request.body.price,
+//           brand: request.body.brand,
+//           category_id: request.body.category_id,
+//           discount: request.body.discount,
+//           reviews: request.body.reviews,
+//           description: request.body.description,
+//           images: request.body.images,
+//           properties: request.body.properties,
+//           quantity: request.body.quantity,
+//           rating: request.body.rating,
+//         },
+//       }
+//     )
+//       .then((data) => {
+//         response.status(201).json({ message: " updated", data });
+//       })
+//       .catch((error) => {
+//         next(error);
+//       });
+//   } else if (request.role == "seller") {
+//     Products.findById({ _id: request.body.id }).then((data) => {
+//       if (request.id == data.seller.userID) {
+//         Products.findByIdAndUpdate(
+//           { _id: request.body.id },
+//           {
+//             $set: {
+//               name: request.body.name,
+//               price: request.body.price,
+//               brand: request.body.brand,
+//               category_id: request.body.category_id,
+//               discount: request.body.discount,
+//               reviews: request.body.reviews,
+//               description: request.body.description,
+//               images: request.body.images,
+//               properties: request.body.properties,
+//               quantity: request.body.quantity,
+//               rating: request.body.rating,
+//             },
+//           }
+//         )
+//           .then((data) => {
+//             response.status(201).json({ message: " updated", data });
+//           })
+//           .catch((error) => {
+//             next(error);
+//           });
+//       } else {
+//         response.status(404).json({ message: "You dont owne this product " });
+//       }
+//     });
+//   } else {
+//     response
+//       .status(404)
+//       .json({ message: "You should be admin or seller to delete product " });
+//   }
+// };
 //------------------------------------------------------------------------------------------------------------
 // exports.update_product = (request, response, next) => {
 //   if (request.role == "admin") {
@@ -231,9 +331,8 @@ exports.update_product = async (req, res) => {
 // };
 //------------------------------------------------------------------------------------------------------------
 exports.show_product = (request, response, next) => {
-  Products.findOne({ _id: request.params.id })
-    .populate("category_id", { name: 1, _id: -1 })
-
+  Products.find({ _id: request.params.id })
+    .populate("category_id")
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -300,9 +399,9 @@ exports.edit_review = (request, response, next) => {
 //-----------------------------------------------------------------------------------------------------------
 exports.delete_review = (request, response, next) => {
   Products.updateOne(
-    { _id: request.body.id },
+    { "reviews._id": request.body.id },
     {
-      $pull: { reviews: { userID: request.id } },
+      $pull: { reviews: { _id: request.body.id } },
     }
   )
     .then((data) => {

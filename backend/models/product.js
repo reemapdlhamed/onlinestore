@@ -1,15 +1,32 @@
-//HASSAN
+
 const mongoose = require("mongoose");
+
+const reviewSchema = new mongoose.Schema({
+  name :{
+    type:String ,
+    required :true
+  },
+  rating :{
+    type:Number ,
+    required :true
+  },
+  comment :{
+    type :String ,
+    required :true
+  },
+  user_id :{
+    type : mongoose.Schema.Types.ObjectId,
+    required :true ,
+    ref :"user"
+
+  }
+})
 
 const productSchema = new mongoose.Schema({
   // _id: mongoose.Types.ObjectId,
   name: { type: String, required: true, trim: true, max: 50 },
   price: { type: Number, required: true },
   brand: { type: String, required: true, max: 50 },
-  seller: {
-    userID: { type: mongoose.Types.ObjectId,  ref: "user" },
-    name: { type: String, max: 20 },
-  },
   category_id: {
     type: mongoose.Types.ObjectId,
     // type: Number,
@@ -32,6 +49,7 @@ const productSchema = new mongoose.Schema({
       user: String,
     },
   ],
+  rating:{type:Number,required:true},
   description: { type: String, required: false },
   images: [String],
   properties: { type: Object, required: false },
