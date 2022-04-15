@@ -6,8 +6,19 @@ import { goToHome } from "../redux/action/Cart";
 const PaymentScreen = ({ history }) => {
 
   const state = useSelector((state) => state.handleCart);
-  console.log(state)
+  console.log("STate",state)
+  var visa=false;
+  var totalPrice=0;
+  for(let i=0;i<state.length;i++)
+  {
+    totalPrice+=state[i].qty*state[i].price
 
+  }
+  if(totalPrice>=20000)
+  {
+    visa=true;
+    console.log("TOTAL",totalPrice)
+  }  
   window.scrollTo(0, 0);
 
 
@@ -32,7 +43,8 @@ const PaymentScreen = ({ history }) => {
           onSubmit={submitHandler}
         >
           <h6>SELECT PAYMENT METHOD</h6>
-          <div className="payment-container">
+          <div style={{width:"500px"}} className="container payment-container">
+          
             <input
               type="radio"
               value="card"
@@ -45,9 +57,10 @@ const PaymentScreen = ({ history }) => {
               type="radio"
               value="cod"
               name="gender"
+              disabled={visa}
               onChange={() => setPaymentMethod("cod")}
             />{" "}
-            cash on delievery<br></br>
+            cash on delievery {visa&&"(SORRY , CASH ON DELIVERY LIMIT IS 20K)"}<br></br>
           </div>
           <NavLink
           className="btn btn-outline-dark mb-5 w-25 mx-auto "

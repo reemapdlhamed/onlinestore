@@ -19,7 +19,6 @@ const Cart = () => {
     if (item.quantity > item.qty) dispatch(addCart(item));
     price.p += item.price;
 
-
   };
   const handleDel = (item) => {
     dispatch(delCart(item));
