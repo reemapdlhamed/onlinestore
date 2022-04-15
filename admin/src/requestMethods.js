@@ -4,7 +4,8 @@ const BASE_URL = "http://localhost:8080/";
 
 let TOKEN;
 if(localStorage.getItem("persist:root"))
-    TOKEN = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user)?.currentUser?.token;
+    TOKEN = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user).currentUser?.accessToken
+
 
 export const publicRequest = axios.create({
   baseURL: BASE_URL,

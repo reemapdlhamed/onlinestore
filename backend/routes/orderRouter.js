@@ -31,7 +31,7 @@ router
 // router.route("/my-order").get(isAuth, controller.getMyOrders);
 
 // GET> /orders/:id > Get Some Order for customer
-// router.route("/:customerId").get(isAuth, controller.getMyOrdersByID);
+router.route("/customer/:customerId").get(isAuth, controller.getMyOrdersByID);
 //Delete an order
 router.route("/:id").delete(isAuth, controller.deleteOrder);
 

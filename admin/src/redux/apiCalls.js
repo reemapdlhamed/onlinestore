@@ -143,6 +143,8 @@ export const updateOrder = async (id, order, dispatch) => {
 export const getUsers = async (dispatch) => {
   dispatch(getUserStart());
   try {
+    console.log(userRequest);
+    console.log("hi");
     const res = await userRequest.get("/users");
     console.log("res.data", res.data);
     dispatch(getUserSuccess(res.data));

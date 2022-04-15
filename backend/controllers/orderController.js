@@ -198,7 +198,9 @@ exports.updateOrder = async (req, res) => {
 
 //GET ORDER
 exports.getOrder = (request, response, next) => {
+  console.log(request.params);
   order.findOne({ _id: request.params.id })
+  
     .then((data) => {
       response.status(200).json({ data });
     })
