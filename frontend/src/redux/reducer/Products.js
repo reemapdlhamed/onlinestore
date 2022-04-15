@@ -32,6 +32,21 @@ const INITIAL_STATE = {
           ...state,
           category: action.payload,
         };
+      case "SORT_ASCEND":
+        return {
+          ...state,
+          list: action.payload.sort((a, b) => a.price > b.price ? 1 : -1),
+        };
+      case "SORT_DESCEND":
+        return {
+          ...state,
+          list: action.payload.sort((a, b) => a.price > b.price ? -1 : 1),
+        };
+      case "SORT_RATING":
+        return {
+          ...state,
+          list: action.payload.sort((a, b) => a.rating > b.rating ? -1 : 1),
+        };
       default:
         return state;
     }

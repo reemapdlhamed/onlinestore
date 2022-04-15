@@ -22,7 +22,7 @@ function Products_Card(props) {
   return (
     <Card
       className="Card1"
-      style={{ width: "200px", height: "250px", marginBottom: "50px" }}
+      style={{ width: "230px", height: "300px", marginBottom: "50px" }}
     >
       <CardMedia
         style={{ objectFit: "contain" }}
@@ -33,14 +33,15 @@ function Products_Card(props) {
       />
       <CardContent className="Card1-content"
       >
-        <Typography style={{color:"white"}} gutterBottom variant="h7" component="div">
+        <Typography style={{fontWeight:"bold"}} gutterBottom variant="h7" component="div">
           {props.product.name}
         </Typography>
-        <Typography style={{color:"white"}} gutterBottom variant="h7" component="div">
+        <Typography className="product-info" style={{color:"white",textOverflow:"ellipsis"}} gutterBottom variant="h7" component="div">
           {props.product.price} E£
         </Typography>
-        <Rating name="read-only" value={props.product.rating} readOnly />
+        <Rating className="product-info" name="read-only" value={props.product.rating} readOnly />
         <Button
+          className="product-info"
           style={{ width: "95%" }}
           variant="outlined"
           value={props.product._id}

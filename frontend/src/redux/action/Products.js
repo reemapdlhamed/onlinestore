@@ -42,3 +42,21 @@ export const selectGategory = (id) => {
       payload : id
   }
 }
+export const sortAscend = (list) => {
+  return{
+      type : "SORT_ASCEND",
+      payload : list
+  }
+}
+export const sortDescend = (list) => {
+  return{
+      type : "SORT_DESCEND",
+      payload : list
+  }
+}
+export const sortRating = (list) => {
+  return{
+      type : "SORT_RATING",
+      payload : list
+  }
+}
