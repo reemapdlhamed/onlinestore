@@ -97,7 +97,7 @@ const OrdersList = () => {
                         disableSelectionOnClick
                         columns={columns}
                         getRowId={(row) => row._id}
-                        pageSize={5}
+                        pageSize={10}
                         rowsPerPageOptions={[5]}
                    
                     />
