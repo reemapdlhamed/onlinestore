@@ -158,7 +158,7 @@ const Product = () => {
           >
             Add to Cart
           </button>
-          <NavLink to="/cart" className="btn btn-dark  mx-3  my-1 col-lg-8 col-md">
+          <NavLink to="/cart" className="btn btn-dark  mx-3 px-3 my-1 col-lg-8 col-md">
             Go to Cart
           </NavLink>
           <button
