@@ -12,6 +12,7 @@ const Orders = (props) => {
 
   const cartState = useSelector((state) => state.handleCart);
   const orderState = useSelector((state) => state.handleOrders);
+  console.log("STATE", orderState);
   var orderStatus;
   var infoz = [];
   for (let i = 0; i < orderState.length; i++) {
@@ -22,25 +23,31 @@ const Orders = (props) => {
   var packed = "step",
     shipped = "step",
     delivered = "step",
-    pending="step";
-    
+    pending = "step",
+    cancelled = "step";
+
   if (orderStatus === "pending") {
-    pending="step completed"
+    pending = "step completed";
   } else if (orderStatus === "packed") {
     packed = "step completed";
-    pending="step completed"
+    pending = "step completed";
   } else if (orderStatus === "shipped") {
     packed = "step completed";
-    pending="step completed"
+    pending = "step completed";
     shipped = "step completed";
   } else if (orderStatus === "delivered") {
     packed = "step completed";
-    pending="step completed"
+    pending = "step completed";
     shipped = "step completed";
     delivered = "step completed";
   } else if (orderStatus === "cancelled") {
+    packed = "step completed";
+    pending = "step completed";
+    shipped = "step completed";
+    delivered = "step completed";
+    cancelled = "step completed";
   }
-  console.log("pending", pending);
+  console.log("orderStatus", orderStatus);
   return (
     <div className="main_container min-vh-100 py-5">
       <div className="container padding-bottom-3x mb-1">
@@ -62,7 +69,7 @@ const Orders = (props) => {
           </div>
           <div className="card-body">
             <div className="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-              <div className="step completed" >
+              <div className="step completed">
                 <div className="step-icon-wrap">
                   <div className="step-icon">
                     <i className="pe-7s-cart"></i>
@@ -102,6 +109,17 @@ const Orders = (props) => {
                 </div>
                 <h4 className="step-title">Product Delivered</h4>
               </div>
+
+              {cancelled !== "step" && (
+                <div  className={cancelled}>
+                  <div  className="step-icon-wrap">
+                    <div style={{backgroundColor:"red"}} className="step-icon">
+                      <i className="pe-7s-close"></i>
+                    </div>
+                  </div>
+                  <h4 className="step-title">order cancelled</h4>
+                </div>
+              )}
             </div>
           </div>
         </div>

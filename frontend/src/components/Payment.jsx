@@ -16,7 +16,7 @@ const PaymentScreen = ({ history }) => {
   const dispatch = useDispatch();
   if(state.length===0)
   {
-    dispatch(goToHome())
+    history.push("/");
   }
   const submitHandler = (e) => {
     e.preventDefault();

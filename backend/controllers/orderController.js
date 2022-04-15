@@ -5,7 +5,16 @@ const { validationResult } = require("express-validator");
 
 //create new order
 exports.createOrders = (request, response, next) => {
+  var paymentStatu;
+  if(request.body.paymentType==="cod")
+  {
+    paymentStatu="pending"
+  }
+  else if(request.body.paymentType==="card")
+  {
+    paymentStatu="completed"
 
+  }
   let object = new order({
     customerName: request.body.customerName,
     customerID: request.body.customerID,
@@ -14,9 +23,12 @@ exports.createOrders = (request, response, next) => {
     orderItems: request.body.orderItems,
     orderDate: request.body.orderDate,
     orderStatus: request.body.orderStatus,
+    paymentStatus: paymentStatu,
+
     totalPrice: request.body.totalPrice,
     shippingPrice: request.body.shippingPrice,
     paymentType: request.body.paymentType,
+    
   });
   object
     .save()
