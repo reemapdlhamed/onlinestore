@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { addItem } from "../redux/action/index";
+import "./Product.css";
 import {
   Rating,
   Card,
@@ -160,7 +161,6 @@ const Product = () => {
             {product.name}
           </h5>
           <h4 className="lead fw-normal">
-            {" "}
             <p className="fw-bold ">DESC :</p> {product.description}
           </h4>
           <h4 className=" fw-bold my-4 text-danger ">
@@ -187,13 +187,11 @@ const Product = () => {
             >
               Add Review
             </button>
-            <button
-              style={{ marginLeft: "10px" }}
-              className="btn btn-outline-success mx-3  col-lg-8 col-md"
-              onClick={showAddReview}
-            >
-              Add to List
-            </button>
+            <div class="cardImage">
+              <a className="wish" href="/">
+                <i class="fas fa-heart"></i> Add to List
+              </a>
+            </div>
           </div>
         </div>
         <div
