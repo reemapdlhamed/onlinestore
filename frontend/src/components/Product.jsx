@@ -41,6 +41,9 @@ const Product = () => {
 
   const dispatch = useDispatch();
   const addProduct = (product) => {
+    console.log("PROD",product)
+    if(product.length===0)
+    return;
     dispatch(addCartFirst(product));
   };
   //changes

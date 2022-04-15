@@ -6,21 +6,7 @@ import { clearLocalStorageCart } from "../redux/action/Cart";
 import { goToHome } from "../redux/action/Cart";
 
 
-async function makePayToDB(prods) {
-  try {
-    let res = await axios({
-      method: "post",
-      url: "http://localhost:8080/pay",
-      data: prods,
-    });
-    console.log(res);
 
-    let data = res.data;
-    console.log(data);
-  } catch (error) {
-    console.log(error.response); // this is the main part. Use the response property from the error object
-  }
-}
 
 const Checkout = (props) => {
 
@@ -29,9 +15,11 @@ const Checkout = (props) => {
   
   const dispatch = useDispatch();
 
-  if(!props.location.state)
-  props.history.push("/payment");
+  if(!props.location.state){
+  props.history.push("/");
+  window.location.reload()
 
+  }
 
 
   
@@ -41,7 +29,7 @@ const Checkout = (props) => {
       method: "post",
       url: "http://localhost:8080/cart/buy",
       headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-      data: JSON.parse(localStorage.getItem("form")),
+      data: JSON.parse(localStorage.getItem("form"),props.location.state.paymentMethod ),
       
     }).then((res) => {
       console.log("ORDER DONE")
@@ -57,9 +45,7 @@ const Checkout = (props) => {
 
   }
 
-  React.useEffect(() => {
-  //  makePayToDB(state);
-  }, []);
+
   const state = useSelector((state) => state.handleCart);
   if(state.length===0)
   {

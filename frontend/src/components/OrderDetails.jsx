@@ -10,23 +10,19 @@ import Paper from "@mui/material/Paper";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-
-
 export default function BasicTable() {
-
   const { id } = useParams();
   var itemz = [];
-var infoz = [];
+  var infoz = [];
   const orderState = useSelector((state) => state.handleOrders);
-  if(infoz.length===0)
-  for (let i = 0; i < orderState.length; i++) {
-    if (orderState[i]._id && id === orderState[i]._id) {
-      itemz.push(orderState[i].orderItems);
-      infoz.push(orderState[i]);
-      break;
+  if (infoz.length === 0)
+    for (let i = 0; i < orderState.length; i++) {
+      if (orderState[i]._id && id === orderState[i]._id) {
+        itemz.push(orderState[i].orderItems);
+        infoz.push(orderState[i]);
+        break;
+      }
     }
-  }
-
 
   return (
     <div className="min-vh-100">
@@ -35,7 +31,7 @@ var infoz = [];
           <TableHead>
             <TableRow>
               <TableCell>Image</TableCell>
-              <TableCell align="right">name</TableCell>
+              <TableCell align="right">order date</TableCell>
               <TableCell align="right">quantity</TableCell>
               <TableCell align="right">price</TableCell>
               <TableCell align="right">status</TableCell>
@@ -45,7 +41,7 @@ var infoz = [];
             {itemz.length > 0 &&
               itemz[0].map((row) => (
                 <TableRow
-                  key={row.name}
+                  key={row.createdAt}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
@@ -53,10 +49,12 @@ var infoz = [];
                       src={row.images[0]}
                       height="200px"
                       width="180px"
-                      alt={row.name}
+                      alt={row.createdAt}
                     />
                   </TableCell>
-                  <TableCell align="right">{row.name}</TableCell>
+                  <TableCell align="right">
+                    {new Date(infoz[0].createdAt).toLocaleDateString()}
+                  </TableCell>
                   <TableCell align="right">{row.qty}</TableCell>
                   <TableCell align="right">{row.price}</TableCell>
                   <TableCell align="right">{infoz[0].orderStatus}</TableCell>

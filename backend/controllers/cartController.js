@@ -55,6 +55,11 @@ exports.addToCart = async (request, response, next) => {
     //);
 
     //user then pushes his product into his cart
+    console.log("REQ")
+    if(request.body.length===0){
+    response.status(400).json({ message: "error internet connection" });
+  return;
+    }
     let x = request.body;
     x.qty = 1;
     user.cart.push(x);

@@ -6,48 +6,61 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
+import moment from 'moment'
 
 const Orders = (props) => {
   const { id } = useParams();
 
   const cartState = useSelector((state) => state.handleCart);
   const orderState = useSelector((state) => state.handleOrders);
+  console.log("STATE", orderState);
   var orderStatus;
+  var orderDate;
+
   var infoz = [];
+  var res;
   for (let i = 0; i < orderState.length; i++) {
     if (orderState[i]._id && id === orderState[i]._id) {
       orderStatus = orderState[i].orderStatus;
+      orderDate = orderState[i].createdAt;
+       res = moment(orderDate, "MM-DD-YYYY").add(5, 'days');
     }
   }
   var packed = "step",
     shipped = "step",
     delivered = "step",
-    pending="step";
-    
+    pending = "step",
+    cancelled = "step";
+
   if (orderStatus === "pending") {
-    pending="step completed"
+    pending = "step completed";
   } else if (orderStatus === "packed") {
     packed = "step completed";
-    pending="step completed"
+    pending = "step completed";
   } else if (orderStatus === "shipped") {
     packed = "step completed";
-    pending="step completed"
+    pending = "step completed";
     shipped = "step completed";
   } else if (orderStatus === "delivered") {
     packed = "step completed";
-    pending="step completed"
+    pending = "step completed";
     shipped = "step completed";
     delivered = "step completed";
   } else if (orderStatus === "cancelled") {
+    packed = "step completed";
+    pending = "step completed";
+    shipped = "step completed";
+    delivered = "step completed";
+    cancelled = "step completed";
   }
-  console.log("pending", pending);
+  console.log("orderStatus", orderStatus);
   return (
     <div className="main_container min-vh-100 py-5">
       <div className="container padding-bottom-3x mb-1">
         <div className="card mb-3">
           <div className="p-4 text-center text-white text-lg bg-dark rounded-top">
             <span className="text-uppercase">Tracking Order No - </span>
-            <span className="text-medium">001698653lp</span>
+            <span className="text-medium">{id}</span>
           </div>
           <div className="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
             <div className="w-100 text-center py-1 px-2">
@@ -57,12 +70,13 @@ const Orders = (props) => {
               <span className="text-medium">Status:</span> {orderStatus}
             </div>
             <div className="w-100 text-center py-1 px-2">
-              <span className="text-medium">Expected Date:</span> APR 27, 2021
+              <span className="text-medium">Expected Date:</span>{ new Date(orderDate).toLocaleDateString()  }
+
             </div>
           </div>
           <div className="card-body">
             <div className="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
-              <div className="step completed" >
+              <div className="step completed">
                 <div className="step-icon-wrap">
                   <div className="step-icon">
                     <i className="pe-7s-cart"></i>
@@ -102,6 +116,17 @@ const Orders = (props) => {
                 </div>
                 <h4 className="step-title">Product Delivered</h4>
               </div>
+
+              {cancelled !== "step" && (
+                <div  className={cancelled}>
+                  <div  className="step-icon-wrap">
+                    <div style={{backgroundColor:"red"}} className="step-icon">
+                      <i className="pe-7s-close"></i>
+                    </div>
+                  </div>
+                  <h4 className="step-title">order cancelled</h4>
+                </div>
+              )}
             </div>
           </div>
         </div>

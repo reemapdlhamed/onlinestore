@@ -13,6 +13,7 @@ import Login from "../src/pages/Login/Login";
 import Payment from "../src/components/Payment";
 import Shipping from "../src/components/Shipping";
 import Orders from "./components/Orders";
+import { Offline, Online } from "react-detect-offline"
 
 import Register from "../src/pages/register/register";
 import { useEffect, useState } from "react";
@@ -26,6 +27,7 @@ import axios from "axios";
 import Footer from "./components/Footer";
 import FAQs from "./pages/FAQs";
 import OrderDetails from "./components/OrderDetails";
+import NoInternet from "./pages/NoInternet";
 
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
@@ -42,12 +44,16 @@ import "slick-carousel/slick/slick-theme.css";
       url: "http://localhost:8080/cart",
       headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
     }).then((res) => {
+      console.log("RES",res);
       for(let i=0;i<res.data.length;i++){
       
       dispatch(addCartFromDB(res.data[i]));
       }
     
+    }).catch((er)=>{
+      console.log("ER",er)
     });
+    console.log(res2)
 
 
     let res3 =  axios({
@@ -67,6 +73,14 @@ import "slick-carousel/slick/slick-theme.css";
   
   return (
     <>
+    <Offline>
+            <Route component={NoInternet} />
+
+    </Offline>
+    <Online>
+    
+    
+
       <Navbar />
       <Switch>
         <Route exact path={"/profile"} component={UserProfile} />
@@ -90,6 +104,7 @@ import "slick-carousel/slick/slick-theme.css";
         <Route path={"*"} component={NotFound} />
       </Switch>
       <Footer />
+      </Online>
     </>
   );
 }
