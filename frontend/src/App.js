@@ -27,6 +27,9 @@ import Footer from "./components/Footer";
 import FAQs from "./pages/FAQs";
 import OrderDetails from "./components/OrderDetails";
 
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
  function App () {
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state.handleCart);

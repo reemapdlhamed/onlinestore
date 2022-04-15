@@ -1,4 +1,5 @@
-import React from "react";
+import React, { Component } from "react";
+import Slider from "react-slick";
 import CategoryCard from "./CategoryCard";
 import Carousel from "react-bootstrap/Carousel";
 import { Col, Container, Row } from "react-bootstrap";
@@ -12,6 +13,41 @@ import axios from "axios";
 import Products_Card from "./Products_Card";
 import PasswordButton from "./PasswordButton";
 const Home = () => {
+
+  var settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 4,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1
+        }
+      }
+    ]
+  };
   const cartState = useSelector((state) => state.handleCart);
   const CategoriesList = useSelector(
     (state) => state.ProductsReducer.categories
@@ -150,6 +186,21 @@ const Home = () => {
           return <Products_Card product={product}></Products_Card>;
         })}
       </Container>
+
+      <div className="min-vh-100 my-5 mx-5">
+      <h2>Products</h2>
+        <Slider {...settings}>
+          {products.map((product)=>{
+            return(
+              <div >
+                <Products_Card product={product} >
+              
+            </Products_Card>
+              </div>
+            )
+          })}
+        </Slider>
+      </div>
     </div>
   );
 };
