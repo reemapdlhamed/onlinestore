@@ -153,17 +153,17 @@ const Product = () => {
           <div className="d-grid gap-1 d-md-block my-4">
 
           <button
-            className="btn btn-outline-dark mx-3 py-2 "
+            className="btn btn-outline-dark mx-3  col-lg-8 col-md"
             onClick={() => addProduct(product)}
           >
             Add to Cart
           </button>
-          <NavLink to="/cart" className="btn btn-dark  mx-3 py-2 my-1">
+          <NavLink to="/cart" className="btn btn-dark  mx-3  my-1 col-lg-8 col-md">
             Go to Cart
           </NavLink>
           <button
             style={{marginLeft:"10px"}}
-            className="btn btn-outline-primary mx-3 py-2"
+            className="btn btn-outline-primary mx-3  col-lg-8 col-md"
             onClick={showAddReview}
           >
             Add Review
