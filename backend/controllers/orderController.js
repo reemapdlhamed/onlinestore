@@ -164,11 +164,10 @@ exports.updateOrderToPaid = (request, response, next) => {
 //   }
 // };
 
-
 exports.deleteOrder = (request, response, next) => {
   if (request.role == "admin") {
-
-    order.findByIdAndDelete({ _id: request.params.id })
+    order
+      .findByIdAndDelete({ _id: request.params.id })
       .then((data) => {
         response.status(201).json({ message: "deleted", data });
       })
@@ -178,4 +177,36 @@ exports.deleteOrder = (request, response, next) => {
   } else {
     response.status(403).json({ message: "Not Autorized" });
   }
+};
+
+//UPDATE ORDER
+exports.updateOrder = async (req, res) => {
+  console.log(req.body);
+  if (req.role == "admin") {
+    try {
+      const updatedOrder = await order.findByIdAndUpdate(
+        req.params.id,
+        {
+          $set: req.body,
+        },
+        { new: true }
+      );
+      res.status(200).json(updatedOrder);
+    } catch (err) {
+      res.status(500).json(err.message);
+    }
+  } else {
+    response.status(403).json({ message: "Not Autorized" });
+  }
+};
+
+//GET ORDER
+exports.getOrder = (request, response, next) => {
+  order.findOne({ _id: request.params.id })
+    .then((data) => {
+      response.status(200).json({ data });
+    })
+    .catch((error) => {
+      next(error);
+    });
 };

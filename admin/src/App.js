@@ -15,6 +15,7 @@ import OrdersList from "./pages/ordersList/OrdersList";
 import UsersList from "./pages/usersList/UsersList";
 import NewUser from "./pages/newUser/NewUser";
 import User from "./pages/user/User";
+import Order from "./pages/order/Order";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   let isAdmin =
@@ -50,10 +51,11 @@ function App() {
                   <Route path=":productId" element={<Product />} />
                   <Route path="new" element={<NewProduct />} />
                 </Route>
+
                 <Route path="orders">
                   {/* <Route index element={<List />} /> */}
                   <Route index element={<OrdersList />} />
-                  {/* <Route path=":productId" element={<Product />} /> */}
+                  <Route path=":orderId" element={<Order />} />
                   {/* <Route path="new" element={<NewProduct />} /> */}
                 </Route>
               </>

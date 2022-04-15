@@ -38,6 +38,22 @@ export const orderSlice = createSlice({
       state.isFetching = false;
       state.error = true;
     },
+
+    //Update
+    updateOrderStart: (state) => {
+      state.isFetching = true;
+      state.error = false;
+    },
+    updateOrderSuccess: (state, action) => {
+      state.isFetching = false;
+      state.orders[
+        state.orders.findIndex((item) => item._id === action.payload.id)
+      ] = action.payload.order;
+    },
+    updateOrderFailure: (state) => {
+      state.isFetching = false;
+      state.error = true;
+    },
   },
 });
 
@@ -48,6 +64,9 @@ export const {
   deleteOrderStart,
   deleteOrderSuccess,
   deleteOrderFailure,
+  updateOrderStart,
+  updateOrderSuccess,
+  updateOrderFailure
 } = orderSlice.actions;
 
 export default orderSlice.reducer;
