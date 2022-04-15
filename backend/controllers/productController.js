@@ -81,7 +81,7 @@ exports.add_product = (request, response, next) => {
       images: request.body.images,
       properties: request.body.properties,
       quantity: request.body.quantity,
-      rating: request.body.rating,
+      rating: 5,
     });
     object
       .save()
