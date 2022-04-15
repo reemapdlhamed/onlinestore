@@ -127,7 +127,7 @@ const Product = () => {
   const ShowProduct = () => {
     return (
       <>
-        <div className="col-md-6 ">
+        <div className="col-lg col-md col-sm mx-4">
           <img
             src={product.images}
             alt={product.name}
@@ -137,7 +137,7 @@ const Product = () => {
             className="py-3 px-3"
           />
         </div>
-        <div className="col-md-6">
+        <div className="col-lg col-md col-sm mx-4">
           <h5 className="text-uppercase text-black fw-bold display-6">
             {product.name}
           </h5>
@@ -149,24 +149,30 @@ const Product = () => {
             Price : {product.price} E£{" "}
           </h4>
           <Rating name="read-only" value={product.rating} readOnly /> <hr />
+
+          <div className="d-grid gap-1 d-md-block my-4">
+
           <button
-            className="btn btn-outline-dark px-4 py-2"
+            className="btn btn-outline-dark mx-3 py-2 "
             onClick={() => addProduct(product)}
           >
             Add to Cart
           </button>
-          <NavLink to="/cart" className="btn btn-dark ms-2 px-3 py-2">
+          <NavLink to="/cart" className="btn btn-dark  mx-3 py-2 my-1">
             Go to Cart
           </NavLink>
           <button
             style={{marginLeft:"10px"}}
-            className="btn btn-outline-primary px-4 py-2"
+            className="btn btn-outline-primary mx-3 py-2"
             onClick={showAddReview}
           >
             Add Review
           </button>
+
+          </div>
+          
         </div>
-        <div  style={{height:"400px",width:"550px",border:"2px solid #eee",padding:"10px"}} className={reviewForm}>
+        <div  style={{height:"400px",width:"550px",border:"2px solid #eee",padding:"10px" ,marginLeft:"30px"}} className={reviewForm}>
           <TextField className="title"   style={{width:"60%"}} onChange={(event) => {newReview.title=event.target.value}} id="demo-helper-text-misaligned-no-helper" label="Review Title" />
           <TextField className="comment"  style={{width:"60%"}} onChange={(event) => { newReview.description=event.target.value}} id="demo-helper-text-misaligned-no-helper" label="Comment" />
           <Rating name="simple-controlled" onChange={(event) => { newReview.rating = +event.target.value}}/>

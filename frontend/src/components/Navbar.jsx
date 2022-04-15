@@ -75,6 +75,17 @@ const Navbar = () => {
                   Home
                 </NavLink>
               </li>
+              {/* <li className="nav-item">
+                <NavLink
+                  className="nav-link "
+                  activeStyle={{
+                    color: "black",
+                  }}
+                  to="/order-details"
+                >
+                  Orders
+                </NavLink>
+              </li> */}
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
@@ -168,9 +179,9 @@ const Navbar = () => {
               </div>
             )}
 
-            <div className="buttons">
+            <div className="buttons  my-3">
               {button}
-              <NavLink to="/cart" className="btn btn-outline-success ms-2">
+              <NavLink to="/cart" className="btn btn-outline-success ms-2 ">
                 <i className="fas fa-shopping-cart fa-1x"></i> <b><sup>(
                 {state.length})</sup></b>
               </NavLink>
