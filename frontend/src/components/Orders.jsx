@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
+import moment from 'moment'
 
 const Orders = (props) => {
   const { id } = useParams();
@@ -14,10 +15,15 @@ const Orders = (props) => {
   const orderState = useSelector((state) => state.handleOrders);
   console.log("STATE", orderState);
   var orderStatus;
+  var orderDate;
+
   var infoz = [];
+  var res;
   for (let i = 0; i < orderState.length; i++) {
     if (orderState[i]._id && id === orderState[i]._id) {
       orderStatus = orderState[i].orderStatus;
+      orderDate = orderState[i].createdAt;
+       res = moment(orderDate, "MM-DD-YYYY").add(5, 'days');
     }
   }
   var packed = "step",
@@ -54,7 +60,7 @@ const Orders = (props) => {
         <div className="card mb-3">
           <div className="p-4 text-center text-white text-lg bg-dark rounded-top">
             <span className="text-uppercase">Tracking Order No - </span>
-            <span className="text-medium">001698653lp</span>
+            <span className="text-medium">{id}</span>
           </div>
           <div className="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
             <div className="w-100 text-center py-1 px-2">
@@ -64,7 +70,8 @@ const Orders = (props) => {
               <span className="text-medium">Status:</span> {orderStatus}
             </div>
             <div className="w-100 text-center py-1 px-2">
-              <span className="text-medium">Expected Date:</span> APR 27, 2021
+              <span className="text-medium">Expected Date:</span>{ new Date(orderDate).toLocaleDateString()  }
+
             </div>
           </div>
           <div className="card-body">

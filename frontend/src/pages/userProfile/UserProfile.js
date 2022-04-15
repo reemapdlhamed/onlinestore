@@ -12,6 +12,7 @@ import Home from "../../components/Home";
 import { Route } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import Moment from 'react-moment';
 import { border } from "@mui/system";
 import "./userProfile.css";
 import PropTypes from "prop-types";
@@ -65,8 +66,8 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-function createData(ID, Name, Status, Total) {
-  return { ID, Name, Status, Total };
+function createData(ID, createdAt, Status, Total) {
+  return { ID, createdAt, Status, Total };
 }
 export default function UserProfile() {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -86,9 +87,11 @@ export default function UserProfile() {
     if (orderState[i]._id&&orderState[i].customerName&&orderState[i].paymentStatus&&orderState[i].totalPrice) {
 
 
-      rows.push({
+      var theDate = new Date(orderState[i].createdAt );
+            rows.push({
         id: orderState[i]._id,
-        customerName: orderState[i].customerName,
+        
+        createdAt:theDate.toLocaleDateString() ,
         orderStatus: orderState[i].orderStatus,
         totalPrice: orderState[i].totalPrice,
       });
@@ -275,7 +278,7 @@ export default function UserProfile() {
                   <TableHead>
                     <TableRow>
                       <TableCell>ID</TableCell>
-                      <TableCell align="right">Name</TableCell>
+                      <TableCell align="right">order date</TableCell>
                       <TableCell align="right">Status</TableCell>
                       <TableCell align="right">Total</TableCell>
                       {/* <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
@@ -298,9 +301,8 @@ export default function UserProfile() {
                         {row.id}
                       </NavLink>
                         </TableCell>
-                        <TableCell align="right">
-                          {row.Name} {localStorage.getItem("name")}
-                        </TableCell>
+                        <TableCell align="right">{row.createdAt} </TableCell>
+
                         <TableCell align="right">{row.orderStatus} </TableCell>
                         <TableCell align="right">{row.totalPrice}</TableCell>
                       </TableRow>
