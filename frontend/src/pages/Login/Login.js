@@ -1,18 +1,50 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
+import { GoogleLogin } from "react-google-login";
 import AuthContext from "../../Context/AuthProvider";
+import { useHistory } from "react-router-dom";
 import Products from "./../Products/Products";
 import "./login.css";
 import { Link, Redirect } from "react-router-dom";
-
+import { dispatchLogin } from "../../redux/action/authaction";
+import { useDispatch } from "react-redux";
 import axios from "../../api/axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import ForgotPassword from "./ForgotPassword";
 import { Switch, Route } from "react-router-dom";
 import Product from "./../../components/Product";
 import Home from "./../../components/Home";
 import PasswordButton from "./../../components/PasswordButton";
+
 function Login() {
+  const initialState = {
+    email: "",
+    password: "",
+    err: "",
+    success: "",
+  };
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [user, setUser] = useState(initialState);
+  
+  const responseGoogle = async (response) => {
+    try {
+      const res = await axios.post("/user/google_login", {
+        tokenId: response.tokenId,
+      });
+
+      setUser({ ...user, error: "", success: res.data.msg });
+      localStorage.setItem("firstLogin", true);
+
+      dispatch(dispatchLogin());
+      history.push("/");
+    } catch (err) {
+      err.response.data.msg &&
+        setUser({ ...user, err: err.response.data.msg, success: "" });
+    }
+  };
+
   const { setAuth } = useContext(AuthContext);
   const [passwordShown, setPasswordShown] = useState(false);
   const emailRef = useRef();
@@ -21,6 +53,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
+
   useEffect(() => {
     emailRef.current.focus();
   }, []);
@@ -152,6 +185,18 @@ function Login() {
                 id="togglePassword"
                 style={{ marginLeft: " -30px", cursor: "pointer" }}
               ></i>
+              <Link
+                to="/forgotPassword"
+                style={{
+                  fontSize: "12px",
+                  textDecoration: "none",
+                  fontWeight: "bold",
+                  color: "crimson",
+                  marginLeft: "10rem",
+                }}
+              >
+                Forgot Your Password?
+              </Link>
 
               <button
                 // onClick={signIn}
@@ -161,6 +206,15 @@ function Login() {
               >
                 Sign In
               </button>
+              <div className="social">
+                <GoogleLogin
+                  className="google"
+                  clientId="Your google client id"
+                  buttonText="Login with google"
+                  onSuccess={responseGoogle}
+                  cookiePolicy={"single_host_origin"}
+                />
+              </div>
             </form>
             <p>
               by signing in you agree to our application conditions of use &
