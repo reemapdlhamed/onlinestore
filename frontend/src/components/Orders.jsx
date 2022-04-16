@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
-import moment from 'moment'
+//import moment from 'moment'
 
 const Orders = (props) => {
   const { id } = useParams();
@@ -23,7 +23,7 @@ const Orders = (props) => {
     if (orderState[i]._id && id === orderState[i]._id) {
       orderStatus = orderState[i].orderStatus;
       orderDate = orderState[i].createdAt;
-       res = moment(orderDate, "MM-DD-YYYY").add(5, 'days');
+       //res = moment(orderDate, "MM-DD-YYYY").add(5, 'days');
     }
   }
   var packed = "step",
