@@ -14,7 +14,7 @@ import Payment from "../src/components/Payment";
 import Shipping from "../src/components/Shipping";
 import Orders from "./components/Orders";
 import { Offline, Online } from "react-detect-offline"
-
+import ForgotPassword from "./pages/Login/ForgotPassword";
 import Register from "../src/pages/register/register";
 import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
@@ -92,7 +92,7 @@ import "slick-carousel/slick/slick-theme.css";
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/shipping" component={Shipping} />
-        
+        <Route exact path="/forgotPassword" component={ForgotPassword}/>
         <Route path={"/login"} component={Login} />
         <Route path={"/register"} component={Register} />
         <Route path={"/payment"} component={Payment} />
