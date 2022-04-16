@@ -5,8 +5,11 @@ import StripeBtn from "./stripeBtn";
 import { clearLocalStorageCart } from "../redux/action/Cart";
 import { goToHome } from "../redux/action/Cart";
 import { useState } from "react";
+import data from "../copons.json";
 
-var promocodes = { ramadan: 100, eid: 150, "": 0 };
+
+
+var promocodes = data[2].data[0]
 
 const Checkout = (props) => {
   const [discount, setDiscount] = useState({
