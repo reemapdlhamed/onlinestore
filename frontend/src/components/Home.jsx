@@ -57,7 +57,7 @@ const Home = () => {
       slidesToScroll: 1,
       autoplay: true,
       speed: 1500,
-      autoplaySpeed: 1500,
+      autoplaySpeed: 3500,
       cssEase: "linear",
     responsive: [
       {
