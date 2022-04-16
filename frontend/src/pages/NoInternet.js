@@ -11,7 +11,7 @@ const NoInternet = () => {
     <h1>⚠</h1>
     <h2>No connection to the internet</h2>
     <p>This Display has a connection to your network but no connection to the internet.</p>
-    <p class="desc">The connection to the outside world is needed for updates and keeping the time.</p>
+    <p className="desc">The connection to the outside world is needed for updates and keeping the time.</p>
     </div>
     </>
 
