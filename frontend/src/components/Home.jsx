@@ -15,16 +15,14 @@ import PasswordButton from "./PasswordButton";
 const Home = () => {
 
   const settings = {
-    className: "center",
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 4,
-    swipeToSlide: true,
-    afterChange: function(index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
-    },
+    dots: true,
+      infinite: true,
+      slidesToShow: 4.5,
+      slidesToScroll: 1,
+      autoplay: true,
+      speed: 2000,
+      autoplaySpeed: 2000,
+      cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024,
@@ -53,16 +51,14 @@ const Home = () => {
     ]
   };
   const settingsTwo = {
-    className: "center",
-    infinite: true,
-    centerPadding: "60px",
-    slidesToShow: 3,
-    swipeToSlide: true,
-    afterChange: function(index) {
-      console.log(
-        `Slider Changed to: ${index + 1}, background: #222; color: #bada55`
-      );
-    },
+    dots: true,
+      infinite: true,
+      slidesToShow: 4.5,
+      slidesToScroll: 1,
+      autoplay: true,
+      speed: 1500,
+      autoplaySpeed: 1500,
+      cssEase: "linear",
     responsive: [
       {
         breakpoint: 1024,
@@ -229,7 +225,7 @@ const Home = () => {
         })}
       </Container>
 
-      <div className="vh-25 my-5 mx-5  px-5 border border-2 bg-secondary p-2  bg-opacity-10">
+      <div className=" mx-5  px-5 border border-2 bg-secondary p-2  bg-opacity-10" style={{height:"500px"}}>
       <h2 className="pt-3">Labtops</h2>
         <Slider {...settings} className="text-black">
           {products.map((product)=>{
@@ -244,7 +240,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      <div className="vh-25 my-5 mx-5 px-5 border border-2 bg-secondary p-2  bg-opacity-10">
+      <div className="vh-25 my-5 mx-5 px-5 border border-2 bg-secondary p-2  bg-opacity-10" style={{height:"500px"}}>
       <h2 className="pt-3">Mobile</h2>
         <Slider {...settingsTwo} className="text-black">
           {products.map((product)=>{
@@ -259,7 +255,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      <div className="vh-25 my-5 mx-5 px-5 border border-2 bg-secondary p-2  bg-opacity-10">
+      <div className="vh-25 my-5 mx-5 px-5 border border-2 bg-secondary p-2  bg-opacity-10" style={{height:"500px"}}>
       <h2 className="pt-3">Clothing</h2>
         <Slider {...settingsTwo} >
           {products.map((product)=>{
