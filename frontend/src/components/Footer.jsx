@@ -78,6 +78,44 @@ const Footer = () => {
                 </ul>
          
         </div>
+{/* <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <h6 className="text-uppercase fw-bold mb-4">
+           Team 
+          </h6> 
+                         <ul className="nav flex-column">
+                  <li className="nav-item mb-2">
+                    <NavLink to="contact" className="nav-link p-0 text-white">
+                      Abdelrhman Zaki
+                    </NavLink>
+                  </li>
+                  <li className="nav-item mb-2">
+                    <NavLink to="/contact" className="nav-link p-0 text-white">
+                      Ahmed Elmanzlawy
+                    </NavLink>
+                  </li>
+                  <li className="nav-item mb-2">
+                    <NavLink to="/contact" className="nav-link p-0 text-white">
+                      Ahmed Kamal
+                    </NavLink>
+                  </li>
+                  <li className="nav-item mb-2">
+                    <NavLink to="/contact" className="nav-link p-0 text-white">
+                      Adel Elfar
+                    </NavLink>
+                  </li>
+                  <li className="nav-item mb-2">
+                    <NavLink to="/contact" className="nav-link p-0 text-white">
+                    Hassan Osama
+                    </NavLink>
+                  </li>
+                   <li className="nav-item mb-2">
+                    <NavLink to="/contact" className="nav-link p-0 text-white">
+                    Reem Abdelhamid
+                    </NavLink>
+                  </li>
+                </ul>
+         
+        </div> */}
 
 
         <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
