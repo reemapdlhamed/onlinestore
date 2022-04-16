@@ -11,7 +11,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Login from "../src/pages/Login/Login";
 import Payment from "../src/components/Payment";
-import Shipping from "../src/components/Shipping";
+import Shipping from "../src/components/shipping/Shipping";
 import Orders from "./components/Orders";
 import { Offline, Online } from "react-detect-offline";
 import ForgotPassword from "./pages/Login/ForgotPassword";
