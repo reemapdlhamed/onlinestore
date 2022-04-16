@@ -12,7 +12,7 @@ import Home from "../../components/Home";
 import { Route } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import Moment from 'react-moment';
+//import Moment from 'react-moment';
 import { border } from "@mui/system";
 import "./userProfile.css";
 import PropTypes from "prop-types";
