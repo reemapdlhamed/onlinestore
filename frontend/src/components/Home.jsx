@@ -103,7 +103,7 @@ const Home = () => {
     console.log(products);
   }, []);
   return (
-    <div className="hero ">
+    <div className="hero  bg-secondary p-2  bg-opacity-10">
       <Carousel>
         <Carousel.Item>
           <img
@@ -225,7 +225,7 @@ const Home = () => {
         })}
       </Container>
 
-      <div className=" mx-5  px-5 border border-2 bg-secondary p-2  bg-opacity-10" style={{height:"500px"}}>
+      <div className="  my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
       <h2 className="pt-3">Labtops</h2>
         <Slider {...settings} className="text-black">
           {products.map((product)=>{
@@ -240,7 +240,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      <div className="vh-25 my-5 mx-5 px-5 border border-2 bg-secondary p-2  bg-opacity-10" style={{height:"500px"}}>
+      <div className="my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
       <h2 className="pt-3">Mobile</h2>
         <Slider {...settingsTwo} className="text-black">
           {products.map((product)=>{
@@ -255,7 +255,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      <div className="vh-25 my-5 mx-5 px-5 border border-2 bg-secondary p-2  bg-opacity-10" style={{height:"500px"}}>
+      <div className="my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
       <h2 className="pt-3">Clothing</h2>
         <Slider {...settingsTwo} >
           {products.map((product)=>{
