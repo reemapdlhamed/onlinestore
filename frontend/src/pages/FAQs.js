@@ -13,7 +13,7 @@ const FAQs = () => {
         </div>
 
         <h3>
-          <i className="far fa-question-circle"></i> Most Common Question{" "}
+          <i className="far fa-question-circle"></i> Most Common Questions{" "}
         </h3>
         <hr />
         <div>

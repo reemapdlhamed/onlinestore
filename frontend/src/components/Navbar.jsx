@@ -41,12 +41,12 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-white py-2
+        className="navbar navbar-expand-lg navbar-light bg-light py-0
        shadow-sm"
         style={{ position: "relative", zIndex: "2" }}
       >
         <div className="container">
-          <NavLink className="navbar-brand" to="#">
+          <NavLink className="navbar-brand" to="/">
             E-commerce
           </NavLink>
           {/* <Link to="/wwishlist/wishlist">Wishlist</Link> */}
