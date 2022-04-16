@@ -1,138 +1,107 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div >
-      <footer className="footer text-white ">
-        <div className="container py-0">
-          <footer className="py-5">
-            <div className="row">
-              <div className="col-3">
-                <h4>E-Commerce</h4>
-              </div>
-
-              <div className="col-2">
-                <h5>Section</h5>
-                <ul className="nav flex-column">
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      Home
-                    </NavLink>
-                  </li>
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      Features
-                    </NavLink>
-                  </li>
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      Pricing
-                    </NavLink>
-                  </li>
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      FAQs
-                    </NavLink>
-                  </li>
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      About
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-2">
-                <h5>Section</h5>
-                <ul className="nav flex-column">
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      Home
-                    </NavLink>
-                  </li>
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      Features
-                    </NavLink>
-                  </li>
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      Pricing
-                    </NavLink>
-                  </li>
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      FAQs
-                    </NavLink>
-                  </li>
-                  <li className="nav-item mb-2">
-                    <NavLink to="#" className="nav-link p-0 text-white">
-                      About
-                    </NavLink>
-                  </li>
-                </ul>
-              </div>
-
-              <div className="col-4 offset-1">
-                <form>
-                  <h5>Subscribe to our newsletter</h5>
-                  <p>Monthly digest of whats new and exciting from us.</p>
-                  <div className="d-flex w-100 gap-2">
-                    <label htmlFor="newsletter1" className="visually-hidden">
-                      Email address
-                    </label>
-                    <input
-                      id="newsletter1"
-                      type="text"
-                      className="form-control"
-                      placeholder="Email address"
-                    />
-                    <button
-                      className="btn btn-primary rounded-pill px-4"
-                      type="button"
-                    >
-                      Subscribe
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-
-            <div className="d-flex justify-content-between pt-4 mt-4 border-top">
-              <p>© 2022 , Inc. All rights reserved, ITI-Dragons-Team</p>
-              <ul className="list-unstyled d-flex">
-                <li className="ms-3">
-                  <NavLink className="link-light" to="#">
-                    <i className="fab fa-facebook fa-2x"></i>
-                  </NavLink>
-                </li>
-                <li className="ms-3">
-                  <NavLink className="link-light" to="#">
-                    <i className="fab fa-instagram fa-2x"></i>
-                  </NavLink>
-                </li>
-                <li className="ms-3">
-                  <NavLink className="link-light" to="#">
-                    <i className="fab fa-twitter fa-2x"></i>
-                  </NavLink>
-                </li>
-                <li className="ms-3">
-                  <NavLink className="link-light" to="#">
-                    <i className="fab fa-github fa-2x"></i>
-                  </NavLink>
-                </li>
-                <li className="ms-3">
-                  <NavLink className="link-light" to="#">
-                    <i className="fab fa-linkedin fa-2x"></i>
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-          </footer>
-        </div>
-      </footer>
+    <footer className="footer text-center text-lg-start bg-dark text-white">
+        <section
+    className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+  >
+    <div className="me-5 d-none d-lg-block">
+      <h6>Get connected with us on social networks:</h6>
     </div>
+
+    <div>
+      <Link to="" className="me-4 text-reset">
+        <i className="fab fa-facebook-f fa-2x"></i>
+      </Link>
+      <Link to="" className="me-4 text-reset">
+        <i className="fab fa-twitter fa-2x"></i>
+      </Link>
+      <Link to="" className="me-4 text-reset">
+        <i className="fab fa-google fa-2x"></i>
+      </Link>
+      <Link to="" className="me-4 text-reset">
+        <i className="fab fa-instagram fa-2x"></i>
+      </Link>
+      <Link to="" className="me-4 text-reset">
+        <i className="fab fa-linkedin fa-2x"></i>
+      </Link>
+      <Link to="" className="me-4 text-reset">
+        <i className="fab fa-github fa-2x"></i>
+      </Link>
+    </div>
+  </section>
+
+  <section className="">
+    <div className="container text-center text-md-start mt-5">
+      <div className="row mt-3">
+        <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+          <h6 className="text-uppercase fw-bold mb-4">
+          <i className="fas fa-shopping-cart fa-1x"></i> ShipShop           
+          </h6>
+          <p>
+            Here you can use rows and columns to organize your footer content. Lorem ipsum
+            dolor sit amet, consectetur adipisicing elit.
+          </p>
+        </div>
+
+        <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <h6 className="text-uppercase fw-bold mb-4">
+            Products
+          </h6>                <ul className="nav flex-column">
+                  <li className="nav-item mb-2">
+                    <NavLink to="/" className="nav-link p-0 text-white">
+                      Home
+                    </NavLink>
+                  </li>
+                  <li className="nav-item mb-2">
+                    <NavLink to="/products" className="nav-link p-0 text-white">
+                      Products
+                    </NavLink>
+                  </li>
+                  <li className="nav-item mb-2">
+                    <NavLink to="/about" className="nav-link p-0 text-white">
+                      About
+                    </NavLink>
+                  </li>
+                  <li className="nav-item mb-2">
+                    <NavLink to="/contact" className="nav-link p-0 text-white">
+                      Contact
+                    </NavLink>
+                  </li>
+                  <li className="nav-item mb-2">
+                    <NavLink to="/FAQs" className="nav-link p-0 text-white">
+                    FAQs
+                    </NavLink>
+                  </li>
+                </ul>
+         
+        </div>
+
+
+        <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+          <h6 className="text-uppercase fw-bold mb-4">
+            Contact
+          </h6>
+          <p><i className="fas fa-home me-3"></i> Egypt, Mansoura,35111</p>
+          <p>
+            <i className="fas fa-envelope me-3"></i>
+            shipShop@gmail.com
+          </p>
+          <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
+          <p><i className="fas fa-print me-3"></i> + 01 234 567 89</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div className="d-flex justify-content-center pt-4 mt-4 border-top px-3 text-center">
+              <p>© 2022 , Inc. All rights reserved, ITI-Dragons-Team</p>
+              
+            </div>
+            </footer>
+     
   );
 };
 
