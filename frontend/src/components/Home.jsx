@@ -299,7 +299,7 @@ const Home = () => {
 
       <div className="vh-25 my-5 mx-5 px-5 border border-2 bg-secondary p-2  bg-opacity-10">
       <h2 className="pt-3">Clothing</h2>
-        <Slider {...settingsTwo} className="text-black">
+        <Slider {...settingsTwo} >
           {products.map((product)=>{
             return(
               <div >
