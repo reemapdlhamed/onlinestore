@@ -30,7 +30,7 @@ function Login() {
   
   const responseGoogle = async (response) => {
     try {
-      const res = await axios.post("/user/google_login", {
+      const res = await axios.post("/id/google_login", {
         tokenId: response.tokenId,
       });
 
