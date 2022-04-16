@@ -2,6 +2,7 @@ import axios from "axios";
 const cart = [];
 
 const handleCart = (state = cart, action) => {
+  new Promise(resolve => setTimeout(resolve, 500)); 
   const product = action.payload;
 
   switch (action.type) {

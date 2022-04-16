@@ -15,6 +15,10 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    discount: {
+      type: Number,
+      required: false,
+    },
     shippingAddress: {
       country: {
         type: String,
@@ -33,6 +37,7 @@ const orderSchema = new mongoose.Schema(
         type: String,
         required: true,
       },
+    
       building: {
         type: String,
         required: true,

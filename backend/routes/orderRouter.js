@@ -24,6 +24,8 @@ router
     body("shippingAddress.building").isString().withMessage("enter correct building"),
     body("orderStatus").isString().withMessage("enter orderStatus"),
     body("paymentType").isString().withMessage("enter paymentType"),
+    body("discount").isNumeric().withMessage("enter discount"),
+
     ],
     controller.createOrders
 );

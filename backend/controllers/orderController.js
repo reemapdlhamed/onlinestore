@@ -5,6 +5,7 @@ const { validationResult } = require("express-validator");
 
 //create new order
 exports.createOrders = (request, response, next) => {
+  console.log("REQ ORDER",request.body)
   var paymentStatu;
   if(request.body.paymentType==="cod")
   {
@@ -24,6 +25,7 @@ exports.createOrders = (request, response, next) => {
     orderDate: request.body.orderDate,
     orderStatus: request.body.orderStatus,
     paymentStatus: paymentStatu,
+    discount: request.body.discount,
 
     totalPrice: request.body.totalPrice,
     shippingPrice: request.body.shippingPrice,

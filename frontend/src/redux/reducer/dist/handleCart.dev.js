@@ -28,6 +28,9 @@ var cart = [];
 var handleCart = function handleCart() {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : cart;
   var action = arguments.length > 1 ? arguments[1] : undefined;
+  new Promise(function (resolve) {
+    return setTimeout(resolve, 500);
+  });
   var product = action.payload;
 
   switch (action.type) {

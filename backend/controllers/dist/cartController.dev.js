@@ -336,12 +336,13 @@ exports.confirmCart = function _callee5(request, response, next) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          _context5.next = 2;
+          console.log("RR", request.body);
+          _context5.next = 3;
           return regeneratorRuntime.awrap(User.findOne({
             email: request.email
           }));
 
-        case 2:
+        case 3:
           user = _context5.sent;
           totalPric = 0;
 
@@ -349,14 +350,15 @@ exports.confirmCart = function _callee5(request, response, next) {
             totalPric += user.cart[i].price;
           }
 
-          _context5.prev = 5;
+          _context5.prev = 6;
           console.log(request.body);
           axios.post("http://127.0.0.1:8080/orders", {
             customerID: user._id,
             customerName: user.name,
             phoneNumber: request.body.phone,
             paymentType: "cod",
-            totalPrice: totalPric,
+            totalPrice: totalPric - request.body.discount,
+            discount: request.body.discount,
             //here we put the user's cart into the order collection
             orderItems: user.cart,
             shippingAddress: {
@@ -374,22 +376,22 @@ exports.confirmCart = function _callee5(request, response, next) {
             }
           });
           user.cart = [];
-          _context5.next = 11;
+          _context5.next = 12;
           return regeneratorRuntime.awrap(user.save());
 
-        case 11:
+        case 12:
           response.send(response.data);
-          _context5.next = 16;
+          _context5.next = 17;
           break;
 
-        case 14:
-          _context5.prev = 14;
-          _context5.t0 = _context5["catch"](5);
+        case 15:
+          _context5.prev = 15;
+          _context5.t0 = _context5["catch"](6);
 
-        case 16:
+        case 17:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[5, 14]]);
+  }, null, null, [[6, 15]]);
 };

@@ -2,6 +2,7 @@ import axios from "axios";
 const orders = [];
 
 const handleOrders = (state = orders, action) => {
+  new Promise(resolve => setTimeout(resolve, 500)); 
   const product = action.payload;
   switch (action.type) {
     default:

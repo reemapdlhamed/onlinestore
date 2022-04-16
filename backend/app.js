@@ -39,6 +39,7 @@ app.listen(process.env.PORT_NUMBER);
 
 //Import Routes
 const authenticationRouter = require("./routes/authRouter");
+const coponRouter = require("./routes/coponRouter");
 
 const productRouter = require("./routes/productRouter");
 const categoryRouter = require("./routes/categoryRouter");
@@ -54,6 +55,8 @@ app.use("/payment", payRouter);
 app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);
+app.use(coponRouter);
+
 app.use(cartRouter);
 app.use(userRouter);
 app.use("/orders", orderRouter);

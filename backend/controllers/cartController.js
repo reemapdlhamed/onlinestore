@@ -207,7 +207,7 @@ exports.updateQuantityCart = async (request, response, next) => {
 // we POST to the order router using axios library
 exports.confirmCart = async (request, response, next) => {
 
-
+console.log("RR",request.body)
   const user = await User.findOne({ email: request.email });
   var totalPric=0;
   for (i=0;i<user.cart.length;i++)
@@ -223,7 +223,8 @@ totalPric+=user.cart[i].price
         customerName: user.name,
         phoneNumber: request.body.phone,
         paymentType: "cod",
-        totalPrice:totalPric,
+        totalPrice:totalPric-request.body.discount,
+        discount:request.body.discount,
         //here we put the user's cart into the order collection
         orderItems: user.cart,
 
