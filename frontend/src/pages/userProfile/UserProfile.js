@@ -262,6 +262,21 @@ export default function UserProfile() {
                   variant="standard"
                   className="w-50"
                 />
+                <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+          <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
+          <Input
+            id="standard-adornment-password"
+            type="password"
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                >
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </FormControl>
 
                 <Button
                   onClick={changePwd}

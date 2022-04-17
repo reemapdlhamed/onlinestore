@@ -179,7 +179,7 @@ const Checkout = (props) => {
 
               {props.location.state &&
                 props.location.state.paymentMethod === "cod" && (
-                  <button onClick={clearCart}>
+                  <button onClick={clearCart} className="btn btn-primary">
                     confirm with cash on delievery
                   </button>
                 )}
