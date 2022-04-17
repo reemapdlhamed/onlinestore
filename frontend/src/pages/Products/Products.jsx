@@ -1,4 +1,4 @@
-import { List, TextField } from "@mui/material";
+import { List, TextField,Button } from "@mui/material";
 import Products_Card from "../../components/Products_Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
@@ -37,28 +37,29 @@ function Products() {
   const [sortOpen, setSortOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("Category");
   const [activeSort, setActiveSort] = useState("Sort");
+  const [more, setMore] = useState(10);
   //----------------------------------------------------------------------
   const dispatch = useDispatch();
   //----------------------------------------------------------------------
   useEffect(() => {
     if (searchWord === ""&& sorting === "none") {
-      dispatch(getProductsList(selected_category));
+      dispatch(getProductsList(selected_category,more));
       dispatch(getCategoriesList());
     }  if(searchWord !== "" && sorting === "none") {
       dispatch(searchProduct(searchWord, selected_category,FirstList));
     }
     if(sorting !== "none"){
-      if(sorting == "ascend"){
+      if(sorting === "ascend"){
         dispatch(sortAscend(ProductsList))
       }
-      if(sorting == "descend"){
+      if(sorting === "descend"){
         dispatch(sortDescend(ProductsList))
       }
-      if(sorting == "rating"){
+      if(sorting === "rating"){
         dispatch(sortRating(ProductsList))
       }
     }
-  }, [selected_category, searchWord,sorting]);
+  }, [selected_category, searchWord,sorting,more]);
 //-------------------------------------------------------------------------------------------
   function categoryClick(cat) {
     setSorting("none")
@@ -67,6 +68,10 @@ function Products() {
   function searchHandel(e) {
     setSorting("none")
     setSearchWord(e.target.value);
+  }
+  function loadMore() {
+    setMore((more+5));
+   
   }
 
   const handleClickCategory = () => {
@@ -95,7 +100,8 @@ function Products() {
             <List component="div" disablePadding>
             <ListItemButton onClick={()=> {categoryClick({_id:""})
           setCategoryOpen(!categoryOpen)
-          setActiveCategory("Category")}} sx={{ pl: 4 }}>
+          setActiveCategory("Category")
+          setMore(10)}} sx={{ pl: 4 }}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
@@ -105,7 +111,8 @@ function Products() {
           return (
             <ListItemButton onClick={()=> {categoryClick(cat)
             setCategoryOpen(!categoryOpen)
-            setActiveCategory(cat.name)}} sx={{ pl: 4 }}>
+            setActiveCategory(cat.name)
+            setMore(10)}} sx={{ pl: 4 }}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
@@ -188,6 +195,14 @@ function Products() {
         return <Products_Card product={product}></Products_Card>;
       })}
       </Container>
+      <Button
+          className="product-info"
+          style={{ width: "30%",margin:"auto",marginBottom:"30px" }}
+          variant="outlined"
+          onClick={loadMore}
+        >
+          Load More
+        </Button>
     </Container>
   );
 }

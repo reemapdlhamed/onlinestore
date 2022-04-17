@@ -1,6 +1,11 @@
 import axios from "axios";
-export const getProductsList = (id) => (dispatch) => {
-  return axios.get(`http://localhost:8080/products/${id}`)
+export const getProductsList = (id,more) => (dispatch) => {
+  console.log(more)
+  return axios({
+    method: "get",
+    url: `http://localhost:8080/products/${id}`,
+    params: {more: more},
+  })
     .then((res) =>
       dispatch({
         type: "GET_PRODUCTS_LIST",
