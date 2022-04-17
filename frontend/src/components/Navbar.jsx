@@ -46,7 +46,7 @@ const Navbar = () => {
         style={{ position: "relative", zIndex: "2" }}
       >
         <div className="container">
-          <NavLink className="navbar-brand" to="#">
+          <NavLink className="navbar-brand" to="/">
             <img src="/assets/logo1.jpg" style={{width:"180px",height:"20px"}} alt="logo" />
 
           </NavLink>
