@@ -83,7 +83,7 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
+
     <Offline>
             <Route component={NoInternet} />
 
@@ -111,44 +111,9 @@ function App() {
         <Route exact path={"/profile"} component={UserProfile}/>
         <Route path={"/orders/:id"} component={Orders}/>
         <Route path={"/order-details/:id"} component={OrderDetails}/>
-        
-        <Route path={"/fav"} component={Favourites} />
         <Route path={"*"} component={NotFound} />
       </Switch>
       <Footer />
-=======
-      <Offline>
-        <Route component={NoInternet} />
-      </Offline>
-      <Online>
-        <Navbar />
-        <Switch>
-          <Route exact path={"/profile"} component={UserProfile} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/products" component={Products} />
-          <Route exact path="/product/:id" component={Product} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/shipping" component={Shipping} />
-          <Route exact path="/forgotPassword" component={ForgotPassword} />
-          <Route path={"/login"} component={Login} />
-          <Route path={"/register"} component={Register} />
-          <Route path={"/payment"} component={Payment} />
-          <Route path={"/FAQs"} component={FAQs} />
-          <Route exact path={"/profile"} component={UserProfile} />
-          <Route path={"/orders/:id"} component={Orders} />
-          <Route path={"/order-details/:id"} component={OrderDetails} />
-          <Route
-            exact
-            path={"/is/activate/:activation_token"}
-            component={ActivationEmail}
-          />
-          <Route path={"*"} component={NotFound} />
-        </Switch>
-        <Footer />
->>>>>>> e2c8733ffaf7be61321205bb3fd274547a38ad3b
       </Online>
     </>
   );
