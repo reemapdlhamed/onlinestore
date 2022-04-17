@@ -11,15 +11,22 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Login from "../src/pages/Login/Login";
 import Payment from "../src/components/Payment";
-import Shipping from "../src/components/Shipping";
+import Shipping from "../src/components/shipping/Shipping";
 import Orders from "./components/Orders";
-import { Offline, Online } from "react-detect-offline"
+import { Offline, Online } from "react-detect-offline";
 import ForgotPassword from "./pages/Login/ForgotPassword";
+import ActivationEmail from "./pages/Login/ActivationEmail";
 import Register from "../src/pages/register/register";
 import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { addCart, delCart, zeroCart,addCartFromDB,addOrdersFromDB } from "./redux/action";
+import {
+  addCart,
+  delCart,
+  zeroCart,
+  addCartFromDB,
+  addOrdersFromDB,
+} from "./redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import Favourites from "./components/Favourites"
 import UserProfile from "./pages/userProfile/UserProfile";
@@ -29,50 +36,54 @@ import FAQs from "./pages/FAQs";
 import OrderDetails from "./components/OrderDetails";
 import NoInternet from "./pages/NoInternet";
 
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
- function App () {
+
+function App() {
   const dispatch = useDispatch();
   const cartState = useSelector((state) => state.handleCart);
   const orderState = useSelector((state) => state.handleOrders);
 
   useEffect(() => {
-
-    let res2 =  axios({
+    let res2 = axios({
       method: "get",
       url: "http://localhost:8080/cart",
-      headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-    }).then((res) => {
-      console.log("RES",res);
-      for(let i=0;i<res.data.length;i++){
-      
-      dispatch(addCartFromDB(res.data[i]));
-      }
-    
-    }).catch((er)=>{
-      console.log("ER",er)
-    });
-    console.log(res2)
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => {
+        console.log("RES", res);
+        for (let i = 0; i < res.data.length; i++) {
+          dispatch(addCartFromDB(res.data[i]));
+        }
+      })
+      .catch((er) => {
+        console.log("ER", er);
+      });
+    console.log(res2);
 
-
-    let res3 =  axios({
+    let res3 = axios({
       method: "get",
-      url: `http://localhost:8080/orders/customer/${localStorage.getItem("_id")}`,
-      headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-      data:{role:localStorage.getItem("role")}
+      url: `http://localhost:8080/orders/customer/${localStorage.getItem(
+        "_id"
+      )}`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      data: { role: localStorage.getItem("role") },
     }).then((res) => {
-      console.log("orders",res);
-      for(let i=0;i<res.data.length;i++){
-      dispatch(addOrdersFromDB(res.data[i]));
+      console.log("orders", res);
+      for (let i = 0; i < res.data.length; i++) {
+        dispatch(addOrdersFromDB(res.data[i]));
       }
     });
-
   }, []);
- 
-  
+
   return (
     <>
+<<<<<<< HEAD
     <Offline>
             <Route component={NoInternet} />
 
@@ -105,6 +116,39 @@ import "slick-carousel/slick/slick-theme.css";
         <Route path={"*"} component={NotFound} />
       </Switch>
       <Footer />
+=======
+      <Offline>
+        <Route component={NoInternet} />
+      </Offline>
+      <Online>
+        <Navbar />
+        <Switch>
+          <Route exact path={"/profile"} component={UserProfile} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/products" component={Products} />
+          <Route exact path="/product/:id" component={Product} />
+          <Route exact path="/about" component={About} />
+          <Route exact path="/checkout" component={Checkout} />
+          <Route exact path="/contact" component={Contact} />
+          <Route exact path="/cart" component={Cart} />
+          <Route exact path="/shipping" component={Shipping} />
+          <Route exact path="/forgotPassword" component={ForgotPassword} />
+          <Route path={"/login"} component={Login} />
+          <Route path={"/register"} component={Register} />
+          <Route path={"/payment"} component={Payment} />
+          <Route path={"/FAQs"} component={FAQs} />
+          <Route exact path={"/profile"} component={UserProfile} />
+          <Route path={"/orders/:id"} component={Orders} />
+          <Route path={"/order-details/:id"} component={OrderDetails} />
+          <Route
+            exact
+            path={"/is/activate/:activation_token"}
+            component={ActivationEmail}
+          />
+          <Route path={"*"} component={NotFound} />
+        </Switch>
+        <Footer />
+>>>>>>> e2c8733ffaf7be61321205bb3fd274547a38ad3b
       </Online>
     </>
   );

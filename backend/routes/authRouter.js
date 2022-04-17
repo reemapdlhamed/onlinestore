@@ -64,6 +64,7 @@ router.post("/refresh_token", controller.getAccessToken);
 router.post("/forgot", controller.forgotPassword);
 router.post("/reset", isAuth, controller.resetPassword);
 router.post("/google_login", controller.googleLogin);
+router.post('/activation', controller.activateEmail)
 
 router.post("/facebook_login", controller.facebookLogin);
 module.exports = router;
