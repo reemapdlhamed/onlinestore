@@ -21,7 +21,7 @@ import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { addCart, delCart, zeroCart,addCartFromDB,addOrdersFromDB } from "./redux/action";
 import { useDispatch, useSelector } from "react-redux";
-
+import Favourites from "./components/Favourites"
 import UserProfile from "./pages/userProfile/UserProfile";
 import axios from "axios";
 import Footer from "./components/Footer";
@@ -97,6 +97,7 @@ import "slick-carousel/slick/slick-theme.css";
         <Route path={"/register"} component={Register} />
         <Route path={"/payment"} component={Payment} />
         <Route path={"/FAQs"} component={FAQs} />
+        <Route path={"/fav"} component={Favourites} />
         <Route exact path={"/profile"} component={UserProfile}/>
         <Route path={"/orders/:id"} component={Orders}/>
         <Route path={"/order-details/:id"} component={OrderDetails}/>
