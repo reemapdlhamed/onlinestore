@@ -204,7 +204,7 @@ const Product = () => {
             >
               Add Review
             </button>
-            <div class="cardImage">
+            {/* <div class="cardImage">
               <a className="wish" href="#" onClick={handleOpen}>
                 <i class="fas fa-heart"></i> Add to List
               </a>
@@ -241,7 +241,7 @@ const Product = () => {
                   </div>
                 </Box>
               </Modal>
-            </div>
+            </div> */}
           </div>
         </div>
         <div

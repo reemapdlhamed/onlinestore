@@ -6,10 +6,9 @@ import { clearLocalStorageCart } from "../redux/action/Cart";
 import { goToHome } from "../redux/action/Cart";
 import { useState } from "react";
 import data from "../copons.json";
+import { border } from "@mui/system";
 
-
-
-var promocodes = data[2].data[0]
+var promocodes = data[2].data[0];
 
 const Checkout = (props) => {
   const [discount, setDiscount] = useState({
@@ -58,12 +57,11 @@ const Checkout = (props) => {
   }
 
   const clearCart = () => {
-    
-    const mergedObject =JSON.parse(localStorage.getItem("form"));
-   
+    const mergedObject = JSON.parse(localStorage.getItem("form"));
+
     mergedObject.paymentType = props.location.state.paymentMethod;
     mergedObject.discount = discount.val;
-console.log(mergedObject)
+    console.log(mergedObject);
     let res2 = axios({
       method: "post",
       url: "http://localhost:8080/cart/buy",
@@ -94,7 +92,7 @@ console.log(mergedObject)
       }
     });
 
-     props.history.push("/");
+    props.history.push("/");
     //dispatch(clearLocalStorageCart());
 
     window.location.reload();
@@ -122,7 +120,14 @@ console.log(mergedObject)
 
   return (
     <>
-      <div className="container my-5 min-vh-100">
+      <div
+        className="container my-5 min-vh-100"
+        style={{
+          boxShadow:
+            "rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
+          paddingTop: "7rem",
+        }}
+      >
         <div style={{ margin: "0 auto", display: "block" }} className="row g-5">
           <div
             style={{ margin: "0 auto", display: "block" }}

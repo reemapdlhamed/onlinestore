@@ -225,16 +225,16 @@ const ShippingScreen = ({ history }) => {
           }}
         >
           {(props) => (
-            <div>
-              <div className="col-sm-12">
+            <div className="formLogin">
+              <div className="col-sm-12 ">
                 <h3>Client Address</h3>
               </div>
-              <div className="col-sm-12">
+              <div className="">
                 <Form>
                   <div className="form-group">
                     <label htmlFor="appartment"></label>
                     <Field
-                      className="form-control"
+                      className="form-control  input"
                       type="text"
                       name="appartment"
                       placeholder="Enter appartment"
@@ -244,9 +244,9 @@ const ShippingScreen = ({ history }) => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="street" className="mt-3"></label>
+                    <label htmlFor="street" className=""></label>
                     <Field
-                      className="form-control"
+                      className="form-control input"
                       type="text"
                       name="street"
                       placeholder="Enter street"
@@ -256,10 +256,10 @@ const ShippingScreen = ({ history }) => {
                   </div>
 
                   <div className="form-group">
-                    <label htmlFor="phone" className="mt-3"></label>
+                    <label htmlFor="phone" className=""></label>
                     <Field
                       type="text"
-                      className="form-control"
+                      className="form-control input"
                       pattern="^01[0-2]\d{1,8}$"
                       maxLength={11}
                       minLength={11}
@@ -269,13 +269,14 @@ const ShippingScreen = ({ history }) => {
                     />
                   </div>
 
-                  <div className="form-group">
+                  <div className="form-group ">
                     <label htmlFor="city" className="mt-3"></label>
 
-                    <Field className="form-control" name="city">
+                    <Field className="form-control selectBox" name="city">
                       {({ field }) => (
-                        <select {...field}>
-                          <option value=""></option>
+                        <select className="select" {...field}>
+                          <option>Select Your Country</option>
+                          {/* <option value=""></option> */}
                           {govs.map((i) => (
                             <option key={i} value={i}>
                               {i}
@@ -289,7 +290,7 @@ const ShippingScreen = ({ history }) => {
                   <button
                     type="submit"
                     onSubmit={submitHandler}
-                    className="btn btn-primary btn-block mt-4"
+                    className=" button"
                   >
                     Submit
                   </button>
