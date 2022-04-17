@@ -19,16 +19,20 @@ export const getCategoriesList = () => (dispatch) => {
     )
     .catch((err) => console.log(err));
 };
-export const searchProduct = (word,category_id) => (dispatch) => {
-  return axios.post(`http://localhost:8080/search`,{category_id,word})
-    .then((res) =>{
-      dispatch({
-        type: "SEARCH_PRODUCT",
-        payload: res.data.data,
-      })
-    }
-    )
-    .catch((err) => console.log(err));
+export const searchProduct = (word,category_id,list) => {
+  const regex = new RegExp(word, "i"); 
+  let newList;
+  if(category_id === ""){
+    newList = list.filter((product)=>regex.test(product.name))
+  }
+  else{
+    newList = list.filter((product)=>product.category_id === category_id && regex.test(product.name)) 
+    console.log(newList)
+  }
+  return{
+    type : "SEARCH_PRODUCT",
+    payload : newList
+}
 };
 export const getProduct = (product_id) => {
   return{
