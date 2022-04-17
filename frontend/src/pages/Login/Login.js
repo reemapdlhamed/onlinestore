@@ -30,7 +30,9 @@ function Login() {
   
   const responseGoogle = async (response) => {
     try {
-      const res = await axios.post("/id/google_login", {
+      const res = await axios.post("/google_login", {
+
+        
         tokenId: response.tokenId,
       });
 
@@ -209,7 +211,7 @@ function Login() {
               <div className="social">
                 <GoogleLogin
                   className="google"
-                  clientId="Your google client id"
+                  clientId="911262537698-u34luk6o30r68m36glnk0hk3ae0e3scn.apps.googleusercontent.com"
                   buttonText="Login with google"
                   onSuccess={responseGoogle}
                   cookiePolicy={"single_host_origin"}

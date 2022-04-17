@@ -7,8 +7,14 @@ const bcrypt = require("bcrypt");
 const { redirect } = require("express/lib/response");
 var ls = require("local-storage");
 const res = require("express/lib/response");
+const axios = require("axios"); // manages http requests
 require("dotenv").config();
 const asyncHandler = require("express-async-handler");
+const { OAuth2Client } = require("google-auth-library");
+
+const googleClient = new OAuth2Client({
+  clientId: `${process.env.GOOGLE_CLIENT_ID}`,
+});
 
 exports.userLogin = (request, response, next) => {
   console.log(request.body);
@@ -265,45 +271,56 @@ exports.getAccessToken = (req, res) => {
 exports.googleLogin = async (req, res) => {
   try {
     const { tokenId } = req.body;
-
-    const verify = await user.verifyIdToken({
+    const verify = await googleClient.verifyIdToken({
       idToken: tokenId,
-      audience: process.env.MAILING_SERVICE_CLIENT_ID,
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
 
     const { email_verified, email, name } = verify.payload;
 
-    const password = email + process.env.GOOGLE_SECRET;
+    const password = email + process.env.GOOGLE_SECRET_KEY;
 
     const passwordHash = await bcrypt.hash(password, 12);
-
+    console.log("")
     if (!email_verified)
       return res.status(400).json({ msg: "Email verification failed." });
 
-    const user = await user.findOne({ email });
-
+    const user = await User.findOne({ email });
+    
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
         return res.status(400).json({ msg: "Password is incorrect." });
 
+        /*
       const refresh_token = createRefreshToken({ id: user._id });
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
         path: "/user/refresh_token",
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
+      */
+       axios({
+        method: "post",
+        url: "http://localhost:8080/login",
+        data:{email:email,password:passwordHash}
+      })
+        .then((res) => {
+          console.log(res)
+        })
+        .catch((er) => {
+          console.log("ER", er);
+        });
 
       res.json({ msg: "Login success!" });
     } else {
-      const newUser = new user({
-        name,
-        email,
+      const newUser = new User({
+        name:name,
+        email:email,
+        role:"customer",
         password: passwordHash,
       });
-
       await newUser.save();
-
       const refresh_token = createRefreshToken({ id: newUser._id });
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
@@ -314,6 +331,7 @@ exports.googleLogin = async (req, res) => {
       res.json({ msg: "Login success!" });
     }
   } catch (err) {
+    console.log(err.message);
     return res.status(500).json({ msg: err.message });
   }
 };
@@ -328,7 +346,6 @@ exports.facebookLogin = async (req, res) => {
       .then((res) => {
         return res;
       });
-
     const { email, name, picture } = data;
 
     const password = email + process.env.FACEBOOK_SECRET;
