@@ -19,6 +19,7 @@ function Products_Card(props) {
 
   return (
     <Card
+      key={props.product._id}
       className="Card1"
       style={{ width: "230px", height: "300px", marginBottom: "50px" }}
     >

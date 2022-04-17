@@ -4,7 +4,7 @@ const express = require("express");
 const { validationResult } = require("express-validator");
 
 exports.show_products_category = (request, response, next) => {
-  Products.find({ category_id: request.params.category_id })
+  Products.find({ category_id: request.params.category_id }).limit(request.query.more)
     .then((data) => {
       response.status(200).json({ data });
     })
@@ -14,9 +14,10 @@ exports.show_products_category = (request, response, next) => {
 };
 //--------------------------------------------------------------------------------------------
 exports.show_products = (request, response, next) => {
-  Products.find({})
+  Products.find({}).limit(request.query.more||1000000)
     .then((data) => {
       response.status(200).json({ data });
+      console.log(data.length)
     })
     .catch((error) => {
       next(error);
