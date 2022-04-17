@@ -60,7 +60,7 @@ const PaymentScreen = ({ history }) => {
               <span className="text"> cash on delievery</span>
             </label>
             {/* cash on delievery{" "} */}
-            {visa && "(SORRY , CASH ON DELIVERY LIMIT IS 20K)"}
+            <p className="hint">{visa && "(SORRY , CASH ON DELIVERY LIMIT IS 20K)"}</p>
             <br></br>
           </div>
           <NavLink
