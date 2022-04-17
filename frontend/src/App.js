@@ -10,7 +10,7 @@ import NotFound from "./pages/NotFound";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Login from "../src/pages/Login/Login";
-import Payment from "../src/components/Payment";
+import Payment from "../src/components/Payment/Payment";
 import Shipping from "../src/components/shipping/Shipping";
 import Orders from "./components/Orders";
 import { Offline, Online } from "react-detect-offline";
@@ -38,7 +38,6 @@ import NoInternet from "./pages/NoInternet";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 
 function App() {
   const dispatch = useDispatch();
