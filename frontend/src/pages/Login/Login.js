@@ -144,7 +144,7 @@ function Login() {
           </p>
         </section>
       ) : (
-        <div className="login">
+        <div className="login ">
           <Link to="/">
             <img
               className="login__logo"
@@ -152,7 +152,7 @@ function Login() {
               alt="amazon logo "
             />
           </Link>
-          <div className="login__container">
+          <div className="login__container ">
             <p
               ref={errorRef}
               className={errMsg ? "errMsg" : "offScreen"}

@@ -28,7 +28,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-
 import IconButton from "@mui/material/IconButton";
 import FilledInput from "@mui/material/FilledInput";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -36,7 +35,6 @@ import FormHelperText from "@mui/material/FormHelperText";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useDispatch, useSelector } from "react-redux";
-
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -84,19 +82,20 @@ export default function UserProfile() {
   var rows = [];
 
   for (let i = 0; i < orderState.length; i++) {
-    if (orderState[i]._id&&orderState[i].customerName&&orderState[i].paymentStatus&&orderState[i].totalPrice) {
-
-
-      var theDate = new Date(orderState[i].createdAt );
-            rows.push({
+    if (
+      orderState[i]._id &&
+      orderState[i].customerName &&
+      orderState[i].paymentStatus &&
+      orderState[i].totalPrice
+    ) {
+      var theDate = new Date(orderState[i].createdAt);
+      rows.push({
         id: orderState[i]._id,
-        
-        createdAt:theDate.toLocaleDateString() ,
+
+        createdAt: theDate.toLocaleDateString(),
         orderStatus: orderState[i].orderStatus,
         totalPrice: orderState[i].totalPrice,
       });
-
-   
     }
   }
 
@@ -111,11 +110,11 @@ export default function UserProfile() {
   let oldPassword;
   const NewPwd = (e) => {
     newPassword = e.target.value;
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
   const OldPwd = (e) => {
     oldPassword = e.target.value;
-    console.log(e.target.value);
+    // console.log(e.target.value);
   };
 
   const changePwd = () => {
@@ -287,7 +286,7 @@ export default function UserProfile() {
                 </Button>
               </form>
             </TabPanel>
-            <TabPanel value={value} index={1} >
+            <TabPanel value={value} index={1}>
               <TableContainer component={Paper} className="my-5 mx-5">
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
@@ -295,6 +294,7 @@ export default function UserProfile() {
                       <TableCell>ID</TableCell>
                       <TableCell align="right">order date</TableCell>
                       <TableCell align="right">Status</TableCell>
+                      <TableCell align="right">Payment Status</TableCell>
                       <TableCell align="right">Total</TableCell>
                       {/* <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
                     </TableRow>
@@ -309,17 +309,20 @@ export default function UserProfile() {
                         }}
                       >
                         <TableCell component="th" scope="row">
-                        <NavLink
-                        to={`orders/${row.id}`}
-                        className=" btn-outline-dark  ms-2 px-3 py-2"
-                      >
-                        {row.id}
-                      </NavLink>
+                          <NavLink
+                            to={`orders/${row.id}`}
+                            className=" btn-outline-dark  ms-2 px-3 py-2"
+                          >
+                            {row.id}
+                          </NavLink>
                         </TableCell>
                         <TableCell align="right">{row.createdAt} </TableCell>
 
                         <TableCell align="right">{row.orderStatus} </TableCell>
-                        <TableCell align="right">{row.totalPrice}</TableCell>
+                        <TableCell align="right">
+                          {row.paymentStatus}{" "}
+                        </TableCell>
+                        <TableCell align="right">{row.totalPrice} E£</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

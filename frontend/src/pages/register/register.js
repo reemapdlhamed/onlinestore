@@ -141,7 +141,7 @@ function register() {
   return (
     <>
       {success ? (
-        <section>
+        <section >
           <Login>
             <Route exact path="/login" component={Login} />
           </Login>
@@ -163,7 +163,7 @@ function register() {
           </p>
         </section>
       ) : (
-        <div className="login">
+        <div className="login ">
           <Link to="/">
             <img
               className="login__logo"
@@ -171,7 +171,7 @@ function register() {
               alt="amazon logo "
             />
           </Link>
-          <div className="login__container">
+          <div className="login__container ">
             <p
               ref={errRef}
               className={errorMsg ? "errorMsg" : "offScreen"}
@@ -354,7 +354,7 @@ function register() {
             <button
               href="/login"
               // onClick={register}
-              className="login__registerbutton"
+              className="login__registerbutton "
             >
               <a href="/login">Already have an account?</a>
             </button>
