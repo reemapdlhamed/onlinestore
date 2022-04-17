@@ -1,16 +1,13 @@
-import { Chip, Grid, List, TextField } from "@mui/material";
+import { List, TextField } from "@mui/material";
 import Products_Card from "../../components/Products_Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import ListSubheader from '@mui/material/ListSubheader';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import Collapse from '@mui/material/Collapse';
 import SortIcon from '@mui/icons-material/Sort';
 import CategoryIcon from '@mui/icons-material/Category';
-import DraftsIcon from '@mui/icons-material/Drafts';
-import SendIcon from '@mui/icons-material/Send';
 import ExpandLess from '@mui/icons-material/ExpandLess';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import StarBorder from '@mui/icons-material/StarBorder';
@@ -23,24 +20,25 @@ import {
   sortDescend,
   sortRating,
 } from "../../redux/action/Products";
-import { Col, Container, Row } from "react-bootstrap";
+import {Container} from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { height } from "@mui/system";
+
 
 
 function Products() {
   const ProductsList = useSelector((state) => state.ProductsReducer.list);
-  const CategoriesList = useSelector(
-    (state) => state.ProductsReducer.categories
-  );
-  const dispatch = useDispatch();
-  const selected_category = useSelector(
-    (state) => state.ProductsReducer.category
-  );
+  const CategoriesList = useSelector((state) => state.ProductsReducer.categories);
+  const selected_category = useSelector((state) => state.ProductsReducer.category);
+  //---------------------------------------------------------------------
   const [searchWord, setSearchWord] = useState("");
   const [sorting, setSorting] = useState("none");
   const [categoryOpen, setCategoryOpen] = useState(false);
   const [sortOpen, setSortOpen] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("Category");
+  const [activeSort, setActiveSort] = useState("Sort");
+  //----------------------------------------------------------------------
+  const dispatch = useDispatch();
+  //----------------------------------------------------------------------
   useEffect(() => {
     if (searchWord === ""&& sorting === "none") {
       dispatch(getProductsList(selected_category));
@@ -60,7 +58,7 @@ function Products() {
       }
     }
   }, [selected_category, searchWord,sorting]);
-
+//-------------------------------------------------------------------------------------------
   function categoryClick(cat) {
     setSorting("none")
     dispatch(selectGategory(cat._id));
@@ -76,11 +74,11 @@ function Products() {
   const handleClickSort = () => {
     setSortOpen(!sortOpen);
   };
-
+//----------------------------------------------------------------------------------------------
   return (
     <Container style={{padding:"0" ,position:"relative"}} fluid className="d-flex flex-column flex-wrap justify-content-end min-vh-100">
       <div className="products-bar">
-      
+   
       <List
           sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}
           component="nav"
@@ -89,13 +87,14 @@ function Products() {
             <ListItemIcon>
               <CategoryIcon />
             </ListItemIcon>
-            <ListItemText primary="Category" />
+            <ListItemText primary={activeCategory} />
             {categoryOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={categoryOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
             <ListItemButton onClick={()=> {categoryClick({_id:""})
-          setCategoryOpen(!categoryOpen)}} sx={{ pl: 4 }}>
+          setCategoryOpen(!categoryOpen)
+          setActiveCategory("Category")}} sx={{ pl: 4 }}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
@@ -104,7 +103,8 @@ function Products() {
             {CategoriesList.map((cat) => {
           return (
             <ListItemButton onClick={()=> {categoryClick(cat)
-            setCategoryOpen(!categoryOpen)}} sx={{ pl: 4 }}>
+            setCategoryOpen(!categoryOpen)
+            setActiveCategory(cat.name)}} sx={{ pl: 4 }}>
             <ListItemIcon>
               <StarBorder />
             </ListItemIcon>
@@ -135,34 +135,38 @@ function Products() {
             <ListItemIcon>
               <SortIcon />
             </ListItemIcon>
-            <ListItemText primary="Sort" />
+            <ListItemText primary={activeSort} />
             {sortOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
           <Collapse in={sortOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemButton onClick={()=> {setSorting("none");
-            setSortOpen(!sortOpen)}} sx={{ pl: 4 }}>
+            setSortOpen(!sortOpen)
+            setActiveSort("Sort")}} sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
                 <ListItemText primary="None" />
               </ListItemButton>
               <ListItemButton onClick={()=> {setSorting("descend");
-            setSortOpen(!sortOpen)}} sx={{ pl: 4 }}>
+            setSortOpen(!sortOpen)
+            setActiveSort("Descend (price)")}} sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
                 <ListItemText primary="High to low Price" />
               </ListItemButton>
               <ListItemButton onClick={()=> {setSorting("ascend");
-            setSortOpen(!sortOpen)}} sx={{ pl: 4 }}>
+            setSortOpen(!sortOpen)
+            setActiveSort("Ascend (price)")}} sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>
                 <ListItemText primary="Low to high price" />
               </ListItemButton>
               <ListItemButton onClick={()=> {setSorting("rating");
-            setSortOpen(!sortOpen)}} sx={{ pl: 4 }}>
+            setSortOpen(!sortOpen)
+            setActiveSort("Descend (rating)")}} sx={{ pl: 4 }}>
                 <ListItemIcon>
                   <StarBorder />
                 </ListItemIcon>

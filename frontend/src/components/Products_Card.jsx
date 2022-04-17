@@ -1,10 +1,8 @@
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import ReadMoreIcon from "@mui/icons-material/ReadMore";
 import "../pages/Products/Products.css";
 import { Rating } from "@mui/material";
 import { useHistory } from "react-router-dom";
