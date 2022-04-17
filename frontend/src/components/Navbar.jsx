@@ -9,7 +9,7 @@ const Navbar = () => {
   const logOut = () => {
     localStorage.removeItem("email");
     localStorage.removeItem("accessToken");
-    window.location.reload();
+    window.location.replace("/");
   };
   // if (!localStorage.getItem("email")) {
   //   button = (
