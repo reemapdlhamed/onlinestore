@@ -149,13 +149,13 @@ const Checkout = (props) => {
               {state.map(itemList)}
 
               <li className="list-group-item d-flex justify-content-between">
-                <span>Total (USD)</span>
-                <strong>${total - discount.val}</strong>
+                <span>Total (Egy)</span>
+                <strong>E£ {total - discount.val}</strong>
               </li>
 
               <li className="list-group-item d-flex justify-content-between">
-                <span>Discount (USD)</span>
-                <strong>${discount.val}</strong>
+                <span>Discount (Egy)</span>
+                <strong>E£ {discount.val}</strong>
               </li>
             </ul>
 
