@@ -20,6 +20,8 @@ import Register from "../src/pages/register/register";
 import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import PrivateRouter from "./PrivateRouter";
+
 import {
   addCart,
   delCart,
@@ -93,23 +95,22 @@ function App() {
 
       <Navbar />
       <Switch>
-        <Route exact path={"/profile"} component={UserProfile} />
+        <PrivateRouter exact path={"/profile"} component={UserProfile} />
         <Route exact path="/" component={Home} />
         <Route exact path="/products" component={Products} />
         <Route exact path="/product/:id" component={Product} />
         <Route exact path="/about" component={About} />
-        <Route exact path="/checkout" component={Checkout} />
+        <PrivateRouter exact path="/checkout" component={Checkout} />
         <Route exact path="/contact" component={Contact} />
-        <Route exact path="/cart" component={Cart} />
-        <Route exact path="/shipping" component={Shipping} />
-        <Route exact path="/forgotPassword" component={ForgotPassword}/>
+        <PrivateRouter exact path="/cart" component={Cart} />
+        <PrivateRouter exact path="/shipping" component={Shipping} />
+        <PrivateRouter exact path="/forgotPassword" component={ForgotPassword}/>
         <Route path={"/login"} component={Login} />
         <Route path={"/register"} component={Register} />
-        <Route path={"/payment"} component={Payment} />
+        <PrivateRouter path={"/payment"} component={Payment} />
         <Route path={"/FAQs"} component={FAQs} />
-        <Route exact path={"/profile"} component={UserProfile}/>
-        <Route path={"/orders/:id"} component={Orders}/>
-        <Route path={"/order-details/:id"} component={OrderDetails}/>
+        <PrivateRouter path={"/orders/:id"} component={Orders}/>
+        <PrivateRouter path={"/order-details/:id"} component={OrderDetails}/>
         <Route path={"*"} component={NotFound} />
       </Switch>
       <Footer />
