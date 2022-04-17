@@ -8,7 +8,7 @@ import { addCart } from "../redux/action";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { getCategoriesList } from "../redux/action/Products";
+import { getCategoriesList, getProductsList } from "../redux/action/Products";
 import axios from "axios";
 import Products_Card from "./Products_Card";
 import PasswordButton from "./PasswordButton";
@@ -91,16 +91,19 @@ const Home = () => {
     (state) => state.ProductsReducer.categories
   );
   const dispatch = useDispatch();
-  const [products, setProducts] = useState([]);
+
+  const [randomproducts, setRandomProducts] = useState([]);
+  const products = useSelector((state) => state.ProductsReducer.list);
   useEffect(() => {
     dispatch(getCategoriesList());
     axios
       .get(`http://localhost:8080/random`)
       .then((res) => {
-        setProducts(res.data.data);
+        setRandomProducts(res.data.data);
       })
       .catch((err) => console.log(err));
-    console.log(products);
+    console.log(randomproducts);
+    dispatch(getProductsList(''));
   }, []);
   return (
     <div className="hero  bg-secondary p-2  bg-opacity-10">
@@ -220,7 +223,7 @@ const Home = () => {
           ></span>
         </div>
 
-        {products.map((product) => {
+        {randomproducts.map((product) => {
           return <Products_Card product={product}></Products_Card>;
         })}
       </Container>
@@ -228,22 +231,45 @@ const Home = () => {
       <div className="  my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
       <h2 className="pt-3">Labtops</h2>
         <Slider {...settings} className="text-black">
-          {products.map((product)=>{
-            return(
-              <div >
-                <Products_Card product={product} >
-              
-            </Products_Card>
-              </div>
-            )
-          })}
+          {products.filter((product)=>{
+              if(product.category_id === "624ea7bde00092df32b811d0" )
+              return true
+              else 
+              return false
+
+            }).map((product)=>{
+              return(
+                <div >
+                  <Products_Card product={product} >
+                
+              </Products_Card>
+                </div>
+              )
+            })}
         </Slider>
       </div>
 
       <div className="my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
       <h2 className="pt-3">Mobile</h2>
         <Slider {...settingsTwo} className="text-black">
-          {products.map((product)=>{
+          {
+            products.filter((product)=>{
+              if(product.category_id === "624ea753e00092df32b811ce" )
+              return true
+              else 
+              return false
+
+            }).map((product)=>{
+              return(
+                <div >
+                  <Products_Card product={product} >
+                
+              </Products_Card>
+                </div>
+              )
+            })
+          }
+          {/* {product.map((product)=>{
             return(
               <div >
                 <Products_Card product={product} >
@@ -251,22 +277,28 @@ const Home = () => {
             </Products_Card>
               </div>
             )
-          })}
+          })} */}
         </Slider>
       </div>
 
       <div className="my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
-      <h2 className="pt-3">Clothing</h2>
+      <h2 className="pt-3">Electronics</h2>
         <Slider {...settingsTwo} >
-          {products.map((product)=>{
-            return(
-              <div >
-                <Products_Card product={product} >
-              
-            </Products_Card>
-              </div>
-            )
-          })}
+          {products.filter((product)=>{
+              if(product.category_id === "6250246d807579e0e8e00d17" )
+              return true
+              else 
+              return false
+
+            }).map((product)=>{
+              return(
+                <div >
+                  <Products_Card product={product} >
+                
+              </Products_Card>
+                </div>
+              )
+            })}
         </Slider>
       </div>
     </div>
