@@ -37,6 +37,12 @@ const Checkout = (props) => {
         custID: localStorage.getItem("_id"),
       },
     }).then((res) => {
+      if(!promocodes[txt])
+      {
+        setDiscount((previousState) => {
+          return { ...previousState, val:0 };
+        });
+      }
       if (res.data.message === "ok" && promocodes[txt]) {
         setDiscount((previousState) => {
           return { ...previousState, val: promocodes[txt] };
@@ -87,7 +93,7 @@ const Checkout = (props) => {
     }).then((res) => {
       if (res.data.message === "ok") {
         setDiscount((previousState) => {
-          return { ...previousState, val: promocodes[txt] };
+          return {val: promocodes[txt] };
         });
       }
     });
