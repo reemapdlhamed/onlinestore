@@ -26,7 +26,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 
 function Products() {
-  const ProductsList = useSelector((state) => state.ProductsReducer.list);
+  const ProductsList = useSelector((state) => state.ProductsReducer.vlist);
+  const FirstList = useSelector((state) => state.ProductsReducer.list);
   const CategoriesList = useSelector((state) => state.ProductsReducer.categories);
   const selected_category = useSelector((state) => state.ProductsReducer.category);
   //---------------------------------------------------------------------
@@ -44,7 +45,7 @@ function Products() {
       dispatch(getProductsList(selected_category));
       dispatch(getCategoriesList());
     }  if(searchWord !== "" && sorting === "none") {
-      dispatch(searchProduct(searchWord, selected_category));
+      dispatch(searchProduct(searchWord, selected_category,FirstList));
     }
     if(sorting !== "none"){
       if(sorting == "ascend"){

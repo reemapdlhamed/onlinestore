@@ -1,5 +1,6 @@
 const INITIAL_STATE = {
     list: [],
+    vlist: [],
     categories:[],
     product:"",
     category:""
@@ -11,6 +12,7 @@ const INITIAL_STATE = {
         return {
           ...state,
           list: action.payload,
+          vlist: action.payload,
         };
       case "GET_PRODUCT":
         return {
@@ -25,7 +27,7 @@ const INITIAL_STATE = {
       case "SEARCH_PRODUCT":
         return {
           ...state,
-          list: action.payload,
+          vlist: action.payload,
         };
       case "SELECT_CATEGORY":
         return {
@@ -35,17 +37,17 @@ const INITIAL_STATE = {
       case "SORT_ASCEND":
         return {
           ...state,
-          list: action.payload.sort((a, b) => a.price > b.price ? 1 : -1),
+          vlist: action.payload.sort((a, b) => a.price > b.price ? 1 : -1),
         };
       case "SORT_DESCEND":
         return {
           ...state,
-          list: action.payload.sort((a, b) => a.price > b.price ? -1 : 1),
+          vlist: action.payload.sort((a, b) => a.price > b.price ? -1 : 1),
         };
       case "SORT_RATING":
         return {
           ...state,
-          list: action.payload.sort((a, b) => a.rating > b.rating ? -1 : 1),
+          vlist: action.payload.sort((a, b) => a.rating > b.rating ? -1 : 1),
         };
       default:
         return state;
