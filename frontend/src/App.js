@@ -28,7 +28,7 @@ import {
   addOrdersFromDB,
 } from "./redux/action";
 import { useDispatch, useSelector } from "react-redux";
-
+import Favourites from "./components/Favourites"
 import UserProfile from "./pages/userProfile/UserProfile";
 import axios from "axios";
 import Footer from "./components/Footer";
@@ -82,37 +82,37 @@ function App() {
 
   return (
     <>
-      <Offline>
-        <Route component={NoInternet} />
-      </Offline>
-      <Online>
-        <Navbar />
-        <Switch>
-          <Route exact path={"/profile"} component={UserProfile} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/products" component={Products} />
-          <Route exact path="/product/:id" component={Product} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/checkout" component={Checkout} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/cart" component={Cart} />
-          <Route exact path="/shipping" component={Shipping} />
-          <Route exact path="/forgotPassword" component={ForgotPassword} />
-          <Route path={"/login"} component={Login} />
-          <Route path={"/register"} component={Register} />
-          <Route path={"/payment"} component={Payment} />
-          <Route path={"/FAQs"} component={FAQs} />
-          <Route exact path={"/profile"} component={UserProfile} />
-          <Route path={"/orders/:id"} component={Orders} />
-          <Route path={"/order-details/:id"} component={OrderDetails} />
-          <Route
-            exact
-            path={"/is/activate/:activation_token"}
-            component={ActivationEmail}
-          />
-          <Route path={"*"} component={NotFound} />
-        </Switch>
-        <Footer />
+
+    <Offline>
+            <Route component={NoInternet} />
+
+    </Offline>
+    <Online>
+    
+    
+
+      <Navbar />
+      <Switch>
+        <Route exact path={"/profile"} component={UserProfile} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/products" component={Products} />
+        <Route exact path="/product/:id" component={Product} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/checkout" component={Checkout} />
+        <Route exact path="/contact" component={Contact} />
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/shipping" component={Shipping} />
+        <Route exact path="/forgotPassword" component={ForgotPassword}/>
+        <Route path={"/login"} component={Login} />
+        <Route path={"/register"} component={Register} />
+        <Route path={"/payment"} component={Payment} />
+        <Route path={"/FAQs"} component={FAQs} />
+        <Route exact path={"/profile"} component={UserProfile}/>
+        <Route path={"/orders/:id"} component={Orders}/>
+        <Route path={"/order-details/:id"} component={OrderDetails}/>
+        <Route path={"*"} component={NotFound} />
+      </Switch>
+      <Footer />
       </Online>
     </>
   );
