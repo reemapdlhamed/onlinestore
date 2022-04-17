@@ -261,7 +261,7 @@ export default function UserProfile() {
                   variant="standard"
                   className="w-50"
                 />
-                <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
+                {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
           <Input
             id="standard-adornment-password"
@@ -275,7 +275,7 @@ export default function UserProfile() {
               </InputAdornment>
             }
           />
-        </FormControl>
+        </FormControl> */}
 
                 <Button
                   onClick={changePwd}
