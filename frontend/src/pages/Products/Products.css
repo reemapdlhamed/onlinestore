@@ -81,9 +81,11 @@ margin: 40px;
 .category-card:hover{
     transform: scale(140%);
     border-radius: 0;
-    filter: grayscale();
     cursor: pointer;
 }
 .category-card:hover div{
     height: 60%;
+}
+.category-card:hover img{
+    filter: grayscale();
 }
