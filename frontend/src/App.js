@@ -97,11 +97,11 @@ import "slick-carousel/slick/slick-theme.css";
         <Route path={"/register"} component={Register} />
         <Route path={"/payment"} component={Payment} />
         <Route path={"/FAQs"} component={FAQs} />
-        <Route path={"/fav"} component={Favourites} />
         <Route exact path={"/profile"} component={UserProfile}/>
         <Route path={"/orders/:id"} component={Orders}/>
         <Route path={"/order-details/:id"} component={OrderDetails}/>
-
+        
+        <Route path={"/fav"} component={Favourites} />
         <Route path={"*"} component={NotFound} />
       </Switch>
       <Footer />
