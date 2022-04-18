@@ -80,6 +80,8 @@ const Checkout = (props) => {
     }).then((res) => {
       console.log("ORDER DONE");
     });
+    console.log(res2)
+
 
     axios({
       method: "post",
@@ -103,7 +105,7 @@ const Checkout = (props) => {
     props.history.push("/");
     //dispatch(clearLocalStorageCart());
 
-    window.location.reload();
+   // window.location.reload();
   };
 
   const state = useSelector((state) => state.handleCart);
