@@ -5,7 +5,6 @@ import { NavLink } from "react-router-dom";
 import "./Payment.css";
 const PaymentScreen = ({ history }) => {
   const state = useSelector((state) => state.handleCart);
-  console.log("STate", state);
   var visa = false;
   var totalPrice = 0;
   for (let i = 0; i < state.length; i++) {
@@ -13,7 +12,6 @@ const PaymentScreen = ({ history }) => {
   }
   if (totalPrice >= 20000) {
     visa = true;
-    console.log("TOTAL", totalPrice);
   }
   window.scrollTo(0, 0);
 

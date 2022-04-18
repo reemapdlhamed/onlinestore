@@ -222,7 +222,7 @@ totalPric+=user.cart[i].price
         customerID: user._id,
         customerName: user.name,
         phoneNumber: request.body.phone,
-        paymentType: "cod",
+        paymentType: request.body.paymentType,
         totalPrice:totalPric-request.body.discount,
         discount:request.body.discount,
         //here we put the user's cart into the order collection
