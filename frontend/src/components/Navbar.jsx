@@ -47,7 +47,7 @@ const Navbar = () => {
       >
         <div className="container">
           <NavLink className="navbar-brand" to="/">
-            <img src="/assets/logo1.jpg" style={{width:"180px",height:"20px"}} alt="logo" />
+            <img src="/assets/shipshop-logo.png" style={{width:"180px",height:"35px"}} alt="logo" />
 
           </NavLink>
           {/* <Link to="/wwishlist/wishlist">Wishlist</Link> */}
