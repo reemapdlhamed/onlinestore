@@ -25,11 +25,12 @@ exports.addMessage = (request, response, next) => {
     from: "shipshopservies@gmail.com", // sender address
     to: request.body.email, // list of receivers
     subject: "ShipShop Customer Support", // Subject line
-    html: "<h3>We have recieved your Message and we will contact you soon to solve your problem</h3><h4>Have A Good Day!</h4><h5>Dont Replay to this message !</h5><h5>ShipShop Customer Support</h5>  ", // plain text body
+    html: "<h3>Thank you for Contacting Us</h3><h4>We have recieved your Message and we will contact you soon to solve your problem</h4><h4>Have A Good Day!</h4><h5>ShipShop Customer Support</h5> <p>Dont Replay to this message !</p> ", // plain text body
   };
   let object = new message({
     name: request.body.name,
     email: request.body.email,
+    phone: request.body.phone,
     message: request.body.message,
   });
   object
