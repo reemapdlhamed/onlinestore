@@ -6,7 +6,7 @@ var nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: process.env.hashed_user,
+    user: process.env.hashed_user ,
     pass: process.env.hashed_pass,
   },
 });
@@ -22,7 +22,7 @@ exports.addMessage = (request, response, next) => {
     throw error;
   }
   const mailOptions = {
-    from: "abokamal010133@gmail.com", // sender address
+    from: "shipshopservies@gmail.com", // sender address
     to: request.body.email, // list of receivers
     subject: "ShipShop Customer Support", // Subject line
     html: "<h3>We have recieved your Message and we will contact you soon to solve your problem</h3><h4>Have A Good Day!</h4><h5>Dont Replay to this message !</h5><h5>ShipShop Customer Support</h5>  ", // plain text body
