@@ -15,7 +15,9 @@ const UsersList = () => {
 
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users.users);
+    // const isAdmin = useSelector((state) => state.user.currentUser) != null;
 
+    
     useEffect(() => {
         getUsers(dispatch);
     }, [dispatch]);

@@ -11,6 +11,7 @@ import { border } from "@mui/system";
 var promocodes = data[2].data[0];
 
 const Checkout = (props) => {
+  const addresState = useSelector((state) => state.handleAddress);
   const [discount, setDiscount] = useState({
     val: 0,
   });
@@ -61,20 +62,21 @@ const Checkout = (props) => {
     props.history.push("/");
     window.location.reload();
   }
+  
+  const mergedObject = addresState.list;
 
+  mergedObject.paymentType = props.location.state.paymentMethod;
+  mergedObject.discount = discount.val;
+  console.log(mergedObject)
   const clearCart = () => {
-    const mergedObject = JSON.parse(localStorage.getItem("form"));
-
-    mergedObject.paymentType = props.location.state.paymentMethod;
-    mergedObject.discount = discount.val;
-    console.log(mergedObject);
+  
     let res2 = axios({
       method: "post",
       url: "http://localhost:8080/cart/buy",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-      data: mergedObject,
+      data:mergedObject,
     }).then((res) => {
       console.log("ORDER DONE");
     });
@@ -174,7 +176,7 @@ const Checkout = (props) => {
             <div style={{ margin: "25px" }}>
               {props.location.state &&
                 props.location.state.paymentMethod === "card" && (
-                  <StripeBtn total={total - discount.val} />
+                  <StripeBtn mergedObject={mergedObject} total={total - discount.val} />
                 )}
 
               {props.location.state &&

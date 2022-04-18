@@ -34,186 +34,14 @@ const ShippingScreen = ({ history }) => {
     history.push("/payment");
   };
 
-  /* 
-  return (
-    <Formik
-      initialValues={{
-        username: "",
-        name: "",
-        mobilenumber: "",
-        email: "",
-        password: "",
-        url: "",
-        genderOptions: "",
-        DateofBirth: "",
-        SubscribetoNewsletter: ""
-      }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          console.log(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
-      }}
-    >
-      {({ errors, touched, isValidating }) => (
-        <div className="container">
-          {console.log("rendering...", ++renderCount)}
-          <div className="col-sm-12">
-            <h3>Client Profile</h3>
-          </div>
-          <div className="col-sm-12">
-            <Form>
-              <div className="form-group">
-                <Field
-                  className="form-control"
-                  type="text"
-                  placeholder="Username"
-                  name="username"
-                  validate={validateUserName}
-                />
-                {errors.username &&
-                  touched.username &&
-                  errorMessage(errors.username)}
-              </div>
-              <div className="form-group">
-                <Field
-                  className="form-control"
-                  type="text"
-                  placeholder="Name"
-                  name="name"
-                  validate={validateName}
-                />
-                {errors.name && touched.name && errorMessage(errors.name)}
-              </div>
-              <div className="form-group">
-                <Field
-                  type="email"
-                  name="email"
-                  className="form-control"
-                  placeholder="Email"
-                  validate={validateEmail}
-                />
-                {errors.email && touched.email && errorMessage(errors.email)}
-              </div>
-              <div className="form-group">
-                <Field
-                  className="form-control"
-                  type="tel"
-                  placeholder="Mobile number"
-                  name="mobilenumber"
-                  validate={validateMobileNumber}
-                />
-                {errors.mobilenumber &&
-                  touched.mobilenumber &&
-                  errorMessage(errors.mobilenumber)}
-              </div>
-              <div className="form-group">
-                <Field
-                  className="form-control"
-                  type="url"
-                  placeholder="Website"
-                  name="Website"
-                />
-              </div>
-              <div className="form-group">
-                <Field
-                  className="form-control"
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  validate={validatePassword}
-                />
-                {errors.password &&
-                  touched.password &&
-                  errorMessage(errors.password)}
-              </div>
-              <div className="form-group">
-                <label>Gender</label>
-                <br />
-                <div className="form-check form-check-inline">
-                  <Field
-                    className="form-check-input"
-                    type="radio"
-                    name="genderOptions"
-                    value="Male"
-                    id="inlineRadio1"
-                  />
-                  <label className="form-check-label" htmlFor="inlineRadio1">
-                    Male
-                  </label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <Field
-                    className="form-check-input"
-                    type="radio"
-                    name="genderOptions"
-                    value="Female"
-                    id="inlineRadio2"
-                  />
-                  <label className="form-check-label" htmlFor="inlineRadio2">
-                    Female
-                  </label>
-                </div>
-                <div className="form-check form-check-inline">
-                  <Field
-                    className="form-check-input"
-                    type="radio"
-                    name="genderOptions"
-                    value=" Non-binary"
-                    id="inlineRadio3"
-                  />
-                  <label className="form-check-label" htmlFor="inlineRadio3">
-                    Non-binary
-                  </label>
-                </div>
-              </div>
-              <div className="form-group">
-                <Field
-                  className="form-control"
-                  type="datetime"
-                  placeholder="Date of Birth"
-                  name="DateofBirth"
-                  validate={validateDateOfBirth}
-                />
-                {errors.DateofBirth &&
-                  touched.DateofBirth &&
-                  errorMessage(errors.DateofBirth)}
-              </div>
-              <div className="form-group">
-                <Field
-                  component="textarea"
-                  className="form-control"
-                  name="About"
-                />
-              </div>
-              <div className="form-group">
-                <Field
-                  type="checkbox"
-                  placeholder="Subscribe to Newsletter"
-                  name="SubscribetoNewsletter"
-                  id="customCheck1"
-                />
-                <label htmlFor="customCheck1"> Subscribe to Newsletter</label>
-              </div>
-              <div className="form-group">
-                <button className="btn btn-primary" type="submit">
-                  Submit
-                </button>
-              </div>
-            </Form>
-          </div>
-        </div>
-      )}
-    </Formik>
-  );
-  */
   return (
     <>
       <div className="container d-flex justify-content-center align-items-center login-center min-vh-100">
         <Formik
           initialValues={{}}
           onSubmit={(values) => {
-            console.log(values);
+            dispatch(saveShippingAddress(( values )));
+            //dispatch(saveShippingAddress({ address, city, postalCode, country }));
 
             if (
               values.city !== "" &&
@@ -294,7 +122,6 @@ const ShippingScreen = ({ history }) => {
                   >
                     Submit
                   </button>
-                  <PersistFormikValues name="form" />
                 </Form>
               </div>
             </div>

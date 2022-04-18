@@ -48,10 +48,10 @@ margin: 40px;
 .category-card{
     width: 30%;
     border: solid 2px #eee;
-    border-radius: 20px;
+    border-radius: 15px;
     overflow: hidden;
     position: relative;
-    height: 150px;
+    height: 250px;
     transition-duration: 0.5s;
     margin-bottom: 40px;
 }

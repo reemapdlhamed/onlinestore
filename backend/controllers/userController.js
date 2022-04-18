@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const asyncHandler = require("express-async-handler");
 
 exports.getUsers = (request, response, next) => {
   if (request.role != "admin") throw new Error("Not Authorized.");
@@ -36,19 +37,19 @@ exports.getUser = (request, response, next) => {
     });
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateUser = async (request, response) => {
   if (request.role == "admin") {
     try {
       const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
+        request.params.id,
         {
-          $set: req.body,
+          $set: request.body,
         },
         { new: true }
       );
-      res.status(200).json(updatedUser);
+      response.status(200).json(updatedUser);
     } catch (err) {
-      res.status(500).json(err.message);
+      response.status(500).json(err.message);
     }
   } else {
     response.status(403).json({ message: "Not Autorized" });

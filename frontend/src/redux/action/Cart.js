@@ -1,16 +1,13 @@
 // SAVE SHIPPING ADDRESS
 import { useHistory } from "react-router-dom";
 
-export const saveShippingAddress = (data) => (dispatch) => {
+export const saveShippingAddress = (list) => {
+  return{
+      type : "GET_ADDRESS",
+      payload : list
+  }
+}
   
-    dispatch({
-      type: 'SAVE_SHIPPING_ADDRESS',
-      payload: data,
-    });
-  
-    localStorage.setItem("shippingAddress", JSON.stringify(data));
-  };
-
   export const clearLocalStorageCart = () => (dispatch) => {
     
     dispatch({
