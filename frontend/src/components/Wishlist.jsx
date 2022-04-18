@@ -16,7 +16,8 @@ export default function Wishlist() {
   //
   console.log("ADEL", JSON.parse(localStorage.getItem("wishlist")));
   let local = JSON.parse(localStorage.getItem("wishlist"));
-
+  if(!local)
+  local=[]
   return (
     <div>
       {local.map((loca) => (
