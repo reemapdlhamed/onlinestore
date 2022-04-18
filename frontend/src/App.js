@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import PrivateRouter from "./PrivateRouter";
-
+import Wishlist from "./components/Wishlist"
 import {
   addCart,
   delCart,
@@ -111,6 +111,7 @@ function App() {
         <Route path={"/FAQs"} component={FAQs} />
         <PrivateRouter path={"/orders/:id"} component={Orders}/>
         <PrivateRouter path={"/order-details/:id"} component={OrderDetails}/>
+        <PrivateRouter path={"/wishlist"} component={Wishlist} />
         <Route path={"*"} component={NotFound} />
       </Switch>
       <Footer />

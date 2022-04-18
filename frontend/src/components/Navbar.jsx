@@ -189,7 +189,7 @@ const Navbar = () => {
                 </b>
               </NavLink>
 
-              <NavLink to="/fav" className="btn btn-outline-danger ms-2 ">
+              <NavLink to="/wishlist" className="btn btn-outline-danger ms-2 ">
               <i className="fas fa-heart fa-1x"></i>{" "}
                 <b>
                   {/* <sup>({state.length})</sup> */}

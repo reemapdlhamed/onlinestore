@@ -66,6 +66,10 @@ const Product = () => {
       setReviews(res.data.data[0].reviews);
     });
   }, []);
+  function addToWishList() {
+    console.log("wishlist product"+JSON.stringify(product));
+    localStorage.setItem("wishlist",JSON.stringify(product));
+  }
   function sendReview() {
     if (localStorage.getItem("accessToken") === null) {
       setPopup(
@@ -203,11 +207,11 @@ const Product = () => {
             >
               Add Review
             </button>
-            {/* <div class="cardImage">
-              <a className="wish" href="#" onClick={handleOpen}>
+            <div class="cardImage">
+              <button className="wish" onClick={addToWishList}>
                 <i class="fas fa-heart"></i> Add to List
-              </a>
-              <Modal
+              </button>
+              {/* <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -239,8 +243,8 @@ const Product = () => {
                     </Button>
                   </div>
                 </Box>
-              </Modal>
-            </div> */}
+              </Modal> */}
+            </div>
           </div>
         </div>
         <div
