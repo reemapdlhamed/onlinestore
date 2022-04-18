@@ -46,7 +46,7 @@ const Navbar = () => {
         style={{ position: "relative", zIndex: "2" }}
       >
         <div className="container">
-          <NavLink className="navbar-brand" to="#">
+          <NavLink className="navbar-brand" to="/">
             <img src="/assets/logo1.jpg" style={{width:"180px",height:"20px"}} alt="logo" />
 
           </NavLink>
@@ -190,7 +190,7 @@ const Navbar = () => {
               </NavLink>
 
               <NavLink to="/fav" className="btn btn-outline-danger ms-2 ">
-              <i class="fas fa-heart fa-1x"></i>{" "}
+              <i className="fas fa-heart fa-1x"></i>{" "}
                 <b>
                   {/* <sup>({state.length})</sup> */}
                 </b>
