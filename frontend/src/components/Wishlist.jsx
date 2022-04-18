@@ -27,24 +27,26 @@ export default function Wishlist() {
             <div class="card mb-3" style={{ maxwidth: "540px" }}>
               <div class="row g-0">
                 <div class="col-md-4">
-                  <img src={loca.images} 
-                  class="img-fluid rounded-start my-3 mx-3"
-                  height="200px"
-              width="180px" 
-                  alt={loca.name} />
+                  <img
+                    src={loca.images}
+                    class="img-fluid rounded-start my-3 mx-3"
+                    height="200px"
+                    width="180px"
+                    alt={loca.name}
+                  />
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
+                    <button
+                      className="btn-close float-end"
+                      aria-label="Close"
+                    ></button>
                     <h5 class="card-title text-danger fw-bold">{loca.name}</h5>
                     <p class="card-text">
-                    <p>description :</p>  {loca.description}
-                    </p> 
-                    <p class="card-text fw-bold">
-                    brand : {loca.brand} 
+                      <p>description :</p> {loca.description}
                     </p>
-                    <p class="card-text fw-bold">
-                    Price : {loca.price} E£
-                    </p>
+                    <p class="card-text fw-bold">brand : {loca.brand}</p>
+                    <p class="card-text fw-bold">Price : {loca.price} E£</p>
                   </div>
                 </div>
               </div>
