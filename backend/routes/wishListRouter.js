@@ -1,14 +1,27 @@
 const express = require("express");
-const wishListRouter = express.Router();
-//controller
-const controller = require("./../controllers/wishListController");
-//auth MW
-const isAuth = require("./../MW/auth");
+const router = express.Router();
+const controller = require("../controllers/wishListController");
+const { body, query, param } = require("express-validator");
+const isAuth = require("../MW/auth");
 
-wishListRouter
-  .route("/wishlist")
-  .get(isAuth, controller.getWishlist)
-  .put(isAuth, controller.updateWishlist)
-  .delete(isAuth, controller.deleteFromWishlist);
+//TODO: Change Route names. Make it RESTFUL API.
 
-module.exports = wishListRouter;
+router.route("/wishlist")
+.post(
+  isAuth,
+  [
+    body("product_id").isString().withMessage("invalid product id."),
+  ],
+  controller.addToWishList
+)
+
+.delete(
+  isAuth,
+  [body("product_id").isString().withMessage("invalid product id.")],
+  controller.removeFromWishList
+)
+.get(
+  isAuth,
+  controller.getWishList
+)
+module.exports = router;

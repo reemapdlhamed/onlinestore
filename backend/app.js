@@ -44,6 +44,7 @@ const coponRouter = require("./routes/coponRouter");
 const productRouter = require("./routes/productRouter");
 const categoryRouter = require("./routes/categoryRouter");
 const cartRouter = require("./routes/cartRouter");
+const wishlistRouter = require("./routes/wishListRouter");
 // const adminRouter = require("./routes/adminRouter");
 const orderRouter = require("./routes/orderRouter");
 const userRouter = require("./routes/userRouter");
@@ -56,8 +57,8 @@ app.use(authenticationRouter);
 app.use(productRouter);
 app.use(categoryRouter);
 app.use(coponRouter);
-
 app.use(cartRouter);
+app.use(wishlistRouter);
 app.use(userRouter);
 app.use("/orders", orderRouter);
 
