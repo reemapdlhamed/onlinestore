@@ -67,22 +67,26 @@ const Product = () => {
     });
   }, []);
   function addToWishList() {
+    console.log("button");
     var images=product.images
     var description=product.description
     var name=product.name
     var id=product._id
 
-    var obj = {images,description,name,id}
-
-    var x =JSON.parse( localStorage.getItem("wishlist"))
-    if(!x)
+    var pro = {images,description,name,id}
+    let wishlist = JSON.parse(localStorage.getItem("wishlist"));
+    if(!wishlist)
     {
-      x=[]
-      
+      wishlist=[]
     }
+
+    wishlist.push(product);
+    localStorage.setItem("wishlist",JSON.stringify(wishlist));
+
+    
   
 
-    localStorage.setItem("wishlist",JSON.stringify( {x,obj} ))
+    // localStorage.setItem("wishlist",JSON.stringify( {x,obj} ))
    console.log("ADEL",JSON.parse( localStorage.getItem("wishlist")))
 
 
