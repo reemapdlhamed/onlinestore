@@ -15,12 +15,12 @@ const StripeBtn = (props) => {
 
 
   const clearCart = ()=>{
-    console.log("LOCAL",localStorage.getItem("form"))
+    console.log(props.mergedObject)
     let res2 =  axios({
       method: "post",
       url: "http://localhost:8080/cart/buy",
       headers: { Authorization: `Bearer ${localStorage.getItem("accessToken")}` },
-      data: JSON.parse(localStorage.getItem("form")),
+      data: props.mergedObject,
       
     }).then((res) => {
       console.log("ORDER DONE")
@@ -31,7 +31,7 @@ const StripeBtn = (props) => {
 
     history.push("/");
 
-        window.location.reload()
+       // window.location.reload()
 
   }
 

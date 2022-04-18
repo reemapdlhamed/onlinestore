@@ -85,7 +85,7 @@ export default function UserProfile() {
     if (
       orderState[i]._id &&
       orderState[i].customerName &&
-      orderState[i].paymentStatus &&
+      
       orderState[i].totalPrice
     ) {
       var theDate = new Date(orderState[i].createdAt);
@@ -95,6 +95,8 @@ export default function UserProfile() {
         createdAt: theDate.toLocaleDateString(),
         orderStatus: orderState[i].orderStatus,
         totalPrice: orderState[i].totalPrice,
+        paymentStatus: orderState[i].paymentStatus,
+
       });
     }
   }

@@ -36,7 +36,6 @@ exports.createOrders = (request, response, next) => {
     .save()
     .then((data) => {
       response.status(201).json({ message: "order added", data });
-      console.log("DOE")
     }
     
     )
