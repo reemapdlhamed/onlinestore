@@ -87,7 +87,6 @@ const Product = () => {
   
 
     // localStorage.setItem("wishlist",JSON.stringify( {x,obj} ))
-   console.log("ADEL",JSON.parse( localStorage.getItem("wishlist")))
 
 
 
