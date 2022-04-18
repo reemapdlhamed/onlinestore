@@ -42,31 +42,8 @@ exports.addToCart = function _callee(request, response, next) {
           throw new Error("email not found");
 
         case 7:
-          // because we still use postman , we enter the product id as a number in the body
-          //when user inputs the product id , we put it in variable called product_id_var , this checks wethere the product_id is real or doesnt exist
-          // we convert the number entered in the postman to objectid data type
-          // all info about product that we gonna buy like price and quantity we want
-          // before we add a product into user's cart , we need to check that he doesnt already have this product in his cart
-          // let doesProductInCartExist = await cart.find(
-          // (item) => item._id.toString() === request.body.product_id
-          //);
-          // if the product id exists in the product collection , then let's go on
-          //we know the product_id , let's find out some info about the product
-          //  const product_obj = await Product.findOne({ _id: product_id_var })
-          //   .populate("price")
-          //  .populate("quantity")
-          //  .populate("discount");
-          //doc.quantity represents the stock
-          // we have to make sure that user doesnt buy quantyity more than the stock itself
-          // product_obj.quantity = Math.min(
-          //  request.body.quantity,
-          // product_obj.quantity
-          //);
-          //user then pushes his product into his cart
-          console.log("REQ");
-
           if (!(request.body.length === 0)) {
-            _context.next = 11;
+            _context.next = 10;
             break;
           }
 
@@ -75,31 +52,31 @@ exports.addToCart = function _callee(request, response, next) {
           });
           return _context.abrupt("return");
 
-        case 11:
+        case 10:
           x = request.body;
           x.qty = 1;
           user.cart.push(x);
-          _context.next = 16;
+          _context.next = 15;
           return regeneratorRuntime.awrap(user.save());
 
-        case 16:
+        case 15:
           response.status(200).json({
             message: "done"
-          }); // console.log(product_obj);
-
+          });
           _context.next = 21;
           break;
 
-        case 19:
-          _context.prev = 19;
+        case 18:
+          _context.prev = 18;
           _context.t0 = _context["catch"](0);
+          next(_context.t0);
 
         case 21:
         case "end":
           return _context.stop();
       }
     }
-  }, null, null, [[0, 19]]);
+  }, null, null, [[0, 18]]);
 };
 
 exports.getCart = function _callee2(request, response, next) {
@@ -155,16 +132,16 @@ exports.getCart = function _callee2(request, response, next) {
           // product_obj.quantity
           //);
 
-          response.status(200).json(user.cart); // console.log(product_obj);
-
-          _context2.next = 14;
+          response.status(200).json(user.cart);
+          _context2.next = 15;
           break;
 
         case 12:
           _context2.prev = 12;
           _context2.t0 = _context2["catch"](0);
+          next(_context2.t0);
 
-        case 14:
+        case 15:
         case "end":
           return _context2.stop();
       }
@@ -222,8 +199,7 @@ exports.removeFromCart = function _callee3(request, response, next) {
         case 15:
           response.status(200).json({
             message: "done"
-          }); // console.log(product_obj);
-
+          });
           _context3.next = 21;
           break;
 
@@ -247,14 +223,13 @@ exports.updateQuantityCart = function _callee4(request, response, next) {
     while (1) {
       switch (_context4.prev = _context4.next) {
         case 0:
-          console.log("UPD");
-          _context4.prev = 1;
-          _context4.next = 4;
+          _context4.prev = 0;
+          _context4.next = 3;
           return regeneratorRuntime.awrap(User.findOne({
             email: request.email
           }));
 
-        case 4:
+        case 3:
           user = _context4.sent;
 
           if (!user) {
@@ -262,13 +237,13 @@ exports.updateQuantityCart = function _callee4(request, response, next) {
           }
 
           if (!(user == null)) {
-            _context4.next = 8;
+            _context4.next = 7;
             break;
           }
 
           throw new Error("email not found");
 
-        case 8:
+        case 7:
           // because we still use postman , we enter the product id as a number in the body
           //when user inputs the product id , we put it in variable called product_id_var , this checks wethere the product_id is real or doesnt exist
           // we convert the number entered in the postman to objectid data type
@@ -285,47 +260,48 @@ exports.updateQuantityCart = function _callee4(request, response, next) {
 
           i = 0;
 
-        case 11:
+        case 10:
           if (!(i < user.cart.length)) {
-            _context4.next = 21;
+            _context4.next = 20;
             break;
           }
 
           if (!(request.body._id == user.cart[i]._id && request.body.qty)) {
-            _context4.next = 18;
+            _context4.next = 17;
             break;
           }
 
           user.cart[i].qty = request.body.qty;
-          _context4.next = 16;
+          _context4.next = 15;
           return regeneratorRuntime.awrap(user.save());
 
-        case 16:
+        case 15:
           response.status(200).json({
             message: "done updating quantity"
           }); //user then pushes his product into his cart
 
-          return _context4.abrupt("break", 21);
+          return _context4.abrupt("break", 20);
 
-        case 18:
+        case 17:
           i++;
-          _context4.next = 11;
+          _context4.next = 10;
           break;
 
-        case 21:
+        case 20:
           _context4.next = 25;
           break;
 
-        case 23:
-          _context4.prev = 23;
-          _context4.t0 = _context4["catch"](1);
+        case 22:
+          _context4.prev = 22;
+          _context4.t0 = _context4["catch"](0);
+          next(_context4.t0);
 
         case 25:
         case "end":
           return _context4.stop();
       }
     }
-  }, null, null, [[1, 23]]);
+  }, null, null, [[0, 22]]);
 }; //this function here , we confirm the cart , so it will become an existing order
 // we POST to the order router using axios library
 
@@ -336,13 +312,12 @@ exports.confirmCart = function _callee5(request, response, next) {
     while (1) {
       switch (_context5.prev = _context5.next) {
         case 0:
-          console.log("RR", request.body);
-          _context5.next = 3;
+          _context5.next = 2;
           return regeneratorRuntime.awrap(User.findOne({
             email: request.email
           }));
 
-        case 3:
+        case 2:
           user = _context5.sent;
           totalPric = 0;
 
@@ -350,8 +325,7 @@ exports.confirmCart = function _callee5(request, response, next) {
             totalPric += user.cart[i].price;
           }
 
-          _context5.prev = 6;
-          console.log(request.body);
+          _context5.prev = 5;
           axios.post("http://127.0.0.1:8080/orders", {
             customerID: user._id,
             customerName: user.name,
@@ -376,22 +350,23 @@ exports.confirmCart = function _callee5(request, response, next) {
             }
           });
           user.cart = [];
-          _context5.next = 12;
+          _context5.next = 10;
           return regeneratorRuntime.awrap(user.save());
 
-        case 12:
+        case 10:
           response.send(response.data);
-          _context5.next = 17;
+          _context5.next = 16;
           break;
 
-        case 15:
-          _context5.prev = 15;
-          _context5.t0 = _context5["catch"](6);
+        case 13:
+          _context5.prev = 13;
+          _context5.t0 = _context5["catch"](5);
+          next(_context5.t0);
 
-        case 17:
+        case 16:
         case "end":
           return _context5.stop();
       }
     }
-  }, null, null, [[6, 15]]);
+  }, null, null, [[5, 13]]);
 };

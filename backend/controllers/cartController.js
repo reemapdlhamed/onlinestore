@@ -55,7 +55,6 @@ exports.addToCart = async (request, response, next) => {
     //);
 
     //user then pushes his product into his cart
-    console.log("REQ")
     if(request.body.length===0){
     response.status(400).json({ message: "error internet connection" });
   return;
@@ -68,8 +67,8 @@ exports.addToCart = async (request, response, next) => {
 
     response.status(200).json({ message: "done" });
 
-    // console.log(product_obj);
   } catch (error) {
+    next(error)
   }
 };
 
@@ -112,8 +111,9 @@ exports.getCart = async (request, response, next) => {
     //);
     response.status(200).json(user.cart);
 
-    // console.log(product_obj);
   } catch (error) {
+    next(error)
+
   }
 };
 
@@ -149,7 +149,6 @@ exports.removeFromCart = async (request, response, next) => {
     await user.save();
     response.status(200).json({ message: "done" });
 
-    // console.log(product_obj);
   } catch (error) {
     next(error)
   }
@@ -157,7 +156,6 @@ exports.removeFromCart = async (request, response, next) => {
 
 //update quantity of product in the cart of user
 exports.updateQuantityCart = async (request, response, next) => {
-  console.log("UPD")
   
   try {
     const user = await User.findOne({ email: request.email });
@@ -198,8 +196,9 @@ exports.updateQuantityCart = async (request, response, next) => {
   
     }
 
-    // console.log(product_obj);
   } catch (error) {
+    next(error)
+
   }
 };
 
@@ -207,7 +206,6 @@ exports.updateQuantityCart = async (request, response, next) => {
 // we POST to the order router using axios library
 exports.confirmCart = async (request, response, next) => {
 
-console.log("RR",request.body)
   const user = await User.findOne({ email: request.email });
   var totalPric=0;
   for (i=0;i<user.cart.length;i++)
@@ -215,7 +213,6 @@ console.log("RR",request.body)
 totalPric+=user.cart[i].price
   }
   try {
-    console.log(request.body)
     axios.post(
       "http://127.0.0.1:8080/orders",
       {
@@ -244,5 +241,7 @@ totalPric+=user.cart[i].price
     await user.save()
     response.send(response.data);
   } catch (error) {
+    next(error)
+
   }
 };
