@@ -1,5 +1,5 @@
 import { loginFailure, loginStart, loginSuccess } from "./loginRedux";
-import { publicRequest, userRequest } from "../requestMethods";
+import { request } from "../requestMethods";
 import {
   getProductFailure,
   getProductStart,
@@ -24,7 +24,7 @@ import {
   deleteOrderFailure,
   updateOrderStart,
   updateOrderSuccess,
-  updateOrderFailure
+  updateOrderFailure,
 } from "./orderRedux";
 
 import {
@@ -36,24 +36,47 @@ import {
   deleteUserFailure,
   updateUserStart,
   updateUserSuccess,
-  updateUserFailure
-} from "./userRedux"
+  updateUserFailure,
+} from "./userRedux";
+import axios from "axios";
 
-export const login = async (dispatch, user) => {
+const CONFIG = () => {
+  let token = "";
+  if (localStorage.getItem("persist:root"))
+    token = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user)
+      .currentUser?.accessToken;
+
+  return {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+};
+export const login = async (navigate, dispatch, user) => {
   dispatch(loginStart());
-  try {
-    const res = await publicRequest.post("/login", user);
-    console.log(res);
-    dispatch(loginSuccess(res.data));
-  } catch (err) {
-    dispatch(loginFailure());
-  }
+
+  const res = request
+    .post("/login", user)
+    .then((res) => {
+      console.log(res);
+      if (res.data.data.role == "admin") {
+        dispatch(loginSuccess(res.data));
+      } else dispatch(loginFailure());
+    })
+    .catch((err) => dispatch(loginFailure()));
+
+  // try {
+  //   const res = publicRequest.post("/login", user).then();
+  //   dispatch(loginSuccess(res.data));
+  // } catch (err) {
+  //   dispatch(loginFailure());
+  // }
 };
 
 export const getProducts = async (dispatch) => {
   dispatch(getProductStart());
   try {
-    const res = await publicRequest.get("/products");
+    const res = await request.get("/products");
     dispatch(getProductSuccess(res.data));
   } catch (err) {
     dispatch(getProductFailure());
@@ -64,7 +87,7 @@ export const deleteProduct = async (id, dispatch) => {
   dispatch(deleteProductStart());
 
   try {
-    const res = await userRequest.delete(`/products/${id}`);
+    const res = await request.delete(`/products/${id}`, CONFIG());
     // console.log(res);
     dispatch(deleteProductSuccess(id));
   } catch (err) {
@@ -76,10 +99,11 @@ export const updateProduct = async (id, product, dispatch) => {
   dispatch(updateProductStart());
   try {
     // update
-    console.log("request ===");
-    console.log("id", id);
-    console.log("product", product);
-    const res = await userRequest.put(`/products/${id}`, product);
+    // console.log("request ===");
+    // console.log("id", id);
+    // console.log("product", product);
+    // const res = await userRequest.put(`/products/${id}`, product);
+    const res = await request.put(`/products/${id}`, product, CONFIG());
     console.log("Update Result", res);
     dispatch(updateProductSuccess({ id, product }));
   } catch (err) {
@@ -91,7 +115,7 @@ export const updateProduct = async (id, product, dispatch) => {
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart());
   try {
-    const res = await userRequest.post(`/products`, product);
+    const res = await request.post(`/products`, product, CONFIG());
     console.log("res", res.data.data);
     dispatch(addProductSuccess(res.data.data));
   } catch (err) {
@@ -105,7 +129,9 @@ export const addProduct = async (product, dispatch) => {
 export const getOrders = async (dispatch) => {
   dispatch(getOrderStart());
   try {
-    const res = await userRequest.get("/orders");
+    const res = await request.get("/orders", CONFIG());
+    // const res = await userRequest.get("/orders");
+    // const res = await axios.get("http://localhost:8080/orders",{ headers: { Authorization: `Bearer ${TOKEN}` }})
     console.log("res.data", res.data);
     dispatch(getOrderSuccess(res.data));
   } catch (err) {
@@ -117,7 +143,8 @@ export const getOrders = async (dispatch) => {
 export const deleteOrder = async (id, dispatch) => {
   dispatch(deleteOrderStart());
   try {
-    const res = await userRequest.delete(`/orders/${id}`);
+    // const res = await request.delete(`/orders/${id}`);
+    const res = await request.delete(`/orders/${id}`, CONFIG());
     console.log(res.data);
     dispatch(deleteOrderSuccess(id));
   } catch (err) {
@@ -129,7 +156,8 @@ export const deleteOrder = async (id, dispatch) => {
 export const updateOrder = async (id, order, dispatch) => {
   dispatch(updateOrderStart());
   try {
-    const res = await userRequest.put(`/orders/${id}`, order);
+    // const res = await userRequest.put(`/orders/${id}`, order);
+    const res = await request.put(`/orders/${id}`, order, CONFIG());
     console.log("Update Result", res);
     dispatch(updateOrderSuccess({ id, order }));
   } catch (err) {
@@ -138,14 +166,12 @@ export const updateOrder = async (id, order, dispatch) => {
   }
 };
 
-
 //USERS
 export const getUsers = async (dispatch) => {
   dispatch(getUserStart());
   try {
-    console.log(userRequest);
-    console.log("hi");
-    const res = await userRequest.get("/users");
+    console.log("userRequest");
+    const res = await request.get("/users", CONFIG());
     console.log("res.data", res.data);
     dispatch(getUserSuccess(res.data));
   } catch (err) {
@@ -153,10 +179,10 @@ export const getUsers = async (dispatch) => {
   }
 };
 
-export const deleteUser = async (id,dispatch)=>{
+export const deleteUser = async (id, dispatch) => {
   dispatch(deleteUserStart());
   try {
-    const res = await userRequest.delete(`/users/${id}`);
+    const res = await request.delete(`/users/${id}`, CONFIG());
     console.log(res.data);
     dispatch(deleteUserSuccess(id));
   } catch (err) {
@@ -167,11 +193,22 @@ export const deleteUser = async (id,dispatch)=>{
 export const updateUser = async (id, user, dispatch) => {
   dispatch(updateUserStart());
   try {
-    const res = await userRequest.put(`/users/${id}`, user);
+    const res = await request.put(`/users/${id}`, user, CONFIG());
     console.log("Update Result", res);
     dispatch(updateUserSuccess({ id, user }));
   } catch (err) {
     console.log("error", err);
     dispatch(updateUserFailure());
+  }
+};
+
+export const getStats = async () => {
+  try {
+    let stats = {};
+    console.log("start of function");
+    const res = await request.get("/stats/", CONFIG());
+    return res.data;
+  } catch (error) {
+    console.log(error);
   }
 };

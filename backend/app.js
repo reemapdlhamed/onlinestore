@@ -49,6 +49,7 @@ const orderRouter = require("./routes/orderRouter");
 const userRouter = require("./routes/userRouter");
 const payRouter = require("./routes/payRouter");
 const messageRouter = require("./routes/messageRouter");
+const statsRouter = require("./routes/statsRouter");
 // const message = require("./routes/messageRouter");
 
 app.use("/payment", payRouter);
@@ -62,6 +63,7 @@ app.use(userRouter);
 app.use("/orders", orderRouter);
 
 app.use(messageRouter);
+app.use(statsRouter);
 
 
 //Not found MW

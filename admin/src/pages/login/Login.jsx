@@ -1,21 +1,37 @@
 import "./login.scss"
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../redux/apiCalls";
 import { useNavigate } from "react-router";
+import { Link } from 'react-router-dom';
 
 const Login = () => {
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+
 
   const navigate = useNavigate()
 
   const handleClick = (e) => {
     e.preventDefault();
-    login(dispatch, { email, password });
-    navigate('/');
+    login(navigate, dispatch, { email, password });
   };
+
+  const isAdmin = useSelector((state) => state.user.currentUser) != null;
+
+
+  useEffect(() => {
+    console.log(isAdmin);
+    if (isAdmin) {
+      navigate("/home",{replace:true});
+      // window.location.replace("/");
+    }
+
+
+  }, [isAdmin]);
+
 
   return (
     <div
@@ -39,7 +55,7 @@ const Login = () => {
         placeholder="password"
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={handleClick} style={{ padding: 10, width:100 }}>
+      <button onClick={handleClick} style={{ padding: 10, width: 100 }}>
         Login
       </button>
     </div>

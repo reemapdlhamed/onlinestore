@@ -4,7 +4,7 @@ import Navbar from '../../components/navbar/Navbar';
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect ,useState} from 'react';
 import { getOrders, deleteOrder } from '../../redux/apiCalls';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Button } from '@mui/material';
@@ -15,6 +15,7 @@ const OrdersList = () => {
 
     const dispatch = useDispatch();
     const orders = useSelector((state) => state.order.orders);
+    console.log("orders",orders)
 
     useEffect(() => {
         getOrders(dispatch);
@@ -99,7 +100,7 @@ const OrdersList = () => {
                         getRowId={(row) => row._id}
                         pageSize={10}
                         rowsPerPageOptions={[5]}
-                   
+
                     />
                 </div>
             </div>
