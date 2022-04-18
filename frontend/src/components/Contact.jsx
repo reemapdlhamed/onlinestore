@@ -31,7 +31,7 @@ const Contact = () => {
         setPopup(<>
           <Alert severity="success">
           <AlertTitle>Success</AlertTitle>
-          Thank You For Contacting Us — <strong>Have Good Day</strong>
+          Thank You For Contacting Us ,Check your Gmail inbox — <strong>Have Good Day</strong>
           </Alert></>)
         
       })
@@ -42,37 +42,6 @@ const Contact = () => {
         opps! , Message Failed — <strong>One of the required fields is empty or wrong</strong>
         </Alert></>)
       })
-    // Object DeStructuring
-    // Store Object Data into Variables
-    // const {name, email, message} = msg;
-    // try {
-    //   const res = await fetch('http://localhost:8080/message', {
-    //     method : "POST",
-    //     headers : {
-    //       "Content-Type" : "application/json"
-    //     },
-    //     body : JSON.stringify({
-    //       name, email, message
-    //     })
-    //   })
-    //   console.log(res.status)
-    //   if(res.status === 400 || !res){
-    //     window.alert("Message Not Sent. Try Again Later")
-    //   }else{
-    //     // You need to Restart the Server for Proxy Works
-    //     // Now Try Again
-    //     window.alert("Message Sent");
-    //     setMsg({
-    //       name : "",
-    //       email : "",
-    //       message : ""
-    //     })
-        
-    //   }
-    // } catch (error) {
-    //   window.alert(error)
-    //   console.log(error);
-    // }
   }
 
   return (
@@ -102,7 +71,7 @@ const Contact = () => {
                     type="text"
                     className="form-control"
                     id="name"
-                    placeholder="John Smith"
+                    placeholder="Enter your Name"
                     name="name"
                     value={msg.name}
                     onChange={handleChange}
@@ -116,7 +85,7 @@ const Contact = () => {
                     type="email"
                     className="form-control"
                     id="exampleFormControlInput1"
-                    placeholder="name@example.com"
+                    placeholder="contact Email@gmail.com"
                     name="email"
                     value={msg.email}
                     onChange={handleChange}
@@ -131,6 +100,7 @@ const Contact = () => {
                     id="exampleFormControlTextarea1"
                     rows="5"
                     name="message"
+                    placeholder="Tell us your message or your question here ?"
                     value={msg.message}
                     onChange={handleChange}
                   ></textarea>
