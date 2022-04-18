@@ -19,7 +19,7 @@ export default function Wishlist() {
   let local = JSON.parse(localStorage.getItem("wishlist"));
   if (!local) local = [];
   return (
-    <div className="px-4 my-5 bg-light rounded-3 py-5">
+    <div className=" bg-light rounded-3 py-5 min-vh-100">
       <div className="container">
         {local.map((loca) => (
           <div key={loca}>
@@ -35,7 +35,7 @@ export default function Wishlist() {
                 </div>
                 <div class="col-md-8">
                   <div class="card-body">
-                    <h5 class="card-title">{loca.name}</h5>
+                    <h5 class="card-title text-danger fw-bold">{loca.name}</h5>
                     <p class="card-text">
                     <p>description :</p>  {loca.description}
                     </p> 
