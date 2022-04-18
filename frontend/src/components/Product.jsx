@@ -67,8 +67,27 @@ const Product = () => {
     });
   }, []);
   function addToWishList() {
-    console.log("wishlist product"+JSON.stringify(product));
-    localStorage.setItem("wishlist",JSON.stringify(product));
+    var images=product.images
+    var description=product.description
+    var name=product.name
+    var id=product._id
+
+    var obj = {images,description,name,id}
+
+    var x =JSON.parse( localStorage.getItem("wishlist"))
+    if(!x)
+    {
+      x=[]
+      
+    }
+  
+
+    localStorage.setItem("wishlist",JSON.stringify( {x,obj} ))
+   console.log("ADEL",JSON.parse( localStorage.getItem("wishlist")))
+
+
+
+
   }
   function sendReview() {
     if (localStorage.getItem("accessToken") === null) {

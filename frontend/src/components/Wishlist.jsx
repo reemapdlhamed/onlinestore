@@ -15,9 +15,8 @@ export default function Wishlist() {
 //   const dispatch = useDispatch();
 // 
   
-    let local = localStorage.getItem("wishlist");
-    console.log(local);
-
+    let local ={}
+  
 //   const emptyWishlist= () => {
 //     return (
 //       <div className="px-4 my-5 bg-light rounded-3 py-0">
