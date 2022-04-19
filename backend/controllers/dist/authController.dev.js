@@ -35,18 +35,6 @@ var googleClient = new OAuth2Client({
 });
 
 exports.userLogin = function (request, response, next) {
-  console.log(request.body);
-  var errors = validationResult(request);
-
-  if (!errors.isEmpty()) {
-    var error = new Error();
-    error.status = 422;
-    error.message = errors.array().reduce(function (current, object) {
-      return current + object.msg + " ";
-    }, "");
-    throw error;
-  }
-
   User.findOne({
     email: request.body.email
   }).then(function (data) {
@@ -54,10 +42,11 @@ exports.userLogin = function (request, response, next) {
       throw new Error("email not found1");
     }
 
-    console.log("2");
     encrypted = data.password;
+    console.log("ENC", request.body.password);
     bcrypt.compare(request.body.password, encrypted).then(function (result) {
       if (result) {
+        console.log("result", result);
         var accessToken = jwt.sign({
           role: data.role,
           id: data._id,
@@ -73,8 +62,7 @@ exports.userLogin = function (request, response, next) {
         next(new Error("wrong pass"));
       }
     });
-  })["catch"](function (error) {
-    next(error.message);
+  })["catch"](function (error) {//next(error.message);
   });
 };
 
@@ -334,11 +322,9 @@ exports.forgotPassword = function _callee4(req, res, next) {
           });
           url = "".concat(CLIENT_URL, "/user/reset/").concat(access_token);
           sendMail(email, url, "Reset your password");
-          res.json({
+          return _context4.abrupt("return", res.json({
             msg: "Re-send the password, please check your email."
-          });
-          _context4.next = 16;
-          break;
+          }));
 
         case 13:
           _context4.prev = 13;
@@ -370,7 +356,7 @@ exports.resetPassword = function _callee5(req, res) {
         case 5:
           passwordHash = _context5.sent;
           _context5.next = 8;
-          return regeneratorRuntime.awrap(Users.findOneAndUpdate({
+          return regeneratorRuntime.awrap(User.findOneAndUpdate({
             _id: req.user.id
           }, {
             password: passwordHash
@@ -446,10 +432,9 @@ exports.googleLogin = function _callee6(req, res) {
 
         case 9:
           passwordHash = _context6.sent;
-          console.log("");
 
           if (email_verified) {
-            _context6.next = 13;
+            _context6.next = 12;
             break;
           }
 
@@ -457,28 +442,28 @@ exports.googleLogin = function _callee6(req, res) {
             msg: "Email verification failed."
           }));
 
-        case 13:
-          _context6.next = 15;
+        case 12:
+          _context6.next = 14;
           return regeneratorRuntime.awrap(User.findOne({
             email: email
           }));
 
-        case 15:
+        case 14:
           user = _context6.sent;
 
           if (!user) {
-            _context6.next = 26;
+            _context6.next = 25;
             break;
           }
 
-          _context6.next = 19;
+          _context6.next = 18;
           return regeneratorRuntime.awrap(bcrypt.compare(password, user.password));
 
-        case 19:
+        case 18:
           isMatch = _context6.sent;
 
           if (isMatch) {
-            _context6.next = 22;
+            _context6.next = 21;
             break;
           }
 
@@ -486,7 +471,7 @@ exports.googleLogin = function _callee6(req, res) {
             msg: "Password is incorrect."
           }));
 
-        case 22:
+        case 21:
           /*
           const refresh_token = createRefreshToken({ id: user._id });
           res.cookie("refreshtoken", refresh_token, {
@@ -505,25 +490,27 @@ exports.googleLogin = function _callee6(req, res) {
           }).then(function (res) {
             console.log(res);
           })["catch"](function (er) {
-            console.log("ER", er);
+            console.log("ER"); //  console.log("ER", er);
           });
           res.json({
-            msg: "Login success!"
+            data: {
+              email: email
+            }
           });
-          _context6.next = 32;
+          _context6.next = 31;
           break;
 
-        case 26:
+        case 25:
           newUser = new User({
             name: name,
             email: email,
             role: "customer",
             password: passwordHash
           });
-          _context6.next = 29;
+          _context6.next = 28;
           return regeneratorRuntime.awrap(newUser.save());
 
-        case 29:
+        case 28:
           refresh_token = createRefreshToken({
             id: newUser._id
           });
@@ -537,24 +524,24 @@ exports.googleLogin = function _callee6(req, res) {
             msg: "Login success!"
           });
 
-        case 32:
-          _context6.next = 38;
+        case 31:
+          _context6.next = 37;
           break;
 
-        case 34:
-          _context6.prev = 34;
+        case 33:
+          _context6.prev = 33;
           _context6.t0 = _context6["catch"](0);
           console.log(_context6.t0.message);
           return _context6.abrupt("return", res.status(500).json({
             msg: _context6.t0.message
           }));
 
-        case 38:
+        case 37:
         case "end":
           return _context6.stop();
       }
     }
-  }, null, null, [[0, 34]]);
+  }, null, null, [[0, 33]]);
 };
 
 exports.facebookLogin = function _callee7(req, res) {
@@ -631,7 +618,7 @@ exports.facebookLogin = function _callee7(req, res) {
           newUser = new Users({
             name: name,
             email: email,
-            password: passwordHash,
+            password: password,
             avatar: picture.data.url
           });
           _context7.next = 28;
@@ -648,7 +635,9 @@ exports.facebookLogin = function _callee7(req, res) {
 
           });
           res.json({
-            msg: "Login success!"
+            data: {
+              email: email
+            }
           });
 
         case 31:

@@ -17,27 +17,17 @@ const googleClient = new OAuth2Client({
 });
 
 exports.userLogin = (request, response, next) => {
-  console.log(request.body);
-  let errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    let error = new Error();
-    error.status = 422;
-    error.message = errors
-      .array()
-      .reduce((current, object) => current + object.msg + " ", "");
-    throw error;
-  }
 
   User.findOne({ email: request.body.email })
     .then((data) => {
       if (data == null) {
         throw new Error("email not found1");
       }
-      console.log("2");
       encrypted = data.password;
-
+console.log("ENC",request.body.password)
       bcrypt.compare(request.body.password, encrypted).then(function (result) {
         if (result) {
+          console.log("result",result)
           let accessToken = jwt.sign(
             {
               role: data.role,
@@ -55,7 +45,7 @@ exports.userLogin = (request, response, next) => {
       });
     })
     .catch((error) => {
-      next(error.message);
+      //next(error.message);
     });
 };
 
@@ -281,7 +271,6 @@ exports.googleLogin = async (req, res) => {
     const password = email + process.env.GOOGLE_SECRET_KEY;
 
     const passwordHash = await bcrypt.hash(password, 12);
-    console.log("")
     if (!email_verified)
       return res.status(400).json({ msg: "Email verification failed." });
 
@@ -306,13 +295,13 @@ exports.googleLogin = async (req, res) => {
         data:{email:email,password:passwordHash}
       })
         .then((res) => {
-          console.log(res)
+         console.log(res)
         })
         .catch((er) => {
-          console.log("ER", er);
+        //  console.log("ER", er);
         });
 
-      res.json({ msg: "Login success!" });
+      res.json({ data: {email} });
     } else {
       const newUser = new User({
         name:name,
@@ -371,7 +360,7 @@ exports.facebookLogin = async (req, res) => {
       const newUser = new Users({
         name,
         email,
-        password: passwordHash,
+        password: password,
         avatar: picture.data.url,
       });
 
@@ -384,7 +373,7 @@ exports.facebookLogin = async (req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
 
-      res.json({ msg: "Login success!" });
+      res.json({ data: {email} });
     }
   } catch (err) {
     return res.status(500).json({ msg: err.message });

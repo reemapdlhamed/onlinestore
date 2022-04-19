@@ -38,12 +38,14 @@ function Login() {
 
       setUser({ ...user, error: "", success: res.data.msg });
       localStorage.setItem("firstLogin", true);
+      console.log("RES",res)
 
       dispatch(dispatchLogin());
       history.push("/");
     } catch (err) {
-      err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
+    //  console.log("R",err)
+      //err.response.data.msg &&
+       // setUser({ ...user, err: err.response.data.msg, success: "" });
     }
   };
 

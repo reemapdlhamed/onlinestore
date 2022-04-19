@@ -17,6 +17,8 @@ var _index = _interopRequireDefault(require("./index"));
 
 var _Products = require("./Products");
 
+var _handleWishList = _interopRequireDefault(require("./handleWishList"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 var r = (0, _redux.combineReducers)({
@@ -24,7 +26,8 @@ var r = (0, _redux.combineReducers)({
   handleOrders: _handleOrders["default"],
   rootReducers: _index["default"],
   ProductsReducer: _Products.ProductsReducer,
-  handleAddress: _handleAddress["default"]
+  handleAddress: _handleAddress["default"],
+  handleWishlist: _handleWishList["default"]
 });
 var _default = r;
 exports["default"] = _default;
