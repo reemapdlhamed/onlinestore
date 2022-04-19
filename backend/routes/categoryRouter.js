@@ -21,10 +21,10 @@ router
     controller.add_category
   )
   //DELETE A CATEGORY WITH ID
-  .delete(isAuth,
-    [body("id").notEmpty().withMessage("ID Should be a object_ID")],
-    controller.delete_category
-  )
+  // .delete(isAuth,
+  //   [body("id").notEmpty().withMessage("ID Should be a object_ID")],
+  //   controller.delete_category
+  // )
   .put(isAuth,
     [
       body("name").isAlphanumeric().withMessage("invalid Name."),
@@ -34,9 +34,14 @@ router
     controller.update_category
   );
 
+router.route("/categories/:id").delete(isAuth, controller.delete_category);
+router.route("/categories/:id").put(isAuth, controller.update_category);
+
 router.route("/category/:id").get(function (request, response, next) {
   let category_id = request.params.id;
   response.redirect(307,"/products/"+category_id);
 });
+
+
 
 module.exports = router;

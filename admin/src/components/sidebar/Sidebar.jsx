@@ -35,7 +35,7 @@ const Sidebar = () => {
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
           <div style={{ padding: "2em" }}>
-            <img src={logo} style={{ width: "100%",marginTop:"0.5em" }} alt="logo" />
+            <img src={logo} style={{ width: "100%", marginTop: "0.5em" }} alt="logo" />
           </div>
 
           {/* <span className="logo">ShipShop</span> */}
@@ -70,32 +70,34 @@ const Sidebar = () => {
               <span>Orders</span>
             </li>
           </Link>
+          <Link to="/categories" style={{ textDecoration: "none" }}>
           <li>
             <CategoryIcon className="icon" />
             <span>Cateogeries</span>
           </li>
-          <li>
-            <LocalOfferIcon className="icon" />
-            <span>Coupons</span>
-          </li>
-          <li>
-            <CategoryIcon className="icon" />
-            <span>Messages</span>
-          </li>
+        </Link>
+        <li>
+          <LocalOfferIcon className="icon" />
+          <span>Coupons</span>
+        </li>
+        <li>
+          <CategoryIcon className="icon" />
+          <span>Messages</span>
+        </li>
 
 
-          <p className="title">USER</p>
-          {/* <li>
+        <p className="title">USER</p>
+        {/* <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li> */}
-          <li onClick={logout}>
-            <ExitToAppIcon className="icon" />
-            <span>Logout</span>
-          </li>
-        </ul>
-      </div>
+        <li onClick={logout}>
+          <ExitToAppIcon className="icon" />
+          <span>Logout</span>
+        </li>
+      </ul>
     </div>
+    </div >
   );
 };
 
