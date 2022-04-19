@@ -54,12 +54,12 @@ router.put(
 );
 
 //Email Verify
-router.get(
-  "/user/verify/:id/:token",
-  [],
-  isAuth,
-  controller.sendVerificationEmail
-);
+// router.get(
+//   "/user/verify/:id/:token",
+//   [],
+//   isAuth,
+//   controller.sendVerificationEmail
+// );
 router.post("/refresh_token", controller.getAccessToken);
 router.post("/forgot", controller.forgotPassword);
 router.post("/reset", isAuth, controller.resetPassword);

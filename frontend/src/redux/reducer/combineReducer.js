@@ -5,6 +5,7 @@ import handleAddress from "./handleAddress";
 
 import  rootReducers  from "./index";
 import { ProductsReducer } from "./Products";
+import handleWishlist from "./handleWishList";
 
 
 
@@ -13,7 +14,8 @@ const r= combineReducers({
  handleOrders:handleOrders,
  rootReducers:rootReducers,
  ProductsReducer:ProductsReducer,
- handleAddress:handleAddress
+ handleAddress:handleAddress,
+ handleWishlist:handleWishlist,
 });
 
 export default r

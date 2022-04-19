@@ -27,24 +27,52 @@ function Login() {
   const history = useHistory();
 
   const [user, setUser] = useState(initialState);
-  
+
   const responseGoogle = async (response) => {
     try {
       const res = await axios.post("/google_login", {
-
-        
         tokenId: response.tokenId,
       });
 
       setUser({ ...user, error: "", success: res.data.msg });
       localStorage.setItem("firstLogin", true);
+      console.log("RES",res)
 
-      dispatch(dispatchLogin());
-      history.push("/");
-    } catch (err) {
-      err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
+
+
+      localStorage.setItem("email", res.data.data.email);
+      localStorage.setItem("accessToken", res.data.data.accessToken);
+      localStorage.setItem("role", "customer");
+      localStorage.setItem("name", res.data.data.name);
+      localStorage.setItem("_id", res.data.data.id);
+
+      localStorage.setItem("data", res.data.data);
+      window.location.replace("/");
+      setSuccess(true);
+      let data = response.data;
+console.log("DATA")
+      return data;
+    } catch (error) {
+      if (!error?.response) {
+        setErrMsg("No Server Response");
+      } else if (error.response?.status === 500) {
+        setErrMsg("Missing Email Or Password");
+      } else if (error.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      errorRef.current.focus();
     }
+
+    
+
+      // setUser({ ...user, error: "", success: res.data.msg });
+      // localStorage.setItem("firstLogin", true);
+
+      // dispatch(dispatchLogin());
+      // history.push("/");
+
   };
 
   const { setAuth } = useContext(AuthContext);
@@ -85,7 +113,6 @@ function Login() {
       window.location.replace("/");
       setSuccess(true);
       let data = response.data;
-      console.log(data.accessToken);
 
       return data;
     } catch (error) {
@@ -149,7 +176,8 @@ function Login() {
             <img
               className="login__logo"
               src="/assets/shipshop-logo.png"
-              style={{width:"180px",height:"35px"}} alt="logo"
+              style={{ width: "180px", height: "35px" }}
+              alt="logo"
             />
           </Link>
           <div className="login__container ">

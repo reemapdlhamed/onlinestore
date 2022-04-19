@@ -17,23 +17,11 @@ const googleClient = new OAuth2Client({
 });
 
 exports.userLogin = (request, response, next) => {
-  console.log(request.body);
-  let errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    let error = new Error();
-    error.status = 422;
-    error.message = errors
-      .array()
-      .reduce((current, object) => current + object.msg + " ", "");
-    throw error;
-  }
-
   User.findOne({ email: request.body.email })
     .then((data) => {
       if (data == null) {
         throw new Error("email not found1");
       }
-      console.log("2");
       encrypted = data.password;
 
       bcrypt.compare(request.body.password, encrypted).then(function (result) {
@@ -55,7 +43,7 @@ exports.userLogin = (request, response, next) => {
       });
     })
     .catch((error) => {
-      next(error.message);
+      //next(error.message);
     });
 };
 
@@ -186,7 +174,6 @@ exports.sendVerificationEmail = async (req, res, next) => {
     const user = req.user;
     infoHash.user = user;
     infoHash.id = user._id;
-    console.log(user);
     const key = eval(process.env.mail_key);
     const token = jwt.sign(infoHash, key, { expiresIn: "24h" });
     const link = `${process.env.BASE_URL}/user/verify/${user._id}/${token}`;
@@ -229,7 +216,7 @@ exports.forgotPassword = async (req, res, next) => {
     const url = `${CLIENT_URL}/user/reset/${access_token}`;
 
     sendMail(email, url, "Reset your password");
-     return res.json({ msg: "Re-send the password, please check your email." });
+    return res.json({ msg: "Re-send the password, please check your email." });
   } catch (error) {
     // next(error),
     return res.status(500).json({ msg: err.message });
@@ -238,8 +225,7 @@ exports.forgotPassword = async (req, res, next) => {
 exports.resetPassword = async (req, res) => {
   try {
     const { password } = req.body;
-    console.log(password);
-    const passwordHash = await bcrypt.hash(password, 12);
+    const passwordHash = await bcrypt.hash(password, 10);
 
     await User.findOneAndUpdate(
       { _id: req.user.id },
@@ -254,19 +240,17 @@ exports.resetPassword = async (req, res) => {
   }
 };
 exports.getAccessToken = (req, res) => {
-  try {
-    const rf_token = req.cookies.refreshtoken;
-    if (!rf_token) return res.status(400).json({ msg: "Please login now!" });
-
-    jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-      if (err) return res.status(400).json({ msg: "Please login now!" });
-
-      const access_token = createAccessToken({ id: user.id });
-      res.json({ access_token });
-    });
-  } catch (err) {
-    return res.status(500).json({ msg: err.message });
-  }
+  // try {
+  //   const rf_token = req.cookies.refreshtoken;
+  //   if (!rf_token) return res.status(400).json({ msg: "Please login now!" });
+  //   jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+  //     if (err) return res.status(400).json({ msg: "Please login now!" });
+  //     const access_token = createAccessToken({ id: user.id });
+  //     res.json({ access_token });
+  //   });
+  // } catch (err) {
+  //   return res.status(500).json({ msg: err.message });
+  // }
 };
 exports.googleLogin = async (req, res) => {
   try {
@@ -280,19 +264,34 @@ exports.googleLogin = async (req, res) => {
 
     const password = email + process.env.GOOGLE_SECRET_KEY;
 
-    const passwordHash = await bcrypt.hash(password, 12);
-    console.log("")
+    const passwordHash = await bcrypt.hash(password, 10);
     if (!email_verified)
       return res.status(400).json({ msg: "Email verification failed." });
 
-    const user = await User.findOne({ email });
-    
+    let user = await User.findOne({ email });
+    if (!user) {
+      console.log("NOT")
+      const newUser = new User({
+        name: name,
+        email: email,
+        role: "customer",
+        password: passwordHash,
+      });
+
+      await newUser.save();
+      console.log("SAVED")
+       user = await User.findOne({ email });
+    }
+    if(!user)
+    {
+
+    }
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
         return res.status(400).json({ msg: "Password is incorrect." });
 
-        /*
+      /*
       const refresh_token = createRefreshToken({ id: user._id });
       res.cookie("refreshtoken", refresh_token, {
         httpOnly: true,
@@ -300,38 +299,36 @@ exports.googleLogin = async (req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
       });
       */
-       axios({
+      axios({
         method: "post",
         url: "http://localhost:8080/login",
-        data:{email:email,password:passwordHash}
+        data: { email: email, password: password },
       })
-        .then((res) => {
-          console.log(res)
+        .then((res2) => {
+          var data = res2.data.data;
+          res.json({
+            data: {
+              email: data.email,
+              id: data._id,
+              accessToken: res2.data.accessToken,
+              name: data.name,
+            },
+          });
         })
         .catch((er) => {
-          console.log("ER", er);
+          // console.log("ER", er);
         });
-
-      res.json({ msg: "Login success!" });
     } else {
-      const newUser = new User({
-        name:name,
-        email:email,
-        role:"customer",
-        password: passwordHash,
-      });
-      await newUser.save();
-      const refresh_token = createRefreshToken({ id: newUser._id });
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/user/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+      // const refresh_token = createRefreshToken({ id: newUser._id });
+      // res.cookie("refreshtoken", refresh_token, {
+      //   httpOnly: true,
+      //   path: "/user/refresh_token",
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
 
       res.json({ msg: "Login success!" });
     }
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json({ msg: err.message });
   }
 };
@@ -350,7 +347,7 @@ exports.facebookLogin = async (req, res) => {
 
     const password = email + process.env.FACEBOOK_SECRET;
 
-    const passwordHash = await bcrypt.hash(password, 12);
+    const passwordHash = await bcrypt.hash(password, 10);
 
     const user = await Users.findOne({ email });
 
@@ -359,32 +356,32 @@ exports.facebookLogin = async (req, res) => {
       if (!isMatch)
         return res.status(400).json({ msg: "Password is incorrect." });
 
-      const refresh_token = createRefreshToken({ id: user._id });
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/user/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+      // const refresh_token = createRefreshToken({ id: user._id });
+      // res.cookie("refreshtoken", refresh_token, {
+      //   httpOnly: true,
+      //   path: "/user/refresh_token",
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
 
       res.json({ msg: "Login success!" });
     } else {
       const newUser = new Users({
         name,
         email,
-        password: passwordHash,
+        password: password,
         avatar: picture.data.url,
       });
 
       await newUser.save();
 
-      const refresh_token = createRefreshToken({ id: newUser._id });
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/user/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+      // const refresh_token = createRefreshToken({ id: newUser._id });
+      // res.cookie("refreshtoken", refresh_token, {
+      //   httpOnly: true,
+      //   path: "/user/refresh_token",
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
 
-      res.json({ msg: "Login success!" });
+      res.json({ data: { email } });
     }
   } catch (err) {
     return res.status(500).json({ msg: err.message });
