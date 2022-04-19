@@ -65,8 +65,10 @@
   margin-top: 1rem;
 }
 .button {
+  background: linear-gradient(90deg, rgb(171, 208, 236), rgb(224, 229, 234) 40%, rgb(181, 218, 247) 100%);
+
   /* background: darkcyan; */
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to left bottom,
     #0065db,
     #3d64d8,
@@ -80,7 +82,7 @@
     #ae5aba,
     #b65ab5,
     #bd5ab0
-  );
+  ); */
   border-radius: 2px;
   width: 100%;
   height: 30px;

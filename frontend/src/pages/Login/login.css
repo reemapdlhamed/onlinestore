@@ -47,7 +47,9 @@
 .login__signin__button {
   /* background: #6461d3; */
   font-weight: 700;
-  background-image: linear-gradient(
+  background: linear-gradient(90deg, rgb(171, 208, 236), rgb(224, 229, 234) 40%, rgb(181, 218, 247) 100%);
+
+  /* background-image: linear-gradient(
     to left bottom,
     #0065db,
     #3d64d8,
@@ -61,13 +63,13 @@
     #ae5aba,
     #b65ab5,
     #bd5ab0
-  );
+  ); */
   border-radius: 2px;
   width: 100%;
   height: 30px;
   border: 1px solid;
   margin-top: 10px;
-  border-color: #0065db #6461d3 #8c5dc9;
+  border-color: #9dc1eb #b8b6f8 #d8c7ef;
 }
 
 .login__registerbutton {
@@ -76,7 +78,7 @@
   height: 30px;
   border: 1px solid;
   margin-top: 10px;
-  background-color: #0065db;
+  background-color: #5199f3;
   border-color: darkgray;
 }
 /* ===================== */
