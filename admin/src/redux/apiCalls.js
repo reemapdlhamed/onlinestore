@@ -54,8 +54,8 @@ const CONFIG = () => {
 };
 export const login = async (navigate, dispatch, user) => {
   dispatch(loginStart());
-
-  const res = request
+  console.log("user",user);
+    const res = request
     .post("/login", user)
     .then((res) => {
       console.log(res);
@@ -112,12 +112,14 @@ export const updateProduct = async (id, product, dispatch) => {
   }
 };
 
-export const addProduct = async (product, dispatch) => {
+export const addProduct = async (product, dispatch,notify) => {
   dispatch(addProductStart());
   try {
     const res = await request.post(`/products`, product, CONFIG());
     console.log("res", res.data.data);
     dispatch(addProductSuccess(res.data.data));
+    notify();
+
   } catch (err) {
     console.log("err", err);
     dispatch(addProductFailure());

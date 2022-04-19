@@ -47,10 +47,10 @@ const Home = () => {
             <Widget type="category" amount={stats.categories} />
           </div>
 
-          <div className="listContainer">
+          {/* <div className="listContainer">
             <div className="listTitle">Latest Transactions</div>
             <Table />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

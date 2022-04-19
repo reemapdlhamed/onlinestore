@@ -1,5 +1,5 @@
 import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
+import Login from "./pages/login/_Login";
 import List from "./pages/list/List";
 import Single from "./pages/single/Single";
 import New from "./pages/new/New";
@@ -15,7 +15,7 @@ import "./style/dark.scss";
 import { useContext, useEffect } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import ProductList from "./pages/productList/productList";
-import NewProduct from "./pages/newProduct/_NewProduct";
+import NewProduct from "./pages/newProduct/NewProduct";
 import Product from "./pages/product/Product";
 import OrdersList from "./pages/ordersList/OrdersList";
 import UsersList from "./pages/usersList/UsersList";

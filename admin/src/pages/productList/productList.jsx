@@ -27,7 +27,7 @@ export default function ProductList() {
         {
             field: "product",
             headerName: "Product",
-            width: 300,
+            width: 350,
             renderCell: (params) => {
                 return (
                     <div className="productListItem">
@@ -37,7 +37,7 @@ export default function ProductList() {
                 );
             },
         },
-        { field: "brand", headerName: "Brand", width: 220 },
+
         { field: "quantity", headerName: "Quantiy", width: 220 },
         //   { field: "inStock", headerName: "Stock", width: 200 },
         {
