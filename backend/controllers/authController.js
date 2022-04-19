@@ -229,7 +229,7 @@ exports.forgotPassword = async (req, res, next) => {
     const url = `${CLIENT_URL}/user/reset/${access_token}`;
 
     sendMail(email, url, "Reset your password");
-    res.json({ msg: "Re-send the password, please check your email." });
+     return res.json({ msg: "Re-send the password, please check your email." });
   } catch (error) {
     // next(error),
     return res.status(500).json({ msg: err.message });
@@ -241,7 +241,7 @@ exports.resetPassword = async (req, res) => {
     console.log(password);
     const passwordHash = await bcrypt.hash(password, 12);
 
-    await Users.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { _id: req.user.id },
       {
         password: passwordHash,
