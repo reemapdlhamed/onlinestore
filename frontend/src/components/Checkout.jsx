@@ -131,12 +131,12 @@ const Checkout = (props) => {
   return (
     <>
       <div
-        className="container my-5 min-vh-100"
+        className="container  min-vh-100 "
         style={{
           boxShadow:
             "rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
-          paddingTop: "7rem",
-        }}
+          paddingTop: "22rem",backgroundImage:"url(/assets/ship.gif)",backgroundRepeat:"no-repeat"
+        ,backgroundSize:"cover"}}
       >
         <div style={{ margin: "0 auto", display: "block" }} className="row g-5">
           <div
