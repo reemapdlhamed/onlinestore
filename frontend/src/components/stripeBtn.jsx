@@ -31,7 +31,7 @@ const StripeBtn = (props) => {
 
     history.push("/");
 
-       // window.location.reload()
+       window.location.reload()
 
   }
 
