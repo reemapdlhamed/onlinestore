@@ -76,6 +76,7 @@
   height: 30px;
   border: 1px solid;
   margin-top: 10px;
+  background-color: #0065db;
   border-color: darkgray;
 }
 /* ===================== */
@@ -139,7 +140,7 @@ button a {
   color: black;
 }
 button a:hover {
-  color: #8c5dc9;
+  color: #c1a875;
 }
 /* ---------- Facebook / Google ---------------- */
 .login_page .hr {
