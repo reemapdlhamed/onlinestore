@@ -18,6 +18,10 @@ export default function Wishlist() {
   console.log("ADEL", JSON.parse(localStorage.getItem("wishlist")));
   let local = JSON.parse(localStorage.getItem("wishlist"));
   if (!local) local = [];
+   function removeItem (){
+     localStorage.removeItem("wishlist");
+   }
+  
   return (
     <div className=" bg-light rounded-3 py-5 min-vh-100">
       <div className="container">
@@ -40,6 +44,7 @@ export default function Wishlist() {
                     <button
                       className="btn-close float-end"
                       aria-label="Close"
+                      onClick={removeItem}
                     ></button>
                     <h5 class="card-title text-danger fw-bold">{loca.name}</h5>
                     <p class="card-text">
