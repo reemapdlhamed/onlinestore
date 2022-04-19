@@ -131,7 +131,7 @@ export default function Order() {
                                     <div className="orderProperties">
                                         <ul>
                                             {order.orderItems.map(order => {
-                                                return <li>{order.name} <strong>[x{order.quantity}]</strong> </li>
+                                                return <li>{order.name} <strong>[x{order.qty}]</strong> </li>
                                             })}
                                         </ul>
 
