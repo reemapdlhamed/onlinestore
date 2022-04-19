@@ -41,8 +41,7 @@ const Footer = () => {
           <i className="fas fa-shopping-cart fa-1x"></i> ShipShop           
           </h6>
           <p>
-            Here you can use rows and columns to organize your footer content. Lorem ipsum
-            dolor sit amet, consectetur adipisicing elit.
+       we  are E-commerce website that allows people to buy and sell physical goods, services, and digital products over the internet rather than at a brick-and-mortar location. Through an e-commerce website, a business can process orders, accept payments, manage shipping and logistics, and provide customer service.
           </p>
         </div>
 
@@ -125,7 +124,7 @@ const Footer = () => {
           <p><i className="fas fa-home me-3"></i> Egypt, Mansoura,35111</p>
           <p>
             <i className="fas fa-envelope me-3"></i>
-            shipShop@gmail.com
+            shipshopservies@gmail.com
           </p>
           <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
           <p><i className="fas fa-print me-3"></i> + 01 234 567 89</p>

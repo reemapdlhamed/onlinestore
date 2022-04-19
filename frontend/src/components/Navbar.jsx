@@ -41,7 +41,7 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg navbar-light bg-light py-0
+        className="navbar navbar-expand-lg navbar-light py-0
        shadow-sm"
         style={{ position: "relative", zIndex: "2" }}
       >

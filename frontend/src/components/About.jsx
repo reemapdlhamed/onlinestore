@@ -9,12 +9,10 @@ const About = () => {
           <div className="col-md-6">
             <h1 className="text-primary fw-bold mb-4 py-0">About Us</h1>
             <p className="lead mb-4">
-              We Are a Team in Iti-Mansoura , we develope this website to our
-              graduation project, 
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Praesentium, illum, laudantium eligendi odio cum expedita mollitia
-              corporis totam distinctio esse vitae commodi culpa ipsa
-              consequatur veritatis, reprehenderit eaque ipsam maxime!
+              We Are a Team in ITI-Mansoura ,our track is Full-stack using MEARN we develope this website to our
+              graduation project, we used alot of technolgies such as reactjs and nodejs and mongoDb
+              ...etc
+             
             </p>
             <NavLink to="/contact" className="btn btn-outline-primary px-3">
               Contact Us
@@ -45,8 +43,7 @@ const About = () => {
                 <i className="far fa-star"></i>
               </div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                et reiciendis voluptatum, amet est natus quaerat ducimus
+             i have alot of skills about Front-end technology, Development Languages, Database, Server, Working with API and version control systems
               </p>
             </div>
             <div className="box">
@@ -61,8 +58,8 @@ const About = () => {
                 <i className="far fa-star"></i>
               </div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                et reiciendis voluptatum, amet est natus quaerat ducimus
+              i have alot of skills about Front-end technology, Development Languages, Database,  Server, Working with API and version control systems
+
               </p>
             </div>
             <div className="box">
@@ -77,8 +74,8 @@ const About = () => {
                 <i className="far fa-star"></i>
               </div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                et reiciendis voluptatum, amet est natus quaerat ducimus
+              i have alot of skills about Front-end technology, Development Languages, Database Server, Working with API and version control systems
+
               </p>
             </div>
             <div className="box">
@@ -93,8 +90,8 @@ const About = () => {
                 <i className="far fa-star"></i>
               </div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                et reiciendis voluptatum, amet est natus quaerat ducimus
+              i have alot of skills about Front-end technology, Development Languages, Database, Server, Working with API and version control systems
+
               </p>
             </div>
             <div className="box">
@@ -109,8 +106,8 @@ const About = () => {
                 <i className="far fa-star"></i>
               </div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                et reiciendis voluptatum, amet est natus quaerat ducimus
+              i have alot of skills about Front-end technology, Development Languages, Database, Server, Working with API and version control systems
+
               </p>
             </div>
             <div className="box">
@@ -125,8 +122,8 @@ const About = () => {
                 <i className="far fa-star"></i>
               </div>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores
-                et reiciendis voluptatum, amet est natus quaerat ducimus
+              i have alot of skills about Front-end technology, Development Languages, Database,  Server, Working with API and version control systems
+
               </p>
             </div>
           </div>

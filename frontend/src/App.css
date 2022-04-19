@@ -5,14 +5,19 @@
 }
 body {
   color: #333;
-  background: #fcfcfc;
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
+
 }
 
 /* Navbar */
+.navbar{
+  background: rgb(211, 224, 239);
+  background: linear-gradient(90deg, rgb(182, 218, 246), rgb(232, 236, 240) 40%, rgb(182, 218, 246) 100%);
+}
 .navbar-nav a{
   font-size:18px ;
+  
 }
 
 /* our servies */
