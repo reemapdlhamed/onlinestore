@@ -179,44 +179,44 @@ exports.updateUser = (request, response, next) => {
     });
 };
 
-//send verification email
-exports.sendVerificationEmail = async (req, res, next) => {
-  try {
-    const infoHash = {};
-    const user = req.user;
-    infoHash.user = user;
-    infoHash.id = user._id;
-    console.log(user);
-    const key = eval(process.env.mail_key);
-    const token = jwt.sign(infoHash, key, { expiresIn: "24h" });
-    const link = `${process.env.BASE_URL}/user/verify/${user._id}/${token}`;
-    //generate html code
-    const html = `<h3 style="color:blue;">Hello, ${user.fullName}</h3>
-    <p>E-mail verification was requested for this email address ${user.email}. If you requested this verification, click the link below :</p>
-    <p>
-    <p style="color:red;">This link is expired with in 24 hrs</p>
-      <a style="background-color:blue; color:white;padding:10px 20px;text-decoration:none; font-weight:bold;border-radius:7px" href="${link}">Verify Your Email</a>
-    </p>`;
-    await sendEmail(user.email, "Verify Email", html);
-    res.status(201).json({
-      data: "Registration successful ,An Email sent to your account please verify",
-      token,
-    });
-  } catch (error) {
-    next(error);
-  }
-};
-//verify email on link sent
-exports.emailVerify = async (req, res, next) => {
-  try {
-    const key = process.env.mail_key;
-    const user = await userVerify(req, key);
-    await user.update({ verified: true });
-    res.status(200).json("mail verified success");
-  } catch (error) {
-    next(error);
-  }
-};
+// //send verification email
+// exports.sendVerificationEmail = async (req, res, next) => {
+//   try {
+//     const infoHash = {};
+//     const user = req.user;
+//     infoHash.user = user;
+//     infoHash.id = user._id;
+//     console.log(user);
+//     const key = eval(process.env.mail_key);
+//     const token = jwt.sign(infoHash, key, { expiresIn: "24h" });
+//     const link = `${process.env.BASE_URL}/user/verify/${user._id}/${token}`;
+//     //generate html code
+//     const html = `<h3 style="color:blue;">Hello, ${user.fullName}</h3>
+//     <p>E-mail verification was requested for this email address ${user.email}. If you requested this verification, click the link below :</p>
+//     <p>
+//     <p style="color:red;">This link is expired with in 24 hrs</p>
+//       <a style="background-color:blue; color:white;padding:10px 20px;text-decoration:none; font-weight:bold;border-radius:7px" href="${link}">Verify Your Email</a>
+//     </p>`;
+//     await sendEmail(user.email, "Verify Email", html);
+//     res.status(201).json({
+//       data: "Registration successful ,An Email sent to your account please verify",
+//       token,
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+// //verify email on link sent
+// exports.emailVerify = async (req, res, next) => {
+//   try {
+//     const key = process.env.mail_key;
+//     const user = await userVerify(req, key);
+//     await user.update({ verified: true });
+//     res.status(200).json("mail verified success");
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 exports.forgotPassword = async (req, res, next) => {
   try {
@@ -254,19 +254,19 @@ exports.resetPassword = async (req, res) => {
   }
 };
 exports.getAccessToken = (req, res) => {
-  try {
-    const rf_token = req.cookies.refreshtoken;
-    if (!rf_token) return res.status(400).json({ msg: "Please login now!" });
+  // try {
+  //   const rf_token = req.cookies.refreshtoken;
+  //   if (!rf_token) return res.status(400).json({ msg: "Please login now!" });
 
-    jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
-      if (err) return res.status(400).json({ msg: "Please login now!" });
+  //   jwt.verify(rf_token, process.env.REFRESH_TOKEN_SECRET, (err, user) => {
+  //     if (err) return res.status(400).json({ msg: "Please login now!" });
 
-      const access_token = createAccessToken({ id: user.id });
-      res.json({ access_token });
-    });
-  } catch (err) {
-    return res.status(500).json({ msg: err.message });
-  }
+  //     const access_token = createAccessToken({ id: user.id });
+  //     res.json({ access_token });
+  //   });
+  // } catch (err) {
+  //   return res.status(500).json({ msg: err.message });
+  // }
 };
 exports.googleLogin = async (req, res) => {
   try {
@@ -281,13 +281,14 @@ exports.googleLogin = async (req, res) => {
     const password = email + process.env.GOOGLE_SECRET_KEY;
 
     const passwordHash = await bcrypt.hash(password, 12);
-    console.log("")
+    console.log(passwordHash)
     if (!email_verified)
       return res.status(400).json({ msg: "Email verification failed." });
 
     const user = await User.findOne({ email });
     
     if (user) {
+      console.log("2222");
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
         return res.status(400).json({ msg: "Password is incorrect." });
@@ -320,13 +321,13 @@ exports.googleLogin = async (req, res) => {
         role:"customer",
         password: passwordHash,
       });
-      await newUser.save();
-      const refresh_token = createRefreshToken({ id: newUser._id });
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/user/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+      // await newUser.save();
+      // const refresh_token = createRefreshToken({ id: newUser._id });
+      // res.cookie("refreshtoken", refresh_token, {
+      //   httpOnly: true,
+      //   path: "/user/refresh_token",
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
 
       res.json({ msg: "Login success!" });
     }
@@ -359,12 +360,12 @@ exports.facebookLogin = async (req, res) => {
       if (!isMatch)
         return res.status(400).json({ msg: "Password is incorrect." });
 
-      const refresh_token = createRefreshToken({ id: user._id });
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/user/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+      // const refresh_token = createRefreshToken({ id: user._id });
+      // res.cookie("refreshtoken", refresh_token, {
+      //   httpOnly: true,
+      //   path: "/user/refresh_token",
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
 
       res.json({ msg: "Login success!" });
     } else {
@@ -377,12 +378,12 @@ exports.facebookLogin = async (req, res) => {
 
       await newUser.save();
 
-      const refresh_token = createRefreshToken({ id: newUser._id });
-      res.cookie("refreshtoken", refresh_token, {
-        httpOnly: true,
-        path: "/user/refresh_token",
-        maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-      });
+      // const refresh_token = createRefreshToken({ id: newUser._id });
+      // res.cookie("refreshtoken", refresh_token, {
+      //   httpOnly: true,
+      //   path: "/user/refresh_token",
+      //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+      // });
 
       res.json({ msg: "Login success!" });
     }

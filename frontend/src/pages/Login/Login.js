@@ -27,23 +27,21 @@ function Login() {
   const history = useHistory();
 
   const [user, setUser] = useState(initialState);
-  
+
   const responseGoogle = async (response) => {
     try {
       const res = await axios.post("/google_login", {
-
-        
         tokenId: response.tokenId,
       });
 
-      setUser({ ...user, error: "", success: res.data.msg });
-      localStorage.setItem("firstLogin", true);
+      // setUser({ ...user, error: "", success: res.data.msg });
+      // localStorage.setItem("firstLogin", true);
 
-      dispatch(dispatchLogin());
-      history.push("/");
+      // dispatch(dispatchLogin());
+      // history.push("/");
     } catch (err) {
-      err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
+      // err.response.data.msg &&
+      // setUser({ ...user, err: err.response.data.msg, success: "" });
     }
   };
 
@@ -149,7 +147,8 @@ function Login() {
             <img
               className="login__logo"
               src="/assets/shipshop-logo.png"
-              style={{width:"180px",height:"35px"}} alt="logo"
+              style={{ width: "180px", height: "35px" }}
+              alt="logo"
             />
           </Link>
           <div className="login__container ">
