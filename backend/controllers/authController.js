@@ -24,10 +24,9 @@ exports.userLogin = (request, response, next) => {
         throw new Error("email not found1");
       }
       encrypted = data.password;
-console.log("ENC",request.body.password)
+
       bcrypt.compare(request.body.password, encrypted).then(function (result) {
         if (result) {
-          console.log("result",result)
           let accessToken = jwt.sign(
             {
               role: data.role,
@@ -176,7 +175,6 @@ exports.sendVerificationEmail = async (req, res, next) => {
     const user = req.user;
     infoHash.user = user;
     infoHash.id = user._id;
-    console.log(user);
     const key = eval(process.env.mail_key);
     const token = jwt.sign(infoHash, key, { expiresIn: "24h" });
     const link = `${process.env.BASE_URL}/user/verify/${user._id}/${token}`;
@@ -228,8 +226,7 @@ exports.forgotPassword = async (req, res, next) => {
 exports.resetPassword = async (req, res) => {
   try {
     const { password } = req.body;
-    console.log(password);
-    const passwordHash = await bcrypt.hash(password, 12);
+    const passwordHash = await bcrypt.hash(password, 10);
 
     await User.findOneAndUpdate(
       { _id: req.user.id },
@@ -270,7 +267,7 @@ exports.googleLogin = async (req, res) => {
 
     const password = email + process.env.GOOGLE_SECRET_KEY;
 
-    const passwordHash = await bcrypt.hash(password, 12);
+    const passwordHash = await bcrypt.hash(password, 10);
     if (!email_verified)
       return res.status(400).json({ msg: "Email verification failed." });
 
@@ -292,16 +289,17 @@ exports.googleLogin = async (req, res) => {
        axios({
         method: "post",
         url: "http://localhost:8080/login",
-        data:{email:email,password:passwordHash}
+        data:{email:email,password:password}
       })
-        .then((res) => {
-         console.log(res)
+        .then((res2) => {
+          var data=res2.data.data
+          res.json({ data: {"email":data.email,"id":data._id,"accessToken":res2.data.accessToken} });
         })
         .catch((er) => {
-        //  console.log("ER", er);
+          // console.log("ER", er);
+          
         });
-
-      res.json({ data: {email} });
+      
     } else {
       const newUser = new User({
         name:name,
@@ -320,7 +318,6 @@ exports.googleLogin = async (req, res) => {
       res.json({ msg: "Login success!" });
     }
   } catch (err) {
-    console.log(err.message);
     return res.status(500).json({ msg: err.message });
   }
 };
@@ -339,7 +336,7 @@ exports.facebookLogin = async (req, res) => {
 
     const password = email + process.env.FACEBOOK_SECRET;
 
-    const passwordHash = await bcrypt.hash(password, 12);
+    const passwordHash = await bcrypt.hash(password, 10);
 
     const user = await Users.findOne({ email });
 
