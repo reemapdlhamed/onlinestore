@@ -87,7 +87,6 @@ const Product = () => {
   
 
     // localStorage.setItem("wishlist",JSON.stringify( {x,obj} ))
-   console.log("ADEL",JSON.parse( localStorage.getItem("wishlist")))
 
 
 
@@ -198,6 +197,9 @@ const Product = () => {
             // style={{border :" 1px solid black"}}
             className="py-3 px-3"
           />
+          <button className="btn btn-outline-danger  mx-3 px-3 my-1 col-lg-8 col-md" onClick={addToWishList}>
+                <i class="fas fa-heart"></i> Add to List
+              </button>
         </div>
         <div className="col-lg col-md col-sm mx-4">
           <h5 className="text-uppercase text-black fw-bold display-6">
@@ -230,10 +232,7 @@ const Product = () => {
             >
               Add Review
             </button>
-            <div class="cardImage">
-              <button className="wish" onClick={addToWishList}>
-                <i class="fas fa-heart"></i> Add to List
-              </button>
+              
               {/* <Modal
                 open={open}
                 onClose={handleClose}
@@ -267,7 +266,7 @@ const Product = () => {
                   </div>
                 </Box>
               </Modal> */}
-            </div>
+            
           </div>
         </div>
         <div

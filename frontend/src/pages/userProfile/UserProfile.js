@@ -85,7 +85,6 @@ export default function UserProfile() {
     if (
       orderState[i]._id &&
       orderState[i].customerName &&
-      
       orderState[i].totalPrice
     ) {
       var theDate = new Date(orderState[i].createdAt);
@@ -96,7 +95,6 @@ export default function UserProfile() {
         orderStatus: orderState[i].orderStatus,
         totalPrice: orderState[i].totalPrice,
         paymentStatus: orderState[i].paymentStatus,
-
       });
     }
   }
@@ -250,7 +248,10 @@ export default function UserProfile() {
                   id="togglePassword"
                   style={{
                     paddingLeft: "3rem",
-                    marginLeft: " 75rem",
+                    // marginBottom: "100px",
+                    marginLeft: " 110rem",
+                    marginTop: "10rem",
+                    position: "absolute",
                     cursor: "pointer",
                   }}
                 ></i>
@@ -263,6 +264,19 @@ export default function UserProfile() {
                   variant="standard"
                   className="w-50"
                 />
+                <i
+                  onClick={togglePassword}
+                  className="far fa-eye"
+                  id="togglePassword"
+                  style={{
+                    paddingLeft: "3rem",
+
+                    marginLeft: " 110rem",
+                    marginTop: "15rem",
+                    position: "absolute",
+                    cursor: "pointer",
+                  }}
+                ></i>
                 {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
           <Input
@@ -281,8 +295,13 @@ export default function UserProfile() {
 
                 <Button
                   onClick={changePwd}
-                  style={{ width: "25rem" }}
-                  variant="dark"
+                  style={{
+                    width: "25rem",
+                    marginTop: "1rem",
+                    backgroundimage:
+                      "linear-gradient(to left bottom, #0065db,#3d64d8,#5762d5, #6a60d2, #7a5fce, #865ecb, #915cc7, #9b5bc3,  #a55abe,#ae5aba,#b65ab5, #bd5ab0)",
+                  }}
+                  // variant="dark"
                 >
                   Update Profile
                 </Button>

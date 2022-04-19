@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 120vh;
+  height: 100vh;
   background-color: white;
 }
 .login__logo {
@@ -14,7 +14,7 @@
   object-fit: contain;
 }
 .login__container {
-  width: 300px;
+  width: 340px;
   height: fit-content;
   display: flex;
   flex-direction: column;
@@ -23,16 +23,21 @@
   padding: 20px;
 }
 .login__container > h1 {
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 2rem;
   margin-bottom: 20px;
+  color: #000;
 }
 .login__container > form > h5 {
   margin-bottom: 5px;
+  font-size: 0.999rem;
+  font-weight: 650;
 }
 .login__container > form > input {
   height: 30px;
   margin-bottom: 10px;
   background-color: white;
+
   width: 98%;
 }
 .login__container > p {
@@ -40,13 +45,29 @@
   font-size: 12px;
 }
 .login__signin__button {
-  background: #f0c14b;
+  /* background: #6461d3; */
+  font-weight: 700;
+  background-image: linear-gradient(
+    to left bottom,
+    #0065db,
+    #3d64d8,
+    #5762d5,
+    #6a60d2,
+    #7a5fce,
+    #865ecb,
+    #915cc7,
+    #9b5bc3,
+    #a55abe,
+    #ae5aba,
+    #b65ab5,
+    #bd5ab0
+  );
   border-radius: 2px;
   width: 100%;
   height: 30px;
   border: 1px solid;
   margin-top: 10px;
-  border-color: #a88734 #9c7e31 #846a29;
+  border-color: #0065db #6461d3 #8c5dc9;
 }
 
 .login__registerbutton {
@@ -55,6 +76,7 @@
   height: 30px;
   border: 1px solid;
   margin-top: 10px;
+  background-color: #0065db;
   border-color: darkgray;
 }
 /* ===================== */
@@ -118,7 +140,7 @@ button a {
   color: black;
 }
 button a:hover {
-  color: #a88734;
+  color: #c1a875;
 }
 /* ---------- Facebook / Google ---------------- */
 .login_page .hr {

@@ -10,7 +10,7 @@ body {
   justify-content: center;
   flex-direction: column;
   /* overflow: hidden; */
-  /* margin: 0px; */
+/* margin: 0px; */
 /* }  */
 
 h3 {
@@ -30,7 +30,15 @@ p {
 .card-container {
   margin-top: 5%;
   margin-left: 5%;
-  background-color: #231e39;
+  /* background-color: #231e39; */
+  background-image: linear-gradient(
+    to right top,
+    #051937,
+    #022b5d,
+    #003e85,
+    #0051af,
+    #0065db
+  );
   border-radius: 5px;
   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
   color: #b3b8cd;
@@ -49,7 +57,7 @@ p {
 }
 
 button.primary {
-  background-color: #03bfcb;
+  background-color: #051937;
   border: 1px solid #03bfcb;
   border-radius: 3px;
   color: #231e39;

@@ -8,6 +8,7 @@ router.route("/message")
   [
     body("name").isString().withMessage("invalid name."),
     body("email").isEmail().withMessage("invalid Email address."),
+    body("phone").isString().withMessage("invalid phone number."),
     body("message").isString().withMessage("invalid Message."),
 
   ],

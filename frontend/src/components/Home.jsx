@@ -163,8 +163,8 @@ const Home = () => {
           <img className="d-block w-100" src="/assets/4.jpg" alt="four slide" />
 
           <Carousel.Caption>
-            <h4>NEW SEASON ARRIVALS</h4>
-            <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
+            <h4 >NEW SEASON ARRIVALS</h4>
+            <p className="card-text  lead fs-2">CHECK OUT ALL THE TRENDS</p>
             <NavLink
               to="/products"
               className="btn btn-outline-dark  ms-2 px-3 py-2"
@@ -174,11 +174,25 @@ const Home = () => {
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
-          <img className="d-block w-100" src="/assets/5.jpg" alt="five slide" />
+          <img className="d-block w-100" src="/assets/8.jpg" alt="five slide" />
 
           <Carousel.Caption>
-            <h4>NEW SEASON ARRIVALS</h4>
-            <p className="card-text lead fs-2">CHECK OUT ALL THE TRENDS</p>
+            <h4 className="text-black">NEW SEASON ARRIVALS</h4>
+            <p className="card-text text-black lead fs-2">CHECK OUT ALL THE TRENDS</p>
+            <NavLink
+              to="/products"
+              className="btn btn-outline-dark  ms-2 px-3 py-2"
+            >
+              Shop Now
+            </NavLink>
+          </Carousel.Caption>
+        </Carousel.Item>
+         <Carousel.Item>
+          <img className="d-block w-100" src="/assets/7.jpg" alt="six slide" />
+
+          <Carousel.Caption>
+            <h4 className="text-black">NEW SEASON ARRIVALS</h4>
+            <p className="card-text text-black lead fs-2">CHECK OUT ALL THE TRENDS</p>
             <NavLink
               to="/products"
               className="btn btn-outline-dark  ms-2 px-3 py-2"

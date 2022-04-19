@@ -163,15 +163,15 @@ function register() {
           </p>
         </section>
       ) : (
-        <div className="login ">
+        <div className="register ">
           <Link to="/">
             <img
-              className="login__logo"
-              src="/assets/simple-vector-filled-flat-amazon-icon-logo-solid-black-pictogram-isolated-white-background-amazon-logo-159029074.jpg"
-              alt="amazon logo "
+              className="register__logo"
+              src="/assets/shipshop-logo.png"
+              style={{width:"180px",height:"35px"}} alt="logo"
             />
           </Link>
-          <div className="login__container ">
+          <div className="register__container ">
             <p
               ref={errRef}
               className={errorMsg ? "errorMsg" : "offScreen"}
@@ -262,7 +262,7 @@ function register() {
               </h5>
               <input
                 type={passwordShown ? "text" : "password"}
-                id="passwoed"
+                id="password"
                 required
                 onChange={(e) => setPassword(e.target.value)}
                 aria-invalid={validPassword ? "false" : "true"}

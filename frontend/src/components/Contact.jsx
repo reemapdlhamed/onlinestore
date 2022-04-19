@@ -7,6 +7,7 @@ const Contact = () => {
   const [msg, setMsg] = useState({
     name : "",
     email : "",
+    phone : "",
     message : ""
   });
   const [popup, setPopup] = useState("");
@@ -26,12 +27,13 @@ const Contact = () => {
         setMsg({
                 name : "",
                 email : "",
+                phone : "",
                 message : ""
               })
         setPopup(<>
           <Alert severity="success">
           <AlertTitle>Success</AlertTitle>
-          Thank You For Contacting Us ,Check your Gmail inbox — <strong>Have Good Day</strong>
+          Thank You For Contacting Us ,Check your Gmail inbox — <strong>Have A Good Day</strong>
           </Alert></>)
         
       })
@@ -91,6 +93,24 @@ const Contact = () => {
                     onChange={handleChange}
                   />
                 </div>
+                <div className="mb-3">
+                  <label htmlFor="exampleFormControlInput1" className="form-label">
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="exampleFormControlInput1"
+                    name="phone"
+                    value={msg.phone}
+                    onChange={handleChange}
+                    pattern="^01[0-2]\d{1,8}$"
+                    maxLength={11}
+                    minLength={11}
+                    placeholder="Enter Valid phone number"
+                    required
+                  />
+                </div>   
                 <div className="mb-3">
                   <label htmlFor="exampleFormControlTextarea1" className="form-label">
                     Your Message
