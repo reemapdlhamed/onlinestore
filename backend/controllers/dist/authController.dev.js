@@ -394,7 +394,7 @@ exports.getAccessToken = function (req, res) {// try {
 };
 
 exports.googleLogin = function _callee6(req, res) {
-  var tokenId, verify, _verify$payload, email_verified, email, name, password, passwordHash, user, isMatch, newUser;
+  var tokenId, verify, _verify$payload, email_verified, email, name, password, passwordHash, user, newUser, isMatch;
 
   return regeneratorRuntime.async(function _callee6$(_context6) {
     while (1) {
@@ -436,20 +436,47 @@ exports.googleLogin = function _callee6(req, res) {
         case 14:
           user = _context6.sent;
 
-          if (!user) {
-            _context6.next = 25;
+          if (user) {
+            _context6.next = 24;
             break;
           }
 
-          console.log("2222");
-          _context6.next = 19;
+          console.log("NOT");
+          newUser = new User({
+            name: name,
+            email: email,
+            role: "customer",
+            password: passwordHash
+          });
+          _context6.next = 20;
+          return regeneratorRuntime.awrap(newUser.save());
+
+        case 20:
+          console.log("SAVED");
+          _context6.next = 23;
+          return regeneratorRuntime.awrap(User.findOne({
+            email: email
+          }));
+
+        case 23:
+          user = _context6.sent;
+
+        case 24:
+          if (!user) {}
+
+          if (!user) {
+            _context6.next = 34;
+            break;
+          }
+
+          _context6.next = 28;
           return regeneratorRuntime.awrap(bcrypt.compare(password, user.password));
 
-        case 19:
+        case 28:
           isMatch = _context6.sent;
 
           if (isMatch) {
-            _context6.next = 22;
+            _context6.next = 31;
             break;
           }
 
@@ -457,13 +484,13 @@ exports.googleLogin = function _callee6(req, res) {
             msg: "Password is incorrect."
           }));
 
-        case 22:
+        case 31:
           /*
           const refresh_token = createRefreshToken({ id: user._id });
           res.cookie("refreshtoken", refresh_token, {
-          httpOnly: true,
-          path: "/user/refresh_token",
-          maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+            httpOnly: true,
+            path: "/user/refresh_token",
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
           });
           */
           axios({
@@ -477,51 +504,45 @@ exports.googleLogin = function _callee6(req, res) {
             var data = res2.data.data;
             res.json({
               data: {
-                "email": data.email,
-                "id": data._id,
-                "accessToken": res2.data.accessToken
+                email: data.email,
+                id: data._id,
+                accessToken: res2.data.accessToken,
+                name: data.name
               }
             });
           })["catch"](function (er) {// console.log("ER", er);
           });
-          _context6.next = 27;
+          _context6.next = 35;
           break;
 
-        case 25:
-          newUser = new User({
-            name: name,
-            email: email,
-            role: "customer",
-            password: passwordHash
-          }); // await newUser.save();
+        case 34:
           // const refresh_token = createRefreshToken({ id: newUser._id });
           // res.cookie("refreshtoken", refresh_token, {
           //   httpOnly: true,
           //   path: "/user/refresh_token",
           //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
           // });
-
           res.json({
             msg: "Login success!"
           });
 
-        case 27:
-          _context6.next = 32;
+        case 35:
+          _context6.next = 40;
           break;
 
-        case 29:
-          _context6.prev = 29;
+        case 37:
+          _context6.prev = 37;
           _context6.t0 = _context6["catch"](0);
           return _context6.abrupt("return", res.status(500).json({
             msg: _context6.t0.message
           }));
 
-        case 32:
+        case 40:
         case "end":
           return _context6.stop();
       }
     }
-  }, null, null, [[0, 29]]);
+  }, null, null, [[0, 37]]);
 };
 
 exports.facebookLogin = function _callee7(req, res) {
