@@ -14,7 +14,7 @@ const Checkout = (props) => {
   const addresState = useSelector((state) => state.handleAddress);
   const [discount, setDiscount] = useState({
     val: 0,
-    redeemTxt:"redeem"
+    redeemTxt: "redeem",
   });
 
   const [txt, setTxt] = useState({
@@ -42,20 +42,22 @@ const Checkout = (props) => {
       }).then((res) => {
         if (!promocodes[txt]) {
           setDiscount((previousState) => {
-            return { ...previousState, val: 0,redeemTxt:"redeem" };
+            return { ...previousState, val: 0, redeemTxt: "redeem" };
           });
         }
         if (res.data.message === "ok" && promocodes[txt]) {
           setDiscount((previousState) => {
-            return { ...previousState, val: promocodes[txt],redeemTxt:"remove" };
+            return {
+              ...previousState,
+              val: promocodes[txt],
+              redeemTxt: "remove",
+            };
           });
         }
       });
-    }
-    else
-    {
+    } else {
       setDiscount((previousState) => {
-        return { ...previousState, val: 0,redeemTxt:"redeem"};
+        return { ...previousState, val: 0, redeemTxt: "redeem" };
       });
     }
   };
@@ -136,14 +138,16 @@ const Checkout = (props) => {
   return (
     <>
       <div
-        className="container  min-vh-100 "
+        className="container-fluid  min-vh-100 "
         style={{
           boxShadow:
             "rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
-          paddingTop: "22rem",
+          paddingTop: "150px",
           backgroundImage: "url(/assets/ship.gif)",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundSize: "100%",
+          position: "relative",
+          // opacity:"0.5"
         }}
       >
         <div style={{ margin: "0 auto", display: "block" }} className="row g-5">
@@ -152,7 +156,7 @@ const Checkout = (props) => {
             className="col-md-5 col-lg-4 order-md-last"
           >
             <h4 className="d-flex justify-content-between align-items-center mb-3">
-              <span className="text-primary">Your cart</span>
+              <span className="text-dark">Your cart</span>
               <span className="badge bg-primary rounded-pill">
                 {state.length}
               </span>
@@ -177,9 +181,9 @@ const Checkout = (props) => {
               </li>
 
               <li className="list-group-item d-flex justify-content-between">
-              <span>Total </span>
-              <strong>E£ {total-discount.val+50}</strong>
-            </li>
+                <span>Total </span>
+                <strong>E£ {total - discount.val + 50}</strong>
+              </li>
             </ul>
 
             <div className="input-group">
@@ -199,7 +203,7 @@ const Checkout = (props) => {
                 props.location.state.paymentMethod === "card" && (
                   <StripeBtn
                     mergedObject={mergedObject}
-                    total={total - discount.val}
+                    total={total - discount.val+50}
                   />
                 )}
 

@@ -48,6 +48,8 @@ function Login() {
 
       localStorage.setItem("data", res.data.data);
       window.location.replace("/");
+      history.goBack()
+      
       setSuccess(true);
       let data = response.data;
 // console.log("DATA")

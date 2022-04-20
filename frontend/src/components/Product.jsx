@@ -30,9 +30,13 @@ import Stack from "@mui/material/Stack";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
+import { ToastContainer, toast } from "react-toastify";
+
 import CloseIcon from "@mui/icons-material/Close";
 
 const Product = () => {
+  const orderState = useSelector((state) => state.handleOrders);
+
   let history = useHistory();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -67,21 +71,19 @@ const Product = () => {
   const addProduct = (product) => {
     if (!localStorage.getItem("accessToken")) {
       history.push("/login");
-      return
+      return;
     }
-      if (product.length === 0) return;
-      dispatch(addCartFirst(product));
-    
+    if (product.length === 0) return;
+    dispatch(addCartFirst(product));
   };
 
   const addProductWishlist = (product) => {
     if (!localStorage.getItem("accessToken")) {
       history.push("/login");
-      return
+      return;
     }
-      if (product.length === 0) return;
-      dispatch(addWishlistFirst(product));
-    
+    if (product.length === 0) return;
+    dispatch(addWishlistFirst(product));
   };
   //changes
   useEffect(() => {
@@ -165,6 +167,30 @@ const Product = () => {
     }
   }
   function showAddReview() {
+    if (!localStorage.getItem("accessToken")) {
+      history.push("/login");
+      
+      return;
+    }
+    let cantReview = true;
+
+    for (let i = 0; i < orderState.length; i++) {
+      
+      if (orderState[i].shippingAddress && orderState[i].orderItems){
+        for (let j = 0; j < orderState[i].orderItems.length; j++) {
+          
+          if (orderState[i].orderItems[j]._id === product._id) {
+            console.log("Can review");
+            cantReview = false;
+          }
+        }
+      }
+    }
+    if(cantReview)
+    {
+     alert("you didnt buy the product!!")
+      }
+    else
     setReviewForm("d-flex flex-column flex-wrap justify-content-between");
   }
   function closeAddReview() {

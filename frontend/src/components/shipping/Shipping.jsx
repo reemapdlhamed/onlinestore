@@ -103,7 +103,7 @@ const ShippingScreen = ({ history }) => {
                     <Field className="form-control selectBox" name="city">
                       {({ field }) => (
                         <select className="select" {...field}>
-                          <option>Select Your Government</option>
+                          <option>Select Your Governorate</option>
                           {/* <option value=""></option> */}
                           {govs.map((i) => (
                             <option key={i} value={i}>

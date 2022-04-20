@@ -49,11 +49,11 @@ const Navbar = () => {
       >
         <div className="container">
           <NavLink className="navbar-brand" to="/">
-            <img src="/assets/shipshop-logo.png" style={{width:"180px",height:"35px"}} alt="logo" />
+            <img src="/assets/shipshop-w.png" style={{width:"180px",height:"35px"}} alt="logo" />
 
           </NavLink>
           {/* <Link to="/wwishlist/wishlist">Wishlist</Link> */}
-          <button
+          {/* <button
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
@@ -63,7 +63,7 @@ const Navbar = () => {
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
-          </button>
+          </button> */}
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav mx-auto mb-1 mb-lg-1">
               <li className="nav-item">
@@ -77,18 +77,7 @@ const Navbar = () => {
                 >
                   Home
                 </NavLink>
-              </li>
-              {/* <li className="nav-item">
-                <NavLink
-                  className="nav-link "
-                  activeStyle={{
-                    color: "black",
-                  }}
-                  to="/order-details"
-                >
-                  Orders
-                </NavLink>
-              </li> */}
+              </li>           
               <li className="nav-item">
                 <NavLink
                   className="nav-link"
@@ -198,7 +187,7 @@ const Navbar = () => {
                 </b>
               </NavLink>
 
-              <NavLink to="/FAQs" className="btn btn-outline-primary ms-2">
+              <NavLink to="/FAQs" className="btn btn-outline-dark ms-2">
                 <i className="far fa-question-circle fa-1x"></i>
               </NavLink>
             </div>
