@@ -45,7 +45,7 @@ function Products_Card(props) {
     history.push(`/product/${e.target.value}`);
   };
   const addProductWishlist = (product) => {
-    console.log("PPPP",product)
+    
     if(wishListed === "grey"){
       dispatch(addWishlistFirst(product));
       setWishListed("red")
