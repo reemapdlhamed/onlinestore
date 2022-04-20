@@ -5,16 +5,12 @@ const { validationResult } = require("express-validator");
 
 //create new order
 exports.createOrders = (request, response, next) => {
-  console.log("REQ ORDER",request.body)
+  console.log("REQ ORDER", request.body);
   var paymentStatu;
-  if(request.body.paymentType==="cod")
-  {
-    paymentStatu="pending"
-  }
-  else if(request.body.paymentType==="card")
-  {
-    paymentStatu="completed"
-
+  if (request.body.paymentType === "cod") {
+    paymentStatu = "pending";
+  } else if (request.body.paymentType === "card") {
+    paymentStatu = "completed";
   }
   let object = new order({
     customerName: request.body.customerName,
@@ -30,21 +26,17 @@ exports.createOrders = (request, response, next) => {
     totalPrice: request.body.totalPrice,
     shippingPrice: request.body.shippingPrice,
     paymentType: request.body.paymentType,
-    
   });
   object
     .save()
     .then((data) => {
       response.status(201).json({ message: "order added", data });
-    }
-    
-    )
+    })
     .catch((error) => next(error.message));
 };
 
 //getMyOrdersByID
 exports.getMyOrdersByID = (request, response, next) => {
-
   let errors = validationResult(request);
   if (!errors.isEmpty()) {
     let error = new Error();
@@ -101,16 +93,40 @@ exports.updateOrderStatus = (request, response, next) => {
 };
 
 //get Orders
-exports.getOrders = (request, response, next) => {
+// exports.getOrders = (request, response, next) => {
+
+//   if (request.role == "admin") {
+
+//     order
+//       .find({})
+//       .then((data) => {
+//         response.status(200).json(data);
+//       })
+//       .catch((error) => {
+//         next(error);
+//       });
+//   } else {
+//     throw new Error("Not Authorized. Only admin can do that");
+//   }
+// };
+
+exports.getOrders = async (request, response, next) => {
+  const qNew = request.query.new;
+
   if (request.role == "admin") {
-    order
-      .find({})
-      .then((data) => {
-        response.status(200).json(data);
-      })
-      .catch((error) => {
-        next(error);
-      });
+    try {
+      let orders;
+
+      if (qNew) {
+        orders = await order.find().sort({ createdAt: -1 }).limit(5);
+      } else {
+        orders = await order.find();
+      }
+      response.status(200).json(orders);
+
+    } catch (err) {
+      response.status(500).json(err);
+    }
   } else {
     throw new Error("Not Authorized. Only admin can do that");
   }
@@ -212,8 +228,9 @@ exports.updateOrder = async (req, res) => {
 //GET ORDER
 exports.getOrder = (request, response, next) => {
   console.log(request.params);
-  order.findOne({ _id: request.params.id })
-  
+  order
+    .findOne({ _id: request.params.id })
+
     .then((data) => {
       response.status(200).json({ data });
     })
