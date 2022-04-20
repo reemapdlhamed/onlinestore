@@ -113,6 +113,7 @@ function Login() {
       localStorage.setItem("data", response.data.data);
 
       window.location.replace("/");
+      history.goBack()
       setSuccess(true);
       let data = response.data;
 
