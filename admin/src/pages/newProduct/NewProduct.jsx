@@ -21,7 +21,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const NewProduct = () => {
-    const notify = () => toast.success("product added");
+    const notifySuccess = () => toast.success("product added");
+    const notifyError = () => toast.error("an Error has occured");
     const error = useSelector((state) => state.product.error);
     const getOptions = async () => {
         const res = await axios.get('http://localhost:8080/categories')
@@ -72,7 +73,7 @@ const NewProduct = () => {
         console.log(product);
 
         try {
-            addProduct(product, dispatch,notify);
+            addProduct(product, dispatch,{notifySuccess,notifyError});
      
        
         } catch (err) {

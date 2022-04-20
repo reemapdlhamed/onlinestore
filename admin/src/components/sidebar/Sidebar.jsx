@@ -76,14 +76,14 @@ const Sidebar = () => {
             <span>Cateogeries</span>
           </li>
         </Link>
-        <li>
+        {/* <li>
           <LocalOfferIcon className="icon" />
           <span>Coupons</span>
         </li>
         <li>
           <CategoryIcon className="icon" />
           <span>Messages</span>
-        </li>
+        </li> */}
 
 
         <p className="title">USER</p>

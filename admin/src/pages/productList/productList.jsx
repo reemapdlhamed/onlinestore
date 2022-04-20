@@ -8,8 +8,11 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function ProductList() {
+    const notifySuccess = () => toast.success("product deleted");
 
     const dispatch = useDispatch();
     const [catOptions, setCatOptions] = useState([]);
@@ -37,7 +40,7 @@ export default function ProductList() {
     }, [dispatch]);
 
     const handleDelete = (id) => {
-        deleteProduct(id, dispatch);
+        deleteProduct(id, dispatch,notifySuccess);
     };
 
     const getCategoryName = (catID) => {
@@ -111,6 +114,8 @@ export default function ProductList() {
 
         <div className="list">
             <Sidebar />
+            <ToastContainer />
+
             <div className="dataContainer">
 
                 <div className="datagrid">
