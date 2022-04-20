@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 
 
 function Products_Card(props) {
+
+
   const wishList = useSelector((state)=>state.handleWishlist)
   const cartList = useSelector((state)=>state.handleCart)
   const [wishListed,setWishListed] = useState("grey")
@@ -22,7 +24,6 @@ function Products_Card(props) {
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
-    console.log(wishList)
     for (let index = 0; index < wishList.length; index++) {
       if(wishList[index]._id === props.product._id)
       {

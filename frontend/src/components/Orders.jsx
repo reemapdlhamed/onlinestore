@@ -13,7 +13,6 @@ const Orders = (props) => {
 
   const cartState = useSelector((state) => state.handleCart);
   const orderState = useSelector((state) => state.handleOrders);
-  console.log("STATE", orderState);
   var orderStatus;
   var orderDate;
 
