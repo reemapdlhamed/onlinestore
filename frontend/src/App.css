@@ -12,8 +12,9 @@ body {
 
 /* Navbar */
 .navbar{
-  background: rgb(211, 224, 239);
-  background: linear-gradient(90deg, rgb(182, 218, 246), rgb(232, 236, 240) 40%, rgb(182, 218, 246) 100%);
+  background: rgb(18, 38, 60);
+  background: linear-gradient(90deg, rgb(232, 236, 240), rgb(12, 85, 141) 40%, rgb(232, 236, 240) 100%);
+  /* background:#247881 */
 }
 .navbar-nav a{
   font-size:18px ;

@@ -12,7 +12,7 @@
     height: 100%;
     opacity: 0.8;
     border-radius: 5px;
-    background-color: black;
+    background: black;
     color: white;
     
 }
@@ -31,11 +31,14 @@ margin: 40px;
     left: 0;
     height: 30%;
     opacity: 0.8;
-    background-color: rgb(48, 170, 221);
+    /* background-color: rgb(48, 170, 221); */
+    background: linear-gradient(90deg, rgb(185, 201, 218), rgb(97, 125, 147) 40%, rgb(120, 152, 189) 100%);
+
+
     transition-duration: 0.5s;
     padding: 10px;
     display: flex;
-    color:gold;
+    color:rgb(10, 10, 10);
     flex-direction: column;
     justify-content: space-around;
     width: 100%;
