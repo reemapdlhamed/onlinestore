@@ -35,11 +35,11 @@ const NewProduct = () => {
 
         setCatOptions(data);
     }
+    const [catOptions, setCatOptions] = useState([]);
     const [file, setFile] = useState("");
     const [properties, setProperties] = useState({});
     const [image, setImage] = useState("");
     const [inputs, setInputs] = useState({});
-    const [catOptions, setCatOptions] = useState([]);
     const [category, setCategory] = useState("");
 
     useEffect(() => {
