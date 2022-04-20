@@ -278,7 +278,8 @@ export default function UserProfile() {
                     position: "absolute",
                     cursor: "pointer",
                   }}
-                ></i><TextField
+                ></i>
+                {/* <TextField
                   value={newPassword}
                   type={passwordShown ? "text" : "password"}
                   onChange={(e) => NewPwd(e)}
@@ -299,7 +300,7 @@ export default function UserProfile() {
                     position: "absolute",
                     cursor: "pointer",
                   }}
-                ></i>
+                ></i> */}
                 {/* <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
           <Input
