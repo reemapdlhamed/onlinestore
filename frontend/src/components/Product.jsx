@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart, addCartFirst } from "../redux/action";
+import { addCart, addCartFirst,addWishlist,delWishlist,zeroWishlist,addWishlistFirst  } from "../redux/action";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
@@ -54,10 +54,16 @@ const Product = () => {
     p: 4,
   };
   const dispatch = useDispatch();
+  
   const addProduct = (product) => {
-    console.log("PROD", product);
     if (product.length === 0) return;
     dispatch(addCartFirst(product));
+  };
+
+  const addProductWishlist = (product) => {
+    console.log("PPPP",product)
+    if (product.length === 0) return;
+    dispatch(addWishlistFirst(product));
   };
   //changes
   useEffect(() => {
@@ -197,7 +203,7 @@ const Product = () => {
             // style={{border :" 1px solid black"}}
             className="py-3 px-3"
           />
-          <button className="btn btn-outline-danger  mx-3 px-3 my-1 col-lg-8 col-md" onClick={addToWishList}>
+          <button className="btn btn-outline-danger  mx-3 px-3 my-1 col-lg-8 col-md" onClick={() => addProductWishlist(product)}>
                 <i class="fas fa-heart"></i> Add to List
               </button>
         </div>

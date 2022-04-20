@@ -1,7 +1,7 @@
 import { useState, useEffect, React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { addCart, delCart, zeroCart } from "../redux/action";
+import { addCart, delCart, zeroCart,addWishlist,delWishlist,zeroWishlist } from "../redux/action";
 import axios from "axios";
 import StripeBtn from "./stripeBtn";
 
@@ -12,6 +12,7 @@ const Cart = () => {
 
 
   const state = useSelector((state) => state.handleCart);
+
   const dispatch = useDispatch();
 
   const handleAdd = (item) => {

@@ -1,5 +1,4 @@
 // For Add Item to Cart
-import axios from "axios";
 
 export const addCart = (product) => {
 
@@ -47,10 +46,65 @@ export const delCart = (product) => {
     }
 }
 
+
+
+
+
+
+
+
+
+export const addWishlist = (product) => {
+
+
+    return{
+        type : "ADDITEMWISHLIST",
+        payload : product
+    }
+
+}
+export const addWishlistFirst = (product) => {
+
+
+    return{
+        type : "ADDITEMFIRSTWISHLIST",
+        payload : product
+    }
+
+}
+
+
+export const addWishlistFromDB = (productArr) => {
+    return{
+        type : "ADDITEMSWISHLIST",
+        payload : productArr
+    }
+
+}
+
+
+
+// For Delete Item From Cart
+export const delWishlist = (product) => {
+    
+    
+    return{
+        type : "DELITEMWISHLIST",
+        payload : product
+    }
+}
+
 // For Delete Item From Cart
 export const zeroCart = (product) => {
     return{
         type : "ZEROITEM",
+        payload : product
+    }
+}
+
+export const zeroWishlist = (product) => {
+    return{
+        type : "ZEROITEMWISHLIST",
         payload : product
     }
 }

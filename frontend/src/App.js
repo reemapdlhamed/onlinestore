@@ -27,6 +27,7 @@ import {
   delCart,
   zeroCart,
   addCartFromDB,
+  addWishlistFromDB,
   addOrdersFromDB,
 } from "./redux/action";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,6 +66,26 @@ function App() {
       });
     console.log(res2);
 
+
+
+    let res5 = axios({
+      method: "get",
+      url: "http://localhost:8080/wishlist",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    })
+      .then((res) => {
+        console.log("RES", res);
+        for (let i = 0; i < res.data.length; i++) {
+          dispatch(addWishlistFromDB(res.data[i]));
+        }
+      })
+      .catch((er) => {
+        console.log("ER", er);
+      });
+      
+    console.log(res2);
     let res3 = axios({
       method: "get",
       url: `http://localhost:8080/orders/customer/${localStorage.getItem(

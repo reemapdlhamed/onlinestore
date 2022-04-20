@@ -3,11 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.zeroCart = exports.delCart = exports.addOrdersFromDB = exports.addCartFromDB = exports.addCartFirst = exports.addCart = void 0;
-
-var _axios = _interopRequireDefault(require("axios"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+exports.zeroWishlist = exports.zeroCart = exports.delWishlist = exports.addWishlistFromDB = exports.addWishlistFirst = exports.addWishlist = exports.delCart = exports.addOrdersFromDB = exports.addCartFromDB = exports.addCartFirst = exports.addCart = void 0;
 
 // For Add Item to Cart
 var addCart = function addCart(product) {
@@ -52,10 +48,47 @@ var delCart = function delCart(product) {
     type: "DELITEM",
     payload: product
   };
+};
+
+exports.delCart = delCart;
+
+var addWishlist = function addWishlist(product) {
+  return {
+    type: "ADDITEMWISHLIST",
+    payload: product
+  };
+};
+
+exports.addWishlist = addWishlist;
+
+var addWishlistFirst = function addWishlistFirst(product) {
+  return {
+    type: "ADDITEMFIRSTWISHLIST",
+    payload: product
+  };
+};
+
+exports.addWishlistFirst = addWishlistFirst;
+
+var addWishlistFromDB = function addWishlistFromDB(productArr) {
+  return {
+    type: "ADDITEMSWISHLIST",
+    payload: productArr
+  };
 }; // For Delete Item From Cart
 
 
-exports.delCart = delCart;
+exports.addWishlistFromDB = addWishlistFromDB;
+
+var delWishlist = function delWishlist(product) {
+  return {
+    type: "DELITEMWISHLIST",
+    payload: product
+  };
+}; // For Delete Item From Cart
+
+
+exports.delWishlist = delWishlist;
 
 var zeroCart = function zeroCart(product) {
   return {
@@ -65,3 +98,12 @@ var zeroCart = function zeroCart(product) {
 };
 
 exports.zeroCart = zeroCart;
+
+var zeroWishlist = function zeroWishlist(product) {
+  return {
+    type: "ZEROITEMWISHLIST",
+    payload: product
+  };
+};
+
+exports.zeroWishlist = zeroWishlist;

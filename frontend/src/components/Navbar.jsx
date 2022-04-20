@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const state = useSelector((state) => state.handleCart);
+  const wishlistState = useSelector((state) => state.handleWishlist);
+
   let button;
 
   const logOut = () => {
@@ -192,7 +194,7 @@ const Navbar = () => {
               <NavLink to="/wishlist" className="btn btn-outline-danger ms-2 ">
               <i className="fas fa-heart fa-1x"></i>{" "}
                 <b>
-                  {/* <sup>({state.length})</sup> */}
+                  { <sup>({wishlistState.length})</sup> }
                 </b>
               </NavLink>
 

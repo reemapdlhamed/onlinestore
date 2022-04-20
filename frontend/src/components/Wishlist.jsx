@@ -1,73 +1,116 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { addCart, delCart, zeroCart } from "../redux/action";
+import { addCart, delCart, zeroCart,addWishlist,delWishlist,zeroWishlist } from "../redux/action";
 import axios from "axios";
 import StripeBtn from "./stripeBtn";
-import Product from "./Product";
-import { Rating } from "@mui/material";
 
-export default function Wishlist() {
-  //   const [price, setPrice] = useState({
-  //     p: 0,
-  //   });
+const Cart = () => {
+  const [price, setPrice] = useState({
+    p: 0,
+  });
 
-  //   const state = useSelector((state) => state.handleCart);
-  //   const dispatch = useDispatch();
-  //
-  console.log("ADEL", JSON.parse(localStorage.getItem("wishlist")));
-  let local = JSON.parse(localStorage.getItem("wishlist"));
-  if (!local) local = [];
-   function removeItem (){
-     localStorage.removeItem("wishlist");
-   }
+
+  const state = useSelector((state) => state.handleWishlist);
+
+  const dispatch = useDispatch();
+
+
+
+  const handleZero = (item) => {
+    dispatch(zeroWishlist(item));
+  };
+
   
-  return (
-    <div className=" bg-light rounded-3 py-5 min-vh-100">
-      <div className="container">
-        {local.map((loca) => (
-          <div key={loca}>
-            {" "}
-            <div class="card mb-3" style={{ maxwidth: "540px" }}>
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img
-                    src={loca.images}
-                    class="img-fluid rounded-start my-3 mx-3"
-                    height="200px"
-                    width="180px"
-                    alt={loca.name}
-                  />
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <button
-                      className="btn-close float-end"
-                      aria-label="Close"
-                      onClick={removeItem}
-                    ></button>
-                    <h5 class="card-title text-danger fw-bold">{loca.name}</h5>
-                    <p class="card-text">
-                      <p>description :</p> {loca.description}
-                    </p>
-                    <p class="card-text fw-bold">brand : {loca.brand}</p>
-                    <p class="card-text fw-bold">Price : {loca.price} E£</p>
-                  </div>
-                </div>
-              </div>
-            </div>{" "}
-          </div>
-        ))}
-      </div>
 
-      {/* <>
-        <div className="px-4 my-5 bg-light rounded-3 py-5">
-          <div className="container py-4">
-            <button className="btn-close float-end" aria-label="Close"></button>
-            <div className="row justify-content-center"></div>
+  
+
+
+  const emptyCart = () => {
+    return (
+      <div className="px-4 my-5 bg-light rounded-3 py-0">
+        <div className="container min-vh-100">
+          <div className="alert alert-info text-center mt-3">
+            <h3>Your Wishlist is Empty</h3>
+            <NavLink
+              to="/products"
+              className="btn btn-outline-dark  ms-2 px-3 py-2"
+            >
+              SHOPPING NOW
+            </NavLink>
           </div>
         </div>
-      </> */}
+      </div>
+    );
+  };
+  const cartItems = (product) => {
+    return (
+      <>
+        <div className="px-4 my-5 bg-light rounded-3 py-5">
+          <div className="container py-4">
+            <button
+              onClick={() => handleZero(product)}
+              className="btn-close float-end"
+              aria-label="Close"
+            ></button>
+            <div className="row justify-content-center">
+              <div className="col-md-4">
+                <img
+                  src={product.images}
+                  alt={product.name}
+                  height="200px"
+                  width="180px"
+                />
+              </div>
+              <div className="col-md-4">
+                <h3>{product.name}</h3>
+                <hr />
+                <h5>Price : {product.price} E£</h5>
+
+                <p className="lead fw-bold hide">
+ 
+                </p>
+                <br />
+           
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+  const buttons = () => {
+    return (
+      <>
+        <div className="container">
+          <hr />
+          <div className="row justify-content-center">
+          <NavLink
+              to="/products"
+              className="btn btn-outline-dark mb-5 w-25 mx-auto "
+            >
+              Continue To Shopping
+            </NavLink>
+            <NavLink
+              to="/shipping"
+              className="btn btn-outline-dark mb-5 w-25 mx-auto "
+            >
+              Proceed to Checkout
+            </NavLink>
+          </div>
+        </div>
+      </>
+    );
+  };
+
+  return (
+    <div>
+      {state.length === 0 && emptyCart()}
+      {state.length !== 0 && state.map(cartItems)}
+      {state.length !== 0 && buttons()}
     </div>
   );
-}
+};
+
+export default Cart;
