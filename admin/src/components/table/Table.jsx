@@ -6,8 +6,50 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import axios from "axios"
+import { useEffect, useState, } from "react";
 
 const List = () => {
+  const CONFIG = () => {
+    let token = "";
+    if (localStorage.getItem("persist:root"))
+      token = JSON.parse(JSON.parse(localStorage.getItem("persist:root"))?.user)
+        .currentUser?.accessToken;
+
+    return {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+  };
+  const getOrders = () => {
+    // const res = await axios.get('http://localhost:8080/orders?new=true',CONFIG());
+    // const data = res.data.data;
+    // console.log("new orders:", data);
+    // setOrders(data);
+
+    const res = axios.get('http://localhost:8080/orders?new=true', CONFIG()).then(
+      res => setOrders(res.data)
+    )
+    // const data = res.data.data;
+    // console.log("new orders:", data);
+    // setOrders(data);
+
+    // const options = data.map(d => ({
+    //     "value": d._id,
+    //     "label": d.name
+    // }))
+  }
+  useEffect(() => {
+    getOrders();
+    console.log("hello useEffects")
+    console.log("orders", orders);
+
+  }, []);
+
+  const [orders, setOrders] = useState([]);
+
+
   const rows = [
     {
       id: 1143155,
@@ -66,30 +108,23 @@ const List = () => {
         <TableHead>
           <TableRow>
             <TableCell className="tableCell">Tracking ID</TableCell>
-            <TableCell className="tableCell">Product</TableCell>
             <TableCell className="tableCell">Customer</TableCell>
             <TableCell className="tableCell">Date</TableCell>
-            <TableCell className="tableCell">Amount</TableCell>
+            <TableCell className="tableCell">Total Price</TableCell>
             <TableCell className="tableCell">Payment Method</TableCell>
             <TableCell className="tableCell">Status</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="tableCell">{row.id}</TableCell>
+          {orders.map((row) => (
+            <TableRow key={row._id}>
+              <TableCell className="tableCell">{row._id}</TableCell>
+              <TableCell className="tableCell">{row.customerName}</TableCell>
+              <TableCell className="tableCell">{new Date(row.createdAt).toLocaleString()}</TableCell>
+              <TableCell className="tableCell">{row.totalPrice}</TableCell>
+              <TableCell className="tableCell">{row.paymentType}</TableCell>
               <TableCell className="tableCell">
-                <div className="cellWrapper">
-                  <img src={row.img} alt="" className="image" />
-                  {row.product}
-                </div>
-              </TableCell>
-              <TableCell className="tableCell">{row.customer}</TableCell>
-              <TableCell className="tableCell">{row.date}</TableCell>
-              <TableCell className="tableCell">{row.amount}</TableCell>
-              <TableCell className="tableCell">{row.method}</TableCell>
-              <TableCell className="tableCell">
-                <span className={`status ${row.status}`}>{row.status}</span>
+                <span className={`status ${row.orderStatus}`}>{row.orderStatus}</span>
               </TableCell>
             </TableRow>
           ))}

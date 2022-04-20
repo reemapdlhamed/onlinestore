@@ -28,9 +28,9 @@ const UsersList = () => {
 
     const columns = [
         { field: "_id", headerName: "ID", width: 250 },
-        { field: "name", headerName: "Name", width: 250 },
+        { field: "name", headerName: "Name", width: 200 },
         { field: "email", headerName: "email", width: 250 },
-        { field: "role", headerName: "role", width: 220 },
+        { field: "role", headerName: "role", width: 150 },
 
         {
             field: "action",
@@ -66,15 +66,15 @@ const UsersList = () => {
                         disableSelectionOnClick
                         columns={columns}
                         getRowId={(row) => row._id}
-                        pageSize={13}
-                        rowsPerPageOptions={[2]}
+                        pageSize={9}
+                        rowsPerPageOptions={[9]}
                         pagination
 
                     />
                 </div>
-                <Link to="/users/new" replace>
+                {/* <Link to="/users/new" replace>
                     <button className="addButton">Add New User</button>
-                </Link>
+                </Link> */}
 
             </div>
         </div>

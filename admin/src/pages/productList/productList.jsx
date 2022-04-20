@@ -1,25 +1,49 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DataGrid } from "@mui/x-data-grid";
 import "./productList.scss"
-import { deleteProduct, getProducts } from "../../redux/apiCalls";
+import { deleteProduct, getProducts, getCategories } from "../../redux/apiCalls";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Sidebar from "../../components/sidebar/Sidebar";
 import Navbar from "../../components/navbar/Navbar";
+import axios from "axios";
+
 export default function ProductList() {
 
     const dispatch = useDispatch();
+    const [catOptions, setCatOptions] = useState([]);
+
     const products = useSelector((state) => state.product.products.data);
-    console.log("products",products)
+    const categories = useSelector((state) => state.categories.categories);
+
+    console.log("products", products);
+
+    // const getCategories = async () => {
+    //     const res = await axios.get('http://localhost:8080/categories')
+    //     const data = res.data.data;
+    //     console.log("cat data", data);
+    //     setCatOptions(data);
+    //     return data;
+    // }
+
+
+    console.log("catOptions", catOptions);
     useEffect(() => {
         getProducts(dispatch);
+        getCategories(dispatch);
+        console.log("categories", categories);
         console.log("products", products);
     }, [dispatch]);
 
     const handleDelete = (id) => {
         deleteProduct(id, dispatch);
     };
+
+    const getCategoryName = (catID) => {
+        let c = categories.find(ca => ca._id == catID)
+        return c.name;
+    }
 
     const columns = [
         { field: "_id", headerName: "ID", width: 220 },
@@ -37,7 +61,19 @@ export default function ProductList() {
                 );
             },
         },
+        {
+            field: "Category",
+            headerName: "Category",
+            width: 150,
+            renderCell: (params) => {
+                return (
 
+                    getCategoryName(params.row.category_id)
+
+                );
+            },
+        },
+        // { field: "category_id", headerName: "Category", width: 220 },
         { field: "quantity", headerName: "Quantiy", width: 220 },
         //   { field: "inStock", headerName: "Stock", width: 200 },
         {
@@ -55,6 +91,11 @@ export default function ProductList() {
                         <Link to={"/products/" + params.row._id}>
                             <button className="productListEdit">Edit</button>
                         </Link>
+
+                        {/* <button className="productListEdit" onClick={() => handleDelete(params.row._id)}>
+                            Delete
+                        </button> */}
+
                         <DeleteOutlineIcon
                             className="productListDelete"
                             onClick={() => handleDelete(params.row._id)}
@@ -78,8 +119,8 @@ export default function ProductList() {
                         disableSelectionOnClick
                         columns={columns}
                         getRowId={(row) => row._id}
-                        pageSize={10}
-                        rowsPerPageOptions={[10]}
+                        pageSize={8}
+                        rowsPerPageOptions={[8]}
 
                     />
                 </div>
