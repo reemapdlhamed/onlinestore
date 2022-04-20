@@ -14,6 +14,7 @@ const Checkout = (props) => {
   const addresState = useSelector((state) => state.handleAddress);
   const [discount, setDiscount] = useState({
     val: 0,
+    redeemTxt:"redeem"
   });
 
   const [txt, setTxt] = useState({
@@ -21,37 +22,43 @@ const Checkout = (props) => {
   });
 
   const Copon = () => {
-    if (total < 1000) {
-      alert("sorry ,  copons can  only apply for orders >=1000 egp");
-      return;
+    if (discount.val === 0) {
+      if (total < 1000) {
+        alert("sorry ,  copons can  only apply for orders >=1000 egp");
+        return;
+      }
+
+      axios({
+        method: "post",
+        url: "http://localhost:8080/validcopon",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        data: {
+          code: txt,
+          value: discount.val,
+          custID: localStorage.getItem("_id"),
+        },
+      }).then((res) => {
+        if (!promocodes[txt]) {
+          setDiscount((previousState) => {
+            return { ...previousState, val: 0,redeemTxt:"redeem" };
+          });
+        }
+        if (res.data.message === "ok" && promocodes[txt]) {
+          setDiscount((previousState) => {
+            return { ...previousState, val: promocodes[txt],redeemTxt:"remove" };
+          });
+        }
+      });
     }
-
-    axios({
-      method: "post",
-      url: "http://localhost:8080/validcopon",
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-      data: {
-        code: txt,
-        value: discount.val,
-        custID: localStorage.getItem("_id"),
-      },
-    }).then((res) => {
-      if(!promocodes[txt])
-      {
-        setDiscount((previousState) => {
-          return { ...previousState, val:0 };
-        });
-      }
-      if (res.data.message === "ok" && promocodes[txt]) {
-        setDiscount((previousState) => {
-          return { ...previousState, val: promocodes[txt] };
-        });
-      }
-    });
+    else
+    {
+      setDiscount((previousState) => {
+        return { ...previousState, val: 0,redeemTxt:"redeem"};
+      });
+    }
   };
-
   const promotext = (e) => {
     setTxt(e.target.value);
   };
@@ -62,26 +69,24 @@ const Checkout = (props) => {
     props.history.push("/");
     window.location.reload();
   }
-  
+
   const mergedObject = addresState.list;
 
   mergedObject.paymentType = props.location.state.paymentMethod;
   mergedObject.discount = discount.val;
-  console.log(mergedObject)
+  console.log(mergedObject);
   const clearCart = () => {
-  
     let res2 = axios({
       method: "post",
       url: "http://localhost:8080/cart/buy",
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
-      data:mergedObject,
+      data: mergedObject,
     }).then((res) => {
       console.log("ORDER DONE");
     });
-    console.log(res2)
-
+    console.log(res2);
 
     axios({
       method: "post",
@@ -97,7 +102,7 @@ const Checkout = (props) => {
     }).then((res) => {
       if (res.data.message === "ok") {
         setDiscount((previousState) => {
-          return {val: promocodes[txt] };
+          return { val: promocodes[txt] };
         });
       }
     });
@@ -135,8 +140,11 @@ const Checkout = (props) => {
         style={{
           boxShadow:
             "rgba(0, 0, 0, 0.15) 0px 15px 25px, rgba(0, 0, 0, 0.05) 0px 5px 10px",
-          paddingTop: "22rem",backgroundImage:"url(/assets/ship.gif)",backgroundRepeat:"no-repeat"
-        ,backgroundSize:"cover"}}
+          paddingTop: "22rem",
+          backgroundImage: "url(/assets/ship.gif)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "cover",
+        }}
       >
         <div style={{ margin: "0 auto", display: "block" }} className="row g-5">
           <div
@@ -153,14 +161,25 @@ const Checkout = (props) => {
               {state.map(itemList)}
 
               <li className="list-group-item d-flex justify-content-between">
-                <span>Total (Egy)</span>
-                <strong>E£ {total - discount.val}</strong>
+                <span>cart price (Egy)</span>
+                <strong>E£ {total}</strong>
+              </li>
+              {discount.val !== 0 && (
+                <li className="list-group-item d-flex justify-content-between">
+                  <span>Discount (Egy)</span>
+                  <strong>E£ {discount.val}</strong>
+                </li>
+              )}
+
+              <li className="list-group-item d-flex justify-content-between">
+                <span>shipping price (Egy)</span>
+                <strong>E£ {50}</strong>
               </li>
 
               <li className="list-group-item d-flex justify-content-between">
-                <span>Discount (Egy)</span>
-                <strong>E£ {discount.val}</strong>
-              </li>
+              <span>Total </span>
+              <strong>E£ {total-discount.val+50}</strong>
+            </li>
             </ul>
 
             <div className="input-group">
@@ -172,13 +191,16 @@ const Checkout = (props) => {
               />
 
               <button onClick={Copon} className="btn btn-secondary">
-                Redeem
+                {discount.redeemTxt}
               </button>
             </div>
             <div style={{ margin: "25px" }}>
               {props.location.state &&
                 props.location.state.paymentMethod === "card" && (
-                  <StripeBtn mergedObject={mergedObject} total={total - discount.val} />
+                  <StripeBtn
+                    mergedObject={mergedObject}
+                    total={total - discount.val}
+                  />
                 )}
 
               {props.location.state &&

@@ -52,6 +52,7 @@ const PaymentScreen = ({ history }) => {
                 value="cod"
                 name="gender"
                 disabled={visa}
+                onPointerEnter={()=>console.log("X")}
                 onChange={() => setPaymentMethod("cod")}
               />
               <span className="design"></span>
@@ -60,7 +61,7 @@ const PaymentScreen = ({ history }) => {
             {/* cash on delievery{" "} */}
             {visa && 
             <div class="alert alert-danger" role="alert">
-           "(SORRY , CASH ON DELIVERY LIMIT IS 20K)"</div>}
+           "SORRY , CASH ON DELIVERY LIMIT IS 20K"</div>}
             {/* <p className="hint">{visa && "(SORRY , CASH ON DELIVERY LIMIT IS 20K)"}</p> */}
             {/* <br></br> */}
           </div>
