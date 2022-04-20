@@ -15,3 +15,8 @@ router.get("/users/:id", isAuth, userController.getUser);
 router.delete("/users/:id",isAuth, userController.deleteUser);
 //Update User
 router.put("/users/:id",isAuth, userController.updateUser);
+
+router.get("/user/verify/:id/:token", userController.getVerify);
+router.post("/user", userController.sendMsg);
+
+  module.exports = router;
