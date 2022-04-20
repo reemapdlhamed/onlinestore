@@ -14,8 +14,8 @@ body {
 .navbar{
   /* background: rgb(18, 38, 60);
   background: linear-gradient(90deg, rgb(232, 236, 240), rgb(12, 85, 141) 40%, rgb(232, 236, 240) 100%); */
-  /* background:#247881 */
-  background:#30AADD
+  background:#43919B
+  /* background:#30AADD */
 }
 .navbar-nav a{
   font-size:18px ;
@@ -74,8 +74,9 @@ body {
 }        
 /* Footer */
 .footer{
-  background: rgb(0, 101, 219);
-  background: linear-gradient(90deg, rgb(0,101,219) 40%, rgba(0, 212, 255, 1) 100%);
+  /* background: rgb(0, 101, 219);
+  background: linear-gradient(90deg, rgb(0,101,219) 40%, rgba(0, 212, 255, 1) 100%); */
+background: #43919B;
 }
 
 /* FAQs */
@@ -83,12 +84,12 @@ h1 {
  font-family: "Lato", sans-serif;
 font-weight: 700;
 font-style: normal;
-color: #4fa9e5;
+color: #30AADD;
   font-size: 32px;
   text-align: center; 
 }
 h3{
-  color: #4fa9e5;
+  color: #30AADD;
 
 }
 .content {
@@ -107,7 +108,7 @@ h3{
 .question {
   color: #fff;
   position: relative;
-  background: #617f8f;
+  background: #247881;
   margin: 0;
   padding: 10px 10px 10px 50px;
   display: block;
