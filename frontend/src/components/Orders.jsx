@@ -17,12 +17,17 @@ const Orders = (props) => {
   var orderDate;
 
   var infoz = [];
-  var res;
+  var res,expectedDate
   for (let i = 0; i < orderState.length; i++) {
     if (orderState[i]._id && id === orderState[i]._id) {
       orderStatus = orderState[i].orderStatus;
       orderDate = orderState[i].createdAt;
-       //res = moment(orderDate, "MM-DD-YYYY").add(5, 'days');
+      var locale = new Date(orderDate)
+
+    let date = new Date(locale)
+    let result=new Date()
+    result.setDate(date.getDate() + 3)
+     expectedDate=(result.toLocaleString().split(',')[0])
     }
   }
   var packed = "step",
@@ -69,7 +74,7 @@ const Orders = (props) => {
               <span className="text-medium">Status:</span> {orderStatus}
             </div>
             <div className="w-100 text-center py-1 px-2">
-              <span className="text-medium">Expected Date:</span>{ new Date(orderDate).toLocaleDateString()  }
+              <span className="text-medium">Expected Date:</span>{ expectedDate  }
 
             </div>
           </div>
