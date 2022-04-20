@@ -169,6 +169,7 @@ const Product = () => {
   function showAddReview() {
     if (!localStorage.getItem("accessToken")) {
       history.push("/login");
+      
       return;
     }
     let cantReview = true;
