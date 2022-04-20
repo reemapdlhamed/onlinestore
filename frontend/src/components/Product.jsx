@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  addCart,
-  addCartFirst,
-  addWishlist,
-  delWishlist,
-  zeroWishlist,
-  addWishlistFirst,
-} from "../redux/action";
+import { addCartFirst, addWishlistFirst } from "../redux/action";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
-import { addItem } from "../redux/action/index";
 import {
   Rating,
   Card,
@@ -22,15 +14,11 @@ import {
   Alert,
   AlertTitle,
 } from "@mui/material";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
+
 import axios from "axios";
-import { border } from "@mui/system";
-import Stack from "@mui/material/Stack";
-import TextareaAutosize from "@mui/material/TextareaAutosize";
+
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
-import { ToastContainer, toast } from "react-toastify";
 
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -169,16 +157,14 @@ const Product = () => {
   function showAddReview() {
     if (!localStorage.getItem("accessToken")) {
       history.push("/login");
-      
+
       return;
     }
     let cantReview = true;
 
     for (let i = 0; i < orderState.length; i++) {
-      
-      if (orderState[i].shippingAddress && orderState[i].orderItems){
+      if (orderState[i].shippingAddress && orderState[i].orderItems) {
         for (let j = 0; j < orderState[i].orderItems.length; j++) {
-          
           if (orderState[i].orderItems[j]._id === product._id) {
             console.log("Can review");
             cantReview = false;
@@ -186,12 +172,10 @@ const Product = () => {
         }
       }
     }
-    if(cantReview)
-    {
-     alert("you didnt buy the product!!")
-      }
-    else
-    setReviewForm("d-flex flex-column flex-wrap justify-content-between");
+    if (cantReview) {
+      alert("you didnt buy the product!!");
+    } else
+      setReviewForm("d-flex flex-column flex-wrap justify-content-between");
   }
   function closeAddReview() {
     setReviewForm("d-none");
@@ -250,10 +234,18 @@ const Product = () => {
           <h4 className=" fw-bold my-4 text-danger ">
             Price : {product.price} E£{" "}
           </h4>
-          <Rating name="read-only" value={product.rating} readOnly /> <hr />
+          <Rating name="read-only" value={product.rating} readOnly />
+          <br />
+          <button
+            className="btn btn-outline-danger  mx-1 px-3 my-1 col-lgcol-md"
+            onClick={() => addProductWishlist(product)}
+          >
+            <i class="fas fa-heart"></i> Wishlist
+          </button>
+          <hr />
           <div className="d-grid gap-1 d-md-block my-4">
             <button
-              className="btn btn-outline-dark mx-3  col-lg col-md"
+              className="btn btn-outline-dark mx-1  col-lg col-md"
               onClick={() => addProduct(product)}
             >
               Add to Cart
@@ -265,19 +257,12 @@ const Product = () => {
               Go to Cart
             </NavLink> */}
             <button
-              style={{ marginLeft: "10px" }}
-              className="btn btn-outline-primary mx-3  col-lg col-md"
+              className="btn btn-outline-primary mx-1  col-lg col-md"
               onClick={showAddReview}
             >
               Add Review
             </button>
-            <button
-              style={{ marginLeft: "10px" }}
-              className="btn btn-outline-danger  mx-3 px-3 my-1 col-lgcol-md"
-              onClick={() => addProductWishlist(product)}
-            >
-              <i class="fas fa-heart"></i> Add to List
-            </button>
+
             {/* <Modal
                 open={open}
                 onClose={handleClose}

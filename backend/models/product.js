@@ -24,7 +24,7 @@ const reviewSchema = new mongoose.Schema({
 
 const productSchema = new mongoose.Schema({
   // _id: mongoose.Types.ObjectId,
-  name: { type: String, required: true, trim: true, max: 50 },
+  name: { type: String, required: true, trim: true, max: 50 ,unique:true},
   price: { type: Number, required: true },
   brand: { type: String, required: true, max: 50 },
   category_id: {

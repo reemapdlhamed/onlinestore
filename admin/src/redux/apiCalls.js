@@ -100,13 +100,14 @@ export const getProducts = async (dispatch) => {
   }
 };
 
-export const deleteProduct = async (id, dispatch) => {
+export const deleteProduct = async (id, dispatch,notifySuccess) => {
   dispatch(deleteProductStart());
 
   try {
     const res = await request.delete(`/products/${id}`, CONFIG());
     // console.log(res);
     dispatch(deleteProductSuccess(id));
+    notifySuccess();
   } catch (err) {
     dispatch(deleteProductFailure());
   }
@@ -129,15 +130,16 @@ export const updateProduct = async (id, product, dispatch) => {
   }
 };
 
-export const addProduct = async (product, dispatch,notify) => {
+export const addProduct = async (product, dispatch,{notifySuccess,notifyError}) => {
   dispatch(addProductStart());
   try {
     const res = await request.post(`/products`, product, CONFIG());
     console.log("res", res.data.data);
     dispatch(addProductSuccess(res.data.data));
-    notify();
+    notifySuccess();
 
   } catch (err) {
+    notifyError();
     console.log("err", err);
     dispatch(addProductFailure());
   }
