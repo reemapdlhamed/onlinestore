@@ -173,7 +173,7 @@ const Product = () => {
       }
     }
     if (cantReview) {
-      alert("you didnt buy the product!!");
+      alert(" you cant add review,you must buy the produc first ! ");
     } else
       setReviewForm("d-flex flex-column flex-wrap justify-content-between");
   }
