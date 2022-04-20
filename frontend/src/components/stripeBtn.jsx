@@ -47,6 +47,7 @@ const StripeBtn = (props) => {
       amount: props.total * 100,
       token: token,
     };
+    console.log(body)
 
     axios
       .post("http://localhost:8080/payment", body)

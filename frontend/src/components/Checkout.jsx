@@ -199,7 +199,7 @@ const Checkout = (props) => {
                 props.location.state.paymentMethod === "card" && (
                   <StripeBtn
                     mergedObject={mergedObject}
-                    total={total - discount.val}
+                    total={total - discount.val+50}
                   />
                 )}
 
