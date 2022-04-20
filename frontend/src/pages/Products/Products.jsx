@@ -96,7 +96,7 @@ function Products() {
             <ListItemText primary={activeCategory} />
             {categoryOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={categoryOpen} timeout="auto" unmountOnExit>
+          <Collapse style={{backgroundColor:"white",boxShadow:"rgb(222 226 230 / 51%) 0px 20px 20px 4px"}} in={categoryOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
             <ListItemButton onClick={()=> {categoryClick({_id:""})
           setCategoryOpen(!categoryOpen)
@@ -127,7 +127,7 @@ function Products() {
           
       
         <TextField
-        style={{ width: "70%" }}
+        style={{ width: "50%",marginTop:"10px" }}
         id="outlined-basic"
         label="Product Name"
         value={searchWord}
@@ -146,7 +146,7 @@ function Products() {
             <ListItemText primary={activeSort} />
             {sortOpen ? <ExpandLess /> : <ExpandMore />}
           </ListItemButton>
-          <Collapse in={sortOpen} timeout="auto" unmountOnExit>
+          <Collapse style={{backgroundColor:"white",boxShadow:"rgb(222 226 230 / 51%) 0px 20px 20px 4px"}} in={sortOpen} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
               <ListItemButton onClick={()=> {setSorting("none");
             setSortOpen(!sortOpen)
