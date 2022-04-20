@@ -1,8 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCart, addCartFirst,addWishlist,delWishlist,zeroWishlist,addWishlistFirst  } from "../redux/action";
+import {
+  addCart,
+  addCartFirst,
+  addWishlist,
+  delWishlist,
+  zeroWishlist,
+  addWishlistFirst,
+} from "../redux/action";
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import { addItem } from "../redux/action/index";
 import {
@@ -25,6 +33,7 @@ import SendIcon from "@mui/icons-material/Send";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Product = () => {
+  let history = useHistory();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -54,16 +63,25 @@ const Product = () => {
     p: 4,
   };
   const dispatch = useDispatch();
-  
+
   const addProduct = (product) => {
-    if (product.length === 0) return;
-    dispatch(addCartFirst(product));
+    if (!localStorage.getItem("accessToken")) {
+      history.push("/login");
+      return
+    }
+      if (product.length === 0) return;
+      dispatch(addCartFirst(product));
+    
   };
 
   const addProductWishlist = (product) => {
-    console.log("PPPP",product)
-    if (product.length === 0) return;
-    dispatch(addWishlistFirst(product));
+    if (!localStorage.getItem("accessToken")) {
+      history.push("/login");
+      return
+    }
+      if (product.length === 0) return;
+      dispatch(addWishlistFirst(product));
+    
   };
   //changes
   useEffect(() => {
@@ -74,29 +92,21 @@ const Product = () => {
   }, []);
   function addToWishList() {
     console.log("button");
-    var images=product.images
-    var description=product.description
-    var name=product.name
-    var id=product._id
+    var images = product.images;
+    var description = product.description;
+    var name = product.name;
+    var id = product._id;
 
-    var pro = {images,description,name,id}
+    var pro = { images, description, name, id };
     let wishlist = JSON.parse(localStorage.getItem("wishlist"));
-    if(!wishlist)
-    {
-      wishlist=[]
+    if (!wishlist) {
+      wishlist = [];
     }
 
     wishlist.push(product);
-    localStorage.setItem("wishlist",JSON.stringify(wishlist));
-
-    
-  
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
 
     // localStorage.setItem("wishlist",JSON.stringify( {x,obj} ))
-
-
-
-
   }
   function sendReview() {
     if (localStorage.getItem("accessToken") === null) {
@@ -203,7 +213,6 @@ const Product = () => {
             // style={{border :" 1px solid black"}}
             className="py-3 px-3"
           />
-         
         </div>
         <div className="col-lg col-md col-sm mx-4">
           <h5 className="text-uppercase text-black fw-bold display-6">
@@ -237,11 +246,13 @@ const Product = () => {
               Add Review
             </button>
             <button
-            style={{ marginLeft: "10px" }}
-             className="btn btn-outline-danger  mx-3 px-3 my-1 col-lgcol-md" onClick={() => addProductWishlist(product)}>
-                <i class="fas fa-heart"></i> Add to List
-              </button>
-              {/* <Modal
+              style={{ marginLeft: "10px" }}
+              className="btn btn-outline-danger  mx-3 px-3 my-1 col-lgcol-md"
+              onClick={() => addProductWishlist(product)}
+            >
+              <i class="fas fa-heart"></i> Add to List
+            </button>
+            {/* <Modal
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
@@ -274,7 +285,6 @@ const Product = () => {
                   </div>
                 </Box>
               </Modal> */}
-            
           </div>
         </div>
         <div

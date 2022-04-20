@@ -45,7 +45,14 @@ function Products_Card(props) {
     history.push(`/product/${e.target.value}`);
   };
   const addProductWishlist = (product) => {
+
+    if(!localStorage.getItem("accessToken"))
+    {
+      history.push('/login')
+      return
+    }
     
+
     if(wishListed === "grey"){
       dispatch(addWishlistFirst(product));
       setWishListed("red")
@@ -57,6 +64,12 @@ function Products_Card(props) {
 
   };
   const addProduct = (product) => {
+    if(!localStorage.getItem("accessToken"))
+    {
+      history.push('/login')
+      return
+    }
+
     if(carted === "grey"){
       dispatch(addCartFirst(product));
       setcarted("green")

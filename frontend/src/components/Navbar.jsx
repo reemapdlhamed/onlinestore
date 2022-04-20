@@ -45,7 +45,7 @@ const Navbar = () => {
       <nav
         className="navbar navbar-expand-lg navbar-light  py-0
        shadow-sm"
-        style={{ position: "relative", zIndex: "2" }}
+        style={{ position: "relative", zIndex: "1000" }}
       >
         <div className="container">
           <NavLink className="navbar-brand" to="/">
@@ -187,14 +187,14 @@ const Navbar = () => {
               <NavLink to="/cart" className="btn btn-outline-success ms-2 ">
                 <i className="fas fa-shopping-cart fa-1x"></i>{" "}
                 <b>
-                  <sup>({state.length})</sup>
+                  <sup>{state.length}</sup>
                 </b>
               </NavLink>
 
               <NavLink to="/wishlist" className="btn btn-outline-danger ms-2 ">
               <i className="fas fa-heart fa-1x"></i>{" "}
                 <b>
-                  { <sup>({wishlistState.length})</sup> }
+                  { <sup >{wishlistState.length}</sup> }
                 </b>
               </NavLink>
 
