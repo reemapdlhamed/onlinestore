@@ -26,7 +26,7 @@ function Products_Card(props) {
     for (let index = 0; index < wishList.length; index++) {
       if(wishList[index]._id === props.product._id)
       {
-        setWishListed("gold")
+        setWishListed("red")
         break;
       }
       
@@ -34,7 +34,7 @@ function Products_Card(props) {
     for (let index = 0; index < cartList.length; index++) {
       if(cartList[index]._id === props.product._id)
       {
-        setcarted("gold")
+        setcarted("green")
         break;
       }
       
@@ -48,9 +48,9 @@ function Products_Card(props) {
     console.log("PPPP",product)
     if(wishListed === "grey"){
       dispatch(addWishlistFirst(product));
-      setWishListed("gold")
+      setWishListed("red")
     }
-    if(wishListed === "gold"){
+    if(wishListed === "red"){
       dispatch(zeroWishlist(product));
       setWishListed("grey")
     }
@@ -59,9 +59,9 @@ function Products_Card(props) {
   const addProduct = (product) => {
     if(carted === "grey"){
       dispatch(addCartFirst(product));
-      setcarted("gold")
+      setcarted("green")
     }
-    if(carted === "gold"){
+    if(carted === "green"){
       dispatch(zeroCart(product));
       setcarted("grey")
     }
