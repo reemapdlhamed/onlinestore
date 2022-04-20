@@ -215,10 +215,16 @@ const Product = () => {
           <h4 className=" fw-bold my-4 text-danger ">
             Price : {product.price} E£{" "}
           </h4>
-          <Rating name="read-only" value={product.rating} readOnly /> <hr />
+          <Rating name="read-only" value={product.rating} readOnly /> <br/>
+          <button
+             className="btn btn-outline-danger  mx-1 px-3 my-1 col-lgcol-md" onClick={() => addProductWishlist(product)}>
+                <i class="fas fa-heart"></i> Wishlist 
+              </button>
+          <hr />
+          
           <div className="d-grid gap-1 d-md-block my-4">
             <button
-              className="btn btn-outline-dark mx-3  col-lg col-md"
+              className="btn btn-outline-dark mx-1  col-lg col-md"
               onClick={() => addProduct(product)}
             >
               Add to Cart
@@ -230,17 +236,12 @@ const Product = () => {
               Go to Cart
             </NavLink> */}
             <button
-              style={{ marginLeft: "10px" }}
-              className="btn btn-outline-primary mx-3  col-lg col-md"
+              className="btn btn-outline-primary mx-1  col-lg col-md"
               onClick={showAddReview}
             >
               Add Review
             </button>
-            <button
-            style={{ marginLeft: "10px" }}
-             className="btn btn-outline-danger  mx-3 px-3 my-1 col-lgcol-md" onClick={() => addProductWishlist(product)}>
-                <i class="fas fa-heart"></i> Add to List
-              </button>
+          
               {/* <Modal
                 open={open}
                 onClose={handleClose}
