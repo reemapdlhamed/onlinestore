@@ -29,12 +29,9 @@ margin: 40px;
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 30%;
+    height: 35%;
     opacity: 0.8;
-    /* background-color: rgb(48, 170, 221); */
-    background: linear-gradient(90deg, rgb(185, 201, 218), rgb(97, 125, 147) 40%, rgb(120, 152, 189) 100%);
-
-
+    background-color: rgb(67, 145, 155);
     transition-duration: 0.5s;
     padding: 10px;
     display: flex;
