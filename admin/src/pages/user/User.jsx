@@ -13,8 +13,12 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 import { updateUser } from "../../redux/apiCalls";
 import { useDispatch } from "react-redux";
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 export default function User() {
+         
+    const notify = () => toast.success("User Updated");
+
     const location = useLocation();
     const userId = location.pathname.split("/")[2];
     const dispatch = useDispatch();
@@ -39,7 +43,7 @@ export default function User() {
         // let product = { ...inputs, category_id: category, properties: properties, images: [image] };
         console.dir(userEdit);
         try {
-            updateUser(userEdit._id, userEdit, dispatch);
+            updateUser(userEdit._id, userEdit, dispatch,notify);
         } catch (err) {
             console.log(err);
         }
@@ -49,6 +53,7 @@ export default function User() {
     return (
         <div className="list">
             <Sidebar />
+            <ToastContainer />
             <div className="dataContainer">
                 <div className="user">
                     <div className="userContainer">

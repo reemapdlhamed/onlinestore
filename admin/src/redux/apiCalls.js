@@ -200,23 +200,25 @@ export const getUsers = async (dispatch) => {
   }
 };
 
-export const deleteUser = async (id, dispatch) => {
+export const deleteUser = async (id, dispatch,notify) => {
   dispatch(deleteUserStart());
   try {
     const res = await request.delete(`/users/${id}`, CONFIG());
     console.log(res.data);
     dispatch(deleteUserSuccess(id));
+    notify();
   } catch (err) {
     dispatch(deleteUserFailure());
   }
 };
 
-export const updateUser = async (id, user, dispatch) => {
+export const updateUser = async (id, user, dispatch,notify) => {
   dispatch(updateUserStart());
   try {
     const res = await request.put(`/users/${id}`, user, CONFIG());
     console.log("Update Result", res);
     dispatch(updateUserSuccess({ id, user }));
+    notify();
   } catch (err) {
     console.log("error", err);
     dispatch(updateUserFailure());
@@ -246,15 +248,16 @@ export const getCategories = async (dispatch) => {
   }
 };
 
-export const addCategory = async (category, dispatch,notify) => {
+export const addCategory = async (category, dispatch,{notifySuccess,notifyError}) => {
   dispatch(addCategoryStart());
   try {
     const res = await request.post(`/categories`, category, CONFIG());
     console.log("res.data.data", res.data.data);
     dispatch(addCategorySuccess(res.data.data));
-    notify();
+    notifySuccess();
 
   } catch (err) {
+    notifyError()
     console.log("err", err);
     dispatch(addCategoryFailure());
   }

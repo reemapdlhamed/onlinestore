@@ -87,7 +87,7 @@ const Widget = ({ type, amount }) => {
       </div>
       <div className="right">
 
-        {data.icon}
+        {/* {data.icon} */}
       </div>
     </div>
   );

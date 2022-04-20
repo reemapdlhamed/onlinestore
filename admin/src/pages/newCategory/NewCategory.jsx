@@ -21,7 +21,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const NewCategory = () => {
-    const notify = () => toast.success("category added");
+    const notifySuccess = () => toast.success("category added");
+    const notifyError = (msg) => toast.error("An Error has Occured");
+
     const error = useSelector((state) => state.categories.error);
     const [inputs, setInputs] = useState({});
     const [category, setCategory] = useState("");
@@ -46,7 +48,7 @@ const NewCategory = () => {
         console.log("inputs",inputs);
 
         try {
-            addCategory(inputs, dispatch,notify);
+            addCategory(inputs, dispatch,{notifySuccess,notifyError});
 
         } catch (err) {
             console.log(err);
