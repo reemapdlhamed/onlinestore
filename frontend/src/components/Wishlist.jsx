@@ -1,7 +1,15 @@
 import { useState, useEffect, React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { addCart, delCart, zeroCart,addWishlist,delWishlist,zeroWishlist } from "../redux/action";
+import {
+  addCart,
+  delCart,
+  zeroCart,
+  addWishlist,
+  delWishlist,
+  zeroWishlist,
+  addCartFirst,
+} from "../redux/action";
 import axios from "axios";
 import StripeBtn from "./stripeBtn";
 
@@ -10,21 +18,18 @@ const Cart = () => {
     p: 0,
   });
 
-
   const state = useSelector((state) => state.handleWishlist);
 
   const dispatch = useDispatch();
-
-
 
   const handleZero = (item) => {
     dispatch(zeroWishlist(item));
   };
 
-  
-
-  
-
+  const addProduct = (product) => {
+    if (product.length === 0) return;
+    dispatch(addCartFirst(product));
+  };
 
   const emptyCart = () => {
     return (
@@ -46,7 +51,7 @@ const Cart = () => {
   const cartItems = (product) => {
     return (
       <>
-        <div className="px-4 my-5 bg-light rounded-3 py-5">
+        <div className="px-4 my-5 bg-light rounded-3 py-2">
           <div className="container py-4">
             <button
               onClick={() => handleZero(product)}
@@ -54,26 +59,32 @@ const Cart = () => {
               aria-label="Close"
             ></button>
             <div class="row g-0">
-                <div class="col-md-4">
-                  <img
-                    src={product.images}
-                    class="img-fluid rounded-start my-3 mx-3"
-                    height="200px"
-                    width="180px"
-                    alt={product.name}
-                  />
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title text-danger fw-bold">{product.name}</h5>
-                    <p class="card-text">
-                      <p>description :</p> {product.description}
-                    </p>
-                    <p class="card-text fw-bold">brand : {product.brand}</p>
-                    <p class="card-text fw-bold">Price : {product.price} E£</p>
-                  </div>
+              <div class="col-md-4">
+                <img
+                  src={product.images}
+                  class="img-fluid rounded-start my-3 mx-3"
+                  height="200px"
+                  width="180px"
+                  alt={product.name}
+                />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title text-danger fw-bold">{product.name}</h5>
+                  <p class="card-text">
+                    <p>description :</p> {product.description}
+                  </p>
+                  <p class="card-text fw-bold">brand : {product.brand}</p>
+                  <p class="card-text fw-bold">Price : {product.price} E£</p>
+                  <button
+                    className="btn btn-outline-success  col-lg col-md"
+                    onClick={() => addProduct(product)}
+                  >
+                    Add To Cart
+                  </button>
                 </div>
               </div>
+            </div>
           </div>
         </div>
       </>
