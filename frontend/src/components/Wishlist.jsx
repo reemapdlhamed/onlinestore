@@ -53,62 +53,61 @@ const Cart = () => {
               className="btn-close float-end"
               aria-label="Close"
             ></button>
-            <div className="row justify-content-center">
-              <div className="col-md-4">
-                <img
-                  src={product.images}
-                  alt={product.name}
-                  height="200px"
-                  width="180px"
-                />
+            <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                    src={product.images}
+                    class="img-fluid rounded-start my-3 mx-3"
+                    height="200px"
+                    width="180px"
+                    alt={product.name}
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title text-danger fw-bold">{product.name}</h5>
+                    <p class="card-text">
+                      <p>description :</p> {product.description}
+                    </p>
+                    <p class="card-text fw-bold">brand : {product.brand}</p>
+                    <p class="card-text fw-bold">Price : {product.price} E£</p>
+                  </div>
+                </div>
               </div>
-              <div className="col-md-4">
-                <h3>{product.name}</h3>
-                <hr />
-                <h5>Price : {product.price} E£</h5>
-
-                <p className="lead fw-bold hide">
- 
-                </p>
-                <br />
-           
-               
-              </div>
-            </div>
           </div>
         </div>
       </>
     );
   };
-  const buttons = () => {
-    return (
-      <>
-        <div className="container">
-          <hr />
-          <div className="row justify-content-center">
-          <NavLink
-              to="/products"
-              className="btn btn-outline-dark mb-5 w-25 mx-auto "
-            >
-              Continue To Shopping
-            </NavLink>
-            <NavLink
-              to="/shipping"
-              className="btn btn-outline-dark mb-5 w-25 mx-auto "
-            >
-              Proceed to Checkout
-            </NavLink>
-          </div>
-        </div>
-      </>
-    );
-  };
+  // const buttons = () => {
+  //   return (
+  //     <>
+  //       <div className="container">
+  //         <hr />
+  //         <div className="row justify-content-center">
+  //         <NavLink
+  //             to="/products"
+  //             className="btn btn-outline-dark mb-5 w-25 mx-auto "
+  //           >
+  //             Continue To Shopping
+  //           </NavLink>
+  //           <NavLink
+  //             to="/shipping"
+  //             className="btn btn-outline-dark mb-5 w-25 mx-auto "
+  //           >
+  //             Proceed to Checkout
+  //           </NavLink>
+  //         </div>
+  //       </div>
+  //     </>
+  //   );
+  // };
 
   return (
     <div>
       {state.length === 0 && emptyCart()}
       {state.length !== 0 && state.map(cartItems)}
-      {state.length !== 0 && buttons()}
+      {/* {state.length !== 0 && buttons()} */}
     </div>
   );
 };
