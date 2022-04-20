@@ -52,15 +52,15 @@ function register() {
   }, []);
   useEffect(() => {
     const result = USER_REGEX.test(user);
-    console.log(result);
-    console.log(user);
+    // console.log(result);
+    // console.log(user);
     setValidName(result);
   }, [user]);
 
   useEffect(() => {
     const result = PWD_REGEX.test(password);
-    console.log(result);
-    console.log(password);
+    // console.log(result);
+    // console.log(password);
     setValidPassword(result);
     const match = password === matchPassword;
     setValidMatch(match);
@@ -68,8 +68,8 @@ function register() {
 
   useEffect(() => {
     const result = EMAIL_REGEX.test(email);
-    console.log(result);
-    console.log(email);
+    // console.log(result);
+    // console.log(email);
     setValidEmail(result);
   }, [email]);
   useEffect(() => {
@@ -100,7 +100,7 @@ function register() {
 
       SetSuccess(true);
       let data = res.data;
-      console.log(data);
+      // console.log(data);
 
       return data;
     } catch (err) {
@@ -122,12 +122,12 @@ function register() {
       return { ...previousState, verify: true };
     });
 
-    console.log("Captcha value:", value);
+    // console.log("Captcha value:", value);
   }
 
   const customId = "custom-id-yes";
   const difToast = () => {
-    console.log(user);
+    // console.log(user);
     toast.success("Register Success, Welcome " + user + ":)", {
       theme: "dark",
       toastId: customId,

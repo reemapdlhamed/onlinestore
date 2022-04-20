@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-const uniqueArrayPlugin = require('mongoose-unique-array');
 
+const uniqueArrayPlugin = require("mongoose-unique-array");
 const userSchema = new mongoose.Schema({
   // _id: mongoose.Types.ObjectId,
   name: {
@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema({
     unique: true,
     required: true,
     trim: true,
+  },
+  verified: {
+    type: Boolean,
+    default: false,
   },
 
   password: {
@@ -52,7 +56,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: "product",
       },
-      qty: { type: Number},
+      qty: { type: Number },
       quantity: { type: Number },
 
       rating: { type: Number, min: 1, max: 5 },
