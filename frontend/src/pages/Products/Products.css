@@ -12,7 +12,7 @@
     height: 100%;
     opacity: 0.8;
     border-radius: 5px;
-    background-color: black;
+    background: black;
     color: white;
     
 }
@@ -29,13 +29,13 @@ margin: 40px;
     position: absolute;
     bottom: 0;
     left: 0;
-    height: 30%;
+    height: 35%;
     opacity: 0.8;
-    background-color: rgb(48, 170, 221);
+    background-color: rgb(67, 145, 155);
     transition-duration: 0.5s;
     padding: 10px;
     display: flex;
-    color:gold;
+    color:rgb(10, 10, 10);
     flex-direction: column;
     justify-content: space-around;
     width: 100%;

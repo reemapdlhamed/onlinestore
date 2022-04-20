@@ -242,8 +242,8 @@ const Home = () => {
         })}
       </Container>
 
-      <div className="  my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
-      <h2 className="pt-3">Labtops</h2>
+      <div className="  my-4 px-5 container-fluid" style={{height:"550px" ,backgroundColor: "white"}}>
+      <h2 className="pt-3">Laptops</h2>
         <Slider {...settings} className="text-black">
           {products.filter((product)=>{
               if(product.category_id === "624ea7bde00092df32b811d0" )
@@ -263,7 +263,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      <div className="my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
+      <div className="my-4 px-5 container-fluid" style={{height:"550px" ,backgroundColor: "white"}}>
       <h2 className="pt-3">Mobile</h2>
         <Slider {...settingsTwo} className="text-black">
           {
@@ -295,7 +295,7 @@ const Home = () => {
         </Slider>
       </div>
 
-      <div className="my-4 px-5 container-fluid" style={{height:"500px" ,backgroundColor: "white"}}>
+      <div className="my-4 px-5 container-fluid" style={{height:"550px" ,backgroundColor: "white"}}>
       <h2 className="pt-3">Electronics</h2>
         <Slider {...settingsTwo} >
           {products.filter((product)=>{

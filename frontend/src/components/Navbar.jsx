@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <div>
       <nav
-        className="navbar navbar-expand-lg navbar-light py-0
+        className="navbar navbar-expand-lg navbar-light  py-0
        shadow-sm"
         style={{ position: "relative", zIndex: "2" }}
       >
@@ -93,7 +93,7 @@ const Navbar = () => {
                 <NavLink
                   className="nav-link"
                   activeStyle={{
-                    color: "blue",
+                    color: "white",
                   }}
                   to="/products"
                 >
@@ -104,7 +104,7 @@ const Navbar = () => {
                 <NavLink
                   className="nav-link"
                   activeStyle={{
-                    color: "blue",
+                    color: "white",
                   }}
                   to="/about"
                 >
@@ -115,7 +115,7 @@ const Navbar = () => {
                 <NavLink
                   className="nav-link"
                   activeStyle={{
-                    color: "blue",
+                    color: "white",
                   }}
                   to="/contact"
                 >
