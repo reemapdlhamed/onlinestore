@@ -1,7 +1,12 @@
 const { validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+
 const sendEmail = require("../service/emailTransptor");
+const sendEmail2 = require("./email");
+const Token = require("../models/token");
+const crypto = import("crypto");
+const randomBytes = require('randombytes');
 const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
 const { redirect } = require("express/lib/response");
@@ -113,16 +118,32 @@ exports.register = asyncHandler(async (request, response, next) => {
     name: request.body.name,
     email: request.body.email,
     password: hashed,
-  });
+  })
 
   try {
     const newUser = await user.save();
+console.log(newUser._id)
+
+
+    let token = await new Token({
+      userId: newUser._id,
+      token: randomBytes(32).toString("hex"),
+    }).save();
+    //console.log(token)
+   const message = `${process.env.BASE_URL}/user/verify/${user.id}/${token.token}`;
+   console.log(message)
+   await sendEmail2(newUser.email, "Verify Email", message);
+
+
     response.status(201).json(newUser);
   } catch (err) {
     err.status = 400;
     next(err);
   }
 });
+
+
+
 
 exports.updateUser = (request, response, next) => {
   let errors = validationResult(request);
