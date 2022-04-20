@@ -38,6 +38,23 @@ import {
   updateUserSuccess,
   updateUserFailure,
 } from "./userRedux";
+
+
+import {
+  getCategoryStart,
+  getCategorySuccess,
+  getCategoryFailure,
+  addCategoryStart,
+  addCategorySuccess,
+  addCategoryFailure,
+  deleteCategoryStart,
+  deleteCategorySuccess,
+  deleteCategoryFailure,
+  updateCategoryStart,
+  updateCategorySuccess,
+  updateCategoryFailure,
+} from "./categoryRedux"
+
 import axios from "axios";
 
 const CONFIG = () => {
@@ -212,5 +229,58 @@ export const getStats = async () => {
     return res.data;
   } catch (error) {
     console.log(error);
+  }
+};
+
+
+export const getCategories = async (dispatch) => {
+  dispatch(getCategoryStart());
+  try {
+    const res = await request.get("/categories");
+    console.log("res.data",res.data);
+    dispatch(getCategorySuccess(res.data));
+  } catch (err) {
+    dispatch(getCategoryFailure());
+  }
+};
+
+export const addCategory = async (category, dispatch,notify) => {
+  dispatch(addCategoryStart());
+  try {
+    const res = await request.post(`/categories`, category, CONFIG());
+    console.log("res.data.data", res.data.data);
+    dispatch(addCategorySuccess(res.data.data));
+    notify();
+
+  } catch (err) {
+    console.log("err", err);
+    dispatch(addCategoryFailure());
+  }
+};
+
+export const deleteCategory = async (id, dispatch,notify) => {
+  dispatch(deleteCategoryStart());
+
+  try {
+    const res = await request.delete(`/categories/${id}`, CONFIG());
+    // console.log(res);
+    dispatch(deleteCategorySuccess(id));
+    notify();
+  } catch (err) {
+    dispatch(deleteCategoryFailure());
+  }
+};
+
+
+export const updateCategory = async (id, category, dispatch,notify) => {
+  dispatch(updateCategoryStart());
+  try {
+    const res = await request.put(`/categories/${id}`, category, CONFIG());
+    console.log("Update Result", res);
+    dispatch(updateCategorySuccess({ id, category }));
+    notify();
+  } catch (err) {
+    console.log("error", err);
+    dispatch(updateCategoryFailure());
   }
 };

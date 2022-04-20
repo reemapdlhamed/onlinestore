@@ -19,16 +19,20 @@ import NewProduct from "./pages/newProduct/NewProduct";
 import Product from "./pages/product/Product";
 import OrdersList from "./pages/ordersList/OrdersList";
 import UsersList from "./pages/usersList/UsersList";
+import CategoriesList from "./pages/categoryList/categoryList";
 import NewUser from "./pages/newUser/NewUser";
+import NewCategory from "./pages/newCategory/NewCategory";
 
 import User from "./pages/user/User";
 import Order from "./pages/order/Order";
+import Category from "./pages/category/category";
 
-const ProtectedRoute = ({redirectPath = "/login" }) => {
+const ProtectedRoute = ({ redirectPath = "/login" }) => {
   let isAdmin = false;
-  if(localStorage.getItem("persist:root"))
-  isAdmin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-    .currentUser?.data.role == "admin";
+  if (localStorage.getItem("persist:root"))
+    isAdmin =
+      JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+        .currentUser?.data.role == "admin";
 
   if (!isAdmin) {
     return <Navigate to={redirectPath} replace />;
@@ -40,9 +44,10 @@ const ProtectedRoute = ({redirectPath = "/login" }) => {
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   let isAdmin = false;
-  if(localStorage.getItem("persist:root"))
-  isAdmin = JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
-    .currentUser?.data.role == "admin";
+  if (localStorage.getItem("persist:root"))
+    isAdmin =
+      JSON.parse(JSON.parse(localStorage.getItem("persist:root")).user)
+        .currentUser?.data.role == "admin";
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
@@ -73,6 +78,13 @@ function App() {
                 <Route index element={<ProductList />} />
                 <Route path=":productId" element={<Product />} />
                 <Route path="new" element={<NewProduct />} />
+              </Route>
+
+              <Route path="categories">
+                {/* <Route index element={<List />} /> */}
+                <Route index element={<CategoriesList />} />
+                <Route path=":productId" element={<Category />} />
+                <Route path="new" element={<NewCategory />} />
               </Route>
 
               <Route path="orders">
