@@ -203,9 +203,7 @@ const Product = () => {
             // style={{border :" 1px solid black"}}
             className="py-3 px-3"
           />
-          <button className="btn btn-outline-danger  mx-3 px-3 my-1 col-lg-8 col-md" onClick={() => addProductWishlist(product)}>
-                <i class="fas fa-heart"></i> Add to List
-              </button>
+         
         </div>
         <div className="col-lg col-md col-sm mx-4">
           <h5 className="text-uppercase text-black fw-bold display-6">
@@ -220,25 +218,29 @@ const Product = () => {
           <Rating name="read-only" value={product.rating} readOnly /> <hr />
           <div className="d-grid gap-1 d-md-block my-4">
             <button
-              className="btn btn-outline-dark mx-3  col-lg-8 col-md"
+              className="btn btn-outline-dark mx-3  col-lg col-md"
               onClick={() => addProduct(product)}
             >
               Add to Cart
             </button>
-            <NavLink
+            {/* <NavLink
               to="/cart"
               className="btn btn-dark  mx-3 px-3 my-1 col-lg-8 col-md"
             >
               Go to Cart
-            </NavLink>
+            </NavLink> */}
             <button
               style={{ marginLeft: "10px" }}
-              className="btn btn-outline-primary mx-3  col-lg-8 col-md"
+              className="btn btn-outline-primary mx-3  col-lg col-md"
               onClick={showAddReview}
             >
               Add Review
             </button>
-              
+            <button
+            style={{ marginLeft: "10px" }}
+             className="btn btn-outline-danger  mx-3 px-3 my-1 col-lgcol-md" onClick={() => addProductWishlist(product)}>
+                <i class="fas fa-heart"></i> Add to List
+              </button>
               {/* <Modal
                 open={open}
                 onClose={handleClose}
