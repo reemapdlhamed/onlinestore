@@ -36,7 +36,7 @@ function Login() {
 
       setUser({ ...user, error: "", success: res.data.msg });
       localStorage.setItem("firstLogin", true);
-      console.log("RES",res)
+      // console.log("RES",res)
 
 
 
@@ -50,7 +50,7 @@ function Login() {
       window.location.replace("/");
       setSuccess(true);
       let data = response.data;
-console.log("DATA")
+// console.log("DATA")
       return data;
     } catch (error) {
       if (!error?.response) {
@@ -130,16 +130,16 @@ console.log("DATA")
   }
 
   // const name = email.substring(0, email.lastIndexOf("@"));
-  const customId = "custom-id-yes";
-  const difToast = () => {
-    toast.success(
-      "Login Success, Welcome " + { name: localStorage.getItem("name") },
-      {
-        theme: "dark",
-        toastId: customId,
-      }
-    );
-  };
+  // const customId = "custom-id-yes";
+  // const difToast = () => {
+  //   toast.success(
+  //     "Login Success, Welcome "+localStorage.getItem("name"),
+  //     {
+  //       theme: "dark",
+  //       toastId: customId,
+  //     }
+  //   );
+  // };
 
   const togglePassword = () => {
     // When the handler is invoked
@@ -155,7 +155,7 @@ console.log("DATA")
           </Home>
 
           <br />
-          <p>
+          {/* <p>
             {difToast}
             <ToastContainer
               position="top-center"
@@ -168,7 +168,7 @@ console.log("DATA")
               draggable
               pauseOnHover
             />
-          </p>
+          </p> */}
         </section>
       ) : (
         <div className="login ">
@@ -232,7 +232,7 @@ console.log("DATA")
                 // onClick={signIn}
                 type="submit"
                 className="login__signin__button"
-                onClick={difToast}
+                // onClick={difToast}
               >
                 Sign In
               </button>

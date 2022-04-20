@@ -103,7 +103,7 @@ const ShippingScreen = ({ history }) => {
                     <Field className="form-control selectBox" name="city">
                       {({ field }) => (
                         <select className="select" {...field}>
-                          <option>Select Your Country</option>
+                          <option>Select Your Governorate</option>
                           {/* <option value=""></option> */}
                           {govs.map((i) => (
                             <option key={i} value={i}>
@@ -118,7 +118,7 @@ const ShippingScreen = ({ history }) => {
                   <button
                     type="submit"
                     onSubmit={submitHandler}
-                    className=" button"
+                    className=" btn btn-primary my-3 px-3"
                   >
                     Submit
                   </button>

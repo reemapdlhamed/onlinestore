@@ -135,10 +135,10 @@ export default function UserProfile() {
     })
       .then((response) => {
         setSucces(true);
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
   const customId = "custom-id-yes";
@@ -216,6 +216,7 @@ export default function UserProfile() {
                   label="Name"
                   variant="standard"
                   className="w-50"
+                  disabled
                 />
 
                 <FormControl variant="standard" className="w-50">
@@ -224,6 +225,7 @@ export default function UserProfile() {
                   </InputLabel>
                   <Input
                     id="input-with-icon-adornment"
+                    disabled
                     value={localStorage.getItem("email")}
                     startAdornment={
                       <InputAdornment position="start">
@@ -238,7 +240,7 @@ export default function UserProfile() {
                   type={passwordShown ? "text" : "password"}
                   onChange={(e) => OldPwd(e)}
                   id="standard-basic"
-                  label="Password"
+                  label="old Password"
                   variant="standard"
                   className="w-50"
                 />
@@ -261,6 +263,27 @@ export default function UserProfile() {
                   onChange={(e) => NewPwd(e)}
                   id="standard-basic"
                   label="New Password"
+                  variant="standard"
+                  className="w-50"
+                />
+                <i
+                  onClick={togglePassword}
+                  className="far fa-eye"
+                  id="togglePassword"
+                  style={{
+                    paddingLeft: "3rem",
+
+                    marginLeft: " 92rem",
+                    marginTop: "15rem",
+                    position: "absolute",
+                    cursor: "pointer",
+                  }}
+                ></i><TextField
+                  value={newPassword}
+                  type={passwordShown ? "text" : "password"}
+                  onChange={(e) => NewPwd(e)}
+                  id="standard-basic"
+                  label="cofirm Password"
                   variant="standard"
                   className="w-50"
                 />
