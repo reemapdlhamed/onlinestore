@@ -51,7 +51,7 @@ const Cart = () => {
   const cartItems = (product) => {
     return (
       <>
-        <div className="px-4 my-5 bg-light rounded-3 py-2">
+        <div className="px-4 my-0 bg-light rounded-3 py-2 border-bottom" >
           <div className="container py-4">
             <button
               onClick={() => handleZero(product)}
