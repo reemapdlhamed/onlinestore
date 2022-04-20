@@ -70,7 +70,7 @@ const Navbar = () => {
                 <NavLink
                   className="nav-link "
                   activeStyle={{
-                    color: "white",
+                    color: "black",
                   }}
                   aria-current="page"
                   to="/"
