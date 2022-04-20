@@ -23,7 +23,7 @@
     position: relative;
     transition-duration: 0.5s;
     color: white;
-margin: 40px;    
+    margin: 40px;    
 }
 .Card1-content{
     position: absolute;
@@ -91,3 +91,18 @@ margin: 40px;
 .category-card:hover img{
     filter: grayscale();
 }
+
+@media screen and (max-width: 700px) {
+    .category-card{
+        width:45%;
+        height: 150px;
+        
+    }
+}
+@media screen and (max-width: 500px) {
+    .category-card{
+        width:80%;
+        height: 150px;
+        
+    }
+  }
