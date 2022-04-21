@@ -48,7 +48,7 @@ function Login() {
 
       localStorage.setItem("data", res.data.data);
       window.location.replace("/");
-      history.goBack()
+      // history.goBack()
       
       setSuccess(true);
       let data = response.data;
@@ -113,7 +113,7 @@ function Login() {
       localStorage.setItem("data", response.data.data);
 
       window.location.replace("/");
-      history.goBack()
+      // history.goBack()
       setSuccess(true);
       let data = response.data;
 
