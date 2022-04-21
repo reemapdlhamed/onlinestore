@@ -9,10 +9,11 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Button } from '@mui/material';
 import { display } from '@mui/system';
 import "./usersList.scss"
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const UsersList = () => {
-
+    const notify = () => toast.success("user deleted");
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users.users);
     // const isAdmin = useSelector((state) => state.user.currentUser) != null;
@@ -23,7 +24,7 @@ const UsersList = () => {
     }, [dispatch]);
 
     const handleDelete = (id) => {
-        deleteUser(id, dispatch);
+        deleteUser(id, dispatch,notify);
     };
 
     const columns = [
@@ -59,6 +60,7 @@ const UsersList = () => {
     return (
         <div className="list">
             <Sidebar />
+            <ToastContainer />
             <div className="dataContainer">
                 <div className="datagrid">
                     <DataGrid

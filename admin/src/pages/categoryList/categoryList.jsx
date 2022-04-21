@@ -31,10 +31,11 @@ const CategoriesList = () => {
     };
 
     const columns = [
+        
         { field: "_id", headerName: "ID", width: 250 },
         { field: "name", headerName: "Name", width: 250 },
         { field: "description", headerName: "email", width: 250 },
-        { field: "bannerImage", headerName: "bannerImage", width: 220 },
+        // { field: "bannerImage", headerName: "bannerImage", width: 220 },
 
         {
             field: "action",
@@ -74,6 +75,8 @@ const CategoriesList = () => {
                         pageSize={13}
                         rowsPerPageOptions={[2]}
                         pagination
+                      
+              
                     />
                 </div>
                 <Link to="/categories/new" replace>
