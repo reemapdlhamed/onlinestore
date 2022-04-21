@@ -14,10 +14,10 @@ const Orders = (props) => {
   const cartState = useSelector((state) => state.handleCart);
   const orderState = useSelector((state) => state.handleOrders);
   var orderStatus;
-  var orderDate;
+  var orderDate,expectedDate
 
   var infoz = [];
-  var res,expectedDate
+  var res;
   for (let i = 0; i < orderState.length; i++) {
     if (orderState[i]._id && id === orderState[i]._id) {
       orderStatus = orderState[i].orderStatus;

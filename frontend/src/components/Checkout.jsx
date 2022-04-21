@@ -69,15 +69,31 @@ const Checkout = (props) => {
 
   if (!props.location.state) {
     props.history.push("/");
-    window.location.reload();
+   // window.location.reload();
   }
 
   const mergedObject = addresState.list;
 
   mergedObject.paymentType = props.location.state.paymentMethod;
   mergedObject.discount = discount.val;
-  console.log(mergedObject);
   const clearCart = () => {
+    console.log("ORRRRRRRRRRRRRDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEEERRRRRRRRRR")
+    let res7 = axios({
+      method: "put",
+      url: "http://localhost:8080/products/stocks",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      data: mergedObject,
+    }).then((res) => {
+    });
+    console.log(res7);
+
+
+
+
+
+
     let res2 = axios({
       method: "post",
       url: "http://localhost:8080/cart/buy",
@@ -86,9 +102,10 @@ const Checkout = (props) => {
       },
       data: mergedObject,
     }).then((res) => {
-      console.log("ORDER DONE");
     });
-    console.log(res2);
+
+
+
 
     axios({
       method: "post",
@@ -112,7 +129,7 @@ const Checkout = (props) => {
     props.history.push("/");
     //dispatch(clearLocalStorageCart());
 
-    window.location.reload();
+   // window.location.reload();
   };
 
   const state = useSelector((state) => state.handleCart);

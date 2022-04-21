@@ -150,24 +150,27 @@ exports.delete_product = (request, response, next) => {
 
 //-------------------------------------------------------------------------------------------------------
 exports.update_stock = (request, response, next) => {
-  let errors = validationResult(request);
-  if (!errors.isEmpty()) {
-    let error = new Error();
-    error.status = 422;
-    error.message = errors
-      .array()
-      .reduce((current, object) => current + object.msg + " ", "");
-    throw error;
-  }
-  Products.findById({ _id: request.body.id })
+  console.log("BODY")
+  // let errors = validationResult(request);
+  // if (!errors.isEmpty()) {
+  //   let error = new Error();
+  //   error.status = 422;
+  //   error.message = errors
+  //     .array()
+  //     .reduce((current, object) => current + object.msg + " ", "");
+  //   throw error;
+  // }
+  for(let i=0;i<request.body.orderItems.length;i++)
+  {
+
+    Products.findById({ _id: request.body.orderItems[i]._id })
     .then((data) => {
-      console.log(data);
-      if (data.quantity - request.body.amount >= 0) {
+      if (data.quantity - request.body.orderItems[i].quantity >= 0) {
         Products.findByIdAndUpdate(
-          { _id: request.body.id },
+          { _id:  request.body.orderItems[i]._id},
           {
             $set: {
-              quantity: data.quantity - request.body.amount,
+              quantity: data.quantity -  request.body.orderItems[i].quantity,
             },
           }
         )
@@ -186,6 +189,9 @@ exports.update_stock = (request, response, next) => {
     .catch((error) => {
       next(error);
     });
+
+  }
+  // 
 };
 
 exports.update_product = async (req, res) => {

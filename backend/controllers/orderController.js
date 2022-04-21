@@ -5,7 +5,6 @@ const { validationResult } = require("express-validator");
 
 //create new order
 exports.createOrders = (request, response, next) => {
-  console.log("REQ ORDER", request.body);
   var paymentStatu;
   if (request.body.paymentType === "cod") {
     paymentStatu = "pending";
@@ -206,7 +205,6 @@ exports.deleteOrder = (request, response, next) => {
 
 //UPDATE ORDER
 exports.updateOrder = async (req, res) => {
-  console.log(req.body);
   if (req.role == "admin") {
     try {
       const updatedOrder = await order.findByIdAndUpdate(
@@ -227,7 +225,6 @@ exports.updateOrder = async (req, res) => {
 
 //GET ORDER
 exports.getOrder = (request, response, next) => {
-  console.log(request.params);
   order
     .findOne({ _id: request.params.id })
 

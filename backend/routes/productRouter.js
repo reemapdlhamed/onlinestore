@@ -84,8 +84,7 @@ router
   .route("/products/stock")
   .put(
     [
-      body("id").notEmpty().withMessage("ID shouldn't be Empty."),
-      body("amount").isNumeric().withMessage("amount shouldn't be Empty."),
+      // body("items").isArray().withMessage("ID shouldn't be Empty."),
     ],
     controller.update_stock
   );
