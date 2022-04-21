@@ -20,9 +20,13 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import CloseIcon from "@mui/icons-material/Close";
 
 const Product = () => {
+  const notifyInfo = (message) => toast.info(message);
+  const notifySuccess = (message) => toast.success(message);
   const orderState = useSelector((state) => state.handleOrders);
 
   let history = useHistory();
@@ -79,7 +83,7 @@ const Product = () => {
       setProduct(res.data.data[0]);
       setReviews(res.data.data[0].reviews);
     });
-  }, [reviews]);
+  }, []);
   function addToWishList() {
     console.log("button");
     var images = product.images;
@@ -173,7 +177,10 @@ const Product = () => {
       }
     }
     if (cantReview) {
-      alert(" you cant add review,you must buy the produc first ! ");
+
+
+      notifyInfo("You must buy the product first to Add Review");
+      // alert(" you cant add review,you must buy the produc first ! ");
     } else
       setReviewForm("d-flex flex-column flex-wrap justify-content-between");
   }
@@ -214,6 +221,7 @@ const Product = () => {
   const ShowProduct = () => {
     return (
       <>
+        <ToastContainer />
         <div className="col-lg col-md col-sm mx-4">
           <img
             src={product.images}
@@ -236,27 +244,42 @@ const Product = () => {
           </h4>
           <Rating name="read-only" value={product.rating} readOnly />
           <br />
-          <button
-            className="btn btn-outline-danger  mx-1 px-3 my-1 col-lgcol-md"
-            onClick={() => addProductWishlist(product)}
-          >
-            <i class="fas fa-heart"></i> Wishlist
-          </button>
+          <div style={{ display: "flex" }}>
+            <button
+              className="btn btn-outline-danger  mx-1 px-3 my-1 col-lgcol-md"
+              onClick={() => addProductWishlist(product)}
+            >
+              <i class="fas fa-heart"></i> Wishlist
+            </button>
+            {product.quantity <= 0 &&
+              <div style={{ cursor: "pointer"}}>
+                <button disabled
+                  className="btn btn-secondary  mx-1 px-3 my-1 col-lgcol-md"
+                >
+
+                  OUT OF STOCK
+                </button>
+              </div>
+            }
+          </div>
+
           <hr />
           <div className="d-grid gap-1 d-md-block my-4">
-          {product.quantity>0&&
-            <button
-              className="btn btn-outline-dark mx-1  col-lg col-md"
-              onClick={() => addProduct(product)}
-            >
-              Add to Cart
-            </button>}
+            {product.quantity > 0 &&
+              <button
+                className="btn btn-outline-dark mx-1  col-lg col-md"
+                onClick={() => addProduct(product)}
+              >
+                Add to Cart
+              </button>}
 
 
-            {product.quantity<=0&&
+            {/* {product.quantity <= 0 &&
               <div>
-                out of stock
-              </div>}
+                <p style={{padding:"2em",backgroundColor:"#777",color:"white"}}>
+                  out of stock
+                </p>
+              </div>} */}
 
             {/* <NavLink
               to="/cart"
@@ -313,14 +336,14 @@ const Product = () => {
             border: "2px solid #eee",
             padding: "20px",
             marginLeft: "30px",
-            position:"absolute",
-            left:"25%",
-            top:"200px",
-            borderRadius:"15px",
-            backgroundColor:"white",
-            margin:"auto",
-            boxShadow:"rgb(0 0 0 / 30%) 0px 1px 20px 20px",
-            transitionDuration:"0.5s"
+            position: "absolute",
+            left: "25%",
+            top: "200px",
+            borderRadius: "15px",
+            backgroundColor: "white",
+            margin: "auto",
+            boxShadow: "rgb(0 0 0 / 30%) 0px 1px 20px 20px",
+            transitionDuration: "0.5s"
           }}
           className={reviewForm}
         >
