@@ -15,7 +15,6 @@ import PasswordButton from "./PasswordButton";
 const Home = () => {
 
   const settings = {
-    dots: true,
       infinite: true,
       slidesToShow: 4.5,
       slidesToScroll: 1,
@@ -51,7 +50,6 @@ const Home = () => {
     ]
   };
   const settingsTwo = {
-    dots: true,
       infinite: true,
       slidesToShow: 4.5,
       slidesToScroll: 1,
