@@ -44,10 +44,11 @@ const ShippingScreen = ({ history }) => {
             //dispatch(saveShippingAddress({ address, city, postalCode, country }));
 
             if (
-              values.city !== "" &&
+              values.Governorate !== "" &&
               values.appartment !== "" &&
               values.street !== "" &&
-              values.phone !== ""
+              values.phone !== "" &&
+              values.city !== ""
             )
               history.push("/payment");
           }}
@@ -59,6 +60,33 @@ const ShippingScreen = ({ history }) => {
               </div>
               <div className="">
                 <Form>
+                <div className="form-group ">
+                    <label htmlFor="Governorate" className="mt-3"></label>
+
+                    <Field className="form-control selectBox" name="Governorate">
+                      {({ field }) => (
+                        <select className="select" {...field}>
+                          <option>Select Your Governorate</option>
+                          {/* <option value=""></option> */}
+                          {govs.map((i) => (
+                            <option key={i} value={i}>
+                              {i}
+                            </option>
+                          ))}
+                        </select>
+                      )}
+                    </Field>
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="city" className=""></label>
+                    <Field
+                      className="form-control input"
+                      type="text"
+                      name="city"
+                      placeholder="Enter city"
+                      required
+                    />
+                  </div>
                   <div className="form-group">
                     <label htmlFor="appartment"></label>
                     <Field
@@ -96,24 +124,8 @@ const ShippingScreen = ({ history }) => {
                       required
                     />
                   </div>
-
-                  <div className="form-group ">
-                    <label htmlFor="city" className="mt-3"></label>
-
-                    <Field className="form-control selectBox" name="city">
-                      {({ field }) => (
-                        <select className="select" {...field}>
-                          <option>Select Your Governorate</option>
-                          {/* <option value=""></option> */}
-                          {govs.map((i) => (
-                            <option key={i} value={i}>
-                              {i}
-                            </option>
-                          ))}
-                        </select>
-                      )}
-                    </Field>
-                  </div>
+                
+                  
 
                   <button
                     type="submit"
