@@ -1,6 +1,8 @@
 import { useState, useEffect, React } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+
 import {
   addCart,
   delCart,
@@ -14,6 +16,8 @@ import axios from "axios";
 import StripeBtn from "./stripeBtn";
 
 const Cart = () => {
+  let history = useHistory();
+
   const [price, setPrice] = useState({
     p: 0,
   });
@@ -51,7 +55,8 @@ const Cart = () => {
   const cartItems = (product) => {
     return (
       <>
-        <div className="px-4 my-0 bg-light rounded-3 py-2 border-bottom" >
+        <div          style={{cursor:"pointer"}}
+        onClick={()=>history.push(`product/${product._id}`)} className="px-4 my-0 bg-light rounded-3 py-2 border-bottom" >
           <div className="container py-4">
             <button
               onClick={() => handleZero(product)}

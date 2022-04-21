@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCartFirst, addWishlistFirst, zeroCart } from "../redux/action";
+import { addCartFirst, zeroCart,addWishlistFirst ,zeroWishlist} from "../redux/action";
+
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -29,6 +30,7 @@ const Product = () => {
   const notifySuccess = (message) => toast.success(message);
   const orderState = useSelector((state) => state.handleOrders);
   const cartList = useSelector((state) => state.handleCart);
+  const wishList = useSelector((state) => state.handleWishlist);
 
   let history = useHistory();
   const [open, setOpen] = React.useState(false);
@@ -38,8 +40,11 @@ const Product = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reviews, setReviews] = useState([]);
+
   const [popup, setPopup] = useState("");
   const [carted, setcarted] = useState("add to cart");
+  const [wishListed, setWishListed] = useState("add to wishlist");
+
   const [reviewForm, setReviewForm] = useState("d-none");
 
   useEffect(() => {
@@ -53,6 +58,17 @@ const Product = () => {
       for (let index = 0; index < cartList.length; index++) {
         if (cartList[index]._id ===res.data.data[0]._id) {
           setcarted("remove from cart");
+  
+          
+          break;
+        }
+      }
+
+
+
+      for (let index = 0; index < wishList.length; index++) {
+        if (wishList[index]._id ===res.data.data[0]._id) {
+          setWishListed("remove from wishlist");
   
           
           break;
@@ -110,8 +126,21 @@ const Product = () => {
       history.push("/login");
       return;
     }
+    
     if (product.length === 0) return;
-    dispatch(addWishlistFirst(product));
+    
+    for (let i = 0; i < wishList.length; i++) {
+      if (wishList[i]._id === product._id) {
+        dispatch(zeroWishlist(product));
+        setWishListed("add to wishlist");
+        break;
+      }
+    }
+
+    if (wishListed === "add to wishlist") {
+      dispatch(addWishlistFirst(product));
+      setWishListed("remove from wishlist");
+    }
   };
   //changes
 
@@ -266,7 +295,7 @@ const Product = () => {
               className="btn btn-outline-danger  mx-1 px-3 my-1 col-lgcol-md"
               onClick={() => addProductWishlist(product)}
             >
-              <i class="fas fa-heart"></i> Wishlist
+              <i class="fas fa-heart"></i> {wishListed}
             </button>
             {product.quantity <= 0 && (
               <div style={{ cursor: "pointer" }}>
