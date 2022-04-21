@@ -79,7 +79,7 @@ const Product = () => {
       setProduct(res.data.data[0]);
       setReviews(res.data.data[0].reviews);
     });
-  }, [reviews]);
+  }, []);
   function addToWishList() {
     console.log("button");
     var images = product.images;
