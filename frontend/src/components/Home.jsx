@@ -206,6 +206,17 @@ const Home = () => {
         className="d-flex flex-wrap justify-content-around"
         style={{ marginTop: "70px" }}
       >
+        <h1 style={{ width: "80%", textAlign: "center", color: "#999" }}>
+            Categories
+          </h1>
+          <span
+            style={{
+              backgroundColor: "#999",
+              height: "2px",
+              width: "71%",
+              marginBottom: "50px",
+            }}
+          ></span>
         {CategoriesList.map((category) => {
           return <CategoryCard category={category}></CategoryCard>;
         })}

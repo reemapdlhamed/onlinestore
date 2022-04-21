@@ -79,7 +79,7 @@ const Product = () => {
       setProduct(res.data.data[0]);
       setReviews(res.data.data[0].reviews);
     });
-  }, []);
+  }, [reviews]);
   function addToWishList() {
     console.log("button");
     var images = product.images;
@@ -309,16 +309,24 @@ const Product = () => {
         <div
           style={{
             height: "400px",
-            width: "550px",
+            width: "50%",
             border: "2px solid #eee",
-            padding: "10px",
+            padding: "20px",
             marginLeft: "30px",
+            position:"absolute",
+            left:"25%",
+            top:"200px",
+            borderRadius:"15px",
+            backgroundColor:"white",
+            margin:"auto",
+            boxShadow:"rgb(0 0 0 / 30%) 0px 1px 20px 20px",
+            transitionDuration:"0.5s"
           }}
           className={reviewForm}
         >
           <TextField
             className="title"
-            style={{ width: "60%" }}
+            style={{ width: "70%" }}
             onChange={(event) => {
               newReview.title = event.target.value;
             }}
@@ -327,7 +335,7 @@ const Product = () => {
           />
           <TextField
             className="comment"
-            style={{ width: "60%" }}
+            style={{ width: "70%" }}
             onChange={(event) => {
               newReview.description = event.target.value;
             }}
@@ -342,7 +350,7 @@ const Product = () => {
           />
           {popup}
           <Button
-            style={{ width: "20%", margin: "10px" }}
+            style={{ width: "30%", margin: "10px" }}
             onClick={sendReview}
             variant="contained"
             endIcon={<SendIcon />}
@@ -350,7 +358,7 @@ const Product = () => {
             Send
           </Button>
           <Button
-            style={{ width: "20%", margin: "10px" }}
+            style={{ width: "30%", margin: "10px" }}
             onClick={closeAddReview}
             variant="contained"
             color="error"
