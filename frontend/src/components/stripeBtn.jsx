@@ -57,7 +57,7 @@ const StripeBtn = (props) => {
 
         //localStorage.removeItem('persist:root');
         //dispatch(goToHome())
-       // window.location.reload()
+        window.location.reload()
       clearCart()
       })
       .catch((error) => {
