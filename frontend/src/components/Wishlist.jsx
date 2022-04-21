@@ -55,15 +55,15 @@ const Cart = () => {
   const cartItems = (product) => {
     return (
       <>
-        <div          style={{cursor:"pointer"}}
-        onClick={()=>history.push(`product/${product._id}`)} className="px-4 my-0 bg-light rounded-3 py-2 border-bottom" >
-          <div className="container py-4">
+        <div  className="px-4 my-0 bg-light rounded-3 py-2 border-bottom" >
+          <div  className="container py-4">
             <button
               onClick={() => handleZero(product)}
               className="btn-close float-end"
               aria-label="Close"
             ></button>
-            <div class="row g-0">
+            <div          style={{cursor:"pointer"}}
+            onClick={()=>history.push(`product/${product._id}`)} class="row g-0">
               <div class="col-md-4">
                 <img
                   src={product.images}
