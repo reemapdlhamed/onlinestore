@@ -76,6 +76,7 @@ const Checkout = (props) => {
 
   mergedObject.paymentType = props.location.state.paymentMethod;
   mergedObject.discount = discount.val;
+  // console.log("mergedObject",mergedObject);
   const clearCart = () => {
     console.log("ORRRRRRRRRRRRRDDDDDDDDDDDDDDDEEEEEEEEEEEEEEEEEERRRRRRRRRR")
     let res7 = axios({
