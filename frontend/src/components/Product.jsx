@@ -64,10 +64,15 @@ const Product = () => {
       return;
     }
     if (product.length === 0) return;
-    console.log("cartState1",cartState)
+    for(let i=0;i<cartState.length;i++)
+    {
+      if(cartState[i]._id===product._id)
+      {
+        alert("you already have the product on the cart")
+        break
+      }
+    }
     dispatch(addCartFirst(product));
-    console.log("cartState2",cartState)
-
   };
 
   const addProductWishlist = (product) => {
