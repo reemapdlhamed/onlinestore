@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const order = require("./../models/order");
+const Products = require("./../models/product");
 const express = require("express");
 const { validationResult } = require("express-validator");
 
@@ -28,8 +29,28 @@ exports.createOrders = (request, response, next) => {
   });
   object
     .save()
-    .then((data) => {
-      response.status(201).json({ message: "order added", data });
+    .then((d) => {
+      //UPDATE QUANTITY 
+      //TODO: FIX ME PLEASE make me clean. xD
+      for (let i = 0; i < request.body.orderItems.length; i++) {
+        console.log("loop",request.body.orderItems[i].name);
+        Products.findById(request.body.orderItems[i]._id)
+          .then((data) => {
+            console.log("__________",data);
+            if (data.quantity - request.body.orderItems[i].qty >= 0) {
+              Products.findByIdAndUpdate(request.body.orderItems[i]._id, {
+                $set: {
+                  quantity: data.quantity - request.body.orderItems[i].qty,
+                },
+              }).then(res=>{console.log("Last then :",res)});
+            }
+          })
+          .catch((error) => {
+            next(error);
+          });
+      }
+
+      // response.status(201).json({ message: "order added", data });
     })
     .catch((error) => next(error.message));
 };
@@ -122,7 +143,6 @@ exports.getOrders = async (request, response, next) => {
         orders = await order.find();
       }
       response.status(200).json(orders);
-
     } catch (err) {
       response.status(500).json(err);
     }

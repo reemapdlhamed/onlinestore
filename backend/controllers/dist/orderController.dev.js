@@ -4,6 +4,8 @@ var mongoose = require("mongoose");
 
 var order = require("./../models/order");
 
+var Products = require("./../models/product");
+
 var express = require("express");
 
 var _require = require("express-validator"),
@@ -33,11 +35,32 @@ exports.createOrders = function (request, response, next) {
     shippingPrice: request.body.shippingPrice,
     paymentType: request.body.paymentType
   });
-  object.save().then(function (data) {
-    response.status(201).json({
-      message: "order added",
-      data: data
-    });
+  object.save().then(function (d) {
+    var _loop = function _loop(i) {
+      console.log("loop", request.body.orderItems[i].name);
+      Products.findById(request.body.orderItems[i]._id).then(function (data) {
+        console.log("__________", data);
+
+        if (data.quantity - request.body.orderItems[i].qty >= 0) {
+          Products.findByIdAndUpdate(request.body.orderItems[i]._id, {
+            $set: {
+              quantity: data.quantity - request.body.orderItems[i].qty
+            }
+          }).then(function (res) {
+            console.log("Last then :", res);
+          });
+        }
+      })["catch"](function (error) {
+        next(error);
+      });
+    };
+
+    //UPDATE QUANTITY 
+    //TODO: FIX ME PLEASE make me clean. xD
+    for (var i = 0; i < request.body.orderItems.length; i++) {
+      _loop(i);
+    } // response.status(201).json({ message: "order added", data });
+
   })["catch"](function (error) {
     return next(error.message);
   });

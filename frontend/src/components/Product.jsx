@@ -244,12 +244,20 @@ const Product = () => {
           </button>
           <hr />
           <div className="d-grid gap-1 d-md-block my-4">
+          {product.quantity>0&&
             <button
               className="btn btn-outline-dark mx-1  col-lg col-md"
               onClick={() => addProduct(product)}
             >
               Add to Cart
-            </button>
+            </button>}
+
+
+            {product.quantity<=0&&
+              <div>
+                out of stock
+              </div>}
+
             {/* <NavLink
               to="/cart"
               className="btn btn-dark  mx-3 px-3 my-1 col-lg-8 col-md"

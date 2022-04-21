@@ -8,76 +8,69 @@ import { Rating } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../redux/action/Products";
-import { zeroCart, addCartFirst,zeroWishlist,addWishlistFirst  } from "../redux/action";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import {
+  zeroCart,
+  addCartFirst,
+  zeroWishlist,
+  addWishlistFirst,
+} from "../redux/action";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { useEffect, useState } from "react";
 
-
 function Products_Card(props) {
-
-
-  const wishList = useSelector((state)=>state.handleWishlist)
-  const cartList = useSelector((state)=>state.handleCart)
-  const [wishListed,setWishListed] = useState("grey")
-  const [carted,setcarted] = useState("grey")
+  const wishList = useSelector((state) => state.handleWishlist);
+  const cartList = useSelector((state) => state.handleCart);
+  const [wishListed, setWishListed] = useState("grey");
+  const [carted, setcarted] = useState("grey");
   const history = useHistory();
   const dispatch = useDispatch();
   useEffect(() => {
     for (let index = 0; index < wishList.length; index++) {
-      if(wishList[index]._id === props.product._id)
-      {
-        setWishListed("red")
+      if (wishList[index]._id === props.product._id) {
+        setWishListed("red");
         break;
       }
-      
     }
     for (let index = 0; index < cartList.length; index++) {
-      if(cartList[index]._id === props.product._id)
-      {
-        setcarted("green")
+      if (cartList[index]._id === props.product._id) {
+        setcarted("green");
         break;
       }
-      
     }
-  }, [wishList,cartList]);
+  }, [wishList, cartList]);
   const navigateTo = (e) => {
     // dispatch(getProduct(e.target.value))
     history.push(`/product/${e.target.value}`);
   };
   const addProductWishlist = (product) => {
-
-    if(!localStorage.getItem("accessToken"))
-    {
-      history.push('/login')
-      return
+    if (!localStorage.getItem("accessToken")) {
+      history.push("/login");
+      return;
     }
-    
 
-    if(wishListed === "grey"){
+    if (wishListed === "grey") {
       dispatch(addWishlistFirst(product));
-      setWishListed("red")
+      setWishListed("red");
     }
-    if(wishListed === "red"){
+    if (wishListed === "red") {
       dispatch(zeroWishlist(product));
-      setWishListed("grey")
+      setWishListed("grey");
     }
-
   };
   const addProduct = (product) => {
-    if(!localStorage.getItem("accessToken"))
-    {
-      history.push('/login')
-      return
+    if (!localStorage.getItem("accessToken")) {
+      history.push("/login");
+      return;
     }
 
-    if(carted === "grey"){
+    if (carted === "grey") {
       dispatch(addCartFirst(product));
-      setcarted("green")
+      setcarted("green");
     }
-    if(carted === "green"){
+    if (carted === "green") {
       dispatch(zeroCart(product));
-      setcarted("grey")
+      setcarted("grey");
     }
   };
   return (
@@ -93,15 +86,29 @@ function Products_Card(props) {
         image={props.product.images[0]}
         alt="green iguana"
       />
-      <CardContent className="Card1-content"
-      >
-        <Typography style={{fontWeight:"bold"}} gutterBottom variant="h7" component="div">
+      <CardContent className="Card1-content">
+        <Typography
+          style={{ fontWeight: "bold" }}
+          gutterBottom
+          variant="h7"
+          component="div"
+        >
           {props.product.name}
         </Typography>
-        <Typography  style={{color:"white",textOverflow:"ellipsis"}} gutterBottom variant="h7" component="div">
+        <Typography
+          style={{ color: "white", textOverflow: "ellipsis" }}
+          gutterBottom
+          variant="h7"
+          component="div"
+        >
           {props.product.price} E£
         </Typography>
-        <Rating className="product-info" name="read-only" value={props.product.rating} readOnly />
+        <Rating
+          className="product-info"
+          name="read-only"
+          value={props.product.rating}
+          readOnly
+        />
         <Button
           className="product-info"
           style={{ width: "95%" }}
@@ -111,17 +118,26 @@ function Products_Card(props) {
         >
           More Details
         </Button>
-        <div className="product-info" 
-        style={{justifyContent:"space-evenly"}}>
-      
-        <FavoriteIcon 
-          style={{color:wishListed,cursor:"pointer"}}
-          variant="outlined"
-          onClick={()=> addProductWishlist(props.product)}></FavoriteIcon>
-        <ShoppingCartIcon 
-          style={{color:carted,cursor:"pointer"}}
-          variant="outlined"
-          onClick={()=> addProduct(props.product)}></ShoppingCartIcon>
+        <div
+          className="product-info"
+          style={{ justifyContent: "space-evenly" }}
+        >
+          <FavoriteIcon
+            style={{ color: wishListed, cursor: "pointer" }}
+            variant="outlined"
+            onClick={() => addProductWishlist(props.product)}
+          ></FavoriteIcon>
+          <ShoppingCartIcon
+            style={{ color: carted, cursor: "pointer" }}
+            variant="outlined"
+            onClick={() => {
+              if (props.product.quantity) {
+                addProduct(props.product);
+              } else {
+                alert("out of stock sorry");
+              }
+            }}
+          ></ShoppingCartIcon>
         </div>
       </CardContent>
     </Card>

@@ -76,12 +76,20 @@ const Cart = () => {
                   </p>
                   <p class="card-text fw-bold">brand : {product.brand}</p>
                   <p class="card-text fw-bold">Price : {product.price} E£</p>
+                  {
+                    product.quantity>0&&
                   <button
                     className="btn btn-outline-success  col-lg col-md"
                     onClick={() => addProduct(product)}
                   >
                     Add To Cart
-                  </button>
+                  </button>}
+
+                  {
+                    product.quantity<=0&&
+                  <div>
+                  out of stock
+                  </div>}
                 </div>
               </div>
             </div>
