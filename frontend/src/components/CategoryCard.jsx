@@ -22,7 +22,7 @@ function CategoryCard(props) {
   return (
     <div className="category-card" onClick={()=>changeCategory(props.category._id)}>
         <img src={props.category.bannerImage} alt="name"></img>
-        <div><h1>{props.category.name}</h1></div>
+        <div><h1 style={{fontWeight:"bold",color:"rgb(67, 145, 155)",textShadow:"0 0 3px white, 0 0 5px #0000FF"}}>{props.category.name}</h1></div>
     </div>
   );
 }
