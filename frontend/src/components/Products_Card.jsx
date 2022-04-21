@@ -16,6 +16,7 @@ import {
 } from "../redux/action";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import { useEffect, useState } from "react";
 
 function Products_Card(props) {
@@ -127,7 +128,7 @@ function Products_Card(props) {
             variant="outlined"
             onClick={() => addProductWishlist(props.product)}
           ></FavoriteIcon>
-          <ShoppingCartIcon
+          {props.product.quantity?<ShoppingCartIcon
             style={{ color: carted, cursor: "pointer" }}
             variant="outlined"
             onClick={() => {
@@ -138,6 +139,8 @@ function Products_Card(props) {
               }
             }}
           ></ShoppingCartIcon>
+          : <div style={{display:"flex",cursor:"pointer"}}><p><strong>OUT OF STOCK</strong></p><RemoveShoppingCartIcon style={{marginLeft:"0.4em"}}/></div>
+          }
         </div>
       </CardContent>
     </Card>
