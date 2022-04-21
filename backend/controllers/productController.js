@@ -26,6 +26,7 @@ exports.show_products = (request, response, next) => {
 //-----------------------------------------------------------------------------------------------
 exports.random_products = (request, response, next) => {
   Products.find({})
+    .sort({ createdAt: -1 })  
     .limit(8)
     .then((data) => {
       response.status(200).json({ data });
