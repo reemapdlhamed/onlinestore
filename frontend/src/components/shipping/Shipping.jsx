@@ -40,11 +40,23 @@ const ShippingScreen = ({ history }) => {
         <Formik
           initialValues={{}}
           onSubmit={(values) => {
-            dispatch(saveShippingAddress(( values )));
+            if (
+              !values.Governorate ||
+              !values.appartment ||
+              !values.street ||
+              !values.phone ||
+              !values.city ||
+              values.Governorate === "Select Your Governorate"
+            ) {
+              return;
+            }
+            dispatch(saveShippingAddress(values));
             //dispatch(saveShippingAddress({ address, city, postalCode, country }));
 
+            console.log(values);
             if (
               values.Governorate !== "" &&
+              values.Governorate !== "Select Your Governorate" &&
               values.appartment !== "" &&
               values.street !== "" &&
               values.phone !== "" &&
@@ -60,10 +72,13 @@ const ShippingScreen = ({ history }) => {
               </div>
               <div className="">
                 <Form>
-                <div className="form-group ">
+                  <div className="form-group ">
                     <label htmlFor="Governorate" className="mt-3"></label>
 
-                    <Field className="form-control selectBox" name="Governorate">
+                    <Field
+                      className="form-control selectBox"
+                      name="Governorate"
+                    >
                       {({ field }) => (
                         <select className="select" {...field}>
                           <option>Select Your Governorate</option>
@@ -124,8 +139,6 @@ const ShippingScreen = ({ history }) => {
                       required
                     />
                   </div>
-                
-                  
 
                   <button
                     type="submit"
