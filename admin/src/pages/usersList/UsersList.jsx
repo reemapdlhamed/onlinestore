@@ -19,6 +19,7 @@ const UsersList = () => {
     const notifyUpdate = () => toast.success("user updated");
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users.users);
+    
     // const isAdmin = useSelector((state) => state.user.currentUser) != null;
 
 
