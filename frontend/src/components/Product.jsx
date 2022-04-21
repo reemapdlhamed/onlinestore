@@ -28,6 +28,7 @@ const Product = () => {
   const notifyInfo = (message) => toast.info(message);
   const notifySuccess = (message) => toast.success(message);
   const orderState = useSelector((state) => state.handleOrders);
+  const cartState = useSelector((state) => state.handleCart);
 
   let history = useHistory();
   const [open, setOpen] = React.useState(false);
@@ -61,12 +62,16 @@ const Product = () => {
   const dispatch = useDispatch();
 
   const addProduct = (product) => {
+
     if (!localStorage.getItem("accessToken")) {
       history.push("/login");
       return;
     }
     if (product.length === 0) return;
+    console.log("cartState1",cartState)
     dispatch(addCartFirst(product));
+    console.log("cartState2",cartState)
+
   };
 
   const addProductWishlist = (product) => {
