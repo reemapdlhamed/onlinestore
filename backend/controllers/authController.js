@@ -6,7 +6,7 @@ const sendEmail = require("../service/emailTransptor");
 const sendEmail2 = require("./email");
 const Token = require("../models/token");
 const crypto = import("crypto");
-const randomBytes = require('randombytes');
+const randomBytes = require("randombytes");
 const Seller = require("../models/seller");
 const bcrypt = require("bcrypt");
 const { redirect } = require("express/lib/response");
@@ -25,12 +25,19 @@ exports.userLogin = (request, response, next) => {
   User.findOne({ email: request.body.email })
     .then((data) => {
       if (data == null) {
-        throw new Error("email not found1");
+        // throw new Error("email not found");
+        response.status(401).json({ message: "invalid credentials" });
+        return;
       }
       encrypted = data.password;
 
       bcrypt.compare(request.body.password, encrypted).then(function (result) {
         if (result) {
+          if (data.ban) {
+            // throw new Error("user banned");
+            response.status(403).json({ message: "USER BANNED" });
+            return;
+          }
           let accessToken = jwt.sign(
             {
               role: data.role,
@@ -43,7 +50,9 @@ exports.userLogin = (request, response, next) => {
           response.json({ data, accessToken });
           // response.redirect("http://127.0.0.1:5500/index.html")
         } else {
-          next(new Error("wrong pass"));
+          // next(new Error("wrong pass"));
+          response.status(401).json({ message: "invalid credentials" });
+          return;
         }
       });
     })
@@ -118,22 +127,20 @@ exports.register = asyncHandler(async (request, response, next) => {
     name: request.body.name,
     email: request.body.email,
     password: hashed,
-  })
+  });
 
   try {
     const newUser = await user.save();
-console.log(newUser._id)
-
+    console.log(newUser._id);
 
     let token = await new Token({
       userId: newUser._id,
       token: randomBytes(32).toString("hex"),
     }).save();
     //console.log(token)
-   const message = `${process.env.BASE_URL}/user/verify/${user.id}/${token.token}`;
-   console.log(message)
-   await sendEmail2(newUser.email, "Verify Email", message);
-
+    const message = `${process.env.BASE_URL}/user/verify/${user.id}/${token.token}`;
+    console.log(message);
+    await sendEmail2(newUser.email, "Verify Email", message);
 
     response.status(201).json(newUser);
   } catch (err) {
@@ -141,9 +148,6 @@ console.log(newUser._id)
     next(err);
   }
 });
-
-
-
 
 exports.updateUser = (request, response, next) => {
   let errors = validationResult(request);
@@ -291,7 +295,7 @@ exports.googleLogin = async (req, res) => {
 
     let user = await User.findOne({ email });
     if (!user) {
-      console.log("NOT")
+      console.log("NOT");
       const newUser = new User({
         name: name,
         email: email,
@@ -300,12 +304,10 @@ exports.googleLogin = async (req, res) => {
       });
 
       await newUser.save();
-      console.log("SAVED")
-       user = await User.findOne({ email });
+      console.log("SAVED");
+      user = await User.findOne({ email });
     }
-    if(!user)
-    {
-
+    if (!user) {
     }
     if (user) {
       const isMatch = await bcrypt.compare(password, user.password);

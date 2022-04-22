@@ -38,8 +38,6 @@ function Login() {
       localStorage.setItem("firstLogin", true);
       // console.log("RES",res)
 
-
-
       localStorage.setItem("email", res.data.data.email);
       localStorage.setItem("accessToken", res.data.data.accessToken);
       localStorage.setItem("role", "customer");
@@ -49,10 +47,10 @@ function Login() {
       localStorage.setItem("data", res.data.data);
       window.location.replace("/");
       // history.goBack()
-      
+
       setSuccess(true);
       let data = response.data;
-// console.log("DATA")
+      // console.log("DATA")
       return data;
     } catch (error) {
       if (!error?.response) {
@@ -67,14 +65,11 @@ function Login() {
       errorRef.current.focus();
     }
 
-    
+    // setUser({ ...user, error: "", success: res.data.msg });
+    // localStorage.setItem("firstLogin", true);
 
-      // setUser({ ...user, error: "", success: res.data.msg });
-      // localStorage.setItem("firstLogin", true);
-
-      // dispatch(dispatchLogin());
-      // history.push("/");
-
+    // dispatch(dispatchLogin());
+    // history.push("/");
   };
 
   const { setAuth } = useContext(AuthContext);
@@ -119,12 +114,15 @@ function Login() {
 
       return data;
     } catch (error) {
+      setErrMsg(error.message);
       if (!error?.response) {
         setErrMsg("No Server Response");
       } else if (error.response?.status === 500) {
         setErrMsg("Missing Email Or Password");
       } else if (error.response?.status === 401) {
-        setErrMsg("Unauthorized");
+        setErrMsg("invalid email or password");
+      } else if (error.response?.status === 403) {
+        setErrMsg("user banned");
       } else {
         setErrMsg("Login Failed");
       }
