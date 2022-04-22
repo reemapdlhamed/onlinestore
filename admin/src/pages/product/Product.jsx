@@ -43,7 +43,7 @@ export default function Product() {
     //     }
     //     setProperties(prop);
     // };
-    const strToObj = (str) =>{
+    const strToObj = (str) => {
         let properties = {};
         for (let p of str.split(",")) {
             properties[p.split(":")[0]?.trim()] = p.split(":")[1]?.trim();
@@ -81,7 +81,7 @@ export default function Product() {
         e.preventDefault();
         // let product = { ...inputs, category_id: category, properties: properties, images: [image] };
         console.dir(productEdit);
-        let product = { ...productEdit, images: [image],properties:strToObj(properties) };
+        let product = { ...productEdit, images: [image], properties: strToObj(properties) };
         console.log("finalPro", product)
 
         try {
@@ -125,15 +125,21 @@ export default function Product() {
                                 <div className="userShowInfo">
                                     <span className="userShowInfoTitle"><strong>Rating: </strong>{product.rating}</span>
                                 </div>
-                                <span className="userShowInfoTitle"><strong>Properties: </strong></span>
-                                <div className="userShowInfo productProperties">
 
-                                    <div className="productProperties">
-                                        {Object.keys(product.properties).map(p => {
-                                            return <p><strong>{p}: </strong> {product.properties[p]}</p>
-                                        })}
-                                    </div>
-                                </div>
+                                {product.properties ?
+                                    <>
+                                        <span className="userShowInfoTitle"><strong>Properties: </strong></span>
+                                        <div className="userShowInfo productProperties">
+
+                                            <div className="productProperties">
+                                                {Object.keys(product.properties).map(p => {
+                                                    return <p><strong>{p}: </strong> {product.properties[p]}</p>
+                                                })}
+                                            </div>
+                                        </div>
+                                    </> :
+                                    <></>
+                                }
                             </div>
                         </div>
                         <div className="userUpdate">
@@ -207,7 +213,7 @@ export default function Product() {
                                             type="text"
                                             className="userUpdateInput"
                                             value={properties}
-                                            onChange={(e)=>{setProperties(e.target.value)}}
+                                            onChange={(e) => { setProperties(e.target.value) }}
                                             name="rating"
                                             placeholder="screan size: 15.6 inches, Hard disk size: 1256, Graphics: Dedicated"
                                         />
