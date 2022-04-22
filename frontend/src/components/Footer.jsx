@@ -41,7 +41,7 @@ const Footer = () => {
           <i className="fas fa-shopping-cart fa-1x"></i> ShipShop           
           </h6>
           <p>
-       we  are E-commerce website that allows people to buy and sell physical goods, services, and digital products over the internet rather than at a brick-and-mortar location. Through an e-commerce website, a business can process orders, accept payments, manage shipping and logistics, and provide customer service.
+          ShipShop.com is a vast Internet-based enterprise that sells almost everything, like books, Mobiles, Fashion, Electronics, and many other goods, either directly or as the middleman between other retailers and ShipShop.com millions of customers.
           </p>
         </div>
 
@@ -126,15 +126,15 @@ const Footer = () => {
             <i className="fas fa-envelope me-3"></i>
             shipshopservies@gmail.com
           </p>
-          <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
-          <p><i className="fas fa-print me-3"></i> + 01 234 567 89</p>
+          <p><i className="fas fa-phone me-3"></i> + 01 554293937</p>
+          <p><i className="fas fa-print me-3"></i> + 01 554293937</p>
         </div>
       </div>
     </div>
   </section>
 
   <div className="d-flex justify-content-center pt-4 mt-4 border-top px-3 text-center">
-              <p>© 2022 , Inc. All rights reserved, ITI-Dragons-Team</p>
+              <p>© 2022 , Inc. All rights reserved, ITI-ShipShop-Team</p>
               
             </div>
             </footer>
