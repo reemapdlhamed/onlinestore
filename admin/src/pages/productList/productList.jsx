@@ -40,7 +40,7 @@ export default function ProductList() {
     }, [dispatch]);
 
     const handleDelete = (id) => {
-        deleteProduct(id, dispatch,notifySuccess);
+        deleteProduct(id, dispatch, notifySuccess);
     };
 
     const getCategoryName = (catID) => {
@@ -53,25 +53,26 @@ export default function ProductList() {
 
         {
             field: "product",
-            headerName: "Product",
-            width: 350,
+            headerName: "Image",
+            width: 70,
             renderCell: (params) => {
                 return (
                     <div className="productListItem">
                         <img className="productListImg" src={params.row.images[0]} alt="" />
-                        {params.row.name}
+
                     </div>
                 );
             },
         },
+        { field: "name", headerName: "Product Name", width: 300 },
         {
-            field: "Category",
+            field: "category_id",
             headerName: "Category",
             width: 150,
             renderCell: (params) => {
                 return (
 
-                    getCategoryName(params.row.category_id)
+                    getCategoryName(params.row.category_id).toString()
 
                 );
             },
