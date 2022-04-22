@@ -7,7 +7,7 @@ import { productSlice } from "./productRedux";
 import { userSlice } from "./loginRedux";
 import { usersSlice } from "./userRedux";
 import { categoriesSlice } from "./categoryRedux";
-
+import { emailsSlice } from "./emailRedux";
 import {
   persistStore,
   persistReducer,
@@ -37,6 +37,7 @@ const rootReducer = combineReducers({
   product: productSlice.reducer,
   order: orderSlice.reducer,
   categories: categoriesSlice.reducer,
+  emails:emailsSlice.reducer
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

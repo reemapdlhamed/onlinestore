@@ -76,13 +76,15 @@ const Sidebar = () => {
             <span>Cateogeries</span>
           </li>
         </Link>
+        <Link to="/emails" style={{ textDecoration: "none" }}>
+        <li>
+          <EmailIcon className="icon" />
+          <span>Messages</span>
+        </li>
+        </Link>
         {/* <li>
           <LocalOfferIcon className="icon" />
           <span>Coupons</span>
-        </li>
-        <li>
-          <CategoryIcon className="icon" />
-          <span>Messages</span>
         </li> */}
 
 

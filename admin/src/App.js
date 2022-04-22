@@ -20,6 +20,7 @@ import Product from "./pages/product/Product";
 import OrdersList from "./pages/ordersList/OrdersList";
 import UsersList from "./pages/usersList/UsersList";
 import CategoriesList from "./pages/categoryList/categoryList";
+import EmailsList from "./pages/emailList/emailList";
 import NewUser from "./pages/newUser/NewUser";
 import NewCategory from "./pages/newCategory/NewCategory";
 
@@ -60,7 +61,7 @@ function App() {
             />
 
             <Route element={<ProtectedRoute />}>
-              <Route path="home" element={<Home />} />
+              <Route path="home" element={<Navigate to="/" replace />} />
               <Route path="/" element={<Home />} />
               <Route path="users">
                 {/* <Route index element={<List />} /> */}
@@ -92,6 +93,12 @@ function App() {
                 <Route index element={<OrdersList />} />
                 <Route path=":orderId" element={<Order />} />
                 {/* <Route path="new" element={<NewProduct />} /> */}
+              </Route>
+
+              <Route path="emails">
+                {/* <Route index element={<List />} /> */}
+                <Route index element={<EmailsList />} />
+    
               </Route>
             </Route>
           </Route>

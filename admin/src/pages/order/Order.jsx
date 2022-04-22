@@ -145,7 +145,7 @@ export default function Order() {
                                     <span className="userShowInfoTitle"><strong>Order Status: </strong>{order.orderStatus}</span>
                                 </div>
                                 <div className="userShowInfo">
-                                    <span className="userShowInfoTitle"><strong>Payment Type: </strong>{order.paymentType}</span>
+                                    <span className="userShowInfoTitle"><strong>Payment Type: </strong>{order.paymentType == "cod" ? "Cash On Delivery" : order.paymentType}</span>
                                 </div>
                                 <div className="userShowInfo">
                                     <span className="userShowInfoTitle"><strong>Payment Status: </strong>{order.paymentStatus}</span>

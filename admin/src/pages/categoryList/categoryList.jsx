@@ -32,9 +32,9 @@ const CategoriesList = () => {
 
     const columns = [
         
-        { field: "_id", headerName: "ID", width: 250 },
+        // { field: "_id", headerName: "ID", width: 250 },
         { field: "name", headerName: "Name", width: 250 },
-        { field: "description", headerName: "email", width: 250 },
+        { field: "description", headerName: "description", width: 450 },
         // { field: "bannerImage", headerName: "bannerImage", width: 220 },
 
         {

@@ -49,7 +49,7 @@ export default function ProductList() {
     }
 
     const columns = [
-        { field: "_id", headerName: "ID", width: 220 },
+        // { field: "_id", headerName: "ID", width: 220 },
 
         {
             field: "product",

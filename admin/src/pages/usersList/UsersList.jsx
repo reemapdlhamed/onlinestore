@@ -19,7 +19,7 @@ const UsersList = () => {
     const notifyUpdate = () => toast.success("user updated");
     const dispatch = useDispatch();
     const users = useSelector((state) => state.users.users);
-    
+
     // const isAdmin = useSelector((state) => state.user.currentUser) != null;
 
 
@@ -44,7 +44,7 @@ const UsersList = () => {
 
 
     const columns = [
-        { field: "_id", headerName: "   ID", width: 250 },
+        // { field: "_id", headerName: "   ID", width: 250 },
         { field: "name", headerName: "Name", width: 200 },
         { field: "email", headerName: "email", width: 250 },
         { field: "role", headerName: "role", width: 150 },
@@ -92,9 +92,11 @@ const UsersList = () => {
                         disableSelectionOnClick
                         columns={columns}
                         getRowId={(row) => row._id}
-                        pageSize={9}
-                        rowsPerPageOptions={[9]}
+                        pageSize={8}
+                        rowsPerPageOptions={[8]}
                         pagination
+                        // getRowClassName={(params) =>  {if(params.row.ban) return `row`}} 
+
 
                     />
                 </div>

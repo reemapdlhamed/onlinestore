@@ -4,7 +4,7 @@ import Navbar from '../../components/navbar/Navbar';
 import { Link } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect ,useState} from 'react';
+import { useEffect, useState } from 'react';
 import { getOrders, deleteOrder } from '../../redux/apiCalls';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Button } from '@mui/material';
@@ -15,7 +15,7 @@ const OrdersList = () => {
 
     const dispatch = useDispatch();
     const orders = useSelector((state) => state.order.orders);
-    console.log("orders",orders)
+    console.log("orders", orders)
 
     useEffect(() => {
         getOrders(dispatch);
@@ -30,12 +30,21 @@ const OrdersList = () => {
     }
 
     const columns = [
-        { field: "_id", headerName: "ID", width: 240 },
+        // { field: "_id", headerName: "ID", width: 240 },
         { field: "customerName", headerName: "Customer", width: 120, },
         // { field: "phoneNumber", headerName: "Phone", width: 160 },
         { field: "totalPrice", headerName: "Price", width: 120, },
         { field: "orderStatus", headerName: "Order Status", width: 160 },
-        { field: "paymentType", headerName: "payment Type", width: 160 },
+        // { field: "paymentType", headerName: "payment Type", width: 160 },
+       
+        {
+            field: "paymentType", headerName: "paymentType", width: 200,
+            renderCell: (params) => {
+                return (
+                    params.row.paymentType == "cod" ? "Cash On Delivery" : params.row.paymentType
+                );
+            },
+        },
         { field: "paymentStatus", headerName: "payment Status", width: 160 },
         // {
         //     field: "shippingAddress", headerName: "Address", width: 160,
@@ -78,10 +87,10 @@ const OrdersList = () => {
                         <Link to={"/orders/" + params.row._id}>
                             <button className="productListEdit">Edit</button>
                         </Link>
-                        <DeleteOutlineIcon
+                        {/* <DeleteOutlineIcon
                             className="productListDelete"
                             onClick={() => handleDelete(params.row._id)}
-                        />
+                        /> */}
                     </>
                 );
             },
@@ -98,8 +107,8 @@ const OrdersList = () => {
                         disableSelectionOnClick
                         columns={columns}
                         getRowId={(row) => row._id}
-                        pageSize={10}
-                        rowsPerPageOptions={[5]}
+                        pageSize={8}
+                        rowsPerPageOptions={[8]}
 
                     />
                 </div>

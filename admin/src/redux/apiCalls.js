@@ -39,7 +39,6 @@ import {
   updateUserFailure,
 } from "./userRedux";
 
-
 import {
   getCategoryStart,
   getCategorySuccess,
@@ -53,7 +52,9 @@ import {
   updateCategoryStart,
   updateCategorySuccess,
   updateCategoryFailure,
-} from "./categoryRedux"
+} from "./categoryRedux";
+
+import { getEmailStart, getEmailSuccess, getEmailFailure } from "./emailRedux";
 
 import axios from "axios";
 
@@ -71,8 +72,8 @@ const CONFIG = () => {
 };
 export const login = async (navigate, dispatch, user) => {
   dispatch(loginStart());
-  console.log("user",user);
-    const res = request
+  console.log("user", user);
+  const res = request
     .post("/login", user)
     .then((res) => {
       console.log(res);
@@ -100,7 +101,7 @@ export const getProducts = async (dispatch) => {
   }
 };
 
-export const deleteProduct = async (id, dispatch,notifySuccess) => {
+export const deleteProduct = async (id, dispatch, notifySuccess) => {
   dispatch(deleteProductStart());
 
   try {
@@ -130,14 +131,17 @@ export const updateProduct = async (id, product, dispatch) => {
   }
 };
 
-export const addProduct = async (product, dispatch,{notifySuccess,notifyError}) => {
+export const addProduct = async (
+  product,
+  dispatch,
+  { notifySuccess, notifyError }
+) => {
   dispatch(addProductStart());
   try {
     const res = await request.post(`/products`, product, CONFIG());
     console.log("res", res.data.data);
     dispatch(addProductSuccess(res.data.data));
     notifySuccess();
-
   } catch (err) {
     notifyError();
     console.log("err", err);
@@ -200,7 +204,7 @@ export const getUsers = async (dispatch) => {
   }
 };
 
-export const deleteUser = async (id, dispatch,notify) => {
+export const deleteUser = async (id, dispatch, notify) => {
   dispatch(deleteUserStart());
   try {
     const res = await request.delete(`/users/${id}`, CONFIG());
@@ -212,7 +216,7 @@ export const deleteUser = async (id, dispatch,notify) => {
   }
 };
 
-export const updateUser = async (id, user, dispatch,notify) => {
+export const updateUser = async (id, user, dispatch, notify) => {
   dispatch(updateUserStart());
   try {
     const res = await request.put(`/users/${id}`, user, CONFIG());
@@ -236,34 +240,36 @@ export const getStats = async () => {
   }
 };
 
-
 export const getCategories = async (dispatch) => {
   dispatch(getCategoryStart());
   try {
     const res = await request.get("/categories");
-    console.log("res.data",res.data);
+    console.log("res.data", res.data);
     dispatch(getCategorySuccess(res.data));
   } catch (err) {
     dispatch(getCategoryFailure());
   }
 };
 
-export const addCategory = async (category, dispatch,{notifySuccess,notifyError}) => {
+export const addCategory = async (
+  category,
+  dispatch,
+  { notifySuccess, notifyError }
+) => {
   dispatch(addCategoryStart());
   try {
     const res = await request.post(`/categories`, category, CONFIG());
     console.log("res.data.data", res.data.data);
     dispatch(addCategorySuccess(res.data.data));
     notifySuccess();
-
   } catch (err) {
-    notifyError()
+    notifyError();
     console.log("err", err);
     dispatch(addCategoryFailure());
   }
 };
 
-export const deleteCategory = async (id, dispatch,notify) => {
+export const deleteCategory = async (id, dispatch, notify) => {
   dispatch(deleteCategoryStart());
 
   try {
@@ -276,8 +282,7 @@ export const deleteCategory = async (id, dispatch,notify) => {
   }
 };
 
-
-export const updateCategory = async (id, category, dispatch,notify) => {
+export const updateCategory = async (id, category, dispatch, notify) => {
   dispatch(updateCategoryStart());
   try {
     const res = await request.put(`/categories/${id}`, category, CONFIG());
@@ -287,5 +292,16 @@ export const updateCategory = async (id, category, dispatch,notify) => {
   } catch (err) {
     console.log("error", err);
     dispatch(updateCategoryFailure());
+  }
+};
+
+export const getEmails = async (dispatch) => {
+  dispatch(getEmailStart());
+  try {
+    const res = await request.get("/message");
+    console.log("res.data", res.data);
+    dispatch(getEmailSuccess(res.data.data));
+  } catch (err) {
+    dispatch(getEmailFailure());
   }
 };
