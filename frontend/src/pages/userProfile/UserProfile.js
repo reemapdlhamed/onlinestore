@@ -358,7 +358,7 @@ export default function UserProfile() {
                             to={`orders/${row.id}`}
                             className=" btn-outline-dark  ms-2 px-3 py-2"
                           >
-                            proceed to order
+                            proceed to order details
                           </NavLink>
                         </TableCell>
                         <TableCell align="right">{row.createdAt} </TableCell>
