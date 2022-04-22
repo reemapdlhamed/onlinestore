@@ -117,7 +117,7 @@ const FAQs = () => {
           <div className="answers">
             <p>
               We offer free processing on all orders over $100. On orders less
-              than $100 the cost of barcodes and marc records is $10.00 per
+              than E£100 the cost of barcodes and marc records is E£10.00 per
               order.{" "}
             </p>
           </div>
@@ -151,7 +151,7 @@ const FAQs = () => {
         </h3>
         <hr />
 
-        <div>
+        {/* <div>
           <input
             type="checkbox"
             id="question11"
@@ -164,11 +164,11 @@ const FAQs = () => {
           </label>
           <div className="answers">
             <p>
-              S&L means school/library. Our school/library prices reflect a 30%
+              S&L means school/library/hosipital. Our school/library prices reflect a 30%
               discount off list prices.
             </p>
           </div>
-        </div>
+        </div> */}
         <div>
           <input
             type="checkbox"
@@ -182,7 +182,7 @@ const FAQs = () => {
           </label>
           <div className="answers">
             <p>
-              You can order Cavendish Square Products by mail, toll-free fax or
+              You can order shipShop  Products by mail, toll-free fax or
               telephone, and online through our cart or quick order portals.
             </p>
             <p>
@@ -190,17 +190,17 @@ const FAQs = () => {
               or PDF) or purchase order to:
             </p>
             <p>
-              Cavendish Square
+              shipshop 
               <br />
-              243 5th Avenue, Suite 136
+              243 5th Mansoura, suezcanel st 136
               <br />
-              New York, NY 10016
+              Mansoura, NY 35111
               <br />
               Attention: Customer Service
             </p>
             <p>
               Place an order anytime through our toll-free fax at
-              1-877-980-4454. Please fax the order form or purchase order; be
+              01554293937. Please fax the order form or purchase order; be
               sure to include the billing and shipping addresses, item ISBNs,
               titles, quantity, price, shipping/handling, and tax (if
               applicable). Please include any special instructions or library
@@ -209,7 +209,7 @@ const FAQs = () => {
             <p>
               Please feel free to order toll-free via telephone between 9 AM and
               5 PM, Eastern Standard Time, Monday through Friday at
-              1-877-980-4450.
+              01554293937.
             </p>
             <p>
               To order online, please select items for your cart and proceed to
@@ -242,7 +242,7 @@ const FAQs = () => {
               section of the purchase portal.
             </p>
             <p>
-              You can also contact Customer Service at 1-877-980-4450 between 9
+              You can also contact Customer Service at 01554293937 between 9
               AM and 5 PM, EST, Monday through Friday to redeem offers.
             </p>
           </div>
@@ -264,7 +264,7 @@ const FAQs = () => {
               Our standard shipping time is 7 to 10 business days from the
               receipt of your purchase order for in-stock items. If your order
               requires expedited delivery, please call Customer Service at
-              1-877-980-4450.{" "}
+              01554293937.{" "}
             </p>
           </div>
         </div>
@@ -371,9 +371,9 @@ const FAQs = () => {
             What is the cost for shipping & handling?
           </label>
           <div className="answers">
-            <p>Shipping is FREE on all orders over $350. </p>
+            <p>Shipping is FREE on all orders over E£350. </p>
             <p>
-              On orders less than $350, shipping is 9% of your invoice total.{" "}
+              On orders less than E£350, shipping is 9% of your invoice total.{" "}
             </p>
             <p>
               Additional shipping charges will be applied to all orders that are
@@ -410,17 +410,17 @@ const FAQs = () => {
             </p>
             <p>
               Our Customer Service Representatives are available from 9 AM to 5
-              PM EST at 1-877-980-4450. <br />
-              Cavendish Square
+              PM EST at 01554293937. <br />
+              ShipShop Mansoura
               <br />
-              243 5th Avenue, Suite 136
+              243 5th SuezCanelSt, 136
               <br />
-              New York, NY 10016
+              Mansoura, SuezCanelSt 
               <br />
               Customer Service <br />
-              Toll-free: 1-877-980-4450
+              Toll-free: 01554293937
               <br />
-              Toll-free fax: 1-877-980-4454
+              Toll-free fax: 01554293937
               <br />
               Customer Service Form{" "}
             </p>
@@ -492,7 +492,7 @@ const FAQs = () => {
           <div className="answers">
             <p>
               If you have entered the correct username/password and you’re still
-              unable to log in, please call Customer Service at 1-877-980-4450.
+              unable to log in, please call Customer Service at 01554293937.
               We will also remind you of your username and password in case you
               forget. Otherwise, you can reset your password through our reset
               portal.{" "}
@@ -540,7 +540,7 @@ const FAQs = () => {
               <p>
                 Our Representatives—who are experts in making sure that your
                 acquisition needs are met—can be located by calling Customer
-                Service at 1-877-980-4450.{" "}
+                Service at 01554293937.{" "}
               </p>
             </div>
           </div>
@@ -560,7 +560,7 @@ const FAQs = () => {
                 Customer Service can help you directly with international
                 purchases. Additional shipping charges will be added for
                 international delivery. Please call Customer Service at
-                1-877-980-4450.{" "}
+                01554293937.{" "}
               </p>
             </div>
           </div>
@@ -573,9 +573,14 @@ const FAQs = () => {
             />
             <div className="plus">+</div>
             <label htmlFor="question22" className="question">
-              Do you have distributors outside of the United States?
+              Do you have distributors outside of the Egypt?
             </label>
-            <div className="answers"></div>
+            <div className="answers">
+              <p>
+                Really, WE don't have any distributors out of Egypt,
+                Maybe in the Future Who Know !
+              </p>
+            </div>
           </div>
           <div>
             <input
@@ -623,7 +628,7 @@ const FAQs = () => {
                 usage other than original purposes.
               </p>
               <p>
-                You can verify usage rights through Customer Service at 19666 or
+                You can verify usage rights through Customer Service at 01554293937 or
                 by submitting your query through our Customer Service form.
               </p>
               <p>
@@ -634,7 +639,7 @@ const FAQs = () => {
               <p>
                 Attn: Permissions Department
                 <br />
-                243 5th Cairo, Ramsisi 136
+                243 5th Mansoura, SuezCanelSt 136
                 <br />
                 Egypt, NY 10016
               </p>
