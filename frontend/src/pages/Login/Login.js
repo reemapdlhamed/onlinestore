@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from "react";
 import { GoogleLogin } from "react-google-login";
 import AuthContext from "../../Context/AuthProvider";
-import { useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import Products from "./../Products/Products";
 import "./login.css";
 import { Link, Redirect } from "react-router-dom";
@@ -216,7 +216,7 @@ function Login() {
                 id="togglePassword"
                 style={{ marginLeft: " -30px", cursor: "pointer" }}
               ></i>
-              <Link
+              {/* <Link
                 to="/forgotPassword"
                 style={{
                   fontSize: "12px",
@@ -227,7 +227,7 @@ function Login() {
                 }}
               >
                 Forgot Your Password?
-              </Link>
+              </Link> */}
 
               <button
                 // onClick={signIn}
@@ -256,7 +256,7 @@ function Login() {
               // onClick={register}
               className="login__registerbutton"
             >
-              <a href="/register"> Create Your Account</a>
+              <NavLink to="/register"> Create Your Account</NavLink>
             </button>
           </div>
         </div>

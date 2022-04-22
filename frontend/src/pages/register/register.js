@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import axios from "../../api/axios";
 import { useRef, useState, useEffect } from "react";
 import { ToastContainer, toast } from "react-toastify";
@@ -356,7 +356,7 @@ function register() {
               // onClick={register}
               className="login__registerbutton "
             >
-              <a href="/login">Already have an account?</a>
+              <NavLink to="/login">Already have an account?</NavLink>
             </button>
           </div>
         </div>
