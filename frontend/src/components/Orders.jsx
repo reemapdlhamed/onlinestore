@@ -62,10 +62,7 @@ const Orders = (props) => {
     <div className="main_container min-vh-100 py-5">
       <div className="container padding-bottom-3x mb-1">
         <div className="card mb-3">
-          <div className="p-4 text-center text-white text-lg bg-dark rounded-top">
-            <span className="text-uppercase">Tracking Order No - </span>
-            <span className="text-medium">{id}</span>
-          </div>
+  
           <div className="d-flex flex-wrap flex-sm-nowrap justify-content-between py-3 px-2 bg-secondary">
             <div className="w-100 text-center py-1 px-2">
               <span className="text-medium">Shipped Via:</span> DHL
