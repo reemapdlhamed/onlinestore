@@ -36,6 +36,7 @@ const EmailsList = () => {
         // { field: "_id", headerName: "ID", width: 250 },
         { field: "name", headerName: "Name", width: 200 },
         { field: "email", headerName: "email", width: 250 },
+        { field: "phone", headerName: "Phone", width: 250 },
         { field: "message", headerName: "message", width: 450 },
 
 

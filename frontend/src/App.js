@@ -31,7 +31,6 @@ import {
   addOrdersFromDB,
 } from "./redux/action";
 import { useDispatch, useSelector } from "react-redux";
-import Favourites from "./components/Favourites"
 import UserProfile from "./pages/userProfile/UserProfile";
 import axios from "axios";
 import Footer from "./components/Footer";

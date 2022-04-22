@@ -70,7 +70,7 @@ const StripeBtn = (props) => {
     
     <div>
       <StripeCheckout
-        label={`confirm with paying ${props.total}$ with credit card`} //Component button text
+        label={`confirm with paying ${props.total}E£ with credit card`} //Component button text
         name="Pay with Card" 
         // description="modal description"
         panelLabel="pay" //Submit button in modal

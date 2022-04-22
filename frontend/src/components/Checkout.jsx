@@ -7,6 +7,8 @@ import { goToHome } from "../redux/action/Cart";
 import { useState } from "react";
 import data from "../copons.json";
 import { border } from "@mui/system";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 var promocodes = data[2].data[0];
 
@@ -20,11 +22,12 @@ const Checkout = (props) => {
   const [txt, setTxt] = useState({
     val: "",
   });
-
+  const notifyInfo = (message) => toast.info(message);
   const Copon = () => {
     if (discount.val === 0) {
       if (total < 1000) {
-        alert("sorry ,  copons can  only apply for orders >=1000 egp");
+        // alert("sorry ,  copons can  only apply for orders >=1000 egp");
+        notifyInfo("sorry ,  copons can  only apply for orders >=1000 egp");
         return;
       }
 
@@ -142,6 +145,7 @@ const Checkout = (props) => {
 
   return (
     <>
+    <ToastContainer />
       <div
         className="container-fluid  min-vh-100 "
         style={{

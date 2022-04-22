@@ -251,7 +251,7 @@ export default function UserProfile() {
                   style={{
                     paddingLeft: "3rem",
                     // marginBottom: "100px",
-                    marginLeft: " 92rem",
+                    marginLeft: " 104rem",
                     marginTop: "11rem",
                     position: "absolute",
                     cursor: "pointer",
@@ -273,7 +273,7 @@ export default function UserProfile() {
                   style={{
                     paddingLeft: "3rem",
 
-                    marginLeft: " 92rem",
+                    marginLeft: " 104rem",
                     marginTop: "15rem",
                     position: "absolute",
                     cursor: "pointer",

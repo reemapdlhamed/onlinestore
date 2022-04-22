@@ -42,8 +42,8 @@ const Product = () => {
   const [reviews, setReviews] = useState([]);
 
   const [popup, setPopup] = useState("");
-  const [carted, setcarted] = useState("add to cart");
-  const [wishListed, setWishListed] = useState("add to wishlist");
+  const [carted, setcarted] = useState("Add to Cart");
+  const [wishListed, setWishListed] = useState("Add to Wishlist");
 
   const [reviewForm, setReviewForm] = useState("d-none");
 
@@ -57,7 +57,7 @@ const Product = () => {
 
       for (let index = 0; index < cartList.length; index++) {
         if (cartList[index]._id ===res.data.data[0]._id) {
-          setcarted("remove from cart");
+          setcarted("Remove From Cart");
   
           
           break;
@@ -68,7 +68,7 @@ const Product = () => {
 
       for (let index = 0; index < wishList.length; index++) {
         if (wishList[index]._id ===res.data.data[0]._id) {
-          setWishListed("remove from wishlist");
+          setWishListed("Remove From Wishlist");
   
           
           break;
@@ -109,14 +109,14 @@ const Product = () => {
     for (let i = 0; i < cartList.length; i++) {
       if (cartList[i]._id === product._id) {
         dispatch(zeroCart(product));
-        setcarted("add to cart");
+        setcarted("Add to Cart");
         break;
       }
     }
 
-    if (carted === "add to cart") {
+    if (carted === "Add to Cart") {
       dispatch(addCartFirst(product));
-      setcarted("remove from cart");
+      setcarted("Remove From Cart");
     }
 
   };
@@ -132,14 +132,14 @@ const Product = () => {
     for (let i = 0; i < wishList.length; i++) {
       if (wishList[i]._id === product._id) {
         dispatch(zeroWishlist(product));
-        setWishListed("add to wishlist");
+        setWishListed("Add to Wishlist");
         break;
       }
     }
 
-    if (wishListed === "add to wishlist") {
+    if (wishListed === "Add to Wishlist") {
       dispatch(addWishlistFirst(product));
-      setWishListed("remove from wishlist");
+      setWishListed("Remove From Wishlist");
     }
   };
   //changes

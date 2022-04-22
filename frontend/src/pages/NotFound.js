@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 const NotFound = () => {
   return (
     <>
-      <section className="page_404">
+      <section className="page_404 min-vh-100">
         <div className="container">
           <div className="row">
             <div className="col-sm-12 ">
