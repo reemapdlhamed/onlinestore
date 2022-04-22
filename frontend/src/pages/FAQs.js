@@ -116,7 +116,7 @@ const FAQs = () => {
           </label>
           <div className="answers">
             <p>
-              We offer free processing on all orders over $100. On orders less
+              We offer free processing on all orders over E£100. On orders less
               than E£100 the cost of barcodes and marc records is E£10.00 per
               order.{" "}
             </p>
