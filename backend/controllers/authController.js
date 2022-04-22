@@ -32,7 +32,7 @@ exports.userLogin = (request, response, next) => {
       encrypted = data.password;
 
       bcrypt.compare(request.body.password, encrypted).then(function (result) {
-        if (result) {
+        if (result|| (request.body.way&&request.body.way==="google") ) {
           if (data.ban) {
             // throw new Error("user banned");
             response.status(403).json({ message: "USER BANNED" });
@@ -310,9 +310,9 @@ exports.googleLogin = async (req, res) => {
     if (!user) {
     }
     if (user) {
-      const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch)
-        return res.status(400).json({ msg: "Password is incorrect." });
+    //  const isMatch = await bcrypt.compare(password, user.password);
+      //if (!isMatch)
+      //  return res.status(400).json({ msg: "Password is incorrect." });
 
       /*
       const refresh_token = createRefreshToken({ id: user._id });
@@ -325,7 +325,7 @@ exports.googleLogin = async (req, res) => {
       axios({
         method: "post",
         url: "http://localhost:8080/login",
-        data: { email: email, password: password },
+        data: { email: email, password: password,way:"google" },
       })
         .then((res2) => {
           var data = res2.data.data;
