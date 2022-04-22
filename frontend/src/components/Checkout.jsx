@@ -69,7 +69,7 @@ const Checkout = (props) => {
 
   if (!props.location.state) {
     props.history.push("/");
-   // window.location.reload();
+    window.location.reload();
   }
 
   const mergedObject = addresState.list;
@@ -117,7 +117,7 @@ const Checkout = (props) => {
     props.history.push("/");
     //dispatch(clearLocalStorageCart());
 
-   // window.location.reload();
+    window.location.reload();
   };
 
   const state = useSelector((state) => state.handleCart);

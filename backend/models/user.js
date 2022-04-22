@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  ban: {
+    type: Boolean,
+    default: false,
+  },
 
   password: {
     type: String,

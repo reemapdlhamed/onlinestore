@@ -13,6 +13,7 @@ var _require = require("express-validator"),
 
 
 exports.createOrders = function (request, response, next) {
+  var total = 0;
   var paymentStatu;
 
   if (request.body.paymentType === "cod") {
@@ -21,6 +22,11 @@ exports.createOrders = function (request, response, next) {
     paymentStatu = "completed";
   }
 
+  for (var i = 0; i < request.body.orderItems.length; i++) {
+    total += request.body.orderItems[i].qty * request.body.orderItems[i].price;
+  }
+
+  console.log("shippingAddress", request.body.shippingAddress);
   var object = new order({
     customerName: request.body.customerName,
     customerID: request.body.customerID,
@@ -31,24 +37,19 @@ exports.createOrders = function (request, response, next) {
     orderStatus: request.body.orderStatus,
     paymentStatus: paymentStatu,
     discount: request.body.discount,
-    totalPrice: request.body.totalPrice,
+    totalPrice: total,
     shippingPrice: request.body.shippingPrice,
     paymentType: request.body.paymentType
   });
   object.save().then(function (d) {
-    var _loop = function _loop(i) {
-      console.log("loop", request.body.orderItems[i].name);
-      Products.findById(request.body.orderItems[i]._id).then(function (data) {
-        console.log("__________", data);
-
-        if (data.quantity - request.body.orderItems[i].qty >= 0) {
-          Products.findByIdAndUpdate(request.body.orderItems[i]._id, {
+    var _loop = function _loop(_i) {
+      Products.findById(request.body.orderItems[_i]._id).then(function (data) {
+        if (data.quantity - request.body.orderItems[_i].qty >= 0) {
+          Products.findByIdAndUpdate(request.body.orderItems[_i]._id, {
             $set: {
-              quantity: data.quantity - request.body.orderItems[i].qty
+              quantity: data.quantity - request.body.orderItems[_i].qty
             }
-          }).then(function (res) {
-            console.log("Last then :", res);
-          });
+          }).then(function (res) {});
         }
       })["catch"](function (error) {
         next(error);
@@ -56,9 +57,8 @@ exports.createOrders = function (request, response, next) {
     };
 
     //UPDATE QUANTITY 
-    //TODO: FIX ME PLEASE make me clean. xD
-    for (var i = 0; i < request.body.orderItems.length; i++) {
-      _loop(i);
+    for (var _i = 0; _i < request.body.orderItems.length; _i++) {
+      _loop(_i);
     } // response.status(201).json({ message: "order added", data });
 
   })["catch"](function (error) {

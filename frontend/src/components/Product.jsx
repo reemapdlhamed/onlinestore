@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCartFirst, addWishlistFirst } from "../redux/action";
+import { addCartFirst, zeroCart,addWishlistFirst ,zeroWishlist} from "../redux/action";
+
 import { useParams } from "react-router";
 import { NavLink } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -20,15 +21,16 @@ import axios from "axios";
 import Button from "@mui/material/Button";
 import SendIcon from "@mui/icons-material/Send";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import CloseIcon from "@mui/icons-material/Close";
 
 const Product = () => {
   const notifyInfo = (message) => toast.info(message);
   const notifySuccess = (message) => toast.success(message);
   const orderState = useSelector((state) => state.handleOrders);
-  const cartState = useSelector((state) => state.handleCart);
+  const cartList = useSelector((state) => state.handleCart);
+  const wishList = useSelector((state) => state.handleWishlist);
 
   let history = useHistory();
   const [open, setOpen] = React.useState(false);
@@ -38,8 +40,43 @@ const Product = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [reviews, setReviews] = useState([]);
+
   const [popup, setPopup] = useState("");
+  const [carted, setcarted] = useState("add to cart");
+  const [wishListed, setWishListed] = useState("add to wishlist");
+
   const [reviewForm, setReviewForm] = useState("d-none");
+
+  useEffect(() => {
+
+
+
+    axios.get(`http://localhost:8080/product/${id}`).then((res) => {
+      setProduct(res.data.data[0]);
+      setReviews(res.data.data[0].reviews);
+
+      for (let index = 0; index < cartList.length; index++) {
+        if (cartList[index]._id ===res.data.data[0]._id) {
+          setcarted("remove from cart");
+  
+          
+          break;
+        }
+      }
+
+
+
+      for (let index = 0; index < wishList.length; index++) {
+        if (wishList[index]._id ===res.data.data[0]._id) {
+          setWishListed("remove from wishlist");
+  
+          
+          break;
+        }
+      }
+    });
+
+ }, [cartList]);
 
   let newReview = {
     title: "",
@@ -62,21 +99,26 @@ const Product = () => {
   const dispatch = useDispatch();
 
   const addProduct = (product) => {
-
     if (!localStorage.getItem("accessToken")) {
       history.push("/login");
       return;
     }
+    
     if (product.length === 0) return;
-    for(let i=0;i<cartState.length;i++)
-    {
-      if(cartState[i]._id===product._id)
-      {
-        alert("you already have the product on the cart")
-        break
+    
+    for (let i = 0; i < cartList.length; i++) {
+      if (cartList[i]._id === product._id) {
+        dispatch(zeroCart(product));
+        setcarted("add to cart");
+        break;
       }
     }
-    dispatch(addCartFirst(product));
+
+    if (carted === "add to cart") {
+      dispatch(addCartFirst(product));
+      setcarted("remove from cart");
+    }
+
   };
 
   const addProductWishlist = (product) => {
@@ -84,16 +126,24 @@ const Product = () => {
       history.push("/login");
       return;
     }
+    
     if (product.length === 0) return;
-    dispatch(addWishlistFirst(product));
+    
+    for (let i = 0; i < wishList.length; i++) {
+      if (wishList[i]._id === product._id) {
+        dispatch(zeroWishlist(product));
+        setWishListed("add to wishlist");
+        break;
+      }
+    }
+
+    if (wishListed === "add to wishlist") {
+      dispatch(addWishlistFirst(product));
+      setWishListed("remove from wishlist");
+    }
   };
   //changes
-  useEffect(() => {
-    axios.get(`http://localhost:8080/product/${id}`).then((res) => {
-      setProduct(res.data.data[0]);
-      setReviews(res.data.data[0].reviews);
-    });
-  }, []);
+
   function addToWishList() {
     console.log("button");
     var images = product.images;
@@ -187,8 +237,6 @@ const Product = () => {
       }
     }
     if (cantReview) {
-
-
       notifyInfo("You must buy the product first to Add Review");
       // alert(" you cant add review,you must buy the produc first ! ");
     } else
@@ -215,18 +263,6 @@ const Product = () => {
       </>
     );
   };
-  // let Saving = () => {
-  //   console.log("Clicked");
-  //   setReview({
-  //     ...review,
-  //     review:3,
-  //     comment:"test"
-  //   })
-
-  //   };
-  //   useEffect(()=>{
-  //     console.log("UPDATED");
-  //   },[review])
 
   const ShowProduct = () => {
     return (
@@ -259,30 +295,30 @@ const Product = () => {
               className="btn btn-outline-danger  mx-1 px-3 my-1 col-lgcol-md"
               onClick={() => addProductWishlist(product)}
             >
-              <i class="fas fa-heart"></i> Wishlist
+              <i class="fas fa-heart"></i> {wishListed}
             </button>
-            {product.quantity <= 0 &&
-              <div style={{ cursor: "pointer"}}>
-                <button disabled
+            {product.quantity <= 0 && (
+              <div style={{ cursor: "pointer" }}>
+                <button
+                  disabled
                   className="btn btn-secondary  mx-1 px-3 my-1 col-lgcol-md"
                 >
-
                   OUT OF STOCK
                 </button>
               </div>
-            }
+            )}
           </div>
 
           <hr />
           <div className="d-grid gap-1 d-md-block my-4">
-            {product.quantity > 0 &&
+            {product.quantity > 0 && (
               <button
                 className="btn btn-outline-dark mx-1  col-lg col-md"
                 onClick={() => addProduct(product)}
               >
-                Add to Cart
-              </button>}
-
+                {carted}
+              </button>
+            )}
 
             {/* {product.quantity <= 0 &&
               <div>
@@ -353,7 +389,7 @@ const Product = () => {
             backgroundColor: "white",
             margin: "auto",
             boxShadow: "rgb(0 0 0 / 30%) 0px 1px 20px 20px",
-            transitionDuration: "0.5s"
+            transitionDuration: "0.5s",
           }}
           className={reviewForm}
         >
