@@ -19,16 +19,18 @@ router.post(
   "/changePass",
   isAuth,
   [
-    body("email").isEmail().withMessage("Email is not valid"),
-    body("password").notEmpty().withMessage("Man enter your password"),
-    body("newPassword").notEmpty().withMessage("Man enter a new password"),
-    body("newPasswordConfirm")
-      .custom((value, { req }) => {
-        return value == req.body.newPassword;
-      })
-      .withMessage("newPasswordConfirm doesn't match"),
+    // body("email").isEmail().withMessage("Email is not valid"),
+    // body("password").notEmpty().withMessage("Man enter your password"),
+    // body("newPassword").notEmpty().withMessage("Man enter a new password"),
+    // body("newPasswordConfirm")
+    //   .custom((value, { req }) => {
+    //     return value == req.body.newPassword;
+    //   })
+    //   .withMessage("newPasswordConfirm doesn't match"),
   ],
   controller.changePass
+
+
 );
 
 router.post(

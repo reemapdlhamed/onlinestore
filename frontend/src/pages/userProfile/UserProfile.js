@@ -36,6 +36,8 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { useDispatch, useSelector } from "react-redux";
 
+import "react-toastify/dist/ReactToastify.css";
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -68,6 +70,8 @@ function createData(ID, createdAt, Status, Total) {
   return { ID, createdAt, Status, Total };
 }
 export default function UserProfile() {
+  const notifySuccess = (msg) => toast.success(msg);
+  const notifyError = (msg) => toast.error(msg);
   const [passwordShown, setPasswordShown] = useState(false);
   const [values, setValues] = React.useState({
     amount: "",
@@ -106,18 +110,22 @@ export default function UserProfile() {
   };
   const [success, setSucces] = useState(false);
 
-  let newPassword;
-  let oldPassword;
+  const [oldPassword, setOldNewPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
+  // let newPassword;
+  // let oldPassword;
   const NewPwd = (e) => {
-    newPassword = e.target.value;
+    setNewPassword(e.target.value);
     // console.log(e.target.value);
   };
   const OldPwd = (e) => {
-    oldPassword = e.target.value;
+    setOldNewPassword(e.target.value);
     // console.log(e.target.value);
   };
 
   const changePwd = () => {
+    console.log("oldPassword", oldPassword, "...", "newPassword", newPassword);
     axios({
       method: "post",
       url: "http://localhost:8080/changePass",
@@ -135,10 +143,15 @@ export default function UserProfile() {
     })
       .then((response) => {
         setSucces(true);
+        notifySuccess("password changed");
+        setOldNewPassword("");
+        setNewPassword("");
+
         // console.log(response);
       })
       .catch((error) => {
-        // console.log(error);
+        console.log(error);
+        notifyError("Couldn't change password");
       });
   };
   const customId = "custom-id-yes";
@@ -157,6 +170,7 @@ export default function UserProfile() {
 
   return (
     <>
+      <ToastContainer />
       <div className="row min-vh-100">
         <div className="card-container col-md-5">
           <img
@@ -235,38 +249,41 @@ export default function UserProfile() {
                   />
                 </FormControl>
 
-                <TextField
-                  value={oldPassword}
-                  type={passwordShown ? "text" : "password"}
-                  onChange={(e) => OldPwd(e)}
-                  id="standard-basic"
-                  label="old Password"
-                  variant="standard"
-                  className="w-50"
-                />
-                <i
-                  onClick={togglePassword}
-                  className="far fa-eye"
-                  id="togglePassword"
-                  style={{
-                    paddingLeft: "3rem",
-                    // marginBottom: "100px",
-                    marginLeft: " 104rem",
-                    marginTop: "11rem",
-                    position: "absolute",
-                    cursor: "pointer",
-                  }}
-                ></i>
+           
+                  <TextField
+                    value={oldPassword}
+                    type={passwordShown ? "text" : "password"}
+                    onChange={OldPwd}
+                    id="standard-basic"
+                    label="old Password"
+                    variant="standard"
+                    className="w-50"
+                  />
+                  {/* <i
+                    onClick={togglePassword}
+                    className="far fa-eye"
+                    id="togglePassword"
+                    style={{
+                      paddingLeft: "3rem",
+                      // marginBottom: "100px",
+                      marginLeft: " 104rem",
+                      // right:"1px",
+                      marginTop: "11rem",
+                      position: "absolute",
+                      cursor: "pointer",
+                    }}
+                  ></i> */}
+      
                 <TextField
                   value={newPassword}
                   type={passwordShown ? "text" : "password"}
-                  onChange={(e) => NewPwd(e)}
+                  onChange={NewPwd}
                   id="standard-basic"
                   label="New Password"
                   variant="standard"
                   className="w-50"
                 />
-                <i
+                {/* <i
                   onClick={togglePassword}
                   className="far fa-eye"
                   id="togglePassword"
@@ -278,7 +295,7 @@ export default function UserProfile() {
                     position: "absolute",
                     cursor: "pointer",
                   }}
-                ></i>
+                ></i> */}
                 {/* <TextField
                   value={newPassword}
                   type={passwordShown ? "text" : "password"}

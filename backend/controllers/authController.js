@@ -32,7 +32,7 @@ exports.userLogin = (request, response, next) => {
       encrypted = data.password;
 
       bcrypt.compare(request.body.password, encrypted).then(function (result) {
-        if (result|| (request.body.way&&request.body.way==="google") ) {
+        if (result || (request.body.way && request.body.way === "google")) {
           if (data.ban) {
             // throw new Error("user banned");
             response.status(403).json({ message: "USER BANNED" });
@@ -62,6 +62,7 @@ exports.userLogin = (request, response, next) => {
 };
 
 exports.changePass = (request, response, next) => {
+  console.log("RB>>>>>>>>>", request.body);
   let errors = validationResult(request);
   if (!errors.isEmpty()) {
     let error = new Error();
@@ -80,13 +81,18 @@ exports.changePass = (request, response, next) => {
   User.findOne({ email: request.body.email })
 
     .then((data) => {
-      if (data.role != request.role || data.email != request.email)
+      if (data.role != request.body.role || data.email != request.body.email)
         next(Error("login first plz"));
       if (data == null) {
         throw new Error("email not found");
       }
 
+ 
       let matched = bcrypt.compareSync(request.body.password, data.password);
+      // console.log("matched",matched);
+      // console.log("request.body.password",request.body.password);
+      // console.log("data.password",data.password);
+      // console.log(' request.body.newPassword == request.body.newPasswordConfirm', request.body.newPassword == request.body.newPasswordConfirm)
       if (
         matched &&
         request.body.newPassword == request.body.newPasswordConfirm
@@ -105,6 +111,7 @@ exports.changePass = (request, response, next) => {
       }
     })
     .catch((error) => {
+      console.log(error.message);
       // error.message = "error happened while login3";
       next(error.message);
     });
@@ -310,7 +317,7 @@ exports.googleLogin = async (req, res) => {
     if (!user) {
     }
     if (user) {
-    //  const isMatch = await bcrypt.compare(password, user.password);
+      //  const isMatch = await bcrypt.compare(password, user.password);
       //if (!isMatch)
       //  return res.status(400).json({ msg: "Password is incorrect." });
 
@@ -325,7 +332,7 @@ exports.googleLogin = async (req, res) => {
       axios({
         method: "post",
         url: "http://localhost:8080/login",
-        data: { email: email, password: password,way:"google" },
+        data: { email: email, password: password, way: "google" },
       })
         .then((res2) => {
           var data = res2.data.data;
