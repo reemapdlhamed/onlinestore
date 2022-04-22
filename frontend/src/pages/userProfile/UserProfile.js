@@ -336,7 +336,7 @@ export default function UserProfile() {
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                   <TableHead>
                     <TableRow>
-                      <TableCell>ID</TableCell>
+                      <TableCell></TableCell>
                       <TableCell align="right">order date</TableCell>
                       <TableCell align="right">Status</TableCell>
                       <TableCell align="right">Payment Status</TableCell>
@@ -358,7 +358,7 @@ export default function UserProfile() {
                             to={`orders/${row.id}`}
                             className=" btn-outline-dark  ms-2 px-3 py-2"
                           >
-                            {row.id}
+                            proceed to order
                           </NavLink>
                         </TableCell>
                         <TableCell align="right">{row.createdAt} </TableCell>
