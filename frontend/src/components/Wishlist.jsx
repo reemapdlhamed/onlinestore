@@ -55,13 +55,8 @@ const Cart = () => {
   const cartItems = (product) => {
     return (
       <>
-<<<<<<< HEAD
         <div className="px-4 my-0 bg-light rounded-3 py-2 border-bottom min-vh-100" >
           <div className="container py-4">
-=======
-        <div  className="px-4 my-0 bg-light rounded-3 py-2 border-bottom" >
-          <div  className="container py-4">
->>>>>>> 2701058ed0e906d9ec42835e45f01189e88c06c9
             <button
               onClick={() => handleZero(product)}
               className="btn-close float-end"
