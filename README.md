@@ -11,32 +11,32 @@ ShipShop.com millions of customers.
 - ✨Magic ✨
  ## Project Description 
  
- ● Any Customer can register and view available products.
-● Only Login Customer can Add Product to Cart
-● Only Login Customer can Add Product to Wishlist
-● Customer Must Buy Product First to Add Review About product
-● Only registered Customers can purchase multiple products regardless
+- Any Customer can register and view available products.
+- Only Login Customer can Add Product to Cart
+-  Only Login Customer can Add Product to Wishlist
+-   Customer Must Buy Product First to Add Review About product
+- Only registered Customers can purchase multiple products regardless
 of quantity.
-● Contact Us page is available to contact Admin for any problem or any
+- Contact Us page is available to contact Admin for any problem or any
 Questions .
-● There are Three Roles Available:
-○ Customer
-○ Admin
-○ Seller
-● Customer
-○ Browse different products and categories.
-○ Search and filter products to meet his needs.
-○ Add items to cart.
-○ Buy items.
-● Admin
-○ Manages products, categories, orders and shipping
-○ Edit / Delete Categories and products
-○ Change website images
-○ Apply discounts and offers.
-○ monitor all product information
-● Seller
-○ List his items for sale.
-○ Add, Edit his items.
+- There are Three Roles Available:
+- Customer 
+-  Admin
+-  Seller
+-  Custome
+-   Browse different products and categories.
+-   search and filter products to meet his needs.
+-   Add items to cart. 
+-  Buy items.
+- Admin
+- Manages products, categories, orders and shipping
+-  Edit / Delete Categories and products
+-  Change website images
+-  Apply discounts and offers.
+-  monitor all product information
+-  Seller
+-  List his items for sale.
+-  Add, Edit his items.
 
 
 ## Features
