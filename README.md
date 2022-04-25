@@ -130,12 +130,13 @@ http://localhost:8080/
 http://localhost:4200/
 ```
 ## Team Members
--Abdulrahman Zaki 
--Adel Elfar
--Ahmed Kamal
--Ahmed Elmanzlawy
--Hassan Osama
--Reem Abdelhamid
+- Abdulrahman Zaki 
+- Adel Elfar
+- Ahmed Kamal
+- Ahmed Elmanzlawy
+- Hassan Osama
+- Reem Apdlhamed
+
 
 
 
