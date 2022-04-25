@@ -121,3 +121,6 @@ For production environments...
 ```sh
 http://localhost:8080/
 ```
+```sh
+http://localhost:4200/
+```
