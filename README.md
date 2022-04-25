@@ -69,20 +69,20 @@ orders
 
 ## Web Pages details
 Website Pages:
-● Home Page
-● Product Page
-● Product Details Page
-● About Page
-● Contact Page
-● FAQ Page
-● Registration Page
-● Login Page
-● Cart Page
-● Shipping Page
-● Payment Page
-● Checkout Page
-● Wish List Page
-● Profile Page
+- Home Page
+- Product Page
+- Product Details Page
+- About Page
+- Contact Page
+- FAQ Page
+- Registration Page
+- Login Page
+- Cart Page
+- Shipping Page
+- Payment Page
+- Checkout Page
+- Wish List Page
+- Profile Page
 
 ## Tech
 
