@@ -104,6 +104,11 @@ Website Pages:
 -  MUI
 -  React-Bootstrap
 
+## To Do
+- Verify Email
+- Forget Password
+- Login With Facebook
+
 ## Installation
 
 
@@ -124,3 +129,17 @@ http://localhost:8080/
 ```sh
 http://localhost:4200/
 ```
+## Team Members
+-Abdulrahman Zaki 
+-Adel Elfar
+-Ahmed Kamal
+-Ahmed Elmanzlawy
+-Hassan Osama
+-Reem Abdelhamid
+
+
+
+
+
+
+
