@@ -42,28 +42,28 @@ Questions .
 ## Features
 
 ### Main Functionalities
-● Categorized:
-○ Every product belong to a category or a subcategory
-○ Customer can choose a category or more to browse in
-● Search and Filtering:
-○ Search and filtering will help customers to find the products they
+#### Categorized:
+ - Every product belong to a category or a subcategory 
+ - Customer can choose a category or more to browse in
+ - Search and Filtering:
+ -  Search and filtering will help customers to find the products they
 are looking for.
-● Product Page:
-○ Customers can get detailed information regarding the product to
+#### Product Page:
+- Customers can get detailed information regarding the product to
 be bought before having to check out.
-○ Details may include images or a description or Rating.
-● product reviews:
-○ Customers can write a review after the shipment.
-○ Review includes the shipment process and the product itself.
-● Shopping Cart:
-○ Customers can easily put products in their shopping cart After
+- Details may include images or a description or Rating.
+#### product reviews:
+- Customers can write a review after the shipment.
+- Review includes the shipment process and the product itself.
+#### Shopping Cart:
+- Customers can easily put products in their shopping cart After
 Login and come back to them later.
-○ Customers can edit the quantity of each product.
-● WishList:
-○ Customers can easily put products in their WishList After Login
+- Customers can edit the quantity of each product.
+#### WishList:
+- Customers can easily put products in their WishList After Login
 and come back to them later.
-● Recommendation system:
-○ User can find recommended products based on his previous
+#### Recommendation system:
+- User can find recommended products based on his previous
 orders
 
 
